@@ -6,7 +6,7 @@
             <!-- SIDEBAR BRAND -->
             <a href="{{ route('admin.dashboard') }}" class="sidebar-brand">
                 <!-- SIDEBAR BRAND IMG -->
-                {!! $generalSettings?'<img  class="sidebar-brand-img" src="'. asset($generalSettings->logo) .'" />':'<img  class="sidebar-brand-img" src="'.asset('backend/assets/img/logo/red.png').'" />' !!}
+                {!! $generalSettings?'<img  class="img-fluid sidebar-brand-img w-100" src="'. asset($generalSettings->site_tag_image) .'" />':'<img  class="sidebar-brand-img" src="'.asset('backend/assets/img/logo/red.png').'" />' !!}
                 <!-- SIDEBAR BRAND TEXT -->
 {{--                <span class="sidebar-brand-text">quantummagazine</span>--}}
             </a>

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\GuestView\GuestController;
 use App\Http\Controllers\Api\DistrictController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,9 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [GuestController::class, 'index'])->name('home');
 
 Route::get('/district-info', [DistrictController::class, 'getDistrictInfo']);
 
