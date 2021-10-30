@@ -8,8 +8,17 @@ use Illuminate\Http\Request;
 class GuestController extends Controller
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function index()
     {
-        return view('welcome');
+        try {
+            return view('welcome');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
     }
 }
