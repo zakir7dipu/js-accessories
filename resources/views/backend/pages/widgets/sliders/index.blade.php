@@ -29,7 +29,7 @@
                             <h6 class="card-title lh-35">{{ __($title) }}</h6>
                         </div>
                         <div class="col-md-6 col-sm-12 text-right">
-                                <a href="{{ route('admin.supplier.create') }}" class="btn btn-danger btn-sm rounded"><i class="material-icons">add</i></a>
+                                <a href="{{ route('admin.slider.create') }}" class="btn btn-danger btn-sm rounded"><i class="material-icons">add</i></a>
                         </div>
                     </div>
                 </div>
@@ -48,8 +48,35 @@
                             </thead>
 
                             <tbody>
-                            @foreach ($sliders as $slider)
+                            @foreach ($sliders as $key => $slider)
+                                <tr>
+                                    <th>{{ $key+1 }}</th>
+                                    <td>{{ $slider->image }}</td>
+                                    <td>{{ $slider->name }}</td>
+                                    <td>
+                                        <label class="switch">
+                                            <input type="checkbox" {{ $slider->status?'checked':'' }} datasrc="{{ $slider->id }}" class="supplierActivationBtn">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex">
+                                            <a href="{{ route('admin.slider.edit',$slider->id) }}">
+                                                <button type="button" class="btn btn-sm btn btn-success m-1 blogCategoryEditBtn" data-id="{{ $slider->id }}">{{ __('Edit') }}</button>
+                                            </a>
+                                            <a href="javascript:void(0)" title="{{__('Delete')}}" class="sliderDestroyBtn">
+                                                <button type="button" class="btn btn-sm btn btn-danger m-1">{{__('Delete')}}</button>
+                                                <form action="{{ route('admin.slider.destroy', $slider->id) }}" method="post" class="deleteForm">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <input type="hidden" name="_method" value="delete">
+                                                </form>
+                                            </a>
 
+
+                                        </div>
+                                    </td>
+                                </tr>
                             @endforeach
                             </tbody>
                         </table>

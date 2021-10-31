@@ -33,7 +33,14 @@ class SliderController extends Controller
      */
     public function create()
     {
-        //
+        try {
+            $generalSettings = GeneralSettings::first();
+            $title = ($generalSettings?$generalSettings->site_name:'').' | '.'Add New Slider';
+            $slider = null;
+            return view('backend.pages.widgets.sliders.form', compact('title', 'generalSettings', 'slider'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
     }
 
     /**
