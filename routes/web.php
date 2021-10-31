@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\GuestView\GuestController;
 use App\Http\Controllers\Api\DistrictController;
@@ -65,6 +66,8 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'verified'])-
         Route::get('/', [AdminController::class, 'customersIndex'])->name('index');
         Route::get('/view/{customer}', [AdminController::class, 'customersView'])->name('view');
     });
+
+    Route::resource('/slider', SliderController::class);
 
     //blogs
     Route::prefix('/blog')->as('blog.')->group(function (){

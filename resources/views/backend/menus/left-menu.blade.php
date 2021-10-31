@@ -93,10 +93,19 @@
                         <li><a href="{{ route('admin.settings.social-media-link') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Social Media Link Settings') }}</span></a></li>
                     </ul>
                 </li>
-
-
                 <!-- NAV DIVIDER -->
                 <li class="nav-divider"></li>
+                <!-- NAV ITEM slider-->
+                <li class="nav-item has-dropdown {{ request()->is('admin/slider*') ?'active':'' }}">
+                    <a href="javascript:void(0);" class="nav-link">
+                        <i class="fas fa-toolbox"></i>
+                        <span class="link-text">{{ __('Widget') }}</span>{{ __('') }}
+                        <span class="badge badge-md"><span class="material-icons h6" >chevron_right</span></span>
+                    </a>
+                    <ul class="dropdown-list">
+                        <li><a href="{{ route('admin.slider.index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Sliders') }}</span></a></li>
+                    </ul>
+                </li>
                 <!-- NAV ITEM BLOG -->
                 <li class="nav-item has-dropdown {{ request()->is('admin/blog*') ?'active':'' }}">
                     <a href="javascript:void(0)" class="nav-link">
@@ -110,6 +119,7 @@
                         <li><a href="{{ route('admin.blog.comment-settings') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Comment Settings') }}</span></a></li>
                     </ul>
                 </li>
+
                 <!-- NAV ITEM -->
 {{--                <li class="nav-item"><a href="card.html" class="nav-link"><i class="material-icons">style</i><span class="link-text">card</span></a></li>--}}
             </ul>
