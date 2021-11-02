@@ -8,8 +8,13 @@
 
 @section('content')
     <main class="main home">
-        @include('forntend.pages.page-sections.slider')
-        @include('forntend.pages.page-sections.feature-product')
+        @if($sliders->count() > 0)
+            @include('forntend.pages.page-sections.slider')
+        @endif
+
+        @if($featureProductSection?$featureProductSection->show:'')
+            @include('forntend.pages.page-sections.feature-product')
+        @endif
         @include('forntend.pages.page-sections.categories')
         @include('forntend.pages.advertisements.layout1')
         @include('forntend.pages.page-sections.new-arrivals')

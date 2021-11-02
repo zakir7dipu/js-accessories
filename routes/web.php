@@ -67,7 +67,17 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'verified'])-
         Route::get('/view/{customer}', [AdminController::class, 'customersView'])->name('view');
     });
 
-    Route::resource('/slider', SliderController::class);
+    Route::prefix('widget')->as('widget.')->group(function (){
+        //slider
+        Route::resource('/slider', SliderController::class);
+
+        // featureProductWidgetIndex
+        Route::prefix('feature-products')->as('feature-products.')->group(function (){
+            Route::get('/', [AppSettingsController::class, 'featureProductWidgetIndex'])->name('index');
+            Route::post('/', [AppSettingsController::class, 'featureProductWidgetStore']);
+        });
+    });
+
 
     //blogs
     Route::prefix('/blog')->as('blog.')->group(function (){

@@ -96,14 +96,15 @@
                 <!-- NAV DIVIDER -->
                 <li class="nav-divider"></li>
                 <!-- NAV ITEM slider-->
-                <li class="nav-item has-dropdown {{ request()->is('admin/slider*') ?'active':'' }}">
+                <li class="nav-item has-dropdown {{ request()->is('admin/widget.*') ?'active':'' }}">
                     <a href="javascript:void(0);" class="nav-link">
                         <i class="fas fa-toolbox"></i>
                         <span class="link-text">{{ __('Widget') }}</span>{{ __('') }}
                         <span class="badge badge-md"><span class="material-icons h6" >chevron_right</span></span>
                     </a>
                     <ul class="dropdown-list">
-                        <li><a href="{{ route('admin.slider.index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Sliders') }}</span></a></li>
+                        <li><a href="{{ route('admin.widget.slider.index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Sliders') }}</span></a></li>
+                        <li><a href="{{ route('admin.widget.feature-products.index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Feature Products Section') }}</span></a></li>
                     </ul>
                 </li>
                 <!-- NAV ITEM BLOG -->

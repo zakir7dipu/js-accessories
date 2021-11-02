@@ -73,12 +73,12 @@ class SliderController extends Controller
 
         try {
             $slider = new Slider();
-            $slider->name = $request->name;
-            $slider->line1 = $request->line1;
-            $slider->line2 = $request->line2;
-            $slider->line3 = $request->line3;
-            $slider->btn_text = $request->button_text;
-            $slider->btn_url = $request->button_url;
+            $slider->name = clean($request->name);
+            $slider->line1 = clean($request->line1);
+            $slider->line2 = clean($request->line2);
+            $slider->line3 = clean($request->line3);
+            $slider->btn_text = clean($request->button_text);
+            $slider->btn_url = clean($request->button_url);
 
             if ($request->hasFile('image')) {
                 $images = $request->image;
@@ -97,7 +97,11 @@ class SliderController extends Controller
             }
             $slider->save();
 
-            return $this->backWithSuccess('Slider has been saved successfully');
+            $notification = [
+                'message' => 'Slider has been saved successfully',
+                'alert-type' => 'success'
+            ];
+            return redirect()->route('admin.slider.edit',$slider->id)->with($notification);
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
@@ -177,12 +181,12 @@ class SliderController extends Controller
         }
 
         try {
-            $slider->name = $request->name;
-            $slider->line1 = $request->line1;
-            $slider->line2 = $request->line2;
-            $slider->line3 = $request->line3;
-            $slider->btn_text = $request->button_text;
-            $slider->btn_url = $request->button_url;
+            $slider->name = clean($request->name);
+            $slider->line1 = clean($request->line1);
+            $slider->line2 = clean($request->line2);
+            $slider->line3 = clean($request->line3);
+            $slider->btn_text = clean($request->button_text);
+            $slider->btn_url = clean($request->button_url);
 
             if ($request->hasFile('image')) {
                 if ($slider->image){

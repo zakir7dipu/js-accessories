@@ -36,7 +36,7 @@
         $('.sliderActivationBtn').on('change', function () {
             $.ajax({
                 type: 'get',
-                url: '/admin/slider/'+$(this).attr('datasrc'),
+                url: '/admin/widget/slider/'+$(this).attr('datasrc'),
                 success:function (data) {
                     console.log(data)
                     toastr[data.alertType](data.message)

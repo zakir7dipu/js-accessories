@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\FeatureProduct;
 use App\Models\GeneralSettings;
 use App\Models\SocialMediaLink;
 use Illuminate\Http\Request;
@@ -306,6 +307,37 @@ class AppSettingsController extends Controller
             return $this->backWithSuccess('Social Media Settings created successfully.');
 
         } catch (\Throwable $th) {
+            return $this->backWithError($th->getMessage());
+        }
+    }
+    /*
+     * feature product widget
+     */
+    public function featureProductWidgetIndex()
+    {
+        try {
+            $generalSettings = GeneralSettings::first();
+            $title = ($generalSettings?$generalSettings->site_name:'').' | '.'Feature Products Section';
+            return view('backend.pages.widgets.feature-products.form', compact('title', 'generalSettings'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function featureProductWidgetStore(Request $request)
+    {
+        $this->validate($request,[
+            'title' => ['required', 'string', 'max:100'],
+            'number_of_content' => ['max:1']
+        ]);
+        try {
+            $featureProductSection = FeatureProduct::first()?FeatureProduct::first():new FeatureProduct();
+            $featureProductSection->title = $request->title;
+            $featureProductSection->show = $request->has('show');
+            $featureProductSection->number_of_content = $request->number_of_content;
+            $featureProductSection->save();
+            return $this->backWithSuccess('Section has been saved successfully');
+        }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
     }

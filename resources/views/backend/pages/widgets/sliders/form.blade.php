@@ -13,7 +13,7 @@
             <div class="col">
                 <nav class="breadcrumb justify-content-sm-start justify-content-center text-center text-light bg-dark ">
                     <a class="breadcrumb-item text-white" href="{{route('admin.dashboard')}}">{{__('Home')}}</a>
-                    <a class="breadcrumb-item text-white" href="{{route('admin.slider.index')}}">{{__('Sliders')}}</a>
+                    <a class="breadcrumb-item text-white" href="{{route('admin.widget.slider.index')}}">{{__('Sliders')}}</a>
                     <span class="breadcrumb-item active">{{ __($title) }}</span>
                     <span class="breadcrumb-info" id="time"></span>
                 </nav>
@@ -27,7 +27,7 @@
                         <h6 class="card-title lh-35">{{ __($title) }}</h6>
                     </div>
 
-                    <form action="{{ $slider?route('admin.slider.update',$slider->id):route('admin.slider.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ $slider?route('admin.widget.slider.update',$slider->id):route('admin.widget.slider.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @if($slider)
                             @method('put')

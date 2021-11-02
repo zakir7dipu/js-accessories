@@ -39,16 +39,16 @@
                                 <thead>
                                 <tr>
                                     <th width="5%">{{__('SL No.')}}</th>
-                                    <th>{{__('Image')}}</th>
-                                    <th>{{__('Name')}}</th>
-                                    <th>{{__('Price')}}</th>
-                                    <th class="text-center">{{__('Status')}}</th>
-                                    <th class="text-center">{{__('Featured')}}</th>
-                                    <th class="text-center">{{__('New Arrival')}}</th>
-                                    <th class="text-center">{{__('Popular')}}</th>
-                                    <th class="text-center">{{__('Bestseller')}}</th>
-                                    <th class="text-center">{{__('Trending')}}</th>
-                                    <th class="text-center">{{__('Option')}}</th>
+                                    <th width="20%">{{__('Image')}}</th>
+                                    <th width="20%">{{__('Name')}}</th>
+                                    <th width="15%">{{__('Price')}}</th>
+                                    <th wirth="5%" class="text-center">{{__('Status')}}</th>
+                                    <th wirth="5%" class="text-center">{{__('Featured')}}</th>
+                                    <th wirth="5%" class="text-center">{{__('New Arrival')}}</th>
+                                    <th wirth="5%" class="text-center">{{__('Popular')}}</th>
+                                    <th wirth="5%" class="text-center">{{__('Bestseller')}}</th>
+                                    <th wirth="5%" class="text-center">{{__('Trending')}}</th>
+                                    <th wirth="10%" class="text-center">{{__('Option')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -59,7 +59,14 @@
                                             <img src="{{ $data->productImages? asset($data->productImages()->first()->image):'' }}" class="img-fluid img-thumbnail rounded w-50" alt="Product\'s Image">
                                         </td>
                                         <td>{{ $data->name }}</td>
-                                        <td>{!! ($data->currency?'<span>'.$data->currency->symbol.'</span>':'').'&nbsp;'.'<span>'.number_format($data->price,'2','.',',').'</span>' !!}</td>
+                                        <td>
+
+                                            @if($data->discount)
+                                                {!! ($data->currency?'<span>'.$data->currency->symbol.'</span>':'').'&nbsp;'.'<span>'.number_format(($data->price - (($data->price * $data->discount) / 100)),'2','.',',').'</span> <sup>(after '.$data->discount.'%)</sup>' !!}
+                                            @else
+                                                {!! ($data->currency?'<span>'.$data->currency->symbol.'</span>':'').'&nbsp;'.'<span>'.number_format($data->price,'2','.',',').'</span>' !!}
+                                            @endif
+                                        </td>
                                         <td class="text-center">
                                             <label class="switch">
                                                 <input type="checkbox" {{ $data->status?'checked':'' }} datatype="status" datasrc="{{ $data->id }}" class="ecommerceProductActivationBtn">

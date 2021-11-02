@@ -29,7 +29,7 @@
                             <h6 class="card-title lh-35">{{ __($title) }}</h6>
                         </div>
                         <div class="col-md-6 col-sm-12 text-right">
-                                <a href="{{ route('admin.slider.create') }}" class="btn btn-danger btn-sm rounded"><i class="material-icons">add</i></a>
+                                <a href="{{ route('admin.widget.slider.create') }}" class="btn btn-danger btn-sm rounded"><i class="material-icons">add</i></a>
                         </div>
                     </div>
                 </div>
@@ -61,12 +61,12 @@
                                     </td>
                                     <td width="20%">
                                         <div class="d-flex">
-                                            <a href="{{ route('admin.slider.edit',$slider->id) }}">
+                                            <a href="{{ route('admin.widget.slider.edit',$slider->id) }}">
                                                 <button type="button" class="btn btn-sm btn btn-success m-1 blogCategoryEditBtn" data-id="{{ $slider->id }}">{{ __('Edit') }}</button>
                                             </a>
                                             <a href="javascript:void(0)" title="{{__('Delete')}}" class="deleteSliderBtn">
                                                 <button type="button" class="btn btn-sm btn btn-danger m-1">{{__('Delete')}}</button>
-                                                <form action="{{ route('admin.slider.destroy', $slider->id) }}" method="post" class="deleteForm">
+                                                <form action="{{ route('admin.widget.slider.destroy', $slider->id) }}" method="post" class="deleteForm">
                                                     @csrf
                                                     @method('delete')
                                                     <input type="hidden" name="_method" value="delete">
