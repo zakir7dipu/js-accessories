@@ -50,21 +50,21 @@
                             <tbody>
                             @foreach ($sliders as $key => $slider)
                                 <tr>
-                                    <th>{{ $key+1 }}</th>
-                                    <td>{{ $slider->image }}</td>
-                                    <td>{{ $slider->name }}</td>
-                                    <td>
+                                    <th width="5%">{{ $key+1 }}</th>
+                                    <td width="20%"><img src="{{ asset($slider->image) }}" alt="{{ $slider->name }}" class="img-fluid img-thumbnail"></td>
+                                    <td width="50%">{{ $slider->name }}</td>
+                                    <td width="10%">
                                         <label class="switch">
-                                            <input type="checkbox" {{ $slider->status?'checked':'' }} datasrc="{{ $slider->id }}" class="supplierActivationBtn">
+                                            <input type="checkbox" {{ $slider->status?'checked':'' }} datasrc="{{ $slider->id }}" class="sliderActivationBtn">
                                             <span class="slider round"></span>
                                         </label>
                                     </td>
-                                    <td>
+                                    <td width="20%">
                                         <div class="d-flex">
                                             <a href="{{ route('admin.slider.edit',$slider->id) }}">
                                                 <button type="button" class="btn btn-sm btn btn-success m-1 blogCategoryEditBtn" data-id="{{ $slider->id }}">{{ __('Edit') }}</button>
                                             </a>
-                                            <a href="javascript:void(0)" title="{{__('Delete')}}" class="sliderDestroyBtn">
+                                            <a href="javascript:void(0)" title="{{__('Delete')}}" class="deleteSliderBtn">
                                                 <button type="button" class="btn btn-sm btn btn-danger m-1">{{__('Delete')}}</button>
                                                 <form action="{{ route('admin.slider.destroy', $slider->id) }}" method="post" class="deleteForm">
                                                     @csrf
@@ -92,5 +92,5 @@
 @endsection
 
 @section('page-script')
-
+    @include('backend.pages.widgets.sliders.internal-assets.slider-js')
 @endsection

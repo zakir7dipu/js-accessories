@@ -13,6 +13,7 @@
             <div class="col">
                 <nav class="breadcrumb justify-content-sm-start justify-content-center text-center text-light bg-dark ">
                     <a class="breadcrumb-item text-white" href="{{route('admin.dashboard')}}">{{__('Home')}}</a>
+                    <a class="breadcrumb-item text-white" href="{{route('admin.slider.index')}}">{{__('Sliders')}}</a>
                     <span class="breadcrumb-item active">{{ __($title) }}</span>
                     <span class="breadcrumb-info" id="time"></span>
                 </nav>
@@ -26,12 +27,16 @@
                         <h6 class="card-title lh-35">{{ __($title) }}</h6>
                     </div>
 
-                    <form action="{{  }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ $slider?route('admin.slider.update',$slider->id):route('admin.slider.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
+                        @if($slider)
+                            @method('put')
+                        @endif
+
                         <div class="card-body">
                             <div class="form-row">
                                 <div class="col-md-8">
-                                    <p class="mb-1 font-weight-bold"><label for="name">{{__('Name :')}}</label></p>
+                                    <p class="mb-1 font-weight-bold"><label for="name">{{__('Name :')}}</label> &nbsp;<sup><i class="text-danger fas fa-star-of-life small"></i></sup></p>
                                     <div class="input-group input-group-lg mb-3">
                                         <input type="text" name="name" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"
                                                placeholder="{{__('Slider Name')}}" value="{{ $slider?$slider->name:old('name') }}">
@@ -76,7 +81,7 @@
                                             <p class="mb-1 font-weight-bold"><label for="button_text">{{__('Button Text :')}}</label></p>
                                             <div class="input-group input-group-lg mb-3">
                                                 <input type="text" name="button_text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"
-                                                       placeholder="{{__('Button Text')}}" value="{{ $slider?$slider->button_text:old('button_text') }}">
+                                                       placeholder="{{__('Button Text')}}" value="{{ $slider?$slider->btn_text:old('button_text') }}">
                                                 <br>
                                                 @if ($errors->has('button_text'))
                                                     <span class="text-danger">{{ $errors->first('button_text') }}</span>
@@ -87,7 +92,7 @@
                                             <p class="mb-1 font-weight-bold"><label for="button_url">{{__('Button Url :')}}</label></p>
                                             <div class="input-group input-group-lg mb-3">
                                                 <input type="text" name="button_url" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"
-                                                       placeholder="{{__('Button Text')}}" value="{{ $slider?$slider->button_url:old('button_url') }}">
+                                                       placeholder="{{__('Button Text')}}" value="{{ $slider?$slider->btn_url:old('button_url') }}">
                                                 <br>
                                                 @if ($errors->has('button_url'))
                                                     <span class="text-danger">{{ $errors->first('button_url') }}</span>
@@ -97,7 +102,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <p class="mb-1">{{__('Slider Image')}}: <sup><i class="text-danger fas fa-star-of-life small"></i></sup></p>
+                                    <p class="mb-1"><label for="sliderImg">{{__('Slider Image')}}:</label> <sup><i class="text-danger fas fa-star-of-life small"></i></sup></p>
                                     <div class="input-group p-3">
                                         <div class="form-group w-100">
                                             <div class="px-2">
@@ -119,6 +124,9 @@
                                         </div>
                                     @endif
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-danger btn-lg rounded">{{ __('Save') }}</button>
                             </div>
                         </div>
                     </form>

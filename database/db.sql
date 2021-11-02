@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2021 at 02:27 PM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 7.4.16
+-- Generation Time: Nov 02, 2021 at 01:49 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 7.4.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -373,7 +373,7 @@ CREATE TABLE `general_settings` (
 --
 
 INSERT INTO `general_settings` (`id`, `site_name`, `meta_keyword`, `meta_description`, `location_map`, `logo`, `favicon`, `site_tag_image`, `created_at`, `updated_at`) VALUES
-(1, 'E Commerce Admin', 'online shopping', 'This is a online e-commerce site....', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.8895533356776!2d90.2446309147299!3d23.858055384536428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755ebdf5e37cba3%3A0x3989ef1f96f1d277!2sBadda%20Government%20Primary%20School!5e0!3m2!1sen!2sbd!4v1629040760976!5m2!1sen!2sbd', '/upload/settings/1634792112o69lu5DAC.png', '/upload/settings/1634792161te3y91DAC.png', '/upload/settings/16347921610gkvpsDAC.png', '2021-10-20 22:41:24', '2021-10-20 22:56:02');
+(1, 'E Commerce Admin', 'online shopping', 'This is a online e-commerce site....', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.8895533356776!2d90.2446309147299!3d23.858055384536428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755ebdf5e37cba3%3A0x3989ef1f96f1d277!2sBadda%20Government%20Primary%20School!5e0!3m2!1sen!2sbd!4v1629040760976!5m2!1sen!2sbd', '/upload/settings/1634792112o69lu5DAC.png', '/upload/settings/1634792161te3y91DAC.png', '/upload/settings/163560706736hxn4DAC.png', '2021-10-20 22:41:24', '2021-10-30 09:17:47');
 
 -- --------------------------------------------------------
 
@@ -419,7 +419,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (25, '2021_10_17_043257_create_product_images_table', 1),
 (26, '2021_10_17_044750_creat_product_supplier_table', 1),
 (27, '2021_10_17_045832_creat__attribute_product_table', 1),
-(28, '2021_10_17_053403_create_currencies_table', 1);
+(28, '2021_10_17_053403_create_currencies_table', 1),
+(30, '2021_10_31_094142_create_sliders_table', 2);
 
 -- --------------------------------------------------------
 
@@ -1956,9 +1957,27 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('43oa3kITVqVahD2wm7HFQQtuE4PfYRAHv2UB5hjl', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRmVsbmtpdGFJd1ZpeTJLcnBDdEpZeU8zb0NDd0tLcEJnaDZidzB2ViI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fX0=', 1635265379),
-('CFMsJwnqbt73OsemMDZrWbxbgD8raCvt8PzXR783', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiNnV2NnM0NUlYTTBaRWlTREEyc1hucHkyZHhKWGVBcmJKNkZVTjRFOCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9lLWNvbW1lcmNlL3Byb2R1Y3QvMi9lZGl0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJ5JDEwJGFKYldZZ1pHbHo1MzN6NEhiYnJpRi5oemQ1U0ZFYnF4QkpUSFpvay9VRlMuRDNJdXl0djhHIjtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCRhSmJXWWdaR2x6NTMzejRIYmJyaUYuaHpkNVNGRWJxeEJKVEhab2svVUZTLkQzSXV5dHY4RyI7fQ==', 1635346744),
-('zUsc3OBZizGYnSCN3nMRYTxF6ObGIsrEgOoMqGkw', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiS21Gd3lhZVNDa1V5YXJ5NXdhSFZoM0MxeDdSaTl6cnFpaVhrQ3BhVyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkYUpiV1lnWkdsejUzM3o0SGJicmlGLmh6ZDVTRkVicXhCSlRIWm9rL1VGUy5EM0l1eXR2OEciO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJGFKYldZZ1pHbHo1MzN6NEhiYnJpRi5oemQ1U0ZFYnF4QkpUSFpvay9VRlMuRDNJdXl0djhHIjt9', 1635423735);
+('rq9qL6UXbxq3LoeV3OdqHPZFXcpsLHqIaOHGbsJC', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoieU9xbGVmSlBReEk4UkUzQTRKalRLVGxJSncwbTN4aTRodFZCWW5YUSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9zbGlkZXIiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkYUpiV1lnWkdsejUzM3o0SGJicmlGLmh6ZDVTRkVicXhCSlRIWm9rL1VGUy5EM0l1eXR2OEciO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJGFKYldZZ1pHbHo1MzN6NEhiYnJpRi5oemQ1U0ZFYnF4QkpUSFpvay9VRlMuRDNJdXl0djhHIjt9', 1635814166);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sliders`
+--
+
+CREATE TABLE `sliders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `line1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `line2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `line3` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `btn_text` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `btn_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -2731,6 +2750,12 @@ ALTER TABLE `sessions`
   ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
+-- Indexes for table `sliders`
+--
+ALTER TABLE `sliders`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `social_media_links`
 --
 ALTER TABLE `social_media_links`
@@ -2850,7 +2875,7 @@ ALTER TABLE `general_settings`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -2880,6 +2905,12 @@ ALTER TABLE `product_images`
 -- AUTO_INCREMENT for table `profiles`
 --
 ALTER TABLE `profiles`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `sliders`
+--
+ALTER TABLE `sliders`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
