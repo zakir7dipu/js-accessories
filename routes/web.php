@@ -88,6 +88,12 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'verified'])-
             Route::get('/', [AppSettingsController::class, 'newArrivalProductWidgetIndex'])->name('index');
             Route::post('/', [AppSettingsController::class, 'newArrivalProductWidgetStore']);
         });
+
+        // products filter gallery
+        Route::prefix('filter-gallery')->as('filter-gallery.')->group(function (){
+            Route::get('/', [AppSettingsController::class, 'productFilterGalleryWidgetIndex'])->name('index');
+            Route::post('/', [AppSettingsController::class, 'productFilterGalleryWidgetStore']);
+        });
     });
 
 

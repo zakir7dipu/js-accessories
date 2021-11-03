@@ -20,13 +20,21 @@
             @include('forntend.pages.page-sections.categories')
         @endif
 
+        @include('forntend.pages.advertisements.layout1')
+
         @if($newArrivalSection?$newArrivalSection->show:'')
-            @include('forntend.pages.advertisements.layout1')
+            @include('forntend.pages.page-sections.new-arrivals')
         @endif
 
-        @include('forntend.pages.page-sections.new-arrivals')
-        @include('forntend.pages.page-sections.product-filter-gallery')
-        @include('forntend.pages.page-sections.top-products')
+        @if($productFilterGallerySection?$productFilterGallerySection->show:'')
+            @include('forntend.pages.page-sections.product-filter-gallery')
+        @endif
+
+        @include('forntend.pages.advertisements.layout2')
+
+        @if($infoSection->count() > 0)
+            @include('forntend.pages.page-sections.infosection')
+        @endif
         @include('forntend.pages.page-sections.top-brands')
     </main><!-- End .main -->
 @endsection

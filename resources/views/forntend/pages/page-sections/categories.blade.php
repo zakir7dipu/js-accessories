@@ -27,7 +27,7 @@
         @foreach($sectionCategories as $sectionCategory)
         <div class="category">
             <div class="col-12 mb-1">
-                <img src="{{ $sectionCategory->icon }}" alt="" class="img-fluid w-50 mx-auto">
+                <img src="{{ asset($sectionCategory->icon) }}" alt="" class="img-fluid w-50 mx-auto">
             </div>
             <span>{{ $sectionCategory->name }}</span>
         </div>

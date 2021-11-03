@@ -7,8 +7,10 @@ use App\Models\CetegorySection;
 use App\Models\DistrictList;
 use App\Models\FeatureProduct;
 use App\Models\GeneralSettings;
+use App\Models\InfoSection;
 use App\Models\NewArrivalProductsSection;
 use App\Models\Product;
+use App\Models\ProductFilterGallerySection;
 use App\Models\Slider;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -30,6 +32,13 @@ class Controller extends BaseController
         $sectionCategories = Category::where(['parent_id' => null, 'status' => true])->orderBy('id', 'ASC')->take($categorySection?$categorySection->number_of_content:6)->get();
         $newArrivalSection = NewArrivalProductsSection::first();
         $newArrivalProducts = Product::where('featured', true)->take($newArrivalSection?$newArrivalSection->number_of_content:6)->get();
+
+        $productFilterGallerySection = ProductFilterGallerySection::first();
+        $bestSellers = Product::where(['bestseller' => true, 'status' => true])->take($productFilterGallerySection?$productFilterGallerySection->number_of_content:6)->get();
+        $populars = Product::where(['popular' => true, 'status' => true])->take($productFilterGallerySection?$productFilterGallerySection->number_of_content:6)->get();
+        $trendings = Product::where(['trending' => true, 'status' => true])->take($productFilterGallerySection?$productFilterGallerySection->number_of_content:6)->get();
+        $discounts = Product::where('status', true)->where('discount', '!=', null)->take($productFilterGallerySection?$productFilterGallerySection->number_of_content:6)->get();
+        $infoSection = InfoSection::take(3)->get();
         View::share('districts', $districts);
         View::share('generalSettings', $generalSettings);
         View::share('sliders', $sliders);
@@ -39,6 +48,13 @@ class Controller extends BaseController
         View::share('sectionCategories', $sectionCategories);
         View::share('newArrivalSection', $newArrivalSection);
         View::share('newArrivalProducts', $newArrivalProducts);
+        View::share('productFilterGallerySection', $productFilterGallerySection);
+        View::share('newArrivalProducts', $newArrivalProducts);
+        View::share('bestSellers', $bestSellers);
+        View::share('populars', $populars);
+        View::share('trendings', $trendings);
+        View::share('discounts', $discounts);
+        View::share('infoSection', $infoSection);
     }
     public function backWithError($message)
     {

@@ -7,6 +7,7 @@ use App\Models\CetegorySection;
 use App\Models\FeatureProduct;
 use App\Models\GeneralSettings;
 use App\Models\NewArrivalProductsSection;
+use App\Models\ProductFilterGallerySection;
 use App\Models\SocialMediaLink;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -398,6 +399,37 @@ class AppSettingsController extends Controller
             $newArrivalSection->show = $request->has('show');
             $newArrivalSection->number_of_content = $request->number_of_content;
             $newArrivalSection->save();
+            return $this->backWithSuccess('Section has been saved successfully');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+    /*
+    * Product filter gallery
+    */
+    public function productFilterGalleryWidgetIndex()
+    {
+        try {
+            $generalSettings = GeneralSettings::first();
+            $title = ($generalSettings?$generalSettings->site_name:'').' | '.'Product Filter Gallery Section';
+            return view('backend.pages.widgets.product-filter-gallery.form', compact('title', 'generalSettings'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function productFilterGalleryWidgetStore(Request $request)
+    {
+        $this->validate($request,[
+            'title' => ['required', 'string', 'max:100'],
+            'number_of_content' => ['max:1']
+        ]);
+        try {
+            $productFilterGallerySection = ProductFilterGallerySection::first()?ProductFilterGallerySection::first():new ProductFilterGallerySection();
+            $productFilterGallerySection->title = $request->title;
+            $productFilterGallerySection->show = $request->has('show');
+            $productFilterGallerySection->number_of_content = $request->number_of_content;
+            $productFilterGallerySection->save();
             return $this->backWithSuccess('Section has been saved successfully');
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
