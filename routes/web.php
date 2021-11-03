@@ -24,6 +24,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/setup', function (){
+    \Illuminate\Support\Facades\Artisan::call('storage:link');
+    \Illuminate\Support\Facades\Artisan::call('cache:clear');
+    \Illuminate\Support\Facades\Artisan::call('view:clear');
+    echo 'done';
+    return redirect()->route('home');
+});
+
 Route::get('/', [GuestController::class, 'index'])->name('home');
 
 Route::get('/district-info', [DistrictController::class, 'getDistrictInfo']);
