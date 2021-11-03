@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 02, 2021 at 06:01 PM
+-- Generation Time: Nov 03, 2021 at 04:41 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.25
 
@@ -221,6 +221,27 @@ INSERT INTO `categories` (`id`, `parent_id`, `name`, `icon`, `slug`, `status`, `
 (23, 5, 'Bags', '/upload/categories/1634793462qvyh6wDAC.png', 'bags_1634793462', 1, '2021-10-20 23:17:42', '2021-10-20 23:17:42'),
 (24, 5, 'Shoes', '/upload/categories/1634793480hetkwlDAC.png', 'shoes_1634793480', 1, '2021-10-20 23:18:00', '2021-10-20 23:18:00'),
 (25, 12, 'Wine Glass', NULL, 'wine_glass_1635343431', 1, '2021-10-27 08:03:51', '2021-10-27 08:03:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cetegory_sections`
+--
+
+CREATE TABLE `cetegory_sections` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `show` tinyint(1) NOT NULL DEFAULT 1,
+  `number_of_content` int(11) NOT NULL DEFAULT 6,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cetegory_sections`
+--
+
+INSERT INTO `cetegory_sections` (`id`, `show`, `number_of_content`, `created_at`, `updated_at`) VALUES
+(1, 1, 6, '2021-11-02 21:04:37', '2021-11-02 21:05:11');
 
 -- --------------------------------------------------------
 
@@ -443,7 +464,31 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (27, '2021_10_17_045832_creat__attribute_product_table', 1),
 (28, '2021_10_17_053403_create_currencies_table', 1),
 (30, '2021_10_31_094142_create_sliders_table', 2),
-(31, '2021_11_02_154151_create_feature_products_table', 3);
+(31, '2021_11_02_154151_create_feature_products_table', 3),
+(32, '2021_11_03_025010_create_cetegory_sections_table', 4),
+(33, '2021_11_03_031733_create_new_arrival_products_sections_table', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `new_arrival_products_sections`
+--
+
+CREATE TABLE `new_arrival_products_sections` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `show` tinyint(1) NOT NULL DEFAULT 1,
+  `number_of_content` int(11) NOT NULL DEFAULT 6,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `new_arrival_products_sections`
+--
+
+INSERT INTO `new_arrival_products_sections` (`id`, `title`, `show`, `number_of_content`, `created_at`, `updated_at`) VALUES
+(1, 'New Arrivals', 1, 6, '2021-11-02 21:34:40', '2021-11-02 21:36:20');
 
 -- --------------------------------------------------------
 
@@ -1980,7 +2025,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('F7uV0d5pnhnXUu3qcEbaiMLH3doRRklXS4NiVjWW', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiblZyQVpLQkNGWGk1d3VFNU5RMlQxU2JaM05tVkNSbXFpdW1HQ1MyWSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCRhSmJXWWdaR2x6NTMzejRIYmJyaUYuaHpkNVNGRWJxeEJKVEhab2svVUZTLkQzSXV5dHY4RyI7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkYUpiV1lnWkdsejUzM3o0SGJicmlGLmh6ZDVTRkVicXhCSlRIWm9rL1VGUy5EM0l1eXR2OEciO30=', 1635872376);
+('wBRsS3O5hf1acCn9yenVSYHj0qL52WQEaXsdY2fA', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNzg5NnBuQ09aMVpNSnZtOTRpelZKRTBVdU1yS1lhajlkMHZ4UVJ3WiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fX0=', 1635910899);
 
 -- --------------------------------------------------------
 
@@ -2705,6 +2750,12 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `cetegory_sections`
+--
+ALTER TABLE `cetegory_sections`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `currencies`
 --
 ALTER TABLE `currencies`
@@ -2739,6 +2790,12 @@ ALTER TABLE `general_settings`
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `new_arrival_products_sections`
+--
+ALTER TABLE `new_arrival_products_sections`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2886,6 +2943,12 @@ ALTER TABLE `categories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
+-- AUTO_INCREMENT for table `cetegory_sections`
+--
+ALTER TABLE `cetegory_sections`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `currencies`
 --
 ALTER TABLE `currencies`
@@ -2919,7 +2982,13 @@ ALTER TABLE `general_settings`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT for table `new_arrival_products_sections`
+--
+ALTER TABLE `new_arrival_products_sections`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
