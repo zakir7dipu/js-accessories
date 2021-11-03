@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CetegorySection;
 use App\Models\FeatureProduct;
 use App\Models\GeneralSettings;
+use App\Models\NewArrivalProductsSection;
 use App\Models\SocialMediaLink;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -341,4 +343,66 @@ class AppSettingsController extends Controller
             return $this->backWithError($th->getMessage());
         }
     }
+    /*
+    * category section widget
+    */
+    public function categorySectionIndex()
+    {
+        try {
+            $generalSettings = GeneralSettings::first();
+            $title = ($generalSettings?$generalSettings->site_name:'').' | '.'Category Section';
+            return view('backend.pages.widgets.category-sections.form', compact('title', 'generalSettings'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function categorySectionStore(Request $request)
+    {
+        $this->validate($request,[
+            'number_of_content' => ['max:1']
+        ]);
+        try {
+            $categorySection = CetegorySection::first()?CetegorySection::first():new CetegorySection();
+            $categorySection->show = $request->has('show');
+            $categorySection->number_of_content = $request->number_of_content;
+            $categorySection->save();
+            return $this->backWithSuccess('Section has been saved successfully');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+    /*
+    * New Arrival Product Widget
+    */
+    public function newArrivalProductWidgetIndex()
+    {
+        try {
+            $generalSettings = GeneralSettings::first();
+            $title = ($generalSettings?$generalSettings->site_name:'').' | '.'New Arrival Section';
+            return view('backend.pages.widgets.new-arrival-products.form', compact('title', 'generalSettings'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function newArrivalProductWidgetStore(Request $request)
+    {
+        $this->validate($request,[
+            'title' => ['required', 'string', 'max:100'],
+            'number_of_content' => ['max:1']
+        ]);
+        try {
+            $newArrivalSection = NewArrivalProductsSection::first()?NewArrivalProductsSection::first():new NewArrivalProductsSection();
+            $newArrivalSection->title = $request->title;
+            $newArrivalSection->show = $request->has('show');
+            $newArrivalSection->number_of_content = $request->number_of_content;
+            $newArrivalSection->save();
+            return $this->backWithSuccess('Section has been saved successfully');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+
 }

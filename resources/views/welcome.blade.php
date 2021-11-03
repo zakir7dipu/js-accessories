@@ -15,8 +15,15 @@
         @if($featureProductSection?$featureProductSection->show:'')
             @include('forntend.pages.page-sections.feature-product')
         @endif
-        @include('forntend.pages.page-sections.categories')
-        @include('forntend.pages.advertisements.layout1')
+
+        @if($categorySection?$categorySection->show:'')
+            @include('forntend.pages.page-sections.categories')
+        @endif
+
+        @if($newArrivalSection?$newArrivalSection->show:'')
+            @include('forntend.pages.advertisements.layout1')
+        @endif
+
         @include('forntend.pages.page-sections.new-arrivals')
         @include('forntend.pages.page-sections.product-filter-gallery')
         @include('forntend.pages.page-sections.top-products')

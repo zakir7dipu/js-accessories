@@ -105,6 +105,8 @@
                     <ul class="dropdown-list">
                         <li><a href="{{ route('admin.widget.slider.index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Sliders') }}</span></a></li>
                         <li><a href="{{ route('admin.widget.feature-products.index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Feature Products Section') }}</span></a></li>
+                        <li><a href="{{ route('admin.widget.category-section.index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Category Section') }}</span></a></li>
+                        <li><a href="{{ route('admin.widget.new-arrival.index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('New Arrival Section') }}</span></a></li>
                     </ul>
                 </li>
                 <!-- NAV ITEM BLOG -->

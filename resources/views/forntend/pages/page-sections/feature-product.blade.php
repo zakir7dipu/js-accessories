@@ -25,12 +25,6 @@
                         <h2 class="product-title">
                             <a href="javascript:void(0)">{{ substr($featureProduct->name, 0, 27) }}</a>
                         </h2>
-{{--                        <div class="ratings-container">--}}
-{{--                            <div class="product-ratings">--}}
-{{--                                <span class="ratings" style="width:0%"></span><!-- End .ratings -->--}}
-{{--                                <span class="tooltiptext tooltip-top">5</span>--}}
-{{--                            </div><!-- End .product-ratings -->--}}
-{{--                        </div><!-- End .product-container -->--}}
                         <div class="price-box">
                             {!! $featureProduct->discount?'<span class="old-price">'.$featureProduct->currency->symbol.$featureProduct->price.'</span><span class="product-price">'.$featureProduct->currency->symbol.($featureProduct->price - (($featureProduct->price * $featureProduct->discount) / 100)).'</span>':'<span class="product-price">'.$featureProduct->currency->symbol.$featureProduct->price.'</span>' !!}
                         </div><!-- End .price-box -->

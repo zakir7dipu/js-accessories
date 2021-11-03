@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\CetegorySection;
 use App\Models\DistrictList;
 use App\Models\FeatureProduct;
 use App\Models\GeneralSettings;
+use App\Models\NewArrivalProductsSection;
 use App\Models\Product;
 use App\Models\Slider;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -23,11 +26,19 @@ class Controller extends BaseController
         $sliders = Slider::where('status', true)->get();
         $featureProductSection = FeatureProduct::first();
         $featureProducts = Product::where('featured', true)->take($featureProductSection?$featureProductSection->number_of_content:6)->get();
+        $categorySection = CetegorySection::first();
+        $sectionCategories = Category::where(['parent_id' => null, 'status' => true])->orderBy('id', 'ASC')->take($categorySection?$categorySection->number_of_content:6)->get();
+        $newArrivalSection = NewArrivalProductsSection::first();
+        $newArrivalProducts = Product::where('featured', true)->take($newArrivalSection?$newArrivalSection->number_of_content:6)->get();
         View::share('districts', $districts);
         View::share('generalSettings', $generalSettings);
         View::share('sliders', $sliders);
         View::share('featureProductSection', $featureProductSection);
         View::share('featureProducts', $featureProducts);
+        View::share('categorySection', $categorySection);
+        View::share('sectionCategories', $sectionCategories);
+        View::share('newArrivalSection', $newArrivalSection);
+        View::share('newArrivalProducts', $newArrivalProducts);
     }
     public function backWithError($message)
     {

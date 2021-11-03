@@ -24,30 +24,13 @@
                       }
                     }
                 }">
+        @foreach($sectionCategories as $sectionCategory)
         <div class="category">
-            <i class="icon-category-fashion"></i>
-            <span>Fashion</span>
+            <div class="col-12 mb-1">
+                <img src="{{ $sectionCategory->icon }}" alt="" class="img-fluid w-50 mx-auto">
+            </div>
+            <span>{{ $sectionCategory->name }}</span>
         </div>
-        <div class="category">
-            <i class="icon-category-electronics"></i>
-            <span>Electronics</span>
-        </div>
-        <div class="category">
-            <i class="icon-gift"></i>
-            <span>Gift</span>
-        </div>
-        <div class="category">
-            <i class="icon-category-garden"></i>
-            <span>Garden</span>
-        </div>
-        <div class="category">
-            <i class="icon-category-music"></i>
-            <span>Music</span>
-        </div>
-        <div class="category">
-            <i class="icon-category-motors"></i>
-            <span>Motors</span>
-        </div>
-
+        @endforeach
     </div><!-- End .categories-carousel -->
 </section><!-- End .categories-container -->

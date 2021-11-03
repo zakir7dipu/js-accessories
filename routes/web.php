@@ -71,10 +71,22 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'verified'])-
         //slider
         Route::resource('/slider', SliderController::class);
 
-        // featureProductWidgetIndex
+        // feature Product Widget Index
         Route::prefix('feature-products')->as('feature-products.')->group(function (){
             Route::get('/', [AppSettingsController::class, 'featureProductWidgetIndex'])->name('index');
             Route::post('/', [AppSettingsController::class, 'featureProductWidgetStore']);
+        });
+
+        // category section index
+        Route::prefix('category-section')->as('category-section.')->group(function (){
+            Route::get('/', [AppSettingsController::class, 'categorySectionIndex'])->name('index');
+            Route::post('/', [AppSettingsController::class, 'categorySectionStore']);
+        });
+
+        // new arrival products
+        Route::prefix('new-arrival')->as('new-arrival.')->group(function (){
+            Route::get('/', [AppSettingsController::class, 'newArrivalProductWidgetIndex'])->name('index');
+            Route::post('/', [AppSettingsController::class, 'newArrivalProductWidgetStore']);
         });
     });
 
