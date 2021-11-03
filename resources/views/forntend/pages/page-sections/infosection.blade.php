@@ -6,7 +6,7 @@
                     <div class="info-box">
 {{--                        <i class="icon-shipping"></i>--}}
                         <div class="col-12 mb-1">
-                            <img src="{{ asset($column->icon) }}" alt="" class="img-fluid mx-auto" style="width: 60px;">
+                            <img src="{{ asset($column->icon) }}" alt="" class="img-fluid mx-auto w-60">
                         </div>
                         <div class="info-box-content">
                             <h4 class="info-title">{{ $column->title }}</h4>

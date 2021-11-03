@@ -121,6 +121,9 @@ button:active:focus {
   40% {
     -webkit-transform: scale(1);
     transform: scale(1); } }
+.w-60{
+    width: 60px;
+}
 .loading-overlay {
   position: fixed;
   top: 0;

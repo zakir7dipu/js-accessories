@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2021 at 04:41 AM
+-- Generation Time: Nov 03, 2021 at 08:42 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.25
 
@@ -390,7 +390,7 @@ CREATE TABLE `feature_products` (
 --
 
 INSERT INTO `feature_products` (`id`, `title`, `show`, `number_of_content`, `created_at`, `updated_at`) VALUES
-(1, 'Featured Products', 1, 6, '2021-11-02 10:24:12', '2021-11-02 10:25:42');
+(1, 'Featured Products', 1, 6, '2021-11-02 10:24:12', '2021-11-03 00:18:53');
 
 -- --------------------------------------------------------
 
@@ -417,6 +417,31 @@ CREATE TABLE `general_settings` (
 
 INSERT INTO `general_settings` (`id`, `site_name`, `meta_keyword`, `meta_description`, `location_map`, `logo`, `favicon`, `site_tag_image`, `created_at`, `updated_at`) VALUES
 (1, 'E Commerce Admin', 'online shopping', 'This is a online e-commerce site....', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.8895533356776!2d90.2446309147299!3d23.858055384536428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755ebdf5e37cba3%3A0x3989ef1f96f1d277!2sBadda%20Government%20Primary%20School!5e0!3m2!1sen!2sbd!4v1629040760976!5m2!1sen!2sbd', '/upload/settings/1634792112o69lu5DAC.png', '/upload/settings/1634792161te3y91DAC.png', '/upload/settings/163560706736hxn4DAC.png', '2021-10-20 22:41:24', '2021-10-30 09:17:47');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `info_sections`
+--
+
+CREATE TABLE `info_sections` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sub_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `info_sections`
+--
+
+INSERT INTO `info_sections` (`id`, `title`, `sub_title`, `description`, `icon`, `created_at`, `updated_at`) VALUES
+(1, 'FREE SHIPPING & RETURNS', 'All Orders Over $99', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec vestibulum magna, et dapibus.', '/upload/settings/free-delivery.png', '2021-11-03 01:19:53', '2021-11-03 01:19:53'),
+(2, 'MONEY BACK GUARANTEE', 'Safe & Fast', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec vestibulum magna, et dapibus.', '/upload/settings/cashback.png', '2021-11-03 01:19:53', '2021-11-03 01:19:53'),
+(3, 'ONLINE SUPPORT', 'Need Assistence?', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec vestibulum magna, et dapibus.', '/upload/settings/support.png', '2021-11-03 01:19:53', '2021-11-03 01:19:53');
 
 -- --------------------------------------------------------
 
@@ -466,7 +491,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (30, '2021_10_31_094142_create_sliders_table', 2),
 (31, '2021_11_02_154151_create_feature_products_table', 3),
 (32, '2021_11_03_025010_create_cetegory_sections_table', 4),
-(33, '2021_11_03_031733_create_new_arrival_products_sections_table', 5);
+(33, '2021_11_03_031733_create_new_arrival_products_sections_table', 5),
+(34, '2021_11_03_055759_create_product_filter_gallery_sections_table', 6),
+(35, '2021_11_03_065932_create_info_sections_table', 7);
 
 -- --------------------------------------------------------
 
@@ -488,7 +515,7 @@ CREATE TABLE `new_arrival_products_sections` (
 --
 
 INSERT INTO `new_arrival_products_sections` (`id`, `title`, `show`, `number_of_content`, `created_at`, `updated_at`) VALUES
-(1, 'New Arrivals', 1, 6, '2021-11-02 21:34:40', '2021-11-02 21:36:20');
+(1, 'New Arrivals', 1, 6, '2021-11-02 21:34:40', '2021-11-02 23:55:30');
 
 -- --------------------------------------------------------
 
@@ -1947,6 +1974,28 @@ INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `currency_id
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `product_filter_gallery_sections`
+--
+
+CREATE TABLE `product_filter_gallery_sections` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `show` tinyint(1) NOT NULL DEFAULT 1,
+  `number_of_content` int(11) NOT NULL DEFAULT 6,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `product_filter_gallery_sections`
+--
+
+INSERT INTO `product_filter_gallery_sections` (`id`, `title`, `show`, `number_of_content`, `created_at`, `updated_at`) VALUES
+(1, 'Special Product', 1, 6, '2021-11-03 00:19:46', '2021-11-03 00:22:10');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `product_images`
 --
 
@@ -2025,7 +2074,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('wBRsS3O5hf1acCn9yenVSYHj0qL52WQEaXsdY2fA', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNzg5NnBuQ09aMVpNSnZtOTRpelZKRTBVdU1yS1lhajlkMHZ4UVJ3WiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fX0=', 1635910899);
+('GwedvRsjYRLV8jHXFtWQQrlvQNK2G9PPFQoxnUcD', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiTlRiQm1GNzdUOHoxS2dkR3F5WWVKUUlEZ1RocDFWSkN6N3VEOGszUSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCRhSmJXWWdaR2x6NTMzejRIYmJyaUYuaHpkNVNGRWJxeEJKVEhab2svVUZTLkQzSXV5dHY4RyI7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkYUpiV1lnWkdsejUzM3o0SGJicmlGLmh6ZDVTRkVicXhCSlRIWm9rL1VGUy5EM0l1eXR2OEciO30=', 1635925351);
 
 -- --------------------------------------------------------
 
@@ -2787,6 +2836,12 @@ ALTER TABLE `general_settings`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `info_sections`
+--
+ALTER TABLE `info_sections`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -2822,6 +2877,12 @@ ALTER TABLE `post_office_lists`
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_filter_gallery_sections`
+--
+ALTER TABLE `product_filter_gallery_sections`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2979,10 +3040,16 @@ ALTER TABLE `general_settings`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `info_sections`
+--
+ALTER TABLE `info_sections`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `new_arrival_products_sections`
@@ -3007,6 +3074,12 @@ ALTER TABLE `post_office_lists`
 --
 ALTER TABLE `products`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `product_filter_gallery_sections`
+--
+ALTER TABLE `product_filter_gallery_sections`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `product_images`

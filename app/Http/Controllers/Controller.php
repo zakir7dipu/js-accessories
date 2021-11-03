@@ -12,6 +12,7 @@ use App\Models\NewArrivalProductsSection;
 use App\Models\Product;
 use App\Models\ProductFilterGallerySection;
 use App\Models\Slider;
+use App\Models\Supplier;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -39,6 +40,8 @@ class Controller extends BaseController
         $trendings = Product::where(['trending' => true, 'status' => true])->take($productFilterGallerySection?$productFilterGallerySection->number_of_content:6)->get();
         $discounts = Product::where('status', true)->where('discount', '!=', null)->take($productFilterGallerySection?$productFilterGallerySection->number_of_content:6)->get();
         $infoSection = InfoSection::take(3)->get();
+        $suppliers = Supplier::where('status', true)->get();
+
         View::share('districts', $districts);
         View::share('generalSettings', $generalSettings);
         View::share('sliders', $sliders);
@@ -55,6 +58,7 @@ class Controller extends BaseController
         View::share('trendings', $trendings);
         View::share('discounts', $discounts);
         View::share('infoSection', $infoSection);
+        View::share('suppliers', $suppliers);
     }
     public function backWithError($message)
     {

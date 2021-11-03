@@ -35,7 +35,10 @@
         @if($infoSection->count() > 0)
             @include('forntend.pages.page-sections.infosection')
         @endif
-        @include('forntend.pages.page-sections.top-brands')
+
+        @if($suppliers->count() > 0)
+            @include('forntend.pages.page-sections.top-brands')
+        @endif
     </main><!-- End .main -->
 @endsection
 
