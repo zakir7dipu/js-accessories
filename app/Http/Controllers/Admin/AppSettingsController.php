@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CetegorySection;
 use App\Models\FeatureProduct;
 use App\Models\GeneralSettings;
+use App\Models\InfoSection;
 use App\Models\NewArrivalProductsSection;
 use App\Models\ProductFilterGallerySection;
 use App\Models\SocialMediaLink;
@@ -435,6 +436,88 @@ class AppSettingsController extends Controller
             return $this->backWithError($th->getMessage());
         }
     }
+    /*
+    * info section
+    */
+    public function infoSectionIndex()
+    {
+        try {
+            $generalSettings = GeneralSettings::first();
+            $title = ($generalSettings?$generalSettings->site_name:'').' | '.'Info Section';
+            return view('backend.pages.widgets.info-section.form', compact('title', 'generalSettings'));
+        }catch(\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
 
+    public function infoColumnStore(Request $request, InfoSection $column)
+    {
+        $this->validate($request, [
+            'title' => ['required', 'string', 'max:255'],
+            'sub_title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'max:255']
+        ]);
+        // for validation check
+        $acceptable = ['png'];
+        if ($request->hasFile('icon')) {
+            foreach ($request->icon as $img) {
+                if (!in_array($img->getClientOriginalExtension(), $acceptable)) {
+                    return $this->backWithWarning('Only png file is supported.');
+                }
+            }
+        }
+        try {
+            $column->title = $request->title;
+            $column->sub_title = $request->sub_title;
+            $column->description = $request->description;
+            if ($request->hasFile('icon')){
+                if ($column->icon){
+                    if (file_exists(public_path($column->icon))){
+                        unlink(public_path($column->icon));
+                    }
+                }
+                $images = $request->icon;
+                foreach ($images as $img) {
+                    $image = $img;
+                    $x = 'abcdefghijklmnopqrstuvwxyz0123456789';
+                    $x = str_shuffle($x);
+                    $x = substr($x, 0, 6) . 'DAC.';
+                    $filename = time() . $x . $image->getClientOriginalExtension();
+                }
+                Image::make($image->getRealPath())
+                    ->resize(64, 64)
+                    ->save(public_path('/upload/settings/' . $filename));
+                $path = "/upload/settings/".$filename;
+                $column->icon = $path;
+            }
+            $column->save();
+            return $this->backWithSuccess('Column updated successfully');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function infoSectionActivation()
+    {
+        $generalSettings = GeneralSettings::first();
+        try {
+            if ($generalSettings->info_section_show){
+                $generalSettings->update(['info_section_show' => false]);
+                $notification = (object)[
+                    'status' => 'warning',
+                    'message' => "Deactivated Successfully......"
+                ];
+            }else{
+                $generalSettings->update(['info_section_show' => true]);
+                $notification = (object)[
+                    'status' => 'success',
+                    'message' => "Activated Successfully......"
+                ];
+            }
+            return response()->json($notification);
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
 
 }

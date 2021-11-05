@@ -32,7 +32,7 @@
 
         @include('forntend.pages.advertisements.layout2')
 
-        @if($infoSection->count() > 0)
+        @if($infoSection->count() > 0 && ($generalSettings?($generalSettings->info_section_show?true:false):false))
             @include('forntend.pages.page-sections.infosection')
         @endif
 

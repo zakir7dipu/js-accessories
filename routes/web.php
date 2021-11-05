@@ -102,6 +102,13 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'verified'])-
             Route::get('/', [AppSettingsController::class, 'productFilterGalleryWidgetIndex'])->name('index');
             Route::post('/', [AppSettingsController::class, 'productFilterGalleryWidgetStore']);
         });
+
+        // info section
+        Route::prefix('info-section')->as('info-section.')->group(function (){
+            Route::get('/', [AppSettingsController::class, 'infoSectionIndex'])->name('index');
+            Route::post('/info/{column}', [AppSettingsController::class, 'infoColumnStore'])->name('store');
+            Route::get('/info-section-Activation', [AppSettingsController::class, 'infoSectionActivation']);
+        });
     });
 
 

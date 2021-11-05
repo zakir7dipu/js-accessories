@@ -22,6 +22,7 @@ class CreateGeneralSettingsTable extends Migration
             $table->longText('logo')->nullable();
             $table->longText('favicon')->nullable();
             $table->longText('site_tag_image')->nullable();
+            $table->boolean('info_section_show')->default(true);
             $table->timestamps();
         });
     }
