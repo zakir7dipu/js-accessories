@@ -95,7 +95,7 @@
                 </li>
                 <!-- NAV DIVIDER -->
                 <li class="nav-divider"></li>
-                <!-- NAV ITEM slider-->
+                <!-- NAV ITEM widget-->
                 <li class="nav-item has-dropdown {{ request()->is('admin/widget.*') ?'active':'' }}">
                     <a href="javascript:void(0);" class="nav-link">
                         <i class="fas fa-toolbox"></i>
@@ -109,6 +109,17 @@
                         <li><a href="{{ route('admin.widget.new-arrival.index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('New Arrival Section') }}</span></a></li>
                         <li><a href="{{ route('admin.widget.filter-gallery.index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Filter Gallery Section') }}</span></a></li>
                         <li><a href="{{ route('admin.widget.info-section.index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Info Section') }}</span></a></li>
+                    </ul>
+                </li>
+                <!-- NAV ITEM advertisement-->
+                <li class="nav-item has-dropdown {{ request()->is('admin/advertisement.*') ?'active':'' }}">
+                    <a href="javascript:void(0);" class="nav-link">
+                        <i class="fas fa-toolbox"></i>
+                        <span class="link-text">{{ __('advertisement') }}</span>{{ __('') }}
+                        <span class="badge badge-md"><span class="material-icons h6" >chevron_right</span></span>
+                    </a>
+                    <ul class="dropdown-list">
+                        <li><a href="{{ route('admin.advertisement.index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Advertising layouts') }}</span></a></li>
                     </ul>
                 </li>
                 <!-- NAV ITEM BLOG -->

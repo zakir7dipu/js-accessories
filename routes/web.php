@@ -2,6 +2,7 @@
 
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\Admin\AppSettingsController;
 use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\BlogPostController;
@@ -75,6 +76,7 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'verified'])-
         Route::get('/view/{customer}', [AdminController::class, 'customersView'])->name('view');
     });
 
+    // widget
     Route::prefix('widget')->as('widget.')->group(function (){
         //slider
         Route::resource('/slider', SliderController::class);
@@ -110,6 +112,12 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'verified'])-
             Route::get('/info-section-Activation', [AppSettingsController::class, 'infoSectionActivation']);
         });
     });
+
+    // advertisement
+    Route::prefix('advertisement')->as('advertisement.')->group(function (){
+
+    });
+    Route::resource('advertisement', AdvertisementController::class);
 
 
     //blogs
