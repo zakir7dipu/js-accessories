@@ -1,25 +1,18 @@
 <section class="home-products-intro mt-3 mb-1">
     <div class="container">
         <div class="row row-sm">
-            <div class="col-xl-6">
-                <div class="banner-product bg-grey" style="background-image: url({{ asset('forntend/assets/images/products/product-banner1.jpg') }});background-position : 54%;">
-                    <h2>ACTION <br>CAMERAS</h2>
-                    <div class="mr-5">
-                        <h4>Starting From<span class="price">$399</span></h4>
-                        <button class="btn btn-primary">SHOP NOW</button>
+            @foreach($advertiseGroup2 as $key => $adItem)
+                <div class="col-xl-6">
+                    <div class="banner-product bg-grey" style="background-image: url({{ $adItem->image?asset($adItem->image):asset('upload/settings/empty-add.jpg') }}); {{ !$adItem->line1 && !$adItem->line2 && !$adItem->line2 && !$adItem->btn_url && !$adItem->btn_text?'background-position : center; background-size: cover;': 'background-position : 54%; background-size: 45% 50%;'}} height: 200px;">
+                        <h2>{{ $adItem->title }}</h2>
+                        <div class="mr-5">
+                            <h4>{{ $adItem->line1 }}<span class="price">{{ $adItem->line2 }}</span></h4>
+                            {!! $adItem->btn_url && $adItem->btn_text ? '<a href="'.$adItem->btn_url.'"><button class="btn btn-primary">'.$adItem->btn_text.'</button></a>':'' !!}
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-6">
-                <div class="banner-product bg-grey" style="background-image: url({{ asset('forntend/assets/images/products/product-banner2.jpg') }});
-                    background-position : 48% 10%;">
-                    <div class="ml-5" style="text-align: right">
-                        <h4>Starting From<span class="price">$199</span></h4>
-                        <button class="btn btn-primary">SHOP NOW</button>
-                    </div>
-                    <h2>FOR ALL <br>STYLES</h2>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>

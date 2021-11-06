@@ -35,7 +35,7 @@
                     }
                 }
             })
-        })
+        });
 
         $('.blogCategoryDestroyBtn').on('click', function(){
             swal({

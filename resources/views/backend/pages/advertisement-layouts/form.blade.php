@@ -5,7 +5,6 @@
 @section('page-css')
     <style>
         .empty-ad{
-            background-image: url({{ asset('upload/settings/empty-add.jpg') }});
             background-size: cover;
             background-position: center;
             height: 300px;
@@ -47,7 +46,9 @@
                                 <h6 class="card-title lh-35">{{ __($title) }}</h6>
                             </div>
                             <div class="col-5 text-right">
-                                <button type="button" class="btn btn-success btn-sm rounded"><i class="far fa-plus-square"></i></button>
+                                <a href="{{ route('admin.advertisement.create') }}">
+                                    <button type="button" class="btn btn-success btn-sm rounded"><i class="far fa-plus-square"></i></button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -56,7 +57,7 @@
                         <div class="row">
                             @foreach($advertisements as $key => $advertise)
                                 <div class="col-md-6">
-                                    <div class="card rounded empty-ad">
+                                    <div class="card rounded empty-ad" style=" background-image: url({{ $advertise->image?asset($advertise->image):asset('upload/settings/empty-add.jpg') }});">
                                         <div class="card-body">
                                             <h2 class="text-black font-weight-bold">{{ $advertise->title }}</h2>
                                         </div>
@@ -67,15 +68,25 @@
                                                 <h5 class="text-black">{{ $advertise->title }}</h5>
                                             </div>
                                             <div class="col-6 text-right">
-                                                <button type="button" class="btn btn-sm btn-danger rounded-circle ad-form-close"><i class="far fa-times-circle"></i></button>
+                                                <a href="javascript:void(0)" title="{{__('Delete')}}" class="deleteAdvertiseBtn d-inline-block">
+                                                    <button type="button" class="btn btn-sm btn-info rounded ad-form-close"><i class="fas fa-trash-alt"></i></button>
+                                                    <form action="{{ route('admin.advertisement.destroy', $advertise->id) }}" method="post" class="deleteForm">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <input type="hidden" name="_method" value="delete">
+                                                    </form>
+                                                </a>
+                                                <button type="button" class="btn btn-sm btn-danger rounded ad-form-close"><i class="far fa-window-close"></i></button>
                                             </div>
                                         </div>
-                                        <form action="" method="post" enctype="multipart/form-data">
+                                        <form action="{{ route('admin.advertisement.update',$advertise->id) }}" method="post" enctype="multipart/form-data">
                                             @csrf
+
+                                            @method('PATCH')
 
                                             <div class="card-body bg-dark">
                                                 <div class="form-group">
-                                                    <p class="mb-1 font-weight-bold"><label for="description">{{__('Advertise Image :')}}</label> &nbsp;<sup><i class="text-danger fas fa-star-of-life small"></i></sup> &nbsp; <code>{{ __('Expected Image size will be 64px x 64px') }}</code></p>
+                                                    <p class="mb-1 font-weight-bold"><label for="description">{{__('Advertise Image :')}}</label> &nbsp;<sup><i class="text-danger fas fa-star-of-life small"></i></sup> &nbsp; <code>{{ __('Expected Image size will be 1583px x 540px') }}</code></p>
                                                     <div class="form-row">
                                                         <div class="col-4" style="display: flex; justify-content: center; align-content: center;">
                                                             @if($advertise->image)
@@ -165,7 +176,7 @@
                                                 <p class="mb-1">{{__('Status')}}: <sup>{{ "( ".__('Optional')." )" }}</sup></p>
                                                 <div class="form-group">
                                                     <label class="switch">
-                                                        <input type="checkbox" {{ $advertise->status?'checked':'' }}>
+                                                        <input type="checkbox" {{ $advertise->status?'checked':'' }} name="status">
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </div>

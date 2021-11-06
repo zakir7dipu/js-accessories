@@ -20,6 +20,29 @@
             $(this).parent().parent().parent().addClass('d-none');
         })
 
+        //
+        $('.deleteAdvertiseBtn').on('click', function(){
+            swal({
+                title: "{{__('Are you sure?')}}",
+                text: "{{__('Once you delete, You can not recover this advertise and related files.')}}",
+                icon: "warning",
+                dangerMode: true,
+                buttons: {
+                    cancel: true,
+                    confirm: {
+                        text: "{{__('Delete')}}",
+                        value: true,
+                        visible: true,
+                        closeModal: true
+                    },
+                },
+            }).then((value) => {
+                if(value){
+                    $(this).find('.deleteForm').submit();
+                }
+            });
+        })
+
 
     })(jQuery)
 </script>

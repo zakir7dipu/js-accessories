@@ -20,7 +20,9 @@
             @include('forntend.pages.page-sections.categories')
         @endif
 
-        @include('forntend.pages.advertisements.layout1')
+        @if($advertiseGroup1->count() == 2)
+            @include('forntend.pages.advertisements.layout1')
+        @endif
 
         @if($newArrivalSection?$newArrivalSection->show:'')
             @include('forntend.pages.page-sections.new-arrivals')
@@ -30,7 +32,9 @@
             @include('forntend.pages.page-sections.product-filter-gallery')
         @endif
 
-        @include('forntend.pages.advertisements.layout2')
+        @if($advertiseGroup2->count() == 2)
+            @include('forntend.pages.advertisements.layout2')
+        @endif
 
         @if($infoSection->count() > 0 && ($generalSettings?($generalSettings->info_section_show?true:false):false))
             @include('forntend.pages.page-sections.infosection')
