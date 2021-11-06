@@ -114,7 +114,7 @@
                 <!-- NAV ITEM advertisement-->
                 <li class="nav-item has-dropdown {{ request()->is('admin/advertisement.*') ?'active':'' }}">
                     <a href="javascript:void(0);" class="nav-link">
-                        <i class="fas fa-toolbox"></i>
+                        <i class="fab fa-adversal"></i>
                         <span class="link-text">{{ __('advertisement') }}</span>{{ __('') }}
                         <span class="badge badge-md"><span class="material-icons h6" >chevron_right</span></span>
                     </a>

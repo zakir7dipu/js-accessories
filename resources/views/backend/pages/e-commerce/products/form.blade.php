@@ -36,7 +36,7 @@
                         <div class="card-body ">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <p class="mb-1"><label for="subCategory" class="card-title font-weight-bold">{{ __('Sub-Category') }}</label> &nbsp;<i class="fas fa-star-of-life text-danger"></i> </p>
+                                    <p class="mb-1"><label for="subCategory" class="card-title font-weight-bold">{{ __('Sub-Category') }}</label> &nbsp;<sup><i class="fas fa-star-of-life text-danger"></i></sup> </p>
                                     <div class="input-group input-group-lg mb-3">
                                         <select name="sub_category" id="subCategory" class="form-control" {{ $categories->count() == 0?'readonly':'' }}>
                                             <option value="{{ null }}">{{ __('Select One') }}</option>
@@ -68,7 +68,7 @@
                                         </div>
                                     </div>
 
-                                    <p class="mb-1"><label for="name" class="card-title font-weight-bold">{{__('Name:')}}</label> &nbsp;<i class="fas fa-star-of-life text-danger"></i></p>
+                                    <p class="mb-1"><label for="name" class="card-title font-weight-bold">{{__('Name:')}}</label> &nbsp;<sup><i class="fas fa-star-of-life text-danger"></i></sup></p>
                                     <div class="input-group input-group-lg mb-3">
                                         <input type="text" name="name" id="name"  class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"
                                                placeholder="{{__('Name')}}" value="{{  $product?$product->name:old('name') }}">
@@ -78,7 +78,7 @@
                                         @endif
                                     </div>
 
-                                    <p class="mb-1"><label for="description" class="card-title font-weight-bold">{{__('Description:')}}</label> &nbsp;<i class="fas fa-star-of-life text-danger"></i></p>
+                                    <p class="mb-1"><label for="description" class="card-title font-weight-bold">{{__('Description:')}}</label> &nbsp;<sup><i class="fas fa-star-of-life text-danger"></i></sup></p>
                                     <div class="mb-3">
                                         <textarea name="description" id="description"  class="form-control" rows="12" placeholder="{{__('Write your product\'s description')}}">{!! $product?$product->description:old('description') !!}</textarea>
 
@@ -88,7 +88,7 @@
                                         @endif
                                     </div>
 
-                                    <p class="mb-1"><label for="price" class="card-title font-weight-bold">{{__('Price:')}}</label> &nbsp;<i class="fas fa-star-of-life text-danger"></i></p>
+                                    <p class="mb-1"><label for="price" class="card-title font-weight-bold">{{__('Price:')}}</label> &nbsp;<sup><i class="fas fa-star-of-life text-danger"></i></sup></p>
                                     <div class="mb-3">
                                         <div class="row">
                                             <div class="col-md-10">
@@ -126,7 +126,7 @@
                                         </div>
                                     </div>
 
-                                    <p class="mb-1"><label for="shortDescription" class="card-title font-weight-bold">{{__('Short Description:')}}</label> &nbsp;<i class="fas fa-star-of-life text-danger"></i></p>
+                                    <p class="mb-1"><label for="shortDescription" class="card-title font-weight-bold">{{__('Short Description:')}}</label> &nbsp;<sup><i class="fas fa-star-of-life text-danger"></i></sup></p>
                                     <div class="mb-3">
                                         <textarea name="short_description" id="shortDescription"  class="form-control" rows="8" placeholder="{{__('Write your product\'s short description')}}">{!! $product?$product->short_description:old('short_description') !!}</textarea>
 
@@ -255,7 +255,7 @@
                                         @endif
                                     </div>
 
-                                    <p class="mb-1"><label for="sku" class="card-title font-weight-bold">{{__('SKU:')}}</label> <code>{{ __('SKU should be unique for each product') }}</code>&nbsp;<i class="fas fa-star-of-life text-danger"></i></p>
+                                    <p class="mb-1"><label for="sku" class="card-title font-weight-bold">{{__('SKU:')}}</label> <code>{{ __('SKU should be unique for each product') }}</code>&nbsp;<sup><i class="fas fa-star-of-life text-danger"></i></sup></p>
                                     <div class="input-group input-group-lg mb-3">
                                         <input type="text" name="sku" id="sku"  class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"
                                                placeholder="{{__('SKU')}}" value="{{  $product?$product->sku:old('sku') }}">
@@ -275,7 +275,7 @@
                                         @endif
                                     </div>
 
-                                    <p class="mb-1"><label for="supplier" class="card-title font-weight-bold">{{__('Supplier:')}}</label> <code>{{ __('Please select one supplier') }}</code>&nbsp;<i class="fas fa-star-of-life text-danger"></i></p>
+                                    <p class="mb-1"><label for="supplier" class="card-title font-weight-bold">{{__('Supplier:')}}</label> <code>{{ __('Please select one supplier') }}</code>&nbsp;<sup><i class="fas fa-star-of-life text-danger"></i></sup></p>
                                     <div class="input-group input-group-lg mb-3">
                                         <select name="supplier" id="supplier" class="form-control">
                                             <option value="{{ null }}">{{ __('Select one') }}</option>
