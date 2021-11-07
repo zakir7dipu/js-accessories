@@ -42,41 +42,46 @@
             <div class="product-single-details">
                 <h1 class="product-title">{{ $product->name }}</h1>
 
-                <div class="ratings-container">
-                    <div class="product-ratings">
-                        <span class="ratings" style="width:60%"></span><!-- End .ratings -->
-                    </div><!-- End .product-ratings -->
+{{--                <div class="ratings-container">--}}
+{{--                    <div class="product-ratings">--}}
+{{--                        <span class="ratings" style="width:60%"></span><!-- End .ratings -->--}}
+{{--                    </div><!-- End .product-ratings -->--}}
 
-                    <a href="#" class="rating-link">( 6 Reviews )</a>
-                </div><!-- End .product-container -->
+{{--                    <a href="#" class="rating-link">( 6 Reviews )</a>--}}
+{{--                </div><!-- End .product-container -->--}}
 
                 <div class="price-box">
-                    <span class="old-price">$81.00</span>
-                    <span class="product-price">$101.00</span>
+                    {!! $product->discount?'<span class="old-price">'.$product->currency->symbol.$product->price.'</span><span class="product-price">'.$product->currency->symbol.($product->price - (($product->price * $product->discount) / 100)).'</span>':'<span class="product-price">'.$product->currency->symbol.$product->price.'</span>' !!}
+{{--                    <span class="old-price">$81.00</span>--}}
+{{--                    <span class="product-price">$101.00</span>--}}
                 </div><!-- End .price-box -->
 
                 <div class="product-desc">
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non.</p>
+                    <p>{{ $product->short_description }}</p>
                 </div><!-- End .product-desc -->
 
                 <div class="product-filters-container">
-                    <div class="product-single-filter">
-                        <label>Colors:</label>
-                        <ul class="config-swatch-list">
-                            <li class="active">
-                                <a href="#" style="background-color: #6085a5;"></a>
-                            </li>
-                            <li>
-                                <a href="#" style="background-color: #ab6e6e;"></a>
-                            </li>
-                            <li>
-                                <a href="#" style="background-color: #b19970;"></a>
-                            </li>
-                            <li>
-                                <a href="#" style="background-color: #11426b;"></a>
-                            </li>
-                        </ul>
-                    </div><!-- End .product-single-filter -->
+                    @if($product->attributes()->where('name', 'color')->first())
+                        <div class="product-single-filter">
+                            <label>Colors:</label>
+                            <ul class="config-swatch-list">
+                                @foreach($product->attributeItems()->where(['attribute_id'=>$product->attributes()->where('name', 'color')->first()->id, 'product_id'=>$product->id])->get() as $key => $color)
+                                <li class="{{ $key==0?'active':''}}">
+                                    <a href="#" style="background-color: {{ $color->details }};"></a>
+                                </li>
+                                @endforeach
+{{--                                <li>--}}
+{{--                                    <a href="#" style="background-color: #ab6e6e;"></a>--}}
+{{--                                </li>--}}
+{{--                                <li>--}}
+{{--                                    <a href="#" style="background-color: #b19970;"></a>--}}
+{{--                                </li>--}}
+{{--                                <li>--}}
+{{--                                    <a href="#" style="background-color: #11426b;"></a>--}}
+{{--                                </li>--}}
+                            </ul>
+                        </div><!-- End .product-single-filter -->
+{{--                    @endif--}}
                 </div><!-- End .product-filters-container -->
 
                 <div class="product-action">
