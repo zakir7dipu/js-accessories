@@ -3,40 +3,44 @@
         <div class="col-lg-6 col-md-6 product-single-gallery">
             <div class="product-slider-container product-item">
                 <div class="product-single-carousel owl-carousel owl-theme">
+                    @foreach($product->productImages as $productImage)
                     <div class="product-item">
-                        <img class="product-single-image" src="assets/images/products/zoom/product-1.jpg" data-zoom-image="assets/images/products/zoom/product-1-big.jpg"/>
+                        <img class="product-single-image" src="{{ asset($productImage->image) }}" data-zoom-image="{{ asset($productImage->image) }}"/>
                     </div>
-                    <div class="product-item">
-                        <img class="product-single-image" src="assets/images/products/zoom/product-2.jpg" data-zoom-image="assets/images/products/zoom/product-2-big.jpg"/>
-                    </div>
-                    <div class="product-item">
-                        <img class="product-single-image" src="assets/images/products/zoom/product-3.jpg" data-zoom-image="assets/images/products/zoom/product-3-big.jpg"/>
-                    </div>
-                    <div class="product-item">
-                        <img class="product-single-image" src="assets/images/products/zoom/product-4.jpg" data-zoom-image="assets/images/products/zoom/product-4-big.jpg"/>
-                    </div>
+                    @endforeach
+{{--                    <div class="product-item">--}}
+{{--                        <img class="product-single-image" src="assets/images/products/zoom/product-2.jpg" data-zoom-image="assets/images/products/zoom/product-2-big.jpg"/>--}}
+{{--                    </div>--}}
+{{--                    <div class="product-item">--}}
+{{--                        <img class="product-single-image" src="assets/images/products/zoom/product-3.jpg" data-zoom-image="assets/images/products/zoom/product-3-big.jpg"/>--}}
+{{--                    </div>--}}
+{{--                    <div class="product-item">--}}
+{{--                        <img class="product-single-image" src="assets/images/products/zoom/product-4.jpg" data-zoom-image="assets/images/products/zoom/product-4-big.jpg"/>--}}
+{{--                    </div>--}}
                 </div>
                 <!-- End .product-single-carousel -->
             </div>
             <div class="prod-thumbnail row owl-dots" id='carousel-custom-dots'>
+                 @foreach($product->productImages as $productImage)
                 <div class="col-3 owl-dot">
-                    <img src="assets/images/products/zoom/product-1.jpg"/>
+                    <img src="{{ asset($productImage->image) }}"/>
                 </div>
-                <div class="col-3 owl-dot">
-                    <img src="assets/images/products/zoom/product-2.jpg"/>
-                </div>
-                <div class="col-3 owl-dot">
-                    <img src="assets/images/products/zoom/product-3.jpg"/>
-                </div>
-                <div class="col-3 owl-dot">
-                    <img src="assets/images/products/zoom/product-4.jpg"/>
-                </div>
+                @endforeach
+{{--                <div class="col-3 owl-dot">--}}
+{{--                    <img src="assets/images/products/zoom/product-2.jpg"/>--}}
+{{--                </div>--}}
+{{--                <div class="col-3 owl-dot">--}}
+{{--                    <img src="assets/images/products/zoom/product-3.jpg"/>--}}
+{{--                </div>--}}
+{{--                <div class="col-3 owl-dot">--}}
+{{--                    <img src="assets/images/products/zoom/product-4.jpg"/>--}}
+{{--                </div>--}}
             </div>
         </div><!-- End .col-lg-7 -->
 
         <div class="col-lg-6 col-md-6">
             <div class="product-single-details">
-                <h1 class="product-title">Silver Porto Headset</h1>
+                <h1 class="product-title">{{ $product->name }}</h1>
 
                 <div class="ratings-container">
                     <div class="product-ratings">

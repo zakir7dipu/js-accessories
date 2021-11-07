@@ -4,6 +4,7 @@ namespace App\Http\Controllers\GuestView;
 
 use App\Http\Controllers\Controller;
 use App\Models\Advertisement;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class GuestController extends Controller
@@ -39,5 +40,14 @@ class GuestController extends Controller
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
+    }
+
+    public function productQuickView(Product $product)
+    {
+//        try {
+            return view('forntend.layouts.ajax.product-quick-view', compact('product'));
+//        }catch (\Throwable $th){
+//            return $this->backWithError($th->getMessage());
+//        }
     }
 }
