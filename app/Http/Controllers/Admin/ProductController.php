@@ -135,7 +135,7 @@ class ProductController extends Controller
             $product->bestseller = $request->has('bestseller');
             $product->trending = $request->has('trending');
             $product->discount = clean($request->discount);
-            $product->slug = clean($request->slug);
+            $product->slug = time();
             $product->sku = clean($request->sku);
             $product->unit_name = clean($request->unit_name);
             $product->gross_weight = clean($request->gross_weight);
@@ -338,7 +338,6 @@ class ProductController extends Controller
             $product->bestseller = $request->has('bestseller');
             $product->trending = $request->has('trending');
             $product->discount = clean($request->discount);
-            $product->slug = clean($request->slug);
             $product->sku = clean($request->sku);
             $product->unit_name = clean($request->unit_name);
             $product->gross_weight = clean($request->gross_weight);

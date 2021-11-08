@@ -2,7 +2,7 @@
     <div class="container">
         <nav class="main-nav">
             <ul class="menu sf-arrows">
-                <li class="active"><a href="javascript:void(0)">Home</a></li>
+                <li class="active"><a href="{{ route('home') }}">Home</a></li>
                 <li>
                     <a href="javascript:void(0)" class="sf-with-ul">Categories</a>
                     <div class="megamenu megamenu-fixed-width">
@@ -140,8 +140,8 @@
                         <li><a href="#">Footer Types</a></li>
                     </ul>
                 </li>
-                <li class="float-right buy-effect"><a href="https://1.envato.market/DdLk5" target="_blank"><span>buy Porto</span></a></li>
-                <li class="float-right special-effect"><a href="#">Special Offer</a></li>
+{{--                <li class="float-right buy-effect"><a href="https://1.envato.market/DdLk5" target="_blank"><span>buy Porto</span></a></li>--}}
+{{--                <li class="float-right special-effect"><a href="#">Special Offer</a></li>--}}
             </ul>
         </nav>
     </div><!-- End .header-bottom -->

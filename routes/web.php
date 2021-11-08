@@ -36,6 +36,8 @@ Route::get('/setup', function (){
 Route::get('/', [GuestController::class, 'index'])->name('home');
 // product quick view
 Route::get('/product-quick-view/{product}', [GuestController::class, 'productQuickView'])->name('product-quick-view');
+// product single view
+Route::get('single-product/{slug}', [GuestController::class, 'productSingleView'])->name('single-product');
 
 Route::get('/district-info', [DistrictController::class, 'getDistrictInfo']);
 

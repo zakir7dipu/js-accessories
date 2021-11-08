@@ -7,7 +7,7 @@
             @foreach($featureProducts as $key => $featureProduct)
                 <div class="col-6 col-lg-2 col-md-3 col-sm-4 product-default inner-quickview inner-icon">
                     <figure>
-                        <a href="javascript:void(0)">
+                        <a href="{{ route('single-product', $featureProduct->slug) }}">
                             <img src="{{ asset($featureProduct->productImages()->first()->image) }}">
                         </a>
                         <div class="btn-icon-group">

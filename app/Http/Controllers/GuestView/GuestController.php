@@ -44,8 +44,25 @@ class GuestController extends Controller
 
     public function productQuickView(Product $product)
     {
-//        try {
+        try {
+            $product->color = $product->attributeItems()->where('attribute_id', 1)->get();
+            $product->size = $product->attributeItems()->where('attribute_id', 2)->get();
             return view('forntend.layouts.ajax.product-quick-view', compact('product'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function productSingleView($slug)
+    {
+//        try {
+            $sProduct = Product::where('slug', $slug)->first();
+            $sProduct->color = $sProduct->attributeItems()->where('attribute_id', 1)->get();
+            $sProduct->size = $sProduct->attributeItems()->where('attribute_id', 2)->get();
+            if ($sProduct->category->parent_id != null){
+                $sProduct->parent = $sProduct->category->parentCategory;
+            }
+            return view('forntend.pages.product-page', compact('sProduct'));
 //        }catch (\Throwable $th){
 //            return $this->backWithError($th->getMessage());
 //        }

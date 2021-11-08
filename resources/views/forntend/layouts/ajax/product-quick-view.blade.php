@@ -8,15 +8,6 @@
                         <img class="product-single-image" src="{{ asset($productImage->image) }}" data-zoom-image="{{ asset($productImage->image) }}"/>
                     </div>
                     @endforeach
-{{--                    <div class="product-item">--}}
-{{--                        <img class="product-single-image" src="assets/images/products/zoom/product-2.jpg" data-zoom-image="assets/images/products/zoom/product-2-big.jpg"/>--}}
-{{--                    </div>--}}
-{{--                    <div class="product-item">--}}
-{{--                        <img class="product-single-image" src="assets/images/products/zoom/product-3.jpg" data-zoom-image="assets/images/products/zoom/product-3-big.jpg"/>--}}
-{{--                    </div>--}}
-{{--                    <div class="product-item">--}}
-{{--                        <img class="product-single-image" src="assets/images/products/zoom/product-4.jpg" data-zoom-image="assets/images/products/zoom/product-4-big.jpg"/>--}}
-{{--                    </div>--}}
                 </div>
                 <!-- End .product-single-carousel -->
             </div>
@@ -26,15 +17,6 @@
                     <img src="{{ asset($productImage->image) }}"/>
                 </div>
                 @endforeach
-{{--                <div class="col-3 owl-dot">--}}
-{{--                    <img src="assets/images/products/zoom/product-2.jpg"/>--}}
-{{--                </div>--}}
-{{--                <div class="col-3 owl-dot">--}}
-{{--                    <img src="assets/images/products/zoom/product-3.jpg"/>--}}
-{{--                </div>--}}
-{{--                <div class="col-3 owl-dot">--}}
-{{--                    <img src="assets/images/products/zoom/product-4.jpg"/>--}}
-{{--                </div>--}}
             </div>
         </div><!-- End .col-lg-7 -->
 
@@ -61,27 +43,28 @@
                 </div><!-- End .product-desc -->
 
                 <div class="product-filters-container">
-                    @if($product->attributes()->where('name', 'color')->first())
                         <div class="product-single-filter">
                             <label>Colors:</label>
                             <ul class="config-swatch-list">
-                                @foreach($product->attributeItems()->where(['attribute_id'=>$product->attributes()->where('name', 'color')->first()->id, 'product_id'=>$product->id])->get() as $key => $color)
+                                @foreach($product->color as $key => $color)
                                 <li class="{{ $key==0?'active':''}}">
-                                    <a href="#" style="background-color: {{ $color->details }};"></a>
+                                    <a href="javascript:void(0)" style="background-color: {{ $color->details }};" data-toggle="tooltip" data-placement="top" title="{{ $color->name }}"></a>
                                 </li>
                                 @endforeach
-{{--                                <li>--}}
-{{--                                    <a href="#" style="background-color: #ab6e6e;"></a>--}}
-{{--                                </li>--}}
-{{--                                <li>--}}
-{{--                                    <a href="#" style="background-color: #b19970;"></a>--}}
-{{--                                </li>--}}
-{{--                                <li>--}}
-{{--                                    <a href="#" style="background-color: #11426b;"></a>--}}
-{{--                                </li>--}}
                             </ul>
                         </div><!-- End .product-single-filter -->
-{{--                    @endif--}}
+                </div><!-- End .product-filters-container -->
+                <div class="product-filters-container">
+                        <div class="product-single-filter">
+                            <label>Size:</label>
+                            <ul class="d-flex">
+                                @foreach($product->size as $key => $size)
+                                <li class="{{ $key==0?'active':''}} m-1">
+                                    <a href="javascript:void(0)" class="btn btn-light btn-sm rounded border-secondary" data-toggle="tooltip" data-placement="top" title="{{ $size->details }}">{{ $size->name }}</a>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div><!-- End .product-single-filter -->
                 </div><!-- End .product-filters-container -->
 
                 <div class="product-action">
