@@ -4,6 +4,7 @@ namespace App\Http\Controllers\GuestView;
 
 use App\Http\Controllers\Controller;
 use App\Models\Advertisement;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -66,5 +67,17 @@ class GuestController extends Controller
 //        }catch (\Throwable $th){
 //            return $this->backWithError($th->getMessage());
 //        }
+    }
+
+    public function categoryElements($slug)
+    {
+        try {
+            $category = Category::where('slug', $slug)->first();
+            $products = $category->products()->paginate(12);
+            $advertise = Advertisement::all()->random(1)->first();
+            return view('forntend.pages.category-element', compact('category', 'products', 'advertise'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
     }
 }

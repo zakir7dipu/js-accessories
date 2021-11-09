@@ -41,6 +41,7 @@ class Controller extends BaseController
         $discounts = Product::where('status', true)->where('discount', '!=', null)->take($productFilterGallerySection?$productFilterGallerySection->number_of_content:6)->get();
         $infoSection = InfoSection::take(3)->get();
         $suppliers = Supplier::where('status', true)->get();
+        $parentCategories = Category::where(['parent_id' => null, 'status' => true])->orderBy('name', 'ASC')->get();
 
         View::share('districts', $districts);
         View::share('generalSettings', $generalSettings);
@@ -59,6 +60,7 @@ class Controller extends BaseController
         View::share('discounts', $discounts);
         View::share('infoSection', $infoSection);
         View::share('suppliers', $suppliers);
+        View::share('parentCategories', $parentCategories);
     }
     public function backWithError($message)
     {

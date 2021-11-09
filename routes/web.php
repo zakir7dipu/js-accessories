@@ -38,6 +38,8 @@ Route::get('/', [GuestController::class, 'index'])->name('home');
 Route::get('/product-quick-view/{product}', [GuestController::class, 'productQuickView'])->name('product-quick-view');
 // product single view
 Route::get('single-product/{slug}', [GuestController::class, 'productSingleView'])->name('single-product');
+// show shop page according to category
+Route::get('/category/{slug}', [GuestController::class, 'categoryElements'])->name('category-elements');
 
 Route::get('/district-info', [DistrictController::class, 'getDistrictInfo']);
 

@@ -7,8 +7,12 @@
                 <a href="#">Links</a>
                 <div class="header-menu">
                     <ul>
-                        <li><a href="{{ route('register') }}">Register</a></li>
-                        <li><a href="{{ route('login') }}">LOG IN</a></li>
+                        @auth
+                            <li><a href="{{ route('login') }}">{{ __('Dashboard') }}</a></li>
+                        @else
+                            <li><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                            <li><a href="{{ route('login') }}">{{ __('LOG IN') }}</a></li>
+                        @endif
                     </ul>
                 </div><!-- End .header-menu -->
             </div><!-- End .header-dropown -->
