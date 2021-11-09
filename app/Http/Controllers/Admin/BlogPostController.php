@@ -102,7 +102,7 @@ class BlogPostController extends Controller
             $post->user_id = auth()->user()->id;
             $post->title = clean($inputs['title']);
             if ($request->hasFile('thumbnail')) {
-                $post->thumbnail = clean($inputs['thumbnail']);
+                $post->thumbnail = $inputs['thumbnail'];
             }
             $post->body = clean($inputs['body']);
             $post->tags = clean($inputs['post_tags']);
