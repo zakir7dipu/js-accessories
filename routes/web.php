@@ -40,6 +40,10 @@ Route::get('/product-quick-view/{product}', [GuestController::class, 'productQui
 Route::get('single-product/{slug}', [GuestController::class, 'productSingleView'])->name('single-product');
 // show shop page according to category
 Route::get('/category/{slug}', [GuestController::class, 'categoryElements'])->name('category-elements');
+//blogs
+Route::prefix('blog')->as('blog.')->group(function (){
+    Route::get('/', [GuestController::class, 'allBlogs'])->name('index');
+});
 
 Route::get('/district-info', [DistrictController::class, 'getDistrictInfo']);
 

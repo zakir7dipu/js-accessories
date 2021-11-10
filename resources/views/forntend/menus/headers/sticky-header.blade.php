@@ -27,7 +27,7 @@
                     </div><!-- End .megamenu -->
                 </li>
 
-                <li><a href="javascript:void(0)"><span>{{ __('Bloges & News') }}</span></a></li>
+                <li><a href="{{ route('blog.index') }}"><span>{{ __('Bloges & News') }}</span></a></li>
                 <li><a href="javascript:void(0)"><span>{{ __('About Us') }}</span></a></li>
                 <li><a href="javascript:void(0)"><span>{{ __('Contact Us') }}</span></a></li>
                 @auth

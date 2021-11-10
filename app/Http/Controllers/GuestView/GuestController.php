@@ -4,6 +4,8 @@ namespace App\Http\Controllers\GuestView;
 
 use App\Http\Controllers\Controller;
 use App\Models\Advertisement;
+use App\Models\BlogCategory;
+use App\Models\BlogPost;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -56,7 +58,7 @@ class GuestController extends Controller
 
     public function productSingleView($slug)
     {
-//        try {
+        try {
             $sProduct = Product::where('slug', $slug)->first();
             $sProduct->color = $sProduct->attributeItems()->where('attribute_id', 1)->get();
             $sProduct->size = $sProduct->attributeItems()->where('attribute_id', 2)->get();
@@ -64,9 +66,9 @@ class GuestController extends Controller
                 $sProduct->parent = $sProduct->category->parentCategory;
             }
             return view('forntend.pages.product-page', compact('sProduct'));
-//        }catch (\Throwable $th){
-//            return $this->backWithError($th->getMessage());
-//        }
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
     }
 
     public function categoryElements($slug)
@@ -79,5 +81,23 @@ class GuestController extends Controller
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
+    }
+
+    public function allBlogs()
+    {
+//        try {
+            $bolgCategories = BlogCategory::where('status', true)->get();
+            $blogs = BlogPost::where('status', true)->orderBy('id', 'DESC')->paginate(5);
+            $recentBlogs = BlogPost::where('status', true)->orderBy('id', 'DESC')->take(2)->get();
+            $data = BlogPost::where('status', true)->orderBy('id', 'DESC')->get('tags');
+            $allTags = '';
+            foreach ($data as $item){
+                $allTags =$allTags.','. $item->tags;
+            }
+            $allTags = array_unique(explode(',', $allTags));
+            return view('forntend.pages.blogs.index', compact('bolgCategories', 'blogs', 'recentBlogs', 'allTags'));
+//        }catch (\Throwable $th){
+//            return $this->backWithError($th->getMessage());
+//        }
     }
 }
