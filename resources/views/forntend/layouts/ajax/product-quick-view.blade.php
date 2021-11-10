@@ -39,9 +39,10 @@
                 </div><!-- End .price-box -->
 
                 <div class="product-desc">
-                    <p>{{ $product->short_description }}</p>
+                    <p>{!! $product->short_description !!}</p>
                 </div><!-- End .product-desc -->
 
+                @if($product->color->count() > 0)
                 <div class="product-filters-container">
                         <div class="product-single-filter">
                             <label>Colors:</label>
@@ -54,6 +55,8 @@
                             </ul>
                         </div><!-- End .product-single-filter -->
                 </div><!-- End .product-filters-container -->
+                @endif
+                @if($product->size->count() > 0)
                 <div class="product-filters-container">
                         <div class="product-single-filter">
                             <label>Size:</label>
@@ -66,6 +69,7 @@
                             </ul>
                         </div><!-- End .product-single-filter -->
                 </div><!-- End .product-filters-container -->
+                @endif
 
                 <div class="product-action">
                     <div class="product-single-qty">
