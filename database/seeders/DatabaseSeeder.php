@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 //        $this->call(AdvertisementSeeder::class);
+//        $this->call(PagesSeeder::class);
 //        $this->call(SocialMediaLinkSeeder::class);
 //        $this->call(DistrictListSeeder::class);
 //        $this->call(AttributeSeeder::class);

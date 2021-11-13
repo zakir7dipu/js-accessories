@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2021 at 11:02 AM
+-- Generation Time: Nov 13, 2021 at 04:51 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.25
 
@@ -190,6 +190,14 @@ CREATE TABLE `blog_posts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `blog_posts`
+--
+
+INSERT INTO `blog_posts` (`id`, `category_id`, `user_id`, `title`, `thumbnail`, `body`, `tags`, `slug`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 'Jun Post Format - Image Gallery', '/upload/bolg-post/1636452630mj1slyDAC.jpg', '<p style=\"color:rgb(118,127,132);font-family:\'Open Sans\', sans-serif;font-size:13px;\">Euismod atras vulputate iltricies etri elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nunc dui, tristique in semper vel, congue sed ligula.</p><p style=\"color:rgb(118,127,132);font-family:\'Open Sans\', sans-serif;font-size:13px;\">Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Pellentesque pellentesque tempor tellus eget hendrerit. Morbi id aliquam ligula. Aliquam id dui sem. Proin rhoncus consequat nisl, eu ornare mauris tincidunt vitae. Nulla aliquet turpis eget sodales scelerisque. Ut accumsan rhoncus sapien a dignissim. Sed vel ipsum nunc. Aliquam erat volutpat. Donec et dignissim elit. Etiam condimentum, ante sed rutrum auctor, quam arcu consequat massa, at gravida enim velit id nisl.</p><p style=\"color:rgb(118,127,132);font-family:\'Open Sans\', sans-serif;font-size:13px;\">Nullam non felis odio. Praesent aliquam magna est, nec volutpat quam aliquet non. Cras ut lobortis massa, a fringilla dolor. Quisque ornare est at felis consectetur mollis. Aliquam vitae metus et enim posuere ornare. Praesent sapien erat, pellentesque quis sollicitudin eget, imperdiet bibendum magna. Aenean sit amet odio est.</p><p style=\"color:rgb(118,127,132);font-family:\'Open Sans\', sans-serif;font-size:13px;\">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris quis est lobortis odio dignissim rutrum. Pellentesque blandit lacinia diam, a tincidunt felis tempus eget.</p><p style=\"color:rgb(118,127,132);font-family:\'Open Sans\', sans-serif;font-size:13px;\">Donec egestas metus non vehicula accumsan. Pellentesque sit amet tempor nibh. Mauris in risus lorem. Cras malesuada gravida massa eget viverra. Suspendisse vitae dolor erat. Morbi id rhoncus enim. In hac habitasse platea dictumst. Aenean lorem diam, venenatis nec venenatis id, adipiscing ac massa. Nam vel dui eget justo dictum pretium a rhoncus ipsum. Donec venenatis erat tincidunt nunc suscipit, sit amet bibendum lacus posuere. Sed scelerisque, dolor a pharetra sodales, mi augue consequat sapien, et interdum tellus leo et nunc. Nunc imperdiet eu libero ut imperdiet.</p><p style=\"color:rgb(118,127,132);font-family:\'Open Sans\', sans-serif;font-size:13px;\">Nunc varius ornare tortor. In dignissim quam eget quam sodales egestas. Nullam imperdiet velit feugiat, egestas risus nec, rhoncus felis. Suspendisse sagittis enim aliquet augue consequat facilisis. Nunc sit amet eleifend tellus. Etiam rhoncus turpis quam. Vestibulum eu lacus mattis, dignissim justo vel, fermentum nulla. Donec pharetra augue eget diam dictum, eu ullamcorper arcu feugiat.</p><p style=\"color:rgb(118,127,132);font-family:\'Open Sans\', sans-serif;font-size:13px;\">Proin ut ante vitae magna cursus porta. Aenean rutrum faucibus augue eu convallis. Phasellus condimentum elit id cursus sodales. Vivamus nec est consectetur, tincidunt augue at, tempor libero.</p>', 'test, post, blog', 'jun-post-format---image-gallery-1636452630', 1, '2021-11-09 04:10:30', '2021-11-09 04:10:30'),
+(2, 1, 1, 'Jun Post Format - Image Gallery', '/upload/bolg-post/16364527635dcvq7DAC.jpg', '<p style=\"color:rgb(118,127,132);font-family:\'Open Sans\', sans-serif;font-size:13px;\">Euismod atras vulputate iltricies etri elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nunc dui, tristique in semper vel, congue sed ligula.</p><p style=\"color:rgb(118,127,132);font-family:\'Open Sans\', sans-serif;font-size:13px;\">Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Pellentesque pellentesque tempor tellus eget hendrerit. Morbi id aliquam ligula. Aliquam id dui sem. Proin rhoncus consequat nisl, eu ornare mauris tincidunt vitae. Nulla aliquet turpis eget sodales scelerisque. Ut accumsan rhoncus sapien a dignissim. Sed vel ipsum nunc. Aliquam erat volutpat. Donec et dignissim elit. Etiam condimentum, ante sed rutrum auctor, quam arcu consequat massa, at gravida enim velit id nisl.</p><p style=\"color:rgb(118,127,132);font-family:\'Open Sans\', sans-serif;font-size:13px;\">Nullam non felis odio. Praesent aliquam magna est, nec volutpat quam aliquet non. Cras ut lobortis massa, a fringilla dolor. Quisque ornare est at felis consectetur mollis. Aliquam vitae metus et enim posuere ornare. Praesent sapien erat, pellentesque quis sollicitudin eget, imperdiet bibendum magna. Aenean sit amet odio est.</p><p style=\"color:rgb(118,127,132);font-family:\'Open Sans\', sans-serif;font-size:13px;\">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris quis est lobortis odio dignissim rutrum. Pellentesque blandit lacinia diam, a tincidunt felis tempus eget.</p><p style=\"color:rgb(118,127,132);font-family:\'Open Sans\', sans-serif;font-size:13px;\">Donec egestas metus non vehicula accumsan. Pellentesque sit amet tempor nibh. Mauris in risus lorem. Cras malesuada gravida massa eget viverra. Suspendisse vitae dolor erat. Morbi id rhoncus enim. In hac habitasse platea dictumst. Aenean lorem diam, venenatis nec venenatis id, adipiscing ac massa. Nam vel dui eget justo dictum pretium a rhoncus ipsum. Donec venenatis erat tincidunt nunc suscipit, sit amet bibendum lacus posuere. Sed scelerisque, dolor a pharetra sodales, mi augue consequat sapien, et interdum tellus leo et nunc. Nunc imperdiet eu libero ut imperdiet.</p><p style=\"color:rgb(118,127,132);font-family:\'Open Sans\', sans-serif;font-size:13px;\">Nunc varius ornare tortor. In dignissim quam eget quam sodales egestas. Nullam imperdiet velit feugiat, egestas risus nec, rhoncus felis. Suspendisse sagittis enim aliquet augue consequat facilisis. Nunc sit amet eleifend tellus. Etiam rhoncus turpis quam. Vestibulum eu lacus mattis, dignissim justo vel, fermentum nulla. Donec pharetra augue eget diam dictum, eu ullamcorper arcu feugiat.</p><p style=\"color:rgb(118,127,132);font-family:\'Open Sans\', sans-serif;font-size:13px;\">Proin ut ante vitae magna cursus porta. Aenean rutrum faucibus augue eu convallis. Phasellus condimentum elit id cursus sodales. Vivamus nec est consectetur, tincidunt augue at, tempor libero.</p>', 'test, post, blog', 'jun-post-format---image-gallery-1636452664', 1, '2021-11-09 04:11:04', '2021-11-09 04:12:43');
 
 -- --------------------------------------------------------
 
@@ -525,7 +533,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (33, '2021_11_03_031733_create_new_arrival_products_sections_table', 5),
 (34, '2021_11_03_055759_create_product_filter_gallery_sections_table', 6),
 (35, '2021_11_03_065932_create_info_sections_table', 7),
-(36, '2021_11_05_053413_create_advertisements_table', 8);
+(36, '2021_11_05_053413_create_advertisements_table', 8),
+(37, '2021_11_13_032615_create_pages_table', 9),
+(38, '2021_11_13_034315_create_page_sections_table', 10);
 
 -- --------------------------------------------------------
 
@@ -548,6 +558,47 @@ CREATE TABLE `new_arrival_products_sections` (
 
 INSERT INTO `new_arrival_products_sections` (`id`, `title`, `show`, `number_of_content`, `created_at`, `updated_at`) VALUES
 (1, 'New Arrivals', 1, 6, '2021-11-02 21:34:40', '2021-11-02 23:55:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pages`
+--
+
+CREATE TABLE `pages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `pages`
+--
+
+INSERT INTO `pages` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'about', 0, '2021-11-12 21:50:08', '2021-11-12 21:50:08'),
+(2, 'contact', 0, '2021-11-12 21:50:08', '2021-11-12 21:50:08'),
+(3, 'privacy_policy', 0, '2021-11-12 21:50:08', '2021-11-12 21:50:08'),
+(4, 'terms&condition', 0, '2021-11-12 21:50:08', '2021-11-12 21:50:08'),
+(5, 'faq', 0, '2021-11-12 21:50:08', '2021-11-12 21:50:08');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `page_sections`
+--
+
+CREATE TABLE `page_sections` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `page_id` bigint(20) NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -2106,7 +2157,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('dBLvbizGIaK2cVdIcsNrmzv5Kp4LFcldEeGBCcyD', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiT3ZxU0c3WE02Rjc3TkhYM2hGdUVxMXd5a2ZiRlpDNjhIOE9xclFkdSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zaW5nbGUtcHJvZHVjdC8xNjM2MzYzMDQxIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJ5JDEwJGFKYldZZ1pHbHo1MzN6NEhiYnJpRi5oemQ1U0ZFYnF4QkpUSFpvay9VRlMuRDNJdXl0djhHIjtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCRhSmJXWWdaR2x6NTMzejRIYmJyaUYuaHpkNVNGRWJxeEJKVEhab2svVUZTLkQzSXV5dHY4RyI7fQ==', 1636365595);
+('HzOya5YB0ADW4vAxpTHEMhpBCCZPYuFVXRrjRDf2', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTDR5SzJkQ2hqRUpCT3JMZm1CTzV0a0hoUldxdzZmRldxQ29GTVhvUCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fX0=', 1636773855),
+('t5x4THmaWMDcZmptLqiBW0yBYWfwOJL6lfRCLSH3', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiNzJHbEhMYzFZNFdBd3Y2bTM1SG00VlhqTlFYVUdyVzNhZldpSFFuYSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9ibG9nIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJ5JDEwJGFKYldZZ1pHbHo1MzN6NEhiYnJpRi5oemQ1U0ZFYnF4QkpUSFpvay9VRlMuRDNJdXl0djhHIjtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCRhSmJXWWdaR2x6NTMzejRIYmJyaUYuaHpkNVNGRWJxeEJKVEhab2svVUZTLkQzSXV5dHY4RyI7fQ==', 1636543071);
 
 -- --------------------------------------------------------
 
@@ -2892,6 +2944,18 @@ ALTER TABLE `new_arrival_products_sections`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `pages`
+--
+ALTER TABLE `pages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `page_sections`
+--
+ALTER TABLE `page_sections`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
@@ -3033,7 +3097,7 @@ ALTER TABLE `blog_categories`
 -- AUTO_INCREMENT for table `blog_posts`
 --
 ALTER TABLE `blog_posts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `blog_post_comment_settings`
@@ -3093,13 +3157,25 @@ ALTER TABLE `info_sections`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `new_arrival_products_sections`
 --
 ALTER TABLE `new_arrival_products_sections`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `pages`
+--
+ALTER TABLE `pages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `page_sections`
+--
+ALTER TABLE `page_sections`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
