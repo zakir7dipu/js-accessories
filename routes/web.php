@@ -77,6 +77,11 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'verified'])-
         Route::post('/social-media-link', [AppSettingsController::class, 'storeSocialMediaLink']);
     });
 
+    //pages
+    Route::prefix('/page')->as('page.')->group(function (){
+        Route::get('/view/{page}', [AppSettingsController::class, 'pageIndex'])->name('index');
+    });
+
     //suppliers
     Route::resource('supplier',SupplierController::class);
 

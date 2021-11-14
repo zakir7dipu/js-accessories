@@ -8,6 +8,7 @@ use App\Models\FeatureProduct;
 use App\Models\GeneralSettings;
 use App\Models\InfoSection;
 use App\Models\NewArrivalProductsSection;
+use App\Models\Pages;
 use App\Models\ProductFilterGallerySection;
 use App\Models\SocialMediaLink;
 use Illuminate\Http\Request;
@@ -515,6 +516,17 @@ class AppSettingsController extends Controller
                 ];
             }
             return response()->json($notification);
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function pageIndex(Pages $page)
+    {
+        try {
+            $generalSettings = GeneralSettings::first();
+            $title = ($generalSettings?$generalSettings->site_name:'').' | '.'About Page Settings';
+            return view('backend.pages.others-pages.about', compact('title', 'generalSettings', 'page'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }

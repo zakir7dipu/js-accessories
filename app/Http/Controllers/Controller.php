@@ -9,6 +9,7 @@ use App\Models\FeatureProduct;
 use App\Models\GeneralSettings;
 use App\Models\InfoSection;
 use App\Models\NewArrivalProductsSection;
+use App\Models\Pages;
 use App\Models\Product;
 use App\Models\ProductFilterGallerySection;
 use App\Models\Slider;
@@ -42,6 +43,7 @@ class Controller extends BaseController
         $infoSection = InfoSection::take(3)->get();
         $suppliers = Supplier::where('status', true)->get();
         $parentCategories = Category::where(['parent_id' => null, 'status' => true])->orderBy('name', 'ASC')->get();
+        $pages = Pages::all();
 
         View::share('districts', $districts);
         View::share('generalSettings', $generalSettings);
@@ -61,6 +63,7 @@ class Controller extends BaseController
         View::share('infoSection', $infoSection);
         View::share('suppliers', $suppliers);
         View::share('parentCategories', $parentCategories);
+        View::share('pages', $pages);
     }
     public function backWithError($message)
     {

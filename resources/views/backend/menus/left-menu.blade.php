@@ -122,6 +122,19 @@
                         <li><a href="{{ route('admin.advertisement.index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Advertising layouts') }}</span></a></li>
                     </ul>
                 </li>
+                <!-- NAV ITEM pages-->
+                <li class="nav-item has-dropdown {{ request()->is('admin/advertisement.*') ?'active':'' }}">
+                    <a href="javascript:void(0);" class="nav-link">
+                        <i class="fas fa-file-alt"></i>
+                        <span class="link-text">{{ __('pages') }}</span>{{ __('') }}
+                        <span class="badge badge-md"><span class="material-icons h6" >chevron_right</span></span>
+                    </a>
+                    <ul class="dropdown-list">
+                        @foreach($pages as $page)
+                            <li><a href="{{ route('admin.page.index', $page->id) }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ $page->name  }}</span></a></li>
+                        @endforeach
+                    </ul>
+                </li>
                 <!-- NAV ITEM BLOG -->
                 <li class="nav-item has-dropdown {{ request()->is('admin/blog*') ?'active':'' }}">
                     <a href="javascript:void(0)" class="nav-link">

@@ -16,6 +16,7 @@ class CreatePageSectionsTable extends Migration
         Schema::create('page_sections', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('page_id');
+            $table->string('name')->unique();
             $table->string('title')->nullable();
             $table->longText('content')->nullable();
             $table->boolean('status')->default(true);

@@ -10,4 +10,9 @@ class Pages extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'status'];
+
+    public function sections()
+    {
+        return $this->hasMany(PageSection::class, 'page_id', 'id');
+    }
 }
