@@ -44,6 +44,8 @@ Route::get('/category/{slug}', [GuestController::class, 'categoryElements'])->na
 Route::prefix('blog')->as('blog.')->group(function (){
     Route::get('/', [GuestController::class, 'allBlogs'])->name('index');
 });
+//page view
+Route::get('/page/{page}', [GuestController::class, 'pageView'])->name('view-page');
 
 Route::get('/district-info', [DistrictController::class, 'getDistrictInfo']);
 
@@ -80,6 +82,7 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'verified'])-
     //pages
     Route::prefix('/page')->as('page.')->group(function (){
         Route::get('/view/{page}', [AppSettingsController::class, 'pageIndex'])->name('index');
+        Route::post('/view/{page}', [AppSettingsController::class, 'pageStore']);
     });
 
     //suppliers

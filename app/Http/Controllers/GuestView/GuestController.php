@@ -7,6 +7,7 @@ use App\Models\Advertisement;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
 use App\Models\Category;
+use App\Models\Pages;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -85,7 +86,7 @@ class GuestController extends Controller
 
     public function allBlogs()
     {
-//        try {
+        try {
             $bolgCategories = BlogCategory::where('status', true)->get();
             $blogs = BlogPost::where('status', true)->orderBy('id', 'DESC')->paginate(5);
             $recentBlogs = BlogPost::where('status', true)->orderBy('id', 'DESC')->take(2)->get();
@@ -96,8 +97,35 @@ class GuestController extends Controller
             }
             $allTags = array_unique(explode(',', $allTags));
             return view('forntend.pages.blogs.index', compact('bolgCategories', 'blogs', 'recentBlogs', 'allTags'));
-//        }catch (\Throwable $th){
-//            return $this->backWithError($th->getMessage());
-//        }
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function pageView(Pages $page)
+    {
+        if ($page->name == 'about'){
+           return  $this->aboutPage($page);
+        }
+        try {
+            $advertise = Advertisement::all()->random(1)->first();
+            return view('forntend.pages.view-page', compact('page', 'advertise'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function aboutPage($page)
+    {
+        try {
+            $advertise = Advertisement::all()->random(1)->first();
+            $overview = $page->sections()->where(['name'=>'overview', 'status'=>true])->first();
+            $mission = $page->sections()->where(['name'=>'mission', 'status'=>true])->first();
+            $vision = $page->sections()->where(['name'=>'vision', 'status'=>true])->first();
+            $about_img = $page->sections()->where(['name'=>'about_img', 'status'=>true])->first();
+            return view('forntend.pages.about-page', compact('page', 'advertise', 'overview', 'mission', 'vision', 'about_img'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
     }
 }

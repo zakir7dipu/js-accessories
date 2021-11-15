@@ -9,6 +9,7 @@ use App\Models\GeneralSettings;
 use App\Models\InfoSection;
 use App\Models\NewArrivalProductsSection;
 use App\Models\Pages;
+use App\Models\PageSection;
 use App\Models\ProductFilterGallerySection;
 use App\Models\SocialMediaLink;
 use Illuminate\Http\Request;
@@ -527,6 +528,83 @@ class AppSettingsController extends Controller
             $generalSettings = GeneralSettings::first();
             $title = ($generalSettings?$generalSettings->site_name:'').' | '.'About Page Settings';
             return view('backend.pages.others-pages.about', compact('title', 'generalSettings', 'page'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function pageStore(Request $request, Pages $page)
+    {
+        $this->validate($request, [
+            'section' => ['required', 'string', 'max:100'],
+            'title' => ['required', 'string', 'max:255'],
+            'content' => ['required', 'string'],
+        ]);
+
+        if ($request->vision_title){
+            $this->validate($request, [
+                'section_vision' => ['required', 'string', 'max:100'],
+                'vision_title' => ['required', 'string', 'max:255'],
+                'vision_content' => ['required', 'string'],
+            ]);
+        }
+        $acceptable = ['jpeg', 'png', 'jpg', 'gif'];
+        if ($request->hasFile('about_images')) {
+            foreach ($request->about_images as $img) {
+                if (!in_array($img->getClientOriginalExtension(), $acceptable)) {
+                    return $this->backWithWarning('Only jpeg, png, jpg and gif file is supported.');
+                }
+            }
+        }
+
+        $section = $page->sections()->where('name',$request->section)->first();
+        try {
+            if (!$section){
+                $section = new PageSection();
+                $section->page_id = $page->id;
+                $section->name = clean($request->section);
+            }
+
+            $section->title = clean($request->title);
+            if ($request->section != 'about_img') {
+                $section->content = clean($request['content']);
+            }
+            $section->status = $request->has('status');
+            if ($request->hasFile('about_images')) {
+                if (file_exists(public_path($section->content))){
+                    unlink(public_path($section->content));
+                }
+
+                $images = $request->about_images;
+                foreach ($images as $img) {
+                    $image = $img;
+                    $x = 'abcdefghijklmnopqrstuvwxyz0123456789';
+                    $x = str_shuffle($x);
+                    $x = substr($x, 0, 6) . 'DAC.';
+                    $filename = time() . $x . $image->getClientOriginalExtension();
+                    Image::make($image->getRealPath())
+                    ->resize(685, 532)
+                        ->save(public_path('/upload/settings/' . $filename));
+                    $path = "/upload/settings/".$filename;
+                }
+                $section->content = $path;
+            }
+            $section->save();
+
+            if ($request->vision_title){
+                $section = $page->sections()->where('name',$request->section_vision)->first();
+                if (!$section){
+                    $section = new PageSection();
+                    $section->page_id = $page->id;
+                    $section->name = clean($request->section_vision);
+                }
+                $section->title = clean($request->vision_title);
+                $section->content = clean($request['vision_content']);
+                $section->status = $request->has('vision_status');
+                $section->save();
+            }
+
+            return $this->backWithSuccess($section->name.' has been saved successfully');
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }

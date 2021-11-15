@@ -28,7 +28,7 @@
                 </li>
 
                 <li><a href="{{ route('blog.index') }}"><span>{{ __('Bloges & News') }}</span></a></li>
-                <li><a href="javascript:void(0)"><span>{{ __('About Us') }}</span></a></li>
+                <li><a href="{{ route('view-page',$pages->where('name','about')->first()->id) }}"><span>{{ __('About Us') }}</span></a></li>
                 <li><a href="javascript:void(0)"><span>{{ __('Contact Us') }}</span></a></li>
                 @auth
                     <li class="float-right special-effect"><a href="{{ route('login') }}">{{ __('Dashboard') }}</a></li>
