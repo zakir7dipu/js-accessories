@@ -524,10 +524,13 @@ class AppSettingsController extends Controller
 
     public function pageIndex(Pages $page)
     {
+        if ($page->name == 'about'){
+            return $this->aboutPage($page);
+        }
         try {
             $generalSettings = GeneralSettings::first();
-            $title = ($generalSettings?$generalSettings->site_name:'').' | '.'About Page Settings';
-            return view('backend.pages.others-pages.about', compact('title', 'generalSettings', 'page'));
+            $title = ($generalSettings?$generalSettings->site_name:'').' | '.ucwords($page->name).' Page Settings';
+            return view('backend.pages.others-pages.basic', compact('title', 'generalSettings', 'page'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
@@ -610,4 +613,14 @@ class AppSettingsController extends Controller
         }
     }
 
+    public function aboutPage($page)
+    {
+        try {
+            $generalSettings = GeneralSettings::first();
+            $title = ($generalSettings?$generalSettings->site_name:'').' | '.ucwords($page).' Page Settings';
+            return view('backend.pages.others-pages.about', compact('title', 'generalSettings', 'page'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
 }
