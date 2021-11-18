@@ -106,6 +106,8 @@ class GuestController extends Controller
     {
         if ($page->name == 'about'){
            return  $this->aboutPage($page);
+        }elseif ($page->name == 'about'){
+            return $this->contactPage($page);
         }
         try {
             $advertise = Advertisement::all()->random(1)->first();
@@ -124,6 +126,15 @@ class GuestController extends Controller
             $vision = $page->sections()->where(['name'=>'vision', 'status'=>true])->first();
             $about_img = $page->sections()->where(['name'=>'about_img', 'status'=>true])->first();
             return view('forntend.pages.about-page', compact('page', 'advertise', 'overview', 'mission', 'vision', 'about_img'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function contactPage($page)
+    {
+            dd($page);
+        try {
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
