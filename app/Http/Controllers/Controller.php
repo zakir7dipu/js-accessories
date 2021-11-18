@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\CetegorySection;
+use App\Models\Company;
 use App\Models\DistrictList;
 use App\Models\FeatureProduct;
 use App\Models\GeneralSettings;
@@ -44,6 +45,7 @@ class Controller extends BaseController
         $suppliers = Supplier::where('status', true)->get();
         $parentCategories = Category::where(['parent_id' => null, 'status' => true])->orderBy('name', 'ASC')->get();
         $pages = Pages::all();
+        $companyContact = Company::first();
 
         View::share('districts', $districts);
         View::share('generalSettings', $generalSettings);
@@ -64,6 +66,7 @@ class Controller extends BaseController
         View::share('suppliers', $suppliers);
         View::share('parentCategories', $parentCategories);
         View::share('pages', $pages);
+        View::share('companyContact', $companyContact);
     }
     public function backWithError($message)
     {

@@ -77,6 +77,8 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'verified'])-
         //social media link
         Route::get('/social-media-link', [AppSettingsController::class, 'socialMediaLinkIndex'])->name('social-media-link');
         Route::post('/social-media-link', [AppSettingsController::class, 'storeSocialMediaLink']);
+        //contact
+        Route::post('/company-contact', [AppSettingsController::class, 'storeContact'])->name('company-contact');
     });
 
     //pages

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CetegorySection;
+use App\Models\Company;
 use App\Models\FeatureProduct;
 use App\Models\GeneralSettings;
 use App\Models\InfoSection;
@@ -526,6 +527,8 @@ class AppSettingsController extends Controller
     {
         if ($page->name == 'about'){
             return $this->aboutPage($page);
+        }elseif ($page->name == 'contact'){
+            return $this->contactPage($page);
         }
         try {
             $generalSettings = GeneralSettings::first();
@@ -617,8 +620,34 @@ class AppSettingsController extends Controller
     {
         try {
             $generalSettings = GeneralSettings::first();
-            $title = ($generalSettings?$generalSettings->site_name:'').' | '.ucwords($page).' Page Settings';
+            $title = ($generalSettings?$generalSettings->site_name:'').' | '.ucwords($page->name).' Page Settings';
             return view('backend.pages.others-pages.about', compact('title', 'generalSettings', 'page'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function contactPage($page)
+    {
+        try {
+            $generalSettings = GeneralSettings::first();
+            $title = ($generalSettings?$generalSettings->site_name:'').' | '.ucwords($page->name).' Page Settings';
+            return view('backend.pages.others-pages.contact', compact('title', 'generalSettings', 'page'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function storeContact(Request $request)
+    {
+        try {
+            $contact = Company::first();
+            $contact->update([
+                'phone'=> clean($request->phone),
+                'email'=> clean($request->email),
+                'address'=> clean($request->address)
+            ]);
+            return $this->backWithSuccess('Contact has been saved successfully');
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
