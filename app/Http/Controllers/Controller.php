@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Advertisement;
+use App\Models\BlogPostCommentSettings;
 use App\Models\Category;
 use App\Models\CetegorySection;
 use App\Models\Company;
@@ -51,6 +52,7 @@ class Controller extends BaseController
         $popupAd = Advertisement::all()
             ->where('status', true)
             ->random(1);
+        $commentSetting = BlogPostCommentSettings::first();
 
         View::share('districts', $districts);
         View::share('generalSettings', $generalSettings);
@@ -74,6 +76,7 @@ class Controller extends BaseController
         View::share('companyContact', $companyContact);
         View::share('contact', $contact);
         View::share('popupAd', $popupAd);
+        View::share('commentSetting', $commentSetting);
     }
     public function backWithError($message)
     {

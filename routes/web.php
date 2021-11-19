@@ -43,6 +43,7 @@ Route::get('/category/{slug}', [GuestController::class, 'categoryElements'])->na
 //blogs
 Route::prefix('blog')->as('blog.')->group(function (){
     Route::get('/', [GuestController::class, 'allBlogs'])->name('index');
+    Route::get('/view/{post}', [GuestController::class, 'singleBlog'])->name('per-blog');
 });
 //page view
 Route::get('/page/{page}', [GuestController::class, 'pageView'])->name('view-page');

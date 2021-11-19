@@ -5,13 +5,6 @@
                 <div class="section-title">
                     <h2>Special Offer</h2>
                 </div>
-{{--                <div class="banner-product mt-3" style="background-image: url({{ asset('forntend/assets/images/products/product-special.jpg') }});">--}}
-{{--                    <div class="banner-content">--}}
-{{--                        <h2>Elec Deals</h2>--}}
-{{--                        <h4><span class="old-price">$59.00</span><span class="price">$49.00</span></h4>--}}
-{{--                        <button class="btn btn-primary">SHOP NOW</button>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
             </div>
             <div class="col-xl-12">
                 <div class="home-product-tabs">
@@ -37,7 +30,7 @@
                                     <div class="col-6 col-lg-2 col-md-3">
                                         <div class="product-default inner-quickview inner-icon">
                                             <figure>
-                                                <a href="javascript:void(0)">
+                                                <a href="{{ route('single-product', $itemData->slug) }}">
                                                     <img src="{{ asset($itemData->productImages()->first()->image) }}">
                                                 </a>
                                                 <div class="btn-icon-group">
@@ -71,7 +64,7 @@
                                     <div class="col-6 col-lg-2 col-md-3">
                                         <div class="product-default inner-quickview inner-icon">
                                             <figure>
-                                                <a href="javascript:void(0)">
+                                                <a href="{{ route('single-product', $itemData->slug) }}">
                                                     <img src="{{ asset($itemData->productImages()->first()->image) }}">
                                                 </a>
                                                 <div class="btn-icon-group">
@@ -105,7 +98,7 @@
                                     <div class="col-6 col-lg-2 col-md-3">
                                         <div class="product-default inner-quickview inner-icon">
                                             <figure>
-                                                <a href="javascript:void(0)">
+                                                <a href="{{ route('single-product', $itemData->slug) }}">
                                                     <img src="{{ asset($itemData->productImages()->first()->image) }}">
                                                 </a>
                                                 <div class="btn-icon-group">
@@ -139,7 +132,7 @@
                                     <div class="col-6 col-lg-2 col-md-3">
                                         <div class="product-default inner-quickview inner-icon">
                                             <figure>
-                                                <a href="javascript:void(0)">
+                                                <a href="{{ route('single-product', $itemData->slug) }}">
                                                     <img src="{{ asset($itemData->productImages()->first()->image) }}">
                                                 </a>
                                                 <div class="btn-icon-group">

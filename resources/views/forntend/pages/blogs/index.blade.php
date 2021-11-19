@@ -41,7 +41,7 @@
                                 </div><!-- End .entry-date -->
 
                                 <h2 class="entry-title">
-                                    <a href="javascript:void(0)">{{ $post->title }}</a>
+                                    <a href="{{ route('blog.per-blog',$post->id) }}">{{ $post->title }}</a>
                                 </h2>
 
                                 <div class="entry-content">
@@ -67,22 +67,7 @@
                     @endforeach
 
                     <nav class="toolbox toolbox-pagination">
-                        <ul class="pagination">
-                            <li class="page-item disabled">
-                                <a class="page-link page-link-btn" href="#"><i class="icon-angle-left"></i></a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><span>...</span></li>
-                            <li class="page-item"><a class="page-link" href="#">15</a></li>
-                            <li class="page-item">
-                                <a class="page-link page-link-btn" href="#"><i class="icon-angle-right"></i></a>
-                            </li>
-                        </ul>
+                        {{ $blogs->links() }}
                     </nav>
                 </div><!-- End .col-lg-9 -->
 

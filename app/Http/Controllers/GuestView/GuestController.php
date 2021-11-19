@@ -103,6 +103,23 @@ class GuestController extends Controller
         }
     }
 
+    public function singleBlog(BlogPost $post)
+    {
+        try {
+            $bolgCategories = BlogCategory::where('status', true)->get();
+            $recentBlogs = BlogPost::where('status', true)->orderBy('id', 'DESC')->take(2)->get();
+            $data = BlogPost::where('status', true)->orderBy('id', 'DESC')->get('tags');
+            $allTags = '';
+            foreach ($data as $item){
+                $allTags =$allTags.','. $item->tags;
+            }
+            $allTags = array_unique(explode(',', $allTags));
+            return view('forntend.pages.blogs.blog-post', compact('post', 'bolgCategories', 'recentBlogs', 'allTags'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
     public function pageView(Pages $page)
     {
         if ($page->name == 'about'){

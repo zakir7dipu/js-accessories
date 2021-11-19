@@ -256,8 +256,8 @@ class BlogPostController extends Controller
         try {
             $generalSettings = GeneralSettings::first();
             $title = ($generalSettings?$generalSettings->site_name:'').' | '. 'Blog Post\'s Comment Settings';
-            $commentSetting = BlogPostCommentSettings::first();
-            return view('backend.pages.blogs.comment',compact('generalSettings', 'title', 'commentSetting'));
+
+            return view('backend.pages.blogs.comment',compact('generalSettings', 'title'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
