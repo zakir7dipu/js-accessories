@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2021 at 09:06 AM
+-- Generation Time: Nov 19, 2021 at 05:48 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.25
 
@@ -212,6 +212,13 @@ CREATE TABLE `blog_post_comment_settings` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `blog_post_comment_settings`
+--
+
+INSERT INTO `blog_post_comment_settings` (`id`, `code`, `created_at`, `updated_at`) VALUES
+(1, '<div id=\"fb-root\"></div>\r\n<script async defer crossorigin=\"anonymous\" src=\"https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v12.0&appId=2097414370290215&autoLogAppEvents=1\" nonce=\"RV8U7nH9\"></script>\r\n<div class=\"fb-comments\" data-href=\"https://b.jadurhari.com/\" data-width=\"\"\r\n                                 data-numposts=\"5\"></div>', '2021-11-18 22:33:24', '2021-11-18 22:33:41');
+
 -- --------------------------------------------------------
 
 --
@@ -280,6 +287,73 @@ CREATE TABLE `cetegory_sections` (
 
 INSERT INTO `cetegory_sections` (`id`, `show`, `number_of_content`, `created_at`, `updated_at`) VALUES
 (1, 1, 6, '2021-11-02 21:04:37', '2021-11-02 21:05:11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `companies`
+--
+
+CREATE TABLE `companies` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '+88 0191 xxx xxxx',
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'exxxxx@xxx.xxx',
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'example len street, example-xxx',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `companies`
+--
+
+INSERT INTO `companies` (`id`, `phone`, `email`, `address`, `created_at`, `updated_at`) VALUES
+(1, '+88 0191 xxx xxxx', 'exxxxx@xxx.xxx', 'xample len street, example-xxx', '2021-11-18 04:33:56', '2021-11-18 04:34:22');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `company_infos`
+--
+
+CREATE TABLE `company_infos` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `licence` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date` date NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `company_infos`
+--
+
+INSERT INTO `company_infos` (`id`, `licence`, `date`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'ecommereadmin-1637229462-DAC', '2021-11-18', 1, '2021-11-18 03:57:42', '2021-11-18 03:57:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact_messages`
+--
+
+CREATE TABLE `contact_messages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `contact-name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact-email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `contact-phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `contact-message` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `contact_messages`
+--
+
+INSERT INTO `contact_messages` (`id`, `contact-name`, `contact-email`, `contact-phone`, `contact-message`, `created_at`, `updated_at`) VALUES
+(1, 'zakir Hossain', 'zakir7dipu@gmail.com', '01764470022', 'This is a testing mail', '2021-11-18 21:55:13', '2021-11-18 21:55:13');
 
 -- --------------------------------------------------------
 
@@ -535,7 +609,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (35, '2021_11_03_065932_create_info_sections_table', 7),
 (36, '2021_11_05_053413_create_advertisements_table', 8),
 (37, '2021_11_13_032615_create_pages_table', 9),
-(38, '2021_11_13_034315_create_page_sections_table', 10);
+(38, '2021_11_13_034315_create_page_sections_table', 10),
+(40, '2021_11_18_083940_create_company_infos_table', 11),
+(43, '2021_11_18_100534_create_companies_table', 12),
+(44, '2021_11_19_033426_create_contact_messages_table', 13);
 
 -- --------------------------------------------------------
 
@@ -609,7 +686,8 @@ INSERT INTO `page_sections` (`id`, `page_id`, `name`, `title`, `content`, `statu
 (1, 1, 'overview', 'Company Overview', '<p><b><span style=\"font-size:14px;\">Lorem </span></b><span style=\"font-size:14px;font-family:Roboto;\">ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus a eros in venenatis. Cras mauris arcu, suscipit id lacinia sed, pulvinar in urna. Donec urna nisi, efficitur fermentum ullamcorper non, mattis et est. Nullam malesuada leo leo, non tempus turpis accumsan a. Sed tincidunt feugiat purus, sed lobortis justo consequat in. Phasellus lectus magna, accumsan eget felis in, hendrerit malesuada lectus. Duis orci nunc, vulputate vel sapien nec, sodales sollicitudin ligula.ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus a eros in venenatis. Cras mauris arcu, suscipit id lacinia sed, pulvinar in urna. Donec urna nisi, efficitur fermentum ullamcorper non, mattis et est. Nullam malesuada leo leo, non tempus turpis accumsan a. Sed tincidunt feugiat purus, sed lobortis justo consequat in. Phasellus lectus magna, accumsan eget felis in, hendrerit malesuada lectus. Duis orci nunc, vulputate vel sapien nec, sodales sollicitudin ligula.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus a eros in venenatis. Cras mauris arcu, suscipit id lacinia sed, pulvinar in urna. Donec urna nisi, efficitur fermentum ullamcorper non, mattis et est. Nullam malesuada leo leo, non tempus turpis accumsan a. Sed tincidunt feugiat purus, sed lobortis justo consequat in. Phasellus lectus magna, accumsan eget felis in, hendrerit malesuada lectus. Duis orci nunc, vulputate vel sapien nec, sodales sollicitudin ligula.</span></p><p><b><span style=\"font-size:14px;font-family:Roboto;\">Lorem </span></b><span style=\"font-size:14px;font-family:Roboto;\">ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus a eros in venenatis. Cras mauris arcu, suscipit id lacinia sed, pulvinar in urna. Donec urna nisi, efficitur fermentum ullamcorper non, mattis et est. Nullam malesuada leo leo, non tempus turpis accumsan a. Sed tincidunt feugiat purus, sed lobortis justo consequat in. Phasellus lectus magna, accumsan eget felis in, hendrerit malesuada lectus. Duis orci nunc, vulputate vel sapien nec, sodales sollicitudin ligula.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus a eros in venenatis. Cras mauris arcu, suscipit id lacinia sed, pulvinar in urna. Donec urna nisi, efficitur fermentum ullamcorper non, mattis et est. Nullam malesuada leo leo, non tempus turpis accumsan a. Sed tincidunt feugiat purus, sed lobortis justo consequat in. Phasellus lectus magna, accumsan eget felis in, hendrerit malesuada lectus. Duis orci nunc, vulputate vel sapien nec, sodales sollicitudin ligula.</span></p><p><b><span style=\"font-size:14px;font-family:Roboto;\">Lorem </span></b><span style=\"font-size:14px;font-family:Roboto;\">ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus a eros in venenatis. Cras mauris arcu, suscipit id lacinia sed, pulvinar in urna. Donec urna nisi, efficitur fermentum ullamcorper non, mattis et est. Nullam malesuada leo leo, non tempus turpis accumsan a. Sed tincidunt feugiat purus, sed lobortis justo consequat in. Phasellus lectus magna, accumsan eget felis in, hendrerit malesuada lectus. Duis orci nunc, vulputate vel sapien nec, sodales sollicitudin ligula.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus a eros in venenatis. Cras mauris arcu, suscipit id lacinia sed, pulvinar in urna. Donec urna nisi, efficitur fermentum ullamcorper non, mattis et est. Nullam malesuada leo leo, non tempus turpis accumsan a. Sed tincidunt feugiat purus, sed lobortis justo consequat in. Phasellus lectus magna, accumsan eget felis in, hendrerit malesuada lectus. Duis orci nunc, vulputate vel sapien nec, sodales sollicitudin ligula.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus a eros in venenatis. Cras mauris arcu, suscipit id lacinia sed, pulvinar in urna. Donec urna nisi, efficitur fermentum ullamcorper non, mattis et est. Nullam malesuada leo leo, non tempus turpis accumsan a. Sed tincidunt feugiat purus, sed lobortis justo consequat in. Phasellus lectus magna, accumsan eget felis in, hendrerit malesuada lectus. Duis orci nunc, vulputate vel sapien nec, sodales sollicitudin ligula.</span><br></p>', 1, '2021-11-15 00:24:05', '2021-11-15 02:00:02'),
 (2, 1, 'mission', 'Mission', '<p style=\"text-align:justify;\"><span style=\"font-weight:bolder;\"><span style=\"font-size:14px;font-family:Roboto;\">Lorem </span></span><span style=\"font-size:14px;font-family:Roboto;\">ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus a eros in venenatis. Cras mauris arcu, suscipit id lacinia sed, pulvinar in urna. Donec urna nisi, efficitur fermentum ullamcorper non, mattis et est. Nullam malesuada leo leo, non tempus turpis accumsan a. Sed tincidunt feugiat purus, sed lobortis justo consequat in. Phasellus lectus magna, accumsan eget felis in, hendrerit malesuada lectus. Duis orci nunc, vulputate vel sapien nec, sodales sollicitudin ligula.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus a eros in venenatis. Cras mauris arcu, suscipit id lacinia sed, pulvinar in urna. Donec urna nisi, efficitur fermentum ullamcorper non, mattis et est. Nullam malesuada leo leo, non tempus turpis accumsan a. Sed tincidunt feugiat purus, sed lobortis justo consequat in. Phasellus lectus magna, accumsan eget felis in, hendrerit malesuada lectus. Duis orci nunc, vulputate vel sapien nec, sodales sollicitudin ligula.</span><br></p>', 1, '2021-11-15 00:38:08', '2021-11-15 02:06:41'),
 (3, 1, 'vision', 'Vision', '<div><span style=\"font-weight:bolder;\"><span style=\"font-size:14px;font-family:Roboto;\">Lorem </span></span><span style=\"font-size:14px;font-family:Roboto;\">ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus a eros in venenatis. Cras mauris arcu, suscipit id lacinia sed, pulvinar in urna. Donec urna nisi, efficitur fermentum ullamcorper non, mattis et est. Nullam malesuada leo leo, non tempus turpis accumsan a. Sed tincidunt feugiat purus, sed lobortis justo consequat in. Phasellus lectus magna, accumsan eget felis in, hendrerit malesuada lectus. Duis orci nunc, vulputate vel sapien nec, sodales sollicitudin ligula.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus a eros in venenatis. Cras mauris arcu, suscipit id lacinia sed, pulvinar in urna. Donec urna nisi, efficitur fermentum ullamcorper non, mattis et est. Nullam malesuada leo leo, non tempus turpis accumsan a. Sed tincidunt feugiat purus, sed lobortis justo consequat in. Phasellus lectus magna, accumsan eget felis in, hendrerit malesuada lectus. Duis orci nunc, vulputate vel sapien nec, sodales sollicitudin ligula.</span></div>', 1, '2021-11-15 00:38:26', '2021-11-15 02:06:41'),
-(4, 1, 'about_img', 'about page img', '/upload/settings/16369627879pb5ioDAC.jpg', 1, '2021-11-15 01:53:08', '2021-11-15 02:06:34');
+(4, 1, 'about_img', 'about page img', '/upload/settings/16369627879pb5ioDAC.jpg', 1, '2021-11-15 01:53:08', '2021-11-15 02:06:34'),
+(5, 2, 'map', 'Contact us', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d233667.8223964362!2d90.27923941726908!3d23.780887453986505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2sDhaka!5e0!3m2!1sen!2sbd!4v1637289553352!5m2!1sen!2sbd', 1, '2021-11-18 20:48:40', '2021-11-18 20:54:52');
 
 -- --------------------------------------------------------
 
@@ -2189,7 +2267,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('gyII2ICYZLKDwV64Vxhrdb2zmXWblX2UbHt8Ekyp', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiNUJMVGtFR3dtNXdXMzhvMGZkT3k0Q1hUVllmSWFUTTU1OUtPaHdlZiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wYWdlLzEiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkYUpiV1lnWkdsejUzM3o0SGJicmlGLmh6ZDVTRkVicXhCSlRIWm9rL1VGUy5EM0l1eXR2OEciO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJGFKYldZZ1pHbHo1MzN6NEhiYnJpRi5oemQ1U0ZFYnF4QkpUSFpvay9VRlMuRDNJdXl0djhHIjt9', 1636963604);
+('Q9D1uMSiVEpa7S0xTUSltxwFwwO8R89olMXgn4gu', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiQkhselJGZmNtdW50Z2FheXZnWVJOWWtsMGk2RWRaWFdablIycjNWYiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zaW5nbGUtcHJvZHVjdC8xNjM2NDY5MTM4Ijt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJ5JDEwJGFKYldZZ1pHbHo1MzN6NEhiYnJpRi5oemQ1U0ZFYnF4QkpUSFpvay9VRlMuRDNJdXl0djhHIjtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCRhSmJXWWdaR2x6NTMzejRIYmJyaUYuaHpkNVNGRWJxeEJKVEhab2svVUZTLkQzSXV5dHY4RyI7fQ==', 1637297118);
 
 -- --------------------------------------------------------
 
@@ -2926,6 +3004,24 @@ ALTER TABLE `cetegory_sections`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `companies`
+--
+ALTER TABLE `companies`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `company_infos`
+--
+ALTER TABLE `company_infos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `contact_messages`
+--
+ALTER TABLE `contact_messages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `currencies`
 --
 ALTER TABLE `currencies`
@@ -3134,7 +3230,7 @@ ALTER TABLE `blog_posts`
 -- AUTO_INCREMENT for table `blog_post_comment_settings`
 --
 ALTER TABLE `blog_post_comment_settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -3146,6 +3242,24 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `cetegory_sections`
 --
 ALTER TABLE `cetegory_sections`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `companies`
+--
+ALTER TABLE `companies`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `company_infos`
+--
+ALTER TABLE `company_infos`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `contact_messages`
+--
+ALTER TABLE `contact_messages`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
@@ -3188,7 +3302,7 @@ ALTER TABLE `info_sections`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `new_arrival_products_sections`
@@ -3206,7 +3320,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `page_sections`
 --
 ALTER TABLE `page_sections`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
