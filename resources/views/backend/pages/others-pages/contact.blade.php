@@ -33,7 +33,7 @@
                             <input type="hidden" name="section" value="map">
                             <p class="mb-1"><label for="title" class="card-title font-weight-bold">{{__('Section Title:')}}</label> <sup><i class="fas fa-star-of-life text-danger"></i></sup></p>
                             <div class="input-group input-group-lg mb-3">
-                                <input type="text" name="map" id="map"  class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"
+                                <input type="text" name="title" id="title"  class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"
                                        placeholder="{{__('Section Title')}}" value="{{  $page->sections()->where('name','map')->first()?$page->sections()->where('name','map')->first()->title:old('title') }}">
                                 <br>
                                 @if ($errors->has('title'))
@@ -64,7 +64,7 @@
                                 <tr>
                                     <td>
                                         <label class="switch float-left">
-                                            <input {{ $page->sections()->where('name','overview')->first()?($page->sections()->where('name','overview')->first()->status?'checked':''):'checked' }}  type="checkbox" name="status" id="pageStatus">
+                                            <input {{ $page->sections()->where('name','map')->first()?($page->sections()->where('name','map')->first()->status?'checked':''):'checked' }}  type="checkbox" name="status" id="pageStatus">
                                             <span class="slider round"></span>
                                         </label>
                                     </td>

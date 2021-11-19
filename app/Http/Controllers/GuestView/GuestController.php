@@ -7,6 +7,7 @@ use App\Models\Advertisement;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
 use App\Models\Category;
+use App\Models\ContactMessage;
 use App\Models\Pages;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -106,7 +107,7 @@ class GuestController extends Controller
     {
         if ($page->name == 'about'){
            return  $this->aboutPage($page);
-        }elseif ($page->name == 'about'){
+        }elseif ($page->name == 'contact'){
             return $this->contactPage($page);
         }
         try {
@@ -133,8 +134,28 @@ class GuestController extends Controller
 
     public function contactPage($page)
     {
-            dd($page);
         try {
+            $map = $page->sections()->where(['name'=>'map', 'status'=>true])->first()?$page->sections()->where('name','map')->first():null;
+            return view('forntend.pages.contact', compact('page', 'map'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function storeContactMessage(Request $request)
+    {
+        $this->validate($request, [
+            'contact-name' => ['required', 'string', 'max:255'],
+            'contact-message' => ['required', 'string', 'max:255'],
+        ]);
+        try {
+            ContactMessage::create([
+                'contact-name'=>$request['contact-name'],
+                'contact-email'=>$request['contact-email'],
+                'contact-phone'=>$request['contact-phone'],
+                'contact-message'=>$request['contact-message']
+            ]);
+            return $this->backWithSuccess('Message has been save successfully.');
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }

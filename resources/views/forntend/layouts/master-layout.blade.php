@@ -15,5 +15,6 @@
 <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
 
 @include('forntend.layouts.scripts')
+@include('backend.layouts.toster-script')
 </body>
 </html>

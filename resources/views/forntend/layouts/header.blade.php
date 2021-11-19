@@ -24,7 +24,8 @@
             s.parentNode.insertBefore(wf, s);
         })(document);
     </script>
-
+    <!-- toastr alert -->
+    <link rel="stylesheet" href="{{asset('notification_assets/css/toastr.min.css')}}" />
     <!-- Plugins CSS File -->
     <link rel="stylesheet" href="{{ asset('forntend/assets/css/bootstrap.min.css') }}">
 

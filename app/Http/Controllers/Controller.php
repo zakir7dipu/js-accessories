@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Advertisement;
 use App\Models\Category;
 use App\Models\CetegorySection;
 use App\Models\Company;
@@ -46,6 +47,10 @@ class Controller extends BaseController
         $parentCategories = Category::where(['parent_id' => null, 'status' => true])->orderBy('name', 'ASC')->get();
         $pages = Pages::all();
         $companyContact = Company::first();
+        $contact = Company::first();
+        $popupAd = Advertisement::all()
+            ->where('status', true)
+            ->random(1);
 
         View::share('districts', $districts);
         View::share('generalSettings', $generalSettings);
@@ -67,6 +72,8 @@ class Controller extends BaseController
         View::share('parentCategories', $parentCategories);
         View::share('pages', $pages);
         View::share('companyContact', $companyContact);
+        View::share('contact', $contact);
+        View::share('popupAd', $popupAd);
     }
     public function backWithError($message)
     {

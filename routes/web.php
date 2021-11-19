@@ -46,6 +46,8 @@ Route::prefix('blog')->as('blog.')->group(function (){
 });
 //page view
 Route::get('/page/{page}', [GuestController::class, 'pageView'])->name('view-page');
+// sote contact message
+Route::post('/contact-store', [GuestController::class, 'storeContactMessage'])->name('contact-store');
 
 Route::get('/district-info', [DistrictController::class, 'getDistrictInfo']);
 

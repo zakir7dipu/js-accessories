@@ -98,22 +98,22 @@
 </div><!-- End .mobile-menu-container -->
 
 <!-- newsletter-popup-form -->
-<div class="newsletter-popup mfp-hide" id="newsletter-popup-form" style="background-image: url({{ asset('forntend/assets/images/newsletter_popup_bg.jpg') }})">
+<div class="newsletter-popup mfp-hide" id="newsletter-popup-form" style="background-image: url({{ $popupAd? asset($popupAd[0]->image):'' }}); background-size: 50%; background-position: right;">
     <div class="newsletter-popup-content">
-        <img src="{{ asset('forntend/assets/images/logo-black.png') }}" alt="Logo" class="logo-newsletter">
-        <h2>BE THE FIRST TO KNOW</h2>
-        <p>Subscribe to the Porto eCommerce newsletter to receive timely updates from your favorite products.</p>
+        <img src="{{ $generalSettings?asset($generalSettings->logo) : '' }}" alt="Logo" class="logo-newsletter">
+        <h2>{{ __('BE THE FIRST TO KNOW') }}</h2>
+        <p>{{ __('Subscribe to the Porto eCommerce newsletter to receive timely updates from your favorite products.') }}</p>
         <form action="#">
             <div class="input-group">
-                <input type="email" class="form-control" id="newsletter-email" name="newsletter-email" placeholder="Email address" required>
-                <input type="submit" class="btn" value="Go!">
+                <input type="email" class="form-control" id="newsletter-email" name="newsletter-email" placeholder="{{ __('Email address') }}" required>
+                <input type="submit" class="btn" value="{{ __('Go') }}!">
             </div><!-- End .from-group -->
         </form>
         <div class="newsletter-subscribe">
             <div class="checkbox">
                 <label>
                     <input type="checkbox" value="1">
-                    Don't show this popup again
+                    {{ __('Don\'t show this popup again') }}
                 </label>
             </div>
         </div>
@@ -125,12 +125,12 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body add-cart-box text-center">
-                <p>You've just added this product to the<br>cart:</p>
+                <p>{{ __('You\'ve just added this product to the').'<br>'.__('cart') }}</p>
                 <h4 id="productTitle"></h4>
                 <img src="" id="productImage" width="100" height="100" alt="adding cart image">
                 <div class="btn-actions">
-                    <a href="javascript:void(0)"><button class="btn-primary">Go to cart page</button></a>
-                    <a href="#"><button class="btn-primary" data-dismiss="modal">Continue</button></a>
+                    <a href="javascript:void(0)"><button class="btn-primary">{{ __('Go to cart page') }}</button></a>
+                    <a href="#"><button class="btn-primary" data-dismiss="modal">{{ __('Continue') }}</button></a>
                 </div>
             </div>
         </div>
