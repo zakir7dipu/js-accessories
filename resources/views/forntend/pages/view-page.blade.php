@@ -8,7 +8,7 @@
 
 @section('content')
     <main class="main">
-        <div class="banner" style="background-image: url({{ asset($advertise->image) }}); background-size: cover; background-position: center;">
+        <div class="banner d-none" style="background-image: url({{ asset($advertise->image) }}); background-size: cover; background-position: center;">
             <div class="container">
                 <div class="banner-content">
                     <h2 class="banner-subtitle text-left">{{ $advertise->line1 }}</h2>

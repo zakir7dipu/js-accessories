@@ -134,7 +134,7 @@ class ProductController extends Controller
             $product->popular = $request->has('popular');
             $product->bestseller = $request->has('bestseller');
             $product->trending = $request->has('trending');
-            $product->discount = clean($request->discount);
+            $product->discount = $request->discount > 0?clean($request->discount):null;
             $product->slug = time();
             $product->sku = clean($request->sku);
             $product->unit_name = clean($request->unit_name);
@@ -151,7 +151,7 @@ class ProductController extends Controller
                     $x = substr($x, 0, 6) . 'DAC.';
                     $filename = time() . $x . $image->getClientOriginalExtension();
                     Image::make($image->getRealPath())
-//                    ->resize(128, 128)
+                    ->resize(800, 800)
                         ->save(public_path('/upload/products/' . $filename));
                     $path = "/upload/products/".$filename;
                     $productImage = new ProductImage();
@@ -337,7 +337,7 @@ class ProductController extends Controller
             $product->popular = $request->has('popular');
             $product->bestseller = $request->has('bestseller');
             $product->trending = $request->has('trending');
-            $product->discount = clean($request->discount);
+            $product->discount = $request->discount > 0?clean($request->discount):null;
             $product->sku = clean($request->sku);
             $product->unit_name = clean($request->unit_name);
             $product->gross_weight = clean($request->gross_weight);
@@ -353,7 +353,7 @@ class ProductController extends Controller
                     $x = substr($x, 0, 6) . 'DAC.';
                     $filename = time() . $x . $image->getClientOriginalExtension();
                     Image::make($image->getRealPath())
-//                    ->resize(128, 128)
+                    ->resize(800, 800)
                         ->save(public_path('/upload/products/' . $filename));
                     $path = "/upload/products/".$filename;
                     $productImage = new ProductImage();

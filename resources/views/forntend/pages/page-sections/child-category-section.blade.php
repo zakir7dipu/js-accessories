@@ -24,15 +24,16 @@
                       }
                     }
                 }">
-        @foreach($sectionCategories as $sectionCategory)
-            <a href="{{ route('category-elements',$sectionCategory->slug) }}" style="text-decoration: none;">
+        @foreach($category->childCategory as $childCategory)
+            <a href="{{ route('category-elements',$childCategory->slug) }}" style="text-decoration: none;">
                 <div class="category">
                     <div class="col-12 mb-1">
-                        <img src="{{ asset($sectionCategory->icon) }}" alt="" class="img-fluid w-50 mx-auto">
+                        <img src="{{ asset($childCategory->icon) }}" alt="" class="img-fluid w-50 mx-auto">
                     </div>
-                    <span>{{ $sectionCategory->name }}</span>
+                    <span>{{ $childCategory->name }}</span>
                 </div>
             </a>
         @endforeach
     </div><!-- End .categories-carousel -->
 </section><!-- End .categories-container -->
+
