@@ -291,8 +291,8 @@ class AppSettingsController extends Controller
         try {
             $generalSettings = GeneralSettings::first();
             $title = ($generalSettings?$generalSettings->site_name:'').' | '.'Social Media Link Settings';
-            $socialMediaLinks = SocialMediaLink::all();
-            return view('backend.pages.settings.social-media', compact('title', 'generalSettings', 'socialMediaLinks'));
+
+            return view('backend.pages.settings.social-media', compact('title', 'generalSettings'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
@@ -308,8 +308,10 @@ class AppSettingsController extends Controller
                     if (!str_contains($value, 'https://')) {
                         $value = 'https://' . $value;
                     }
+                }else{
+                    $value = null;
                 }
-                SocialMediaLink::where('name',$key)->update(['url' => clean($value)]);
+                SocialMediaLink::where('name',$key)->update(['url' => $value?clean($value):$value]);
             }
             return $this->backWithSuccess('Social Media Settings created successfully.');
 

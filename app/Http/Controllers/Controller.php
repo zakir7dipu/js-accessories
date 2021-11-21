@@ -16,6 +16,7 @@ use App\Models\Pages;
 use App\Models\Product;
 use App\Models\ProductFilterGallerySection;
 use App\Models\Slider;
+use App\Models\SocialMediaLink;
 use App\Models\Supplier;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -37,6 +38,7 @@ class Controller extends BaseController
         $sectionCategories = Category::where(['parent_id' => null, 'status' => true])->orderBy('id', 'ASC')->take($categorySection?$categorySection->number_of_content:6)->get();
         $newArrivalSection = NewArrivalProductsSection::first();
         $newArrivalProducts = Product::where('featured', true)->take($newArrivalSection?$newArrivalSection->number_of_content:6)->get();
+        $socialMediaLinks = SocialMediaLink::all();
 
         $productFilterGallerySection = ProductFilterGallerySection::first();
         $bestSellers = Product::where(['bestseller' => true, 'status' => true])->take($productFilterGallerySection?$productFilterGallerySection->number_of_content:6)->get();
@@ -64,6 +66,7 @@ class Controller extends BaseController
         View::share('newArrivalSection', $newArrivalSection);
         View::share('newArrivalProducts', $newArrivalProducts);
         View::share('productFilterGallerySection', $productFilterGallerySection);
+        View::share('socialMediaLinks', $socialMediaLinks);
         View::share('newArrivalProducts', $newArrivalProducts);
         View::share('bestSellers', $bestSellers);
         View::share('populars', $populars);

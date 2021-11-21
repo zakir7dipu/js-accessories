@@ -3,18 +3,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
-                    <a href="{{ route('register') }}" class="widget-newsletter-title">Sign Up to Newsletter</a>
+                    <a href="{{ route('register') }}" class="widget-newsletter-title">{{ __('Sign Up to Newsletter') }}</a>
                 </div>
                 <div class="col-lg-4">
-                    <p class="widget-newsletter-content">Get all the latest information on Events, Sales and Offers.<br>
-                        <span class="widget-newsletter-content">Receive $10 coupon for first shopping.</span>
+                    <p class="widget-newsletter-content">{{ __('Get all the latest information on Events, Sales and Offers.') }}<br>
+                        <span class="widget-newsletter-content">{{ __('Receive $10 coupon for first shopping.') }}</span>
                     </p>
                 </div>
                 <div class="col-lg-5">
                     <form action="#">
                         <div class="footer-submit-wrapper">
                             <input type="email" class="form-control" placeholder="Enter your Email address" required>
-                            <button type="submit" class="btn">Subscribe</button>
+                            <button type="submit" class="btn">{{ __('Subscribe') }}</button>
                         </div>
                     </form>
                 </div>
@@ -27,30 +27,32 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <a href="javascript:void(0)">
-                        <img src="{{ asset('forntend/assets/images/logo-dark.png') }}" alt="Porto Logo" class="mt-2">
+                        {!! $generalSettings?'<img src="'.asset($generalSettings->logo).'" alt="Porto Logo" class="mt-2">':'<img src="'.asset('forntend/assets/images/logo.png').'" data-src="'.asset('forntend/assets/images/logo-black.png').'" alt="Porto Logo" class="mt-2">' !!}
                     </a>
                     <div class="row">
                         <div class="col-sm-6 col-xl-4">
                             <div class="contact-widget phone">
                                 <div style="display: inline-block;">
-                                    <h4 class="widget-title">call us now</h4>
-                                    <a href="#">+123 5678 890</a>
+                                    <h4 class="widget-title">{{ __('call us now') }}</h4>
+                                    <a href="tel:{{ $contact->phone }}">{{ $contact->phone }}</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6 col-xl-4">
                             <div class="contact-widget email">
-                                <h4 class="widget-title" style="margin-bottom : .5rem;">e-mail address</h4>
-                                <a href="mailto:mail@example.com">mail@domain.com</a>
+                                <h4 class="widget-title" style="margin-bottom : .5rem;">{{ __('e-mail address') }}</h4>
+                                <a href="mailto:{{ $contact->email }}">{{ $contact->email }}</a>
                             </div>
                         </div>
                         <div class="col-xl-3">
                             <div class="contact-widget follow">
-                                <h4 class="widget-title">follow us</h4>
+                                <h4 class="widget-title">{{ __('follow us') }}</h4>
                                 <div class="social-icons">
-                                    <a href="#" class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#" class="social-icon" target="_blank"><i class="fab fa-twitter"></i></a>
-                                    <a href="#" class="social-icon" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                    @foreach($socialMediaLinks as $socialMediaLink)
+                                        @if($socialMediaLink->url)
+                                            <a href="{{ $socialMediaLink->url }}" class="social-icon" target="_blank"><i class="fab fa-{{ $socialMediaLink->name == 'facebook'?$socialMediaLink->name.'-f':$socialMediaLink->name }}"></i></a>
+                                        @endif
+                                    @endforeach
                                 </div><!-- End .social-icons -->
                             </div>
                         </div>
@@ -61,38 +63,33 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="widget">
-                                <h4 class="widget-title">Categories</h4>
+                                <h4 class="widget-title">{{ __('Categories') }}</h4>
                                 <ul class="links">
-                                    <li><a href="#">Fashion</a></li>
-                                    <li><a href="#">Electronics</a></li>
-                                    <li><a href="#">Gifts</a></li>
-                                    <li><a href="#">Garden</a></li>
-                                    <li><a href="#">Music</a></li>
-                                    <li><a href="#">Motors</a></li>
+                                    @foreach($parentCategories as $key => $parentCategory)
+                                        <li><a href="#">{{ $parentCategory->name }}</a></li>
+                                    @endforeach
                                 </ul>
                             </div><!-- End .widget -->
                         </div>
                         <div class="col-sm-4">
                             <div class="widget">
-                                <h4 class="widget-title">About</h4>
+                                <h4 class="widget-title">{{ __('Pages') }}</h4>
                                 <ul class="links">
-                                    <li><a href="javascript:void(0)">About Us</a></li>
-                                    <li><a href="javascript:void(0)">Contact Us</a></li>
-                                    <li><a href="#">All Collections</a></li>
-                                    <li><a href="#">Privacy policy</a></li>
-                                    <li><a href="#">Terms & Conditions</a></li>
+                                    @foreach($pages as $key => $page)
+                                    <li><a href="{{ route('view-page',$page->id) }}">{{ ucwords(str_replace('_', ' ', $page->name)) }}</a></li>
+                                    @endforeach
                                 </ul>
                             </div><!-- End .widget -->
                         </div>
                         <div class="col-sm-4">
                             <div class="widget">
-                                <h4 class="widget-title">Customer Care</h4>
+                                <h4 class="widget-title">{{ __('Customer Care') }}</h4>
                                 <ul class="links">
-                                    <li><a href="javascript:void(0)">My Account</a></li>
-                                    <li><a href="">Wishlist</a></li>
-                                    <li><a href="">Shopping Cart</a></li>
-                                    <li><a href="#">Terms & Conditions</a></li>
-                                    <li><a href="#">FAQs</a></li>
+                                    <li><a href="{{ route('login') }}">{{ __('My Account') }}</a></li>
+                                    <li><a href="javascript:void(0)">{{ __('Wishlist') }}</a></li>
+                                    <li><a href="javascript:void(0)">{{ __('Shopping Cart') }}</a></li>
+                                    <li><a href="javascript:void(0)">{{ __('Saved Item') }}</a></li>
+                                    <li><a href="javascript:void(0)">{{ __('Request Item') }}</a></li>
                                 </ul>
                             </div><!-- End .widget -->
                         </div>
@@ -101,8 +98,8 @@
             </div><!-- End .row -->
         </div><!-- End .footer-middle -->
         <div class="footer-bottom">
-            <p class="footer-copyright">Porto eCommerce. &copy;  2020.  All Rights Reserved</p>
-            <img src="{{ asset('forntend/assets/images/payments_long.png') }}" width="180px" style="max-height: 24px">
+            <p class="footer-copyright">{!! config('app.name').'. &copy; '.date('Y', time()). '. All Rights Reserved' !!}</p>
+{{--            <img src="{{ asset('forntend/assets/images/payments_long.png') }}" width="180px" style="max-height: 24px">--}}
         </div><!-- End .footer-bottom -->
     </div>
 </footer><!-- End .footer -->

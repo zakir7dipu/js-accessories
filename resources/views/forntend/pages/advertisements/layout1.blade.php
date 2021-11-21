@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row row-sm">
             @foreach($advertiseGroup1 as $key => $adItem)
-                <div class="col-xl-6 {{ $key == 0? 'd-sm-none':'' }}">
+                <div class="col-xl-6 {{ $key == 0? 'd-lg-block d-sm-none':'' }}">
                     <div class="banner-product bg-grey" style="background-image: url({{ $adItem->image?asset($adItem->image):asset('upload/settings/empty-add.jpg') }}); {{ !$adItem->line1 && !$adItem->line2 && !$adItem->line2 && !$adItem->btn_url && !$adItem->btn_text?'background-position : center; background-size: cover;': 'background-position : 54%; background-size: 45% 50%;'}} height: 200px;">
                         <h2>{{ $adItem->title }}</h2>
                         <div class="mr-5">

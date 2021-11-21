@@ -28,6 +28,10 @@
                 </ol>
             </div><!-- End .container -->
         </nav>
+
+        <div class="container my-5">
+            {!! $page->sections()->count() > 0?($page->sections()->first()->status?$page->sections()->first()->content:''):'' !!}
+        </div>
     </main><!-- End .main -->
 @endsection
 
