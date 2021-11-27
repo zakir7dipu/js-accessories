@@ -177,4 +177,13 @@ class GuestController extends Controller
             return $this->backWithError($th->getMessage());
         }
     }
+
+    public function getProduct(Product $product)
+    {
+        $product->image = $product->productImages()->first()->image;
+        $product->discount = ($product->price * $product->discount) / 100;
+        $product->currence = $product->currency->symbol;
+        $product->wish_date = date('Y-m-d H:i:s', time());
+        return response()->json($product);
+    }
 }

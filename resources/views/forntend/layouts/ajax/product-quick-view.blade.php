@@ -79,7 +79,7 @@
                     <a href="cart.html" class="paction add-cart" title="Add to Cart">
                         <span>Add to Cart</span>
                     </a>
-                    <a href="#" class="paction add-wishlist" title="Add to Wishlist">
+                    <a href="javascript:void(0)" data-role="{{ $product->id }}" class="paction add-wishlist myWish" title="Add to Wishlist">
                         <span>Add to Wishlist</span>
                     </a>
                     <a href="#" class="paction add-compare" title="Add to Compare">
@@ -96,3 +96,6 @@
         </div><!-- End .col-lg-5 -->
     </div><!-- End .row -->
 </div><!-- End .product-single-container -->
+
+<!-- Wishlist js -->
+<script src="{{ asset('forntend/assets/js/ecommerce-wishlist.js') }}"></script>

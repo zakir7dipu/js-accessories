@@ -49,7 +49,10 @@ Route::prefix('blog')->as('blog.')->group(function (){
 Route::get('/page/{page}', [GuestController::class, 'pageView'])->name('view-page');
 // sote contact message
 Route::post('/contact-store', [GuestController::class, 'storeContactMessage'])->name('contact-store');
+//get product
+Route::get('/product-info/{product}', [GuestController::class, 'getProduct']);
 
+//district-info
 Route::get('/district-info', [DistrictController::class, 'getDistrictInfo']);
 
 Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'verified'])->group(function () {

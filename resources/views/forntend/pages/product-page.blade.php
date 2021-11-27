@@ -105,7 +105,7 @@
                                 <a href="cart.html" class="paction add-cart" title="Add to Cart">
                                     <span>Add to Cart</span>
                                 </a>
-                                <a href="#" class="paction add-wishlist" title="Add to Wishlist">
+                                <a href="javascript:void(0)" data-role="{{ $sProduct->id }}" class="paction add-wishlist myWish" title="Add to Wishlist">
                                     <span>Add to Wishlist</span>
                                 </a>
                                 <a href="#" class="paction add-compare" title="Add to Compare">

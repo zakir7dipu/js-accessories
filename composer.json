@@ -15,7 +15,8 @@
         "laravel/socialite": "^5.2",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5",
-        "mews/purifier": "^3.3"
+        "mews/purifier": "^3.3",
+        "olimortimer/laravelshoppingcart": "^5.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -15,26 +15,17 @@
                 <a href="#" class="search-toggle" role="button"><i class="icon-magnifier"></i></a>
                 <form action="#" method="get">
                     <div class="header-search-wrapper">
-                        <input type="search" class="form-control" name="q" id="q" placeholder="I'm searching for..." required>
+                        <input type="search" class="form-control" name="quarry" id="q" placeholder="I'm searching for..." required>
                         <div class="select-custom">
-                            <select id="cat" name="cat">
-                                <option value="">All Categories</option>
-                                <option value="4">Fashion</option>
-                                <option value="12">- Women</option>
-                                <option value="13">- Men</option>
-                                <option value="66">- Jewellery</option>
-                                <option value="67">- Kids Fashion</option>
-                                <option value="5">Electronics</option>
-                                <option value="21">- Smart TVs</option>
-                                <option value="22">- Cameras</option>
-                                <option value="63">- Games</option>
-                                <option value="7">Home &amp; Garden</option>
-                                <option value="11">Motors</option>
-                                <option value="31">- Cars and Trucks</option>
-                                <option value="32">- Motorcycles &amp; Powersports</option>
-                                <option value="33">- Parts &amp; Accessories</option>
-                                <option value="34">- Boats</option>
-                                <option value="57">- Auto Tools &amp; Supplies</option>
+                            <select id="cat" name="category">
+                                <option disabled selected value="{{ null }}">{{ __('Select One') }}</option>
+                                @foreach($parentCategories as $key => $parentCategory)
+                                    <optgroup label="{{ $parentCategory->name }}">
+                                        @foreach($parentCategory->childCategory as $childCategory)
+                                            <option value="{{ $childCategory->id }}">{{ $childCategory->name }}</option>
+                                        @endforeach
+                                    </optgroup>
+                                @endforeach
                             </select>
                         </div><!-- End .select-custom -->
                         <button class="btn" type="submit"><i class="icon-magnifier"></i></button>
@@ -44,7 +35,30 @@
         </div><!-- End .headeer-center -->
 
         <div class="header-right">
-            <a href="#" class="porto-icon"><i class="icon icon-heart"></i></a>
+{{--            <a href="#" class="porto-icon"><i class="icon icon-heart"></i></a>--}}
+
+            <div class="dropdown cart-dropdown">
+                <a href="#" class="dropdown-toggle porto-icon" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" style="padding-right: 0px;">
+                    <i class="icon icon-heart"></i>
+                    <span class="cart-count wishCount">2</span>
+                </a>
+
+                <div class="dropdown-menu" >
+                    <div class="dropdownmenu-wrapper">
+                        <div class="dropdown-cart-header">
+                            <span><span class="wishCount">3</span> {{ __('Items') }}</span>
+                            <a href="javascript:void(0)">{{ __('My Wishes') }}</a>
+                        </div><!-- End .dropdown-cart-header -->
+                        <div class="dropdown-cart-products myWishesList">
+
+                        </div><!-- End .cart-product -->
+
+                        <div class="dropdown-cart-action">
+                            <a href="javascript:void(0)" class="btn btn-block">{{ __('My Wish List') }}</a>
+                        </div><!-- End .dropdown-cart-total -->
+                    </div><!-- End .dropdownmenu-wrapper -->
+                </div><!-- End .dropdown-menu -->
+            </div><!-- End .dropdown heart -->
 
             <div class="dropdown cart-dropdown">
                 <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
@@ -112,7 +126,7 @@
                         </div><!-- End .dropdown-cart-total -->
                     </div><!-- End .dropdownmenu-wrapper -->
                 </div><!-- End .dropdown-menu -->
-            </div><!-- End .dropdown -->
+            </div><!-- End .dropdown cart -->
         </div><!-- End .header-right -->
     </div><!-- End .container -->
 </div><!-- End .header-middle -->

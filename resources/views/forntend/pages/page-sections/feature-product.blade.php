@@ -20,7 +20,7 @@
                             <div class="category-list">
                                 <a href="javascript:void(0)" class="product-category">{{ $featureProduct->category->name }}</a>
                             </div>
-                            <a href="#" class="btn-icon-wish"><i class="icon-heart"></i></a>
+                            <a href="javascript:void(0)" data-role="{{ $featureProduct->id }}" class="btn-icon-wish myWish"><i class="icon-heart"></i></a>
                         </div>
                         <h2 class="product-title">
                             <a href="javascript:void(0)">{{ substr($featureProduct->name, 0, 27) }}</a>
