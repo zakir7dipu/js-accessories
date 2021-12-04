@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-lg-8 mx-auto">
                     <div class="cart-table-container">
-                        <table class="table table-cart">
+                        <table class="table table-cart wishListViewTable">
                             <thead>
                             <tr>
                                 <th class="product-col">Product</th>
