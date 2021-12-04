@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\GuestView\GuestController;
 use App\Http\Controllers\Api\DistrictController;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +52,9 @@ Route::get('/page/{page}', [GuestController::class, 'pageView'])->name('view-pag
 Route::post('/contact-store', [GuestController::class, 'storeContactMessage'])->name('contact-store');
 //get product
 Route::get('/product-info/{product}', [GuestController::class, 'getProduct']);
+
+// my Wish List
+Route::get('/my-wishes', [GuestController::class, 'myWishList'])->name('my-wishes');
 
 //district-info
 Route::get('/district-info', [DistrictController::class, 'getDistrictInfo']);
@@ -173,4 +177,8 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'verified'])-
         Route::post('/feature-activation/{product}', [ProductController::class, 'featureActivation']);
     });
 
+});
+
+Route::prefix('/my-account')->as('client.')->middleware(['auth:sanctum', 'verified', 'role:customer'])->group(function (){
+    Route::get('/dashboard', [ClientController::class, 'index'])->name('dashboard');
 });

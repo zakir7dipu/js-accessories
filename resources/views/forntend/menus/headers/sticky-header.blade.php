@@ -31,7 +31,11 @@
                 <li><a href="{{ route('view-page',$pages->where('name','about')->first()->id) }}"><span>{{ __('About Us') }}</span></a></li>
                 <li><a href="{{ route('view-page',$pages->where('name','contact')->first()->id) }}"><span>{{ __('Contact Us') }}</span></a></li>
                 @auth
-                    <li class="float-right special-effect"><a href="{{ route('login') }}">{{ __('Dashboard') }}</a></li>
+                    @if(Auth::user()->hasRole('customer'))
+                    <li class="float-right special-effect"><a href="{{ route('client.dashboard') }}">{{ __('Dashboard') }}</a></li>
+                    @else
+                    <li class="float-right special-effect"><a href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a></li>
+                    @endif
                 @else
                     <li class="float-right special-effect"><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
                 @endauth

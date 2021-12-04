@@ -43,5 +43,7 @@ class UserTableSeader extends Seeder
             'road' => null,
             'house' => null
         ]);
+
+        $user->assignRole('supper_admin');
     }
 }

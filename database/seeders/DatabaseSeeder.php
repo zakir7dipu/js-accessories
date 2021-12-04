@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
 //        $this->call(DistrictListSeeder::class);
 //        $this->call(AttributeSeeder::class);
 //        $this->call(CurrencySeeder::class);
+//        $this->call(RoleTableSeadder::class);
 //        $this->call(UserTableSeader::class);
 //        $this->call(InfoSectionSeeder::class);
     }

@@ -64,10 +64,12 @@ return [
 
 //    'home' => RouteServiceProvider::HOME,
     'home' => function(){
-        if (Auth::user()->user_type == 1) {
+        if (Auth::user()->hasRole('supper_admin')) {
             return route('admin.dashboard');
-        } elseif (Auth::user()->user_type == 2) {
+        } elseif (Auth::user()->hasRole('admin')) {
             return route('admin.dashboard');
+        } elseif (Auth::user()->hasRole('customer')) {
+            return route('client.dashboard');
         } else {
             Auth::logout();
         }

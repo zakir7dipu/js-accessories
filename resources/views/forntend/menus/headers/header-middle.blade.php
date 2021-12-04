@@ -40,7 +40,7 @@
             <div class="dropdown cart-dropdown">
                 <a href="#" class="dropdown-toggle porto-icon" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" style="padding-right: 0px;">
                     <i class="icon icon-heart"></i>
-                    <span class="cart-count wishCount">2</span>
+                    <span class="cart-count wishCount"></span>
                 </a>
 
                 <div class="dropdown-menu" >
@@ -54,7 +54,7 @@
                         </div><!-- End .cart-product -->
 
                         <div class="dropdown-cart-action">
-                            <a href="javascript:void(0)" class="btn btn-block">{{ __('My Wish List') }}</a>
+                            <a href="{{ route('my-wishes') }}" class="btn btn-block">{{ __('My Wish List') }}</a>
                         </div><!-- End .dropdown-cart-total -->
                     </div><!-- End .dropdownmenu-wrapper -->
                 </div><!-- End .dropdown-menu -->

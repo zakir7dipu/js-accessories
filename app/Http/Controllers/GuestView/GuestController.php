@@ -186,4 +186,15 @@ class GuestController extends Controller
         $product->wish_date = date('Y-m-d H:i:s', time());
         return response()->json($product);
     }
+
+    public function myWishList()
+    {
+        try {
+            return view('forntend.pages.wish-list', [
+                'title' => 'My Wish-list',
+            ]);
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
 }
