@@ -56,6 +56,12 @@ Route::get('/product-info/{product}', [GuestController::class, 'getProduct']);
 // my Wish List
 Route::get('/my-wishes', [GuestController::class, 'myWishList'])->name('my-wishes');
 
+// my cart
+Route::prefix('/my-cart')->as('cart.')->group(function (){
+    Route::get('/get', [GuestController::class, 'getCart']);
+    Route::get('/set/{product}', [GuestController::class, 'setCart']);
+});
+
 //district-info
 Route::get('/district-info', [DistrictController::class, 'getDistrictInfo']);
 

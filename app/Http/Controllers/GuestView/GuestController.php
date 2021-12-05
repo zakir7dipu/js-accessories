@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\ContactMessage;
 use App\Models\Pages;
 use App\Models\Product;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class GuestController extends Controller
@@ -195,6 +196,39 @@ class GuestController extends Controller
             ]);
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function setCart(Product $product)
+    {
+        try {
+            $product->color = $product->attributeItems()->where('attribute_id', 1)->first();
+            $product->size = $product->attributeItems()->where('attribute_id', 2)->first();
+            $cart = Cart::instance('shopping_cart')->add([
+                'id' => $product->id,
+                'name' => $product->name,
+                'qty' => 1,
+                'price' => $product->price,
+                'options' => [
+                    'discount' => $product->discount?($product->price*$product->discount)/100:0,
+                    'size' => $product->size?$product->size->id:$product->size,
+                    'color' => $product->color?$product->color->id:$product->color,
+                ]
+            ]);
+            $data = [
+                'status' => 'success',
+                'info' => [
+                    'cart' => $cart,
+                    'count' => Cart::instance('shopping_cart')->count()
+                ]
+            ];
+            return response()->json($data);
+        }catch (\Throwable $th){
+            $data = [
+                'status' => 'error',
+                'info' => $th->getMessage()
+            ];
+            return response()->json($data);
         }
     }
 }

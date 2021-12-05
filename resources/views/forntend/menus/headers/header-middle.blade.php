@@ -40,7 +40,7 @@
             <div class="dropdown cart-dropdown">
                 <a href="#" class="dropdown-toggle porto-icon" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" style="padding-right: 0px;">
                     <i class="icon icon-heart"></i>
-                    <span class="cart-count wishCount"></span>
+                    <span class="cart-count wishCount">2</span>
                 </a>
 
                 <div class="dropdown-menu" >
@@ -63,7 +63,7 @@
             <div class="dropdown cart-dropdown">
                 <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                     <i class="minicart-icon"></i>
-                    <span class="cart-count">2</span>
+                    <span class="cart-count cartCount">2</span>
                 </a>
 
                 <div class="dropdown-menu" >
