@@ -48,7 +48,7 @@
                             <label>Colors:</label>
                             <ul class="config-swatch-list">
                                 @foreach($product->color as $key => $color)
-                                <li class="{{ $key==0?'active':''}}">
+                                <li class="{{ $key==0?'active':''}} productColorBtn">
                                     <a href="javascript:void(0)" style="background-color: {{ $color->details }};" data-toggle="tooltip" data-placement="top" title="{{ $color->name }}"></a>
                                 </li>
                                 @endforeach
@@ -62,7 +62,7 @@
                             <label>Size:</label>
                             <ul class="d-flex">
                                 @foreach($product->size as $key => $size)
-                                <li class="{{ $key==0?'active':''}} m-1">
+                                <li class="{{ $key==0?'active':''}} m-1 productSizeBtn">
                                     <a href="javascript:void(0)" class="btn btn-light btn-sm rounded border-secondary" data-toggle="tooltip" data-placement="top" title="{{ $size->details }}">{{ $size->name }}</a>
                                 </li>
                                 @endforeach
@@ -99,3 +99,4 @@
 
 <!-- Wishlist js -->
 <script src="{{ asset('forntend/assets/js/ecommerce-wishlist.js') }}"></script>
+<script src="{{ asset('forntend/assets/js/select-product-attributes.js') }}"></script>

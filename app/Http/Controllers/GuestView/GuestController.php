@@ -254,6 +254,30 @@ class GuestController extends Controller
         }
     }
 
+    public function setCartForm(Request $request, Product $product)
+    {
+        try {
+            $product->image = $product->productImages()->first()->image;
+            $product->currence = $product->currency->symbol;
+            Cart::instance('shopping_cart')->add([
+                'id' => $product->id,
+                'name' => $product->name,
+                'qty' => $request->qty,
+                'price' => $product->price,
+                'options' => [
+                    'image' => $product->image,
+                    'currence' => $product->currence,
+                    'discount' => $product->discount?($product->price*$product->discount)/100:0,
+                    'size' => $request->size,
+                    'color' => $request->color,
+                ]
+            ]);
+            return $this->backWithSuccess('Cart has been added successfully.');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
     public function getCart()
     {
         try {

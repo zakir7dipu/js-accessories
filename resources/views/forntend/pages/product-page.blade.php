@@ -3,7 +3,9 @@
 @section('title', config('app.name'))
 
 @section('page-css')
+    <style>
 
+    </style>
 @endsection
 
 @section('content')
@@ -71,10 +73,10 @@
                             @if($sProduct->color->count() > 0)
                             <div class="product-filters-container">
                                 <div class="product-single-filter">
-                                    <label>Colors:</label>
+                                    <label>{{ __('Colors') }}:</label>
                                     <ul class="config-swatch-list">
                                         @foreach($sProduct->color as $key => $color)
-                                        <li class="{{ $key==0?'active':''}}">
+                                        <li class="{{ $key==0?'active':''}} productColorBtn" data-role="{{ $color->id }}">
                                             <a href="javascript:void(0)" style="background-color: {{ $color->details }};" data-toggle="tooltip" data-placement="top" title="{{ $color->name }}"></a>
                                         </li>
                                         @endforeach
@@ -85,10 +87,10 @@
                             @if($sProduct->size->count() > 0)
                             <div class="product-filters-container">
                                 <div class="product-single-filter">
-                                    <label>Size:</label>
+                                    <label>{{ __('Size') }}:</label>
                                     <ul class="d-flex">
                                         @foreach($sProduct->size as $key => $size)
-                                            <li class="{{ $key==0?'active':''}} m-1">
+                                            <li class="{{ $key==0?'active':''}} m-1 productSizeBtn" data-role="{{ $size->id }}">
                                                 <a href="javascript:void(0)" class="btn btn-light btn-sm rounded border-secondary" data-toggle="tooltip" data-placement="top" title="{{ $size->details }}">{{ $size->name }}</a>
                                             </li>
                                         @endforeach
@@ -98,13 +100,18 @@
                             @endif
 
                             <div class="product-action">
-                                <div class="product-single-qty">
-                                    <input class="horizontal-quantity form-control" type="text">
-                                </div><!-- End .product-single-qty -->
+                                <form action="{{ route('cart.set',$sProduct->id) }}" method="post" class="form-inline">
+                                    @csrf
+                                    <div class="product-single-qty">
+                                        <input class="horizontal-quantity form-control" type="text" id="productQty" name="qty">
+                                        <input type="hidden" id="productColor" name="color">
+                                        <input type="hidden" id="productSize" name="size">
+                                    </div><!-- End .product-single-qty -->
 
-                                <a href="cart.html" class="paction add-cart" title="Add to Cart">
-                                    <span>Add to Cart</span>
-                                </a>
+                                    <button type="submit" class="paction add-cart cursor-pointer" title="Add to Cart">
+                                        <span>Add to Cart</span>
+                                    </button>
+                                </form>
                                 <a href="javascript:void(0)" data-role="{{ $sProduct->id }}" class="paction add-wishlist myWish" title="Add to Wishlist">
                                     <span>Add to Wishlist</span>
                                 </a>
@@ -171,5 +178,5 @@
 @endsection
 
 @section('page-script')
-
+    <script src="{{ asset('forntend/assets/js/select-product-attributes.js') }}"></script>
 @endsection
