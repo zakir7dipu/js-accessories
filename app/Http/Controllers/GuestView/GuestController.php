@@ -41,8 +41,13 @@ class GuestController extends Controller
                     ->random(2);
             }
 
+            $carts = Cart::instance('shopping_cart')->content();
+            $cartTotal = Cart::instance('shopping_cart')->subtotal();
+//            foreach ($carts as $cart){
+//                dd($cart->options['image']);
+//            }
 
-            return view('welcome', compact('advertiseGroup1', 'advertiseGroup2'));
+            return view('welcome', compact('advertiseGroup1', 'advertiseGroup2', 'carts', 'cartTotal'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
@@ -202,14 +207,19 @@ class GuestController extends Controller
     public function setCart(Product $product)
     {
         try {
+//            Cart::instance('shopping_cart')->destroy();
             $product->color = $product->attributeItems()->where('attribute_id', 1)->first();
             $product->size = $product->attributeItems()->where('attribute_id', 2)->first();
+            $product->image = $product->productImages()->first()->image;
+            $product->currence = $product->currency->symbol;
             $cart = Cart::instance('shopping_cart')->add([
                 'id' => $product->id,
                 'name' => $product->name,
                 'qty' => 1,
                 'price' => $product->price,
                 'options' => [
+                    'image' => $product->image,
+                    'currence' => $product->currence,
                     'discount' => $product->discount?($product->price*$product->discount)/100:0,
                     'size' => $product->size?$product->size->id:$product->size,
                     'color' => $product->color?$product->color->id:$product->color,
@@ -219,6 +229,26 @@ class GuestController extends Controller
                 'status' => 'success',
                 'info' => [
                     'cart' => $cart,
+                    'count' => Cart::instance('shopping_cart')->count()
+                ]
+            ];
+            return response()->json($data);
+        }catch (\Throwable $th){
+            $data = [
+                'status' => 'error',
+                'info' => $th->getMessage()
+            ];
+            return response()->json($data);
+        }
+    }
+
+    public function getCart()
+    {
+        try {
+            $data = [
+                'status' => 'success',
+                'info' => [
+                    'cart' => Cart::instance('shopping_cart')->content(),
                     'count' => Cart::instance('shopping_cart')->count()
                 ]
             ];

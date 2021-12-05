@@ -69,56 +69,39 @@
                 <div class="dropdown-menu" >
                     <div class="dropdownmenu-wrapper">
                         <div class="dropdown-cart-header">
-                            <span>2 Items</span>
+                            <span><span class="cartCount">2</span> {{ __('Items') }}</span>
 
-                            <a href="javascript:void(0)">View Cart</a>
+                            <a href="javascript:void(0)">{{ __('View Cart') }}</a>
                         </div><!-- End .dropdown-cart-header -->
-                        <div class="dropdown-cart-products">
+                        <div class="dropdown-cart-products myCartList">
+
+                            @foreach($carts as $cart)
                             <div class="product">
                                 <div class="product-details">
                                     <h4 class="product-title">
-                                        <a href="javascript:void(0)">Woman Ring</a>
+                                        <a href="javascript:void(0)">{{ $cart->name }}</a>
                                     </h4>
 
                                     <span class="cart-product-info">
-                                                    <span class="cart-product-qty">1</span>
-                                                    x $99.00
+                                                    <span class="cart-product-qty">{{ $cart->qty }}</span>
+                                                    x {{ $cart->options['currence'].$cart->price }}
                                                 </span>
                                 </div><!-- End .product-details -->
 
                                 <figure class="product-image-container">
                                     <a href="javascript:void(0)" class="product-image">
-                                        <img src="{{ asset('forntend/assets/images/products/cart/product-1.jpg') }}" alt="product">
+                                        <img src="{{ asset($cart->options['image']) }}" alt="product">
                                     </a>
-                                    <a href="#" class="btn-remove" title="Remove Product"><i class="icon-retweet"></i></a>
+                                    <a href="#" class="btn-remove" title="Remove Product"><i class="icon-retweet" data-src="{{ $cart->rowId }}"></i></a>
                                 </figure>
                             </div><!-- End .product -->
-
-                            <div class="product">
-                                <div class="product-details">
-                                    <h4 class="product-title">
-                                        <a href="javascript:void(0)">Woman Necklace</a>
-                                    </h4>
-
-                                    <span class="cart-product-info">
-                                                    <span class="cart-product-qty">1</span>
-                                                    x $35.00
-                                                </span>
-                                </div><!-- End .product-details -->
-
-                                <figure class="product-image-container">
-                                    <a href="javascript:void(0)" class="product-image">
-                                        <img src="{{ asset('forntend/assets/images/products/cart/product-2.jpg') }}" alt="product">
-                                    </a>
-                                    <a href="#" class="btn-remove" title="Remove Product"><i class="icon-retweet"></i></a>
-                                </figure>
-                            </div><!-- End .product -->
+                            @endforeach
                         </div><!-- End .cart-product -->
 
                         <div class="dropdown-cart-total">
-                            <span>Total</span>
+                            <span>{{ __('Total') }}</span>
 
-                            <span class="cart-total-price">$134.00</span>
+                            <span class="cart-total-price">{{ $cartTotal }}</span>
                         </div><!-- End .dropdown-cart-total -->
 
                         <div class="dropdown-cart-action">

@@ -1,23 +1,23 @@
 (function ($) {
     "use script";
     const cartButton = document.querySelectorAll('.myCartBtn');
+    const cartListContainer = document.querySelector('.myCartList');
 
     const showCartCount = (num) => {
         $('.cartCount').html(num)
     };
 
-    const showCart = () => {
+    const getCart = () => {
         $.ajax({
             type: 'get',
             url: '/my-cart/get',
             success:function (data) {
-
+                if (data.status === 'error'){
+                    toastr[data.status](data.info)
+                }
+                showCartCount(data.info.count);
             }
         })
-    };
-
-    const getCart = (array) => {
-
     };
 
     Array.from(cartButton).map((item, key)=>{
@@ -35,7 +35,6 @@
                         toastr[data.status](data.info)
                     }
                     showCartCount(data.info.count);
-                    console.log(data);
                     // let productInfo =  {
                     //     id: data.id,
                     //     name: data.name,
@@ -51,5 +50,5 @@
             })
         })
     });
-    showCart();
+    getCart();
 })(jQuery);
