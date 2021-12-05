@@ -20,7 +20,11 @@
                 <li><a href="{{ route('view-page',$pages->where('name','about')->first()->id) }}">{{ __('About Us') }}</a></li>
                 <li><a href="{{ route('view-page',$pages->where('name','contact')->first()->id) }}">{{ __('Contact Us') }}</a></li>
                 @auth
-                    <li><a href="{{ route('login') }}">{{ __('Dashboard') }}</a></li>
+                    @if(Auth::user()->hasRole('customer'))
+                        <li><a href="{{ route('client.dashboard') }}">{{ __('Dashboard') }}</a></li>
+                    @else
+                        <li><a href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a></li>
+                    @endif
                 @else
                     <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
                 @endauth
