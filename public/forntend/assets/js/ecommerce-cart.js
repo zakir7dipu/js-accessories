@@ -1,7 +1,7 @@
 (function ($) {
     "use script";
     const cartButton = document.querySelectorAll('.myCartBtn');
-    const cartListContainer = document.querySelector('.myCartList');
+    const cartRemoveBtn = document.querySelectorAll('.cartRemoveBtn');
 
     const showCartCount = (num) => {
         $('.cartCount').html(num)
@@ -23,8 +23,7 @@
     Array.from(cartButton).map((item, key)=>{
         let btn = item;
         btn.addEventListener('click', (e) => {
-            // e.preventDefault();
-            console.clear();
+            e.preventDefault();
             let button = e.target.parentElement;
             let product = button.getAttribute('data-role');
             $.ajax({
@@ -35,19 +34,31 @@
                         toastr[data.status](data.info)
                     }
                     showCartCount(data.info.count);
-                    // let productInfo =  {
-                    //     id: data.id,
-                    //     name: data.name,
-                    //     image: data.image,
-                    //     currence: data.currence,
-                    //     discount: data.discount,
-                    //     price: data.price,
-                    //     wish_date: data.wish_date,
-                    //     slug: data.slug,
-                    // };
-                    // setWishlist(productInfo);
+                    toastr[data.status]('Cart has been added successfully.');
+                    setTimeout(()=>{
+                        location.reload();
+                    },1000);
                 }
             })
+        })
+    });
+
+    Array.from(cartRemoveBtn).map((item, key)=>{
+        let btn = item;
+        btn.addEventListener('click', (e)=>{
+            e.preventDefault();
+            let button = e.target.parentElement;
+            let cart = button.getAttribute('data-role');
+            $.ajax({
+                type: 'get',
+                url: `/my-cart/destroy/${cart}`,
+                success:function (data) {
+                    toastr[data.status](data.info);
+                    setTimeout(()=>{
+                        location.reload();
+                    },1000);
+                }
+            });
         })
     });
     getCart();

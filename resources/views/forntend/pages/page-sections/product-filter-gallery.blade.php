@@ -34,7 +34,7 @@
                                                     <img src="{{ asset($itemData->productImages()->first()->image) }}">
                                                 </a>
                                                 <div class="btn-icon-group">
-                                                    <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-bag"></i></button>
+                                                    <button class="btn-icon myCartBtn btn-add-cart" data-role="{{ $itemData->id }}"><i class="icon-bag"></i></button>
                                                 </div>
                                                 <a href="{{ route('product-quick-view',$itemData->id) }}" class="btn-quickview" title="Quick View">Quick View</a>
                                             </figure>
@@ -68,7 +68,7 @@
                                                     <img src="{{ asset($itemData->productImages()->first()->image) }}">
                                                 </a>
                                                 <div class="btn-icon-group">
-                                                    <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-bag"></i></button>
+                                                    <button class="btn-icon btn-add-cart myCartBtn" data-role="{{ $itemData->id }}"><i class="icon-bag"></i></button>
                                                 </div>
                                                 <a href="{{ route('product-quick-view',$itemData->id) }}" class="btn-quickview" title="Quick View">Quick View</a>
                                             </figure>
@@ -102,7 +102,7 @@
                                                     <img src="{{ asset($itemData->productImages()->first()->image) }}">
                                                 </a>
                                                 <div class="btn-icon-group">
-                                                    <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-bag"></i></button>
+                                                    <button class="btn-icon btn-add-cart myCartBtn" data-role="{{ $itemData->id }}"><i class="icon-bag"></i></button>
                                                 </div>
                                                 <a href="{{ route('product-quick-view',$itemData->id) }}" class="btn-quickview" title="Quick View">Quick View</a>
                                             </figure>
@@ -136,7 +136,7 @@
                                                     <img src="{{ asset($itemData->productImages()->first()->image) }}">
                                                 </a>
                                                 <div class="btn-icon-group">
-                                                    <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-bag"></i></button>
+                                                    <button class="btn-icon btn-add-cart myCartBtn" data-role="{{ $itemData->id }}"><i class="icon-bag"></i></button>
                                                 </div>
                                                 <a href="{{ route('product-quick-view',$itemData->id) }}" class="btn-quickview" title="Quick View">Quick View</a>
                                             </figure>

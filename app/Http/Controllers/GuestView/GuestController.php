@@ -43,10 +43,6 @@ class GuestController extends Controller
 
             $carts = Cart::instance('shopping_cart')->content();
             $cartTotal = Cart::instance('shopping_cart')->subtotal();
-//            foreach ($carts as $cart){
-//                dd($cart->options['image']);
-//            }
-
             return view('welcome', compact('advertiseGroup1', 'advertiseGroup2', 'carts', 'cartTotal'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
@@ -73,7 +69,9 @@ class GuestController extends Controller
             if ($sProduct->category->parent_id != null){
                 $sProduct->parent = $sProduct->category->parentCategory;
             }
-            return view('forntend.pages.product-page', compact('sProduct'));
+            $carts = Cart::instance('shopping_cart')->content();
+            $cartTotal = Cart::instance('shopping_cart')->subtotal();
+            return view('forntend.pages.product-page', compact('sProduct', 'carts', 'cartTotal'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
@@ -85,7 +83,9 @@ class GuestController extends Controller
             $category = Category::where('slug', $slug)->first();
             $products = $category->products()->paginate(12);
             $advertise = Advertisement::all()->random(1)->first();
-            return view('forntend.pages.category-element', compact('category', 'products', 'advertise'));
+            $carts = Cart::instance('shopping_cart')->content();
+            $cartTotal = Cart::instance('shopping_cart')->subtotal();
+            return view('forntend.pages.category-element', compact('category', 'products', 'advertise', 'carts', 'cartTotal'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
@@ -103,7 +103,9 @@ class GuestController extends Controller
                 $allTags =$allTags.','. $item->tags;
             }
             $allTags = array_unique(explode(',', $allTags));
-            return view('forntend.pages.blogs.index', compact('bolgCategories', 'blogs', 'recentBlogs', 'allTags'));
+            $carts = Cart::instance('shopping_cart')->content();
+            $cartTotal = Cart::instance('shopping_cart')->subtotal();
+            return view('forntend.pages.blogs.index', compact('bolgCategories', 'blogs', 'recentBlogs', 'allTags', 'carts', 'cartTotal'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
@@ -120,7 +122,9 @@ class GuestController extends Controller
                 $allTags =$allTags.','. $item->tags;
             }
             $allTags = array_unique(explode(',', $allTags));
-            return view('forntend.pages.blogs.blog-post', compact('post', 'bolgCategories', 'recentBlogs', 'allTags'));
+            $carts = Cart::instance('shopping_cart')->content();
+            $cartTotal = Cart::instance('shopping_cart')->subtotal();
+            return view('forntend.pages.blogs.blog-post', compact('post', 'bolgCategories', 'recentBlogs', 'allTags', 'carts', 'cartTotal'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
@@ -135,7 +139,9 @@ class GuestController extends Controller
         }
         try {
             $advertise = Advertisement::all()->random(1)->first();
-            return view('forntend.pages.view-page', compact('page', 'advertise'));
+            $carts = Cart::instance('shopping_cart')->content();
+            $cartTotal = Cart::instance('shopping_cart')->subtotal();
+            return view('forntend.pages.view-page', compact('page', 'advertise', 'carts', 'cartTotal'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
@@ -149,7 +155,9 @@ class GuestController extends Controller
             $mission = $page->sections()->where(['name'=>'mission', 'status'=>true])->first();
             $vision = $page->sections()->where(['name'=>'vision', 'status'=>true])->first();
             $about_img = $page->sections()->where(['name'=>'about_img', 'status'=>true])->first();
-            return view('forntend.pages.about-page', compact('page', 'advertise', 'overview', 'mission', 'vision', 'about_img'));
+            $carts = Cart::instance('shopping_cart')->content();
+            $cartTotal = Cart::instance('shopping_cart')->subtotal();
+            return view('forntend.pages.about-page', compact('page', 'advertise', 'overview', 'mission', 'vision', 'about_img', 'carts', 'cartTotal'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
@@ -159,7 +167,9 @@ class GuestController extends Controller
     {
         try {
             $map = $page->sections()->where(['name'=>'map', 'status'=>true])->first()?$page->sections()->where('name','map')->first():null;
-            return view('forntend.pages.contact', compact('page', 'map'));
+            $carts = Cart::instance('shopping_cart')->content();
+            $cartTotal = Cart::instance('shopping_cart')->subtotal();
+            return view('forntend.pages.contact', compact('page', 'map', 'carts', 'cartTotal'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
@@ -198,6 +208,8 @@ class GuestController extends Controller
         try {
             return view('forntend.pages.wish-list', [
                 'title' => 'My Wish-list',
+                'carts' => Cart::instance('shopping_cart')->content(),
+                'cartTotal' => Cart::instance('shopping_cart')->subtotal()
             ]);
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
@@ -251,6 +263,24 @@ class GuestController extends Controller
                     'cart' => Cart::instance('shopping_cart')->content(),
                     'count' => Cart::instance('shopping_cart')->count()
                 ]
+            ];
+            return response()->json($data);
+        }catch (\Throwable $th){
+            $data = [
+                'status' => 'error',
+                'info' => $th->getMessage()
+            ];
+            return response()->json($data);
+        }
+    }
+
+    public function destroyCart($cart)
+    {
+        try {
+            Cart::instance('shopping_cart')->remove($cart);
+            $data = [
+                'status' => 'success',
+                'info' => 'Cart item has been removed successfully.'
             ];
             return response()->json($data);
         }catch (\Throwable $th){

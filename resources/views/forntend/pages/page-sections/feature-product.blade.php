@@ -11,7 +11,7 @@
                             <img src="{{ asset($featureProduct->productImages()->first()->image) }}">
                         </a>
                         <div class="btn-icon-group"> <!--  -->
-                            <button class="btn-icon myCartBtn btn-add-cart" data-toggle="modal" data-target="#addCartModal" data-role="{{ $featureProduct->id }}"><i class="icon-bag"></i></button>
+                            <button class="btn-icon myCartBtn btn-add-cart" data-role="{{ $featureProduct->id }}"><i class="icon-bag"></i></button>
                         </div>
                         <a href="{{ route('product-quick-view',$featureProduct->id) }}" class="btn-quickview" title="Quick View">Quick View</a>
                     </figure>

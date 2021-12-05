@@ -47,14 +47,14 @@
                     <div class="dropdownmenu-wrapper">
                         <div class="dropdown-cart-header">
                             <span><span class="wishCount">3</span> {{ __('Items') }}</span>
-                            <a href="javascript:void(0)">{{ __('My Wishes') }}</a>
+                            <a href="{{ route('my-wishes') }}">{{ __('My Wishes') }}</a>
                         </div><!-- End .dropdown-cart-header -->
                         <div class="dropdown-cart-products myWishesList">
 
                         </div><!-- End .cart-product -->
 
                         <div class="dropdown-cart-action">
-                            <a href="{{ route('my-wishes') }}" class="btn btn-block">{{ __('My Wish List') }}</a>
+                            <a href="{{ route('my-wishes') }}" class="btn btn-block">{{ __('Add To Cart') }}</a>
                         </div><!-- End .dropdown-cart-total -->
                     </div><!-- End .dropdownmenu-wrapper -->
                 </div><!-- End .dropdown-menu -->
@@ -92,7 +92,7 @@
                                     <a href="javascript:void(0)" class="product-image">
                                         <img src="{{ asset($cart->options['image']) }}" alt="product">
                                     </a>
-                                    <a href="#" class="btn-remove" title="Remove Product"><i class="icon-retweet" data-src="{{ $cart->rowId }}"></i></a>
+                                    <a href="#" class="btn-remove cartRemoveBtn" title="Remove Product" data-role="{{ $cart->rowId }}"><i class="icon-retweet"></i></a>
                                 </figure>
                             </div><!-- End .product -->
                             @endforeach
@@ -105,7 +105,7 @@
                         </div><!-- End .dropdown-cart-total -->
 
                         <div class="dropdown-cart-action">
-                            <a href="javascript:void(0)" class="btn btn-block">Checkout</a>
+                            <a href="javascript:void(0)" class="btn btn-block">{{ __('Checkout') }}</a>
                         </div><!-- End .dropdown-cart-total -->
                     </div><!-- End .dropdownmenu-wrapper -->
                 </div><!-- End .dropdown-menu -->

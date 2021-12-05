@@ -27,7 +27,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body add-cart-box text-center">
-                <p>{{ __('You\'ve just added this product to the').'<br>'.__('cart') }}</p>
+                <p>{!! __('You\'ve just added this product to the').'<br>'.__('cart') !!}</p>
                 <h4 id="productTitle"></h4>
                 <img src="" id="productImage" width="100" height="100" alt="adding cart image">
                 <div class="btn-actions">
