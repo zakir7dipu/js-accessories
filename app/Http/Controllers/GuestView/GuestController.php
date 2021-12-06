@@ -381,4 +381,23 @@ class GuestController extends Controller
             return $this->backWithError($th->getMessage());
         }
     }
+
+    public function updateCartForm(Request $request, $cart)
+    {
+        try {
+            Cart::instance('shopping_cart')->update($cart, $request->qty);
+            return $this->backWithSuccess('Cart item has been updated successfully.');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function cartDestroy()
+    {
+        try {
+            dd('ok');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
 }

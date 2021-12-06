@@ -24,10 +24,10 @@
                         <table class="table table-cart">
                             <thead>
                             <tr>
-                                <th class="product-col">Product</th>
-                                <th class="price-col">Price</th>
-                                <th class="qty-col">Qty</th>
-                                <th>Subtotal</th>
+                                <th class="product-col">{{ __('Product') }}</th>
+                                <th class="price-col">{{ __('Price') }}</th>
+                                <th class="qty-col">{{ __('Qty') }}</th>
+                                <th>{{ __('Subtotal') }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -40,19 +40,28 @@
                                             </a>
                                         </figure>
                                         <h2 class="product-title">
-                                            <a href="{{ route('single-product',$cart->options['slug']) }}">{{ $cart->name }}</a>
+                                            @php
+                                                $color = \App\Models\AttributeItem::find($cart->options['color']);
+                                                $size = \App\Models\AttributeItem::find($cart->options['size'])
+                                            @endphp
+                                            <a href="{{ route('single-product',$cart->options['slug']) }}">{!!  $cart->name. ($color?' <span class="badge m-1 rounded"  style="background-color: '.$color->details.';">'.$color->name.'</span>':'').( $size?'<span class="badge m-1 btn-primary rounded">'.$size->name.'</span>':'')  !!}
+                                            </a>
                                         </h2>
                                     </td>
                                     <td>{{ $cart->options['currence'].$cart->price }}</td>
                                     <td>
-                                        <input class="vertical-quantity form-control" type="text" value="{{ $cart->qty }}">
+                                        <form action="{{ route('cart.update',$cart->rowId) }}" method="post" class="cartUpdateForm">
+                                            @csrf
+                                            @method('put')
+                                            <input class="vertical-quantity form-control" type="text" name="qty" value="{{ $cart->qty }}">
+                                        </form>
                                     </td>
                                     <td>{{ $cart->subtotal() }}</td>
                                 </tr>
                                 <tr class="product-action-row">
                                     <td colspan="4" class="clearfix">
                                         <div class="float-right" data-role="{{ $cart->rowId }}">
-                                            <a href="#" title="Edit product" class="btn-edit"><span class="sr-only">Edit</span><i class="icon-pencil"></i></a>
+                                            <a href="javascript:void(0)" title="Edit product" class="btn-edit cartUpdateBtn"><span class="sr-only">Edit</span><i class="icon-pencil"></i></a>
                                             <a href="javascript:void(0)" title="Remove product" class="btn-remove cartRemoveBtn"><span class="sr-only">Remove</span></a>
                                         </div><!-- End .float-right -->
                                     </td>
@@ -68,8 +77,11 @@
                                     </div><!-- End .float-left -->
 
                                     <div class="float-right">
-                                        <a href="#" class="btn btn-outline-secondary btn-clear-cart">Clear Shopping Cart</a>
-                                        <a href="#" class="btn btn-outline-secondary btn-update-cart">Update Shopping Cart</a>
+                                        <form action="{{ route('cart.destroy') }}" method="post" class="form-inline">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-outline-secondary btn-clear-cart">{{ __('Clear Shopping Cart') }}</button>
+                                        </form>
                                     </div><!-- End .float-right -->
                                 </td>
                             </tr>
@@ -77,17 +89,17 @@
                         </table>
                     </div><!-- End .cart-table-container -->
 
-                    <div class="cart-discount">
-                        <h4>Apply Discount Code</h4>
-                        <form action="#">
-                            <div class="input-group">
-                                <input type="text" class="form-control form-control-sm" placeholder="Enter discount code"  required>
-                                <div class="input-group-append">
-                                    <button class="btn btn-sm btn-primary" type="submit">Apply Discount</button>
-                                </div>
-                            </div><!-- End .input-group -->
-                        </form>
-                    </div><!-- End .cart-discount -->
+{{--                    <div class="cart-discount">--}}
+{{--                        <h4>Apply Discount Code</h4>--}}
+{{--                        <form action="#">--}}
+{{--                            <div class="input-group">--}}
+{{--                                <input type="text" class="form-control form-control-sm" placeholder="Enter discount code"  required>--}}
+{{--                                <div class="input-group-append">--}}
+{{--                                    <button class="btn btn-sm btn-primary" type="submit">Apply Discount</button>--}}
+{{--                                </div>--}}
+{{--                            </div><!-- End .input-group -->--}}
+{{--                        </form>--}}
+{{--                    </div><!-- End .cart-discount -->--}}
                 </div><!-- End .col-lg-8 -->
 
                 <div class="col-lg-4">
@@ -148,26 +160,21 @@
                         <table class="table table-totals">
                             <tbody>
                             <tr>
-                                <td>Subtotal</td>
-                                <td>$17.90</td>
-                            </tr>
-
-                            <tr>
-                                <td>Tax</td>
-                                <td>$0.00</td>
+                                <td>{{ __('Subtotal') }}</td>
+                                <td>{{ $cartTotal }}</td>
                             </tr>
                             </tbody>
                             <tfoot>
                             <tr>
-                                <td>Order Total</td>
-                                <td>$17.90</td>
+                                <td>{{ __('Order Total') }}</td>
+                                <td>{{ $cartTotal }}</td>
                             </tr>
                             </tfoot>
                         </table>
 
                         <div class="checkout-methods">
-                            <a href="checkout-shipping.html" class="btn btn-block btn-sm btn-primary">Go to Checkout</a>
-                            <a href="#" class="btn btn-link btn-block">Check Out with Multiple Addresses</a>
+                            <a href="checkout-shipping.html" class="btn btn-block btn-sm btn-primary">{{ __('Go to Checkout') }}</a>
+{{--                            <a href="#" class="btn btn-link btn-block">Check Out with Multiple Addresses</a>--}}
                         </div><!-- End .checkout-methods -->
                     </div><!-- End .cart-summary -->
                 </div><!-- End .col-lg-4 -->

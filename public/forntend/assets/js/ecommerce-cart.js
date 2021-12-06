@@ -3,6 +3,15 @@
 
     const cartButton = document.querySelectorAll('.myCartBtn');
     const cartRemoveBtn = document.querySelectorAll('.cartRemoveBtn');
+    const cartUpdateForm = document.querySelectorAll('.cartUpdateForm');
+    const cartUpdateBtn = document.querySelectorAll('.cartUpdateBtn');
+
+    Array.from(cartUpdateBtn).map((item, key)=>{
+        let btn = item;
+        btn.addEventListener('click', ()=>{
+            cartUpdateForm[key].submit();
+        })
+    });
 
     const showCartCount = (num) => {
         $('.cartCount').html(num)
