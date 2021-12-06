@@ -49,6 +49,7 @@ class GuestController extends Controller
         }
     }
 
+    // product quick view
     public function productQuickView(Product $product)
     {
         try {
@@ -60,6 +61,7 @@ class GuestController extends Controller
         }
     }
 
+    // single product view
     public function productSingleView($slug)
     {
         try {
@@ -77,6 +79,7 @@ class GuestController extends Controller
         }
     }
 
+    // category element view
     public function categoryElements($slug)
     {
         try {
@@ -91,6 +94,7 @@ class GuestController extends Controller
         }
     }
 
+    // blog & single blog
     public function allBlogs()
     {
         try {
@@ -130,6 +134,7 @@ class GuestController extends Controller
         }
     }
 
+    // all basic page view
     public function pageView(Pages $page)
     {
         if ($page->name == 'about'){
@@ -147,6 +152,7 @@ class GuestController extends Controller
         }
     }
 
+    // about page
     public function aboutPage($page)
     {
         try {
@@ -163,6 +169,7 @@ class GuestController extends Controller
         }
     }
 
+    // contact page
     public function contactPage($page)
     {
         try {
@@ -194,6 +201,7 @@ class GuestController extends Controller
         }
     }
 
+    // find product
     public function getProduct(Product $product)
     {
         $product->image = $product->productImages()->first()->image;
@@ -203,6 +211,7 @@ class GuestController extends Controller
         return response()->json($product);
     }
 
+    // wish list
     public function myWishList()
     {
         try {
@@ -216,6 +225,7 @@ class GuestController extends Controller
         }
     }
 
+    // shopping cart
     public function setCart(Product $product)
     {
         try {

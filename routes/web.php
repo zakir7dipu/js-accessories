@@ -193,4 +193,5 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'verified'])-
 
 Route::prefix('/my-account')->as('client.')->middleware(['auth:sanctum', 'verified', 'role:customer'])->group(function (){
     Route::get('/dashboard', [ClientController::class, 'index'])->name('dashboard');
+    Route::get('/checkout', [ClientController::class, 'checkoutIndex'])->name('checkout.index');
 });
