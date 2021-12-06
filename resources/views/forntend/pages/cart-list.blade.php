@@ -173,7 +173,7 @@
                         </table>
 
                         <div class="checkout-methods">
-                            <a href="checkout-shipping.html" class="btn btn-block btn-sm btn-primary">{{ __('Go to Checkout') }}</a>
+                            <a href="javascript:void(0)" class="btn btn-block btn-sm btn-primary">{{ __('Go to Checkout') }}</a>
 {{--                            <a href="#" class="btn btn-link btn-block">Check Out with Multiple Addresses</a>--}}
                         </div><!-- End .checkout-methods -->
                     </div><!-- End .cart-summary -->
