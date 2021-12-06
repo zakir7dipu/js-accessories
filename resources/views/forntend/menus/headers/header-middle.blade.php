@@ -71,7 +71,7 @@
                         <div class="dropdown-cart-header">
                             <span><span class="cartCount">2</span> {{ __('Items') }}</span>
 
-                            <a href="javascript:void(0)">{{ __('View Cart') }}</a>
+                            <a href="{{ route('cart.items') }}">{{ __('View Cart') }}</a>
                         </div><!-- End .dropdown-cart-header -->
                         <div class="dropdown-cart-products myCartList">
 
@@ -92,7 +92,7 @@
                                     <a href="javascript:void(0)" class="product-image">
                                         <img src="{{ asset($cart->options['image']) }}" alt="product">
                                     </a>
-                                    <a href="#" class="btn-remove cartRemoveBtn" title="Remove Product" data-role="{{ $cart->rowId }}"><i class="icon-retweet"></i></a>
+                                    <a href="javascript:void(0)" class="btn-remove cartRemoveBtn" title="Remove Product" data-role="{{ $cart->rowId }}"><i class="icon-retweet"></i></a>
                                 </figure>
                             </div><!-- End .product -->
                             @endforeach

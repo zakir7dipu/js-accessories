@@ -224,17 +224,19 @@ class GuestController extends Controller
             $product->size = $product->attributeItems()->where('attribute_id', 2)->first();
             $product->image = $product->productImages()->first()->image;
             $product->currence = $product->currency->symbol;
+            $price = $product->discount?($product->price-($product->price*$product->discount)/100):$product->price;
             $cart = Cart::instance('shopping_cart')->add([
                 'id' => $product->id,
                 'name' => $product->name,
                 'qty' => 1,
-                'price' => $product->price,
+                'price' => $price,
                 'options' => [
                     'image' => $product->image,
                     'currence' => $product->currence,
                     'discount' => $product->discount?($product->price*$product->discount)/100:0,
                     'size' => $product->size?$product->size->id:$product->size,
                     'color' => $product->color?$product->color->id:$product->color,
+                    'slug' => $product->slug
                 ]
             ]);
             $data = [
@@ -259,17 +261,19 @@ class GuestController extends Controller
         try {
             $product->image = $product->productImages()->first()->image;
             $product->currence = $product->currency->symbol;
+            $price = $product->discount?($product->price-($product->price*$product->discount)/100):$product->price;
             Cart::instance('shopping_cart')->add([
                 'id' => $product->id,
                 'name' => $product->name,
                 'qty' => $request->qty,
-                'price' => $product->price,
+                'price' => $price,
                 'options' => [
                     'image' => $product->image,
                     'currence' => $product->currence,
                     'discount' => $product->discount?($product->price*$product->discount)/100:0,
                     'size' => $request->size,
                     'color' => $request->color,
+                    'slug' => $product->slug
                 ]
             ]);
             return $this->backWithSuccess('Cart has been added successfully.');
@@ -290,17 +294,19 @@ class GuestController extends Controller
                     $product->size = $product->attributeItems()->where('attribute_id', 2)->first();
                     $product->image = $product->productImages()->first()->image;
                     $product->currence = $product->currency->symbol;
+                    $price = $product->discount?($product->price-($product->price*$product->discount)/100):$product->price;
                     $cart = Cart::instance('shopping_cart')->add([
                         'id' => $product->id,
                         'name' => $product->name,
                         'qty' => 1,
-                        'price' => $product->price,
+                        'price' => $price,
                         'options' => [
                             'image' => $product->image,
                             'currence' => $product->currence,
                             'discount' => $product->discount?($product->price*$product->discount)/100:0,
                             'size' => $product->size?$product->size->id:$product->size,
                             'color' => $product->color?$product->color->id:$product->color,
+                            'slug' => $product->slug
                         ]
                     ]);
                     $cartProducts[] = $cart;
@@ -361,6 +367,18 @@ class GuestController extends Controller
                 'info' => $th->getMessage()
             ];
             return response()->json($data);
+        }
+    }
+
+    public function myCartItems()
+    {
+        try {
+            $title = 'My Cart-list';
+            $carts = Cart::instance('shopping_cart')->content();
+            $cartTotal = Cart::instance('shopping_cart')->subtotal();
+            return view('forntend.pages.cart-list', compact('title', 'carts', 'cartTotal'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
         }
     }
 }
