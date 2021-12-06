@@ -6,9 +6,9 @@
 <!-- toastr alert -->
 <script src="{{asset('notification_assets/js/toastr.min.js')}}"></script>
 <!-- Wishlist js -->
-<script src="{{ asset('forntend/assets/js/ecommerce-wishlist.js') }}"></script>
+<script type="module" src="{{ asset('forntend/assets/js/ecommerce-wishlist.js') }}"></script>
 <!-- Cart js -->
-<script src="{{ asset('forntend/assets/js/ecommerce-cart.js') }}"></script>
+<script type="module" src="{{ asset('forntend/assets/js/ecommerce-cart.js') }}"></script>
 
 <!-- Main JS File -->
 <script src="{{ asset('forntend/assets/js/main_init.min.js') }}"></script>

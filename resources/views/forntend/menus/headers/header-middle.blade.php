@@ -54,7 +54,7 @@
                         </div><!-- End .cart-product -->
 
                         <div class="dropdown-cart-action">
-                            <a href="{{ route('my-wishes') }}" class="btn btn-block">{{ __('Add To Cart') }}</a>
+                            <a href="{{ route('my-wishes') }}" class="btn btn-block wishToCartBtn">{{ __('Add To Cart') }}</a>
                         </div><!-- End .dropdown-cart-total -->
                     </div><!-- End .dropdownmenu-wrapper -->
                 </div><!-- End .dropdown-menu -->

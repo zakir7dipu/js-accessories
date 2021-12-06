@@ -60,6 +60,7 @@ Route::get('/my-wishes', [GuestController::class, 'myWishList'])->name('my-wishe
 Route::prefix('/my-cart')->as('cart.')->group(function (){
     Route::get('/get', [GuestController::class, 'getCart']);
     Route::get('/set/{product}', [GuestController::class, 'setCart']);
+    Route::post('/set/wish-to-cart', [GuestController::class, 'wishToCart']);
     Route::post('/set/{product}', [GuestController::class, 'setCartForm'])->name('set');
     Route::get('/destroy/{cart}', [GuestController::class, 'destroyCart']);
 });

@@ -278,6 +278,54 @@ class GuestController extends Controller
         }
     }
 
+    public function wishToCart(Request $request)
+    {
+        try {
+//            Cart::instance('shopping_cart')->destroy();
+            $cartProducts = [];
+            foreach ($request->products as $item){
+                $product = Product::find($item);
+                if ($product){
+                    $product->color = $product->attributeItems()->where('attribute_id', 1)->first();
+                    $product->size = $product->attributeItems()->where('attribute_id', 2)->first();
+                    $product->image = $product->productImages()->first()->image;
+                    $product->currence = $product->currency->symbol;
+                    $cart = Cart::instance('shopping_cart')->add([
+                        'id' => $product->id,
+                        'name' => $product->name,
+                        'qty' => 1,
+                        'price' => $product->price,
+                        'options' => [
+                            'image' => $product->image,
+                            'currence' => $product->currence,
+                            'discount' => $product->discount?($product->price*$product->discount)/100:0,
+                            'size' => $product->size?$product->size->id:$product->size,
+                            'color' => $product->color?$product->color->id:$product->color,
+                        ]
+                    ]);
+                    $cartProducts[] = $cart;
+                }
+            }
+
+            $data = [
+                'status' => 'success',
+                'info' => [
+                    'cart' => $cartProducts,
+                    'count' => Cart::instance('shopping_cart')->count(),
+                ],
+                'message' => 'All Products have been added to cart successfully.'
+            ];
+            return response()->json($data);
+        }catch (\Throwable $th){
+            $data = [
+                'status' => 'error',
+                'info' => [],
+                'message' => $th->getMessage()
+            ];
+            return response()->json($data);
+        }
+    }
+
     public function getCart()
     {
         try {

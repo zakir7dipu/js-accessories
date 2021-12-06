@@ -85,7 +85,7 @@
                             <div class="widget">
                                 <h4 class="widget-title">{{ __('Customer Care') }}</h4>
                                 <ul class="links">
-                                    <li><a href="{{ route('login') }}">{{ __('My Account') }}</a></li>
+                                    <li><a href="{{ route('client.dashboard') }}">{{ __('My Account') }}</a></li>
                                     <li><a href="javascript:void(0)">{{ __('Wishlist') }}</a></li>
                                     <li><a href="javascript:void(0)">{{ __('Shopping Cart') }}</a></li>
                                     <li><a href="javascript:void(0)">{{ __('Saved Item') }}</a></li>

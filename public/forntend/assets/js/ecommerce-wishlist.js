@@ -1,11 +1,15 @@
 (function ($) {
     "use script";
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     // localStorage.clear()
     const wishButton = document.querySelectorAll('.myWish');
     let wishListContainer = document.querySelector('.myWishesList');
     let wishListPageContainer = document.querySelector('.wishListViewTable');
-    // console.log(window.location.pathname) /my-wishes;
-
+    let wishToCartBtn = document.querySelector('.wishToCartBtn');
 
     const showWishListInTable = (array) => {
         // console.log(array)
@@ -49,8 +53,9 @@
 
             let divLeft = document.createElement('div');
             divLeft.className = 'float-left';
+            divLeft.setAttribute('data-role', item.id);
             let divLeftATag = document.createElement('a');
-            divLeftATag.className = 'btn-move';
+            divLeftATag.className = 'btn-move myCartBtn';
             divLeftATag.href = 'javascript:void(0)';
             divLeftATag.innerText = 'Move to Cart';
             divLeft.appendChild(divLeftATag);
@@ -145,6 +150,11 @@
             }
         });
 
+        if (wishlist.length >= 4){
+            toastr.warning('You have already 5 item on wish list. Please may you process those at first.');
+            return;
+        }
+
         if (typeof haveProduct === 'number'){
             wishlist[haveProduct] = data;
             toastr.success('Wishlist has been updated.')
@@ -216,6 +226,33 @@
     });
 
     let preWish = !JSON.parse(getWishlist())?[]:JSON.parse(getWishlist());
+
+    wishToCartBtn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        let products = [];
+        Array.from(preWish).map((item, key)=>{
+            products.push(item.id);
+        });
+        if (products.length > 0){
+            $.ajax({
+                type: 'post',
+                url: '/my-cart/set/wish-to-cart',
+                data:{
+                    products: products
+                },
+                success:function (data) {
+                    if (data.status === 'success'){
+                        localStorage.removeItem('wishlist');
+                    }
+                    toastr[data.status](data.message);
+                    setTimeout(()=>{
+                        location.reload();
+                    },1000);
+                }
+            });
+        }
+    });
+
     showWishCount(preWish.length);
     showWishList(preWish);
 })(jQuery);

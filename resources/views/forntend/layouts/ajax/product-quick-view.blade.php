@@ -48,7 +48,7 @@
                             <label>Colors:</label>
                             <ul class="config-swatch-list">
                                 @foreach($product->color as $key => $color)
-                                <li class="{{ $key==0?'active':''}} productColorBtn">
+                                <li class="{{ $key==0?'active':''}} productColorBtn" data-role="{{ $color->id }}">
                                     <a href="javascript:void(0)" style="background-color: {{ $color->details }};" data-toggle="tooltip" data-placement="top" title="{{ $color->name }}"></a>
                                 </li>
                                 @endforeach
@@ -62,7 +62,7 @@
                             <label>Size:</label>
                             <ul class="d-flex">
                                 @foreach($product->size as $key => $size)
-                                <li class="{{ $key==0?'active':''}} m-1 productSizeBtn">
+                                <li class="{{ $key==0?'active':''}} m-1 productSizeBtn" data-role="{{ $size->id }}">
                                     <a href="javascript:void(0)" class="btn btn-light btn-sm rounded border-secondary" data-toggle="tooltip" data-placement="top" title="{{ $size->details }}">{{ $size->name }}</a>
                                 </li>
                                 @endforeach
@@ -72,13 +72,18 @@
                 @endif
 
                 <div class="product-action">
-                    <div class="product-single-qty">
-                        <input class="horizontal-quantity form-control" type="text">
-                    </div><!-- End .product-single-qty -->
+                    <form action="{{ route('cart.set',$product->id) }}" method="post" class="form-inline">
+                        @csrf
+                        <div class="product-single-qty">
+                            <input class="horizontal-quantity form-control" type="text" id="productQty" name="qty">
+                            <input type="hidden" id="productColor" name="color">
+                            <input type="hidden" id="productSize" name="size">
+                        </div><!-- End .product-single-qty -->
 
-                    <a href="cart.html" class="paction add-cart" title="Add to Cart">
-                        <span>Add to Cart</span>
-                    </a>
+                        <button type="submit" class="paction add-cart cursor-pointer" title="Add to Cart">
+                            <span>Add to Cart</span>
+                        </button>
+                    </form>
                     <a href="javascript:void(0)" data-role="{{ $product->id }}" class="paction add-wishlist myWish" title="Add to Wishlist">
                         <span>Add to Wishlist</span>
                     </a>
