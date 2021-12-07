@@ -38,6 +38,37 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-lg-8 col-md-12 mx-lg-auto">
+                <div class="card card-dark bg-dark">
+                    <div class="card-header">
+                        <h6 class="card-title">{{__('All selected areas')}}</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-12">
+                            <span><b>All Selected countries: </b></span>
+                            @foreach($countries as $country)
+                                <span class="badge badge-primary p-2 h6">{{ $country->name }}
+                                    <form action="{{ route('admin.settings.order-country-delete', $country->id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit">&times;</button>
+                                    </form>
+{{--                                    <a href="javascript:void(0)"></a>--}}
+                                </span>
+                            @endforeach
+                        </div>
+                        <div class="col-12">
+                            <span><b>All Selected states: </b></span>
+                            @foreach($sates as $sate)
+                                <span class="badge badge-primary p-2 h6">{{ $sate->name }} <a href="javascript:void(0)">&times;</a></span>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 

@@ -71,6 +71,8 @@ Route::prefix('/my-cart')->as('cart.')->group(function (){
 //district-info
 Route::get('/country', [DistrictController::class, 'getCountry']);
 Route::post('/district', [DistrictController::class, 'getDistrict']);
+Route::post('/police-station', [DistrictController::class, 'getPoliceStation']);
+Route::post('/order-area', [DistrictController::class, 'saveOrderArea']);
 Route::get('/district-info', [DistrictController::class, 'getDistrictInfo']);
 
 Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'verified'])->group(function () {
@@ -105,6 +107,7 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'verified'])-
         Route::post('/company-contact', [AppSettingsController::class, 'storeContact'])->name('company-contact');
         //order
         Route::get('/order', [AppSettingsController::class, 'orderIndex'])->name('order-index');
+        Route::delete('/order-country/{country}', [AppSettingsController::class, 'orderDestroy'])->name('order-country-delete');
     });
 
     //pages

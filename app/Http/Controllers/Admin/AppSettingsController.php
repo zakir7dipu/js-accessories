@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CetegorySection;
 use App\Models\Company;
 use App\Models\CountryList;
+use App\Models\DistrictList;
 use App\Models\FeatureProduct;
 use App\Models\GeneralSettings;
 use App\Models\InfoSection;
@@ -669,9 +670,16 @@ class AppSettingsController extends Controller
         try {
             $generalSettings = GeneralSettings::first();
             $title = ($generalSettings?$generalSettings->site_name:'').' | Order Settings';
-            return view('backend.pages.settings.order-settings', compact('title', 'generalSettings'));
+            $countries = CountryList::where('status', true)->get();
+            $sates = DistrictList::where('status', true)->get();
+            return view('backend.pages.settings.order-settings', compact('title', 'generalSettings', 'countries', 'sates'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
+    }
+
+    public function orderDestroy(CountryList $country)
+    {
+        dd($country);
     }
 }
