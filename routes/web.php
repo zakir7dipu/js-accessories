@@ -69,6 +69,8 @@ Route::prefix('/my-cart')->as('cart.')->group(function (){
 });
 
 //district-info
+Route::get('/country', [DistrictController::class, 'getCountry']);
+Route::post('/district', [DistrictController::class, 'getDistrict']);
 Route::get('/district-info', [DistrictController::class, 'getDistrictInfo']);
 
 Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'verified'])->group(function () {
@@ -101,6 +103,8 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'verified'])-
         Route::post('/social-media-link', [AppSettingsController::class, 'storeSocialMediaLink']);
         //contact
         Route::post('/company-contact', [AppSettingsController::class, 'storeContact'])->name('company-contact');
+        //order
+        Route::get('/order', [AppSettingsController::class, 'orderIndex'])->name('order-index');
     });
 
     //pages

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\CetegorySection;
 use App\Models\Company;
+use App\Models\CountryList;
 use App\Models\FeatureProduct;
 use App\Models\GeneralSettings;
 use App\Models\InfoSection;
@@ -524,7 +525,9 @@ class AppSettingsController extends Controller
             return $this->backWithError($th->getMessage());
         }
     }
-
+    /*
+    * basic page view
+    */
     public function pageIndex(Pages $page)
     {
         if ($page->name == 'about'){
@@ -617,7 +620,9 @@ class AppSettingsController extends Controller
             return $this->backWithError($th->getMessage());
         }
     }
-
+    /*
+    * about page view
+    */
     public function aboutPage($page)
     {
         try {
@@ -628,7 +633,9 @@ class AppSettingsController extends Controller
             return $this->backWithError($th->getMessage());
         }
     }
-
+    /*
+    * contact page view
+    */
     public function contactPage($page)
     {
         try {
@@ -650,6 +657,19 @@ class AppSettingsController extends Controller
                 'address'=> clean($request->address)
             ]);
             return $this->backWithSuccess('Contact has been saved successfully');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+    /*
+    * order settings
+    */
+    public function orderIndex()
+    {
+        try {
+            $generalSettings = GeneralSettings::first();
+            $title = ($generalSettings?$generalSettings->site_name:'').' | Order Settings';
+            return view('backend.pages.settings.order-settings', compact('title', 'generalSettings'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }

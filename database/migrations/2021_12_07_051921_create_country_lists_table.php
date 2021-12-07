@@ -4,19 +4,20 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDistrictListsTable extends Migration
+class CreateCountryListsTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     *'name', 'code', 'status'
      * @return void
      */
     public function up()
     {
-        Schema::create('district_lists', function (Blueprint $table) {
+        Schema::create('country_lists', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('country_list_id');
             $table->string('name');
+            $table->string('code');
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateDistrictListsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('district_lists');
+        Schema::dropIfExists('country_lists');
     }
 }

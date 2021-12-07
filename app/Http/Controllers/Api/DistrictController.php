@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\CountryList;
 use App\Models\DistrictList;
 use Illuminate\Http\Request;
 
@@ -24,5 +25,18 @@ class DistrictController extends Controller
         }
 
         return response()->json(['thana' => $thanaView, 'postOffice' => $postOfficeView]);
+    }
+
+    public function getCountry()
+    {
+        $countries = CountryList::all();
+        return response()->json($countries);
+    }
+
+    public function getDistrict(Request $request)
+    {
+//        $countries = CountryList::all();
+        $districts = DistrictList::whereIn('country_list_id', $request->countries)->get();
+        return response()->json($districts);
     }
 }

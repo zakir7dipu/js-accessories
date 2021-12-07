@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CountryList;
 use App\Models\DistrictList;
 use App\Models\PostOfficeList;
 use App\Models\ThanaList;
@@ -16,6 +17,7 @@ class DistrictListSeeder extends Seeder
      */
     public function run()
     {
+        $bangladesh = CountryList::where(['name'=> 'Bangladesh', 'code'=> 'BD'])->first();
         $districts = [
             (object)[
                 'name'=>'Barguna',
@@ -413,6 +415,7 @@ class DistrictListSeeder extends Seeder
         for ($i=0; $i < count($districts); $i++){
             if (count($districts[$i]->post_code) == count($districts[$i]->post_office)) {
                 $district =  new DistrictList();
+                $district->country_list_id = $bangladesh?$bangladesh->id:19;
                 $district->name = $districts[$i]->name;
                 $district->save();
 

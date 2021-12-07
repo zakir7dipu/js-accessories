@@ -245,7 +245,7 @@
                                         @endif
                                     </div>
 
-                                    <p class="mb-1"><label for="grossWeight" class="card-title font-weight-bold">{{__('Gross Weight:')}}</label> </p>
+                                    <p class="mb-1"><label for="grossWeight" class="card-title font-weight-bold">{{__('Gross Weight:')}}</label> <code>{{ __('Input is only allowed the matrix value  KG (kilogram)') }}</code></p>
                                     <div class="input-group input-group-lg mb-3">
                                         <input type="number" step="0.01" name="gross_weight" id="grossWeight"  class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"
                                                placeholder="{{__('Gross Weight EXM: 1')}}" value="{{  $product?$product->gross_weight:old('gross_weight') }}">

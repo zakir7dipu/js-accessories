@@ -42,7 +42,7 @@
             </div>
             <!-- SIDEBAR NAV -->
             <ul class="sidebar-nav">
-                <!-- NAV ITEM -->
+                <!-- NAV dashboard -->
                 <li class="nav-item {{ request()->is('admin/dashboard') ?'active':'' }}">
                     <a href="{{ route('admin.dashboard') }}" class="nav-link">
                         <i class="material-icons">{{ __('dashboard') }}</i>
@@ -78,7 +78,7 @@
                 </li>
                 <!-- NAV DIVIDER -->
                 <li class="nav-divider"></li>
-                <!-- NAV ITEM SETTINGS -->
+                <!-- NAV SETTINGS -->
                 <li class="nav-item has-dropdown {{ request()->is('admin/settings*') ?'active':'' }}">
                     <a href="javascript:void(0);" class="nav-link">
                         <i class="material-icons">settings</i>
@@ -91,6 +91,7 @@
                         <li><a href="{{ route('admin.settings.sms') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('SMS Settings') }}</span></a></li>
                         <li><a href="{{ route('admin.settings.api') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('API Settings') }}</span></a></li>
                         <li><a href="{{ route('admin.settings.social-media-link') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Social Media Link Settings') }}</span></a></li>
+                        <li><a href="{{ route('admin.settings.order-index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Order Settings') }}</span></a></li>
                     </ul>
                 </li>
                 <!-- NAV DIVIDER -->

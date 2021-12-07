@@ -108,10 +108,11 @@
                             </tfoot>
                         </table>
 
-                        <div class="checkout-methods">
-                            <a href="{{ route('client.checkout.index') }}" class="btn btn-block btn-sm btn-primary">{{ __('Go to Checkout') }}</a>
-{{--                            <a href="#" class="btn btn-link btn-block">Check Out with Multiple Addresses</a>--}}
-                        </div><!-- End .checkout-methods -->
+                        {!! count($carts) > 0 ? '<div class="checkout-methods">
+                            <a href="'.route('client.checkout.index').'" class="btn btn-block btn-sm btn-primary">'.__('Go to Checkout').'</a>
+<!--                            <a href="#" class="btn btn-link btn-block">Check Out with Multiple Addresses</a>-->
+                        </div><!-- End .checkout-methods -->':'' !!}
+
                     </div><!-- End .cart-summary -->
                 </div><!-- End .col-lg-4 -->
             </div><!-- End .row -->

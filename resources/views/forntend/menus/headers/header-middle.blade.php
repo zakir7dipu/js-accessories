@@ -104,9 +104,10 @@
                             <span class="cart-total-price">{{ $cartTotal }}</span>
                         </div><!-- End .dropdown-cart-total -->
 
-                        <div class="dropdown-cart-action">
-                            <a href="javascript:void(0)" class="btn btn-block">{{ __('Checkout') }}</a>
-                        </div><!-- End .dropdown-cart-total -->
+                        {!! count($carts) > 0 ? '<div class="dropdown-cart-action">
+                            <a href="'.route('client.checkout.index').'" class="btn btn-block">'.__('Checkout').'</a>
+                        </div><!-- End .dropdown-cart-total -->':'' !!}
+
                     </div><!-- End .dropdownmenu-wrapper -->
                 </div><!-- End .dropdown-menu -->
             </div><!-- End .dropdown cart -->
