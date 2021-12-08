@@ -54,12 +54,18 @@ class DistrictController extends Controller
             'thana' => ['required']
         ]);
         try {
-            CountryList::whereIn('id', explode(",", $request->country[0]))->get()->each->update(['status' => true]);
-            CountryList::whereNotIn('id', explode(",", $request->country[0]))->get()->each->update(['status' => false]);
-            DistrictList::whereIn('id', explode(",", $request->state[0]))->get()->each->update(['status' => true]);
-            DistrictList::whereNotIn('id', explode(",", $request->state[0]))->get()->each->update(['status' => false]);
-            ThanaList::whereIn('id', explode(",", $request->thana[0]))->get()->each->update(['status' => true]);
-            ThanaList::whereNotIn('id', explode(",", $request->thana[0]))->get()->each->update(['status' => false]);
+            //country active
+            CountryList::whereIn('id', explode(",", $request->country))->get()->each->update(['status' => true]);
+            //country deactivate
+            CountryList::whereNotIn('id', explode(",", $request->country))->get()->each->update(['status' => false]);
+            //state active
+            DistrictList::whereIn('id', explode(",", $request->state))->get()->each->update(['status' => true]);
+            //state deactivate
+            DistrictList::whereNotIn('id', explode(",", $request->state))->get()->each->update(['status' => false]);
+            //police station active
+            ThanaList::whereIn('id', explode(",", $request->thana))->get()->each->update(['status' => true]);
+            //police station deactivate
+            ThanaList::whereNotIn('id', explode(",", $request->thana))->get()->each->update(['status' => false]);
             return $this->backWithSuccess('Order areas have been updated successfully.');
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());

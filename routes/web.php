@@ -107,7 +107,9 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'verified'])-
         Route::post('/company-contact', [AppSettingsController::class, 'storeContact'])->name('company-contact');
         //order
         Route::get('/order', [AppSettingsController::class, 'orderIndex'])->name('order-index');
-        Route::delete('/order-country/{country}', [AppSettingsController::class, 'orderDestroy'])->name('order-country-delete');
+        Route::get('/order-country/{country}', [AppSettingsController::class, 'orderCountryDeactivate'])->name('order-country-delete');
+        Route::get('/order-state/{state}', [AppSettingsController::class, 'orderStateDeactivate'])->name('order-state-delete');
+        Route::get('/order-police-station/{thana}', [AppSettingsController::class, 'orderThanaDeactivate'])->name('order-police-station-delete');
     });
 
     //pages

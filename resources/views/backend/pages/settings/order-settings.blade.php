@@ -47,22 +47,26 @@
                     </div>
                     <div class="card-body">
                         <div class="col-12">
-                            <span><b>All Selected countries: </b></span>
+                            <span><b>{{ __('All Selected countries') }}: </b></span>
                             @foreach($countries as $country)
-                                <span class="badge badge-primary p-2 h6">{{ $country->name }}
-                                    <form action="{{ route('admin.settings.order-country-delete', $country->id) }}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit">&times;</button>
-                                    </form>
-{{--                                    <a href="javascript:void(0)"></a>--}}
+                                <span class="badge badge-primary p-2 h6">
+                                    {{ $country->name }}
+                                    <a href="{{ route('admin.settings.order-country-delete',$country->id) }}">&times;</a>
                                 </span>
                             @endforeach
                         </div>
+
                         <div class="col-12">
-                            <span><b>All Selected states: </b></span>
+                            <span><b>{{ __('All Selected States') }}: </b></span>
                             @foreach($sates as $sate)
-                                <span class="badge badge-primary p-2 h6">{{ $sate->name }} <a href="javascript:void(0)">&times;</a></span>
+                                <span class="badge badge-primary p-2 h6">{{ $sate->name }} <a href="{{ route('admin.settings.order-state-delete', $sate->id) }}">&times;</a></span>
+                            @endforeach
+                        </div>
+
+                        <div class="col-12">
+                            <span><b>{{ __('All Selected Police Station') }}: </b></span>
+                            @foreach($policeStations as $policeStation)
+                                <span class="badge badge-primary p-2 h6">{{ $policeStation->name }} <a href="{{ route('admin.settings.order-police-station-delete', $policeStation->id) }}">&times;</a></span>
                             @endforeach
                         </div>
                     </div>

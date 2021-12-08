@@ -9,7 +9,12 @@ class DistrictList extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['country_list_id', 'name', 'status'];
+
+    public function country()
+    {
+        return $this->belongsTo(CountryList::class, 'country_list_id', 'id');
+    }
 
     public function thana()
     {

@@ -17,6 +17,7 @@ class CreateDistrictListsTable extends Migration
             $table->id();
             $table->bigInteger('country_list_id');
             $table->string('name');
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

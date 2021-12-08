@@ -9,7 +9,7 @@ class ThanaList extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['district_list_id', 'name'];
+    protected $fillable = ['district_list_id', 'name', 'status'];
 
     public function district()
     {

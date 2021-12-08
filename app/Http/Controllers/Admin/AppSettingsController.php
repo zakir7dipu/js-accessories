@@ -15,6 +15,7 @@ use App\Models\Pages;
 use App\Models\PageSection;
 use App\Models\ProductFilterGallerySection;
 use App\Models\SocialMediaLink;
+use App\Models\ThanaList;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -663,7 +664,7 @@ class AppSettingsController extends Controller
         }
     }
     /*
-    * order settings
+    * order area settings
     */
     public function orderIndex()
     {
@@ -672,14 +673,45 @@ class AppSettingsController extends Controller
             $title = ($generalSettings?$generalSettings->site_name:'').' | Order Settings';
             $countries = CountryList::where('status', true)->get();
             $sates = DistrictList::where('status', true)->get();
-            return view('backend.pages.settings.order-settings', compact('title', 'generalSettings', 'countries', 'sates'));
+            $policeStations = ThanaList::where('status', true)->get();
+            return view('backend.pages.settings.order-settings', compact('title', 'generalSettings', 'countries', 'sates', 'policeStations'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
     }
 
-    public function orderDestroy(CountryList $country)
+    public function orderCountryDeactivate(CountryList $country)
     {
-        dd($country);
+        try {
+            $country->state->each(function ($state){
+                $state->thana->each->update(['status' => false]);
+                $state->update(['status' => false]);
+            });
+            $country->update(['status' => false]);
+            return $this->backWithSuccess('Deactivated successfully.');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function orderStateDeactivate(DistrictList $state)
+    {
+        try {
+            $state->thana->each->update(['status' => false]);
+            $state->update(['status' => false]);
+            return $this->backWithSuccess('Deactivated successfully.');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function orderThanaDeactivate(ThanaList $thana)
+    {
+        try {
+            $thana->update(['status' => false]);
+            return $this->backWithSuccess('Deactivated successfully.');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
     }
 }

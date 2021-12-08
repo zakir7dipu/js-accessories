@@ -46,7 +46,7 @@
                 if (document.getElementsByClassName(type).length === 0){
                     let hiddenInput = document.createElement('input');
                     hiddenInput.type = 'hidden';
-                    hiddenInput.name= `${type}[]`;
+                    hiddenInput.name= `${type}`;
                     hiddenInput.classList.add(type);
                     hiddenInput.value = selected;
                     form.appendChild(hiddenInput);
@@ -60,7 +60,7 @@
                 if (document.getElementsByClassName(type).length === 0){
                     let hiddenInput = document.createElement('input');
                     hiddenInput.type = 'hidden';
-                    hiddenInput.name= `${type}[]`;
+                    hiddenInput.name= `${type}`;
                     hiddenInput.classList.add(type);
                     hiddenInput.value = selected;
                     form.appendChild(hiddenInput);
@@ -74,7 +74,7 @@
                 if (document.getElementsByClassName(type).length === 0){
                     let hiddenInput = document.createElement('input');
                     hiddenInput.type = 'hidden';
-                    hiddenInput.name= `${type}[]`;
+                    hiddenInput.name= `${type}`;
                     hiddenInput.classList.add(type);
                     hiddenInput.value = selected;
                     form.appendChild(hiddenInput);

@@ -17,6 +17,7 @@ class CreateThanaListsTable extends Migration
             $table->id();
             $table->integer('district_list_id');
             $table->string('name');
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
