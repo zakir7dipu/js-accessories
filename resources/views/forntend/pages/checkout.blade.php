@@ -20,10 +20,10 @@
         <div class="container my-5">
             <ul class="checkout-progress-bar">
                 <li class="progressBar"> <!-- active -->
-                    <span>Shipping</span>
+                    <span>{{ __('Shipping') }}</span>
                 </li>
                 <li class="progressBar">
-                    <span>Review &amp; Payments</span>
+                    <span>{{ __('Review & Payments') }}</span>
                 </li>
             </ul>
             <form action="javascript:void(0)" method="post" id="checkoutForm">

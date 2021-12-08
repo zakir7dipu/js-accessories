@@ -1,10 +1,17 @@
 (function ($) {
     "use script";
+    localStorage.removeItem('sipping_address');
     $('#policeStation').selectpicker();
     $('#state').selectpicker();
     $('#country').selectpicker();
 
     let myForm = document.getElementById('checkoutForm');
+    let progressStatus = document.querySelector('.checkout-progress-bar');
+    progressStatus.querySelectorAll('.progressBar')[0].classList.remove('active');
+
+    const reviewSippingAddress = () => {
+        progressStatus.querySelectorAll('.progressBar')[0].classList.add('active');
+    };
 
     myForm.addEventListener('submit', (eveny)=>{
         let shippingAddress = {
@@ -95,13 +102,12 @@
         }
 
         if (shippingAddress.name != '' && shippingAddress.address != '' && shippingAddress.police_station != '' && shippingAddress.state != '' && shippingAddress.post_code != '' && shippingAddress.country != '' && shippingAddress.phone != ''){
-            alert('ok')
+            localStorage.setItem('sipping_address', JSON.stringify(shippingAddress));
+            toastr.success(`Step one has been completed`);
         }else {
-            alert('please input required fields');
             return;
         }
 
-        // console.log(shippingAddress);
     });
 
 })(jQuery);
