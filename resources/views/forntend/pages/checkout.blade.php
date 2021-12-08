@@ -3,7 +3,7 @@
 @section('title', config('app.name'))
 
 @section('page-css')
-
+    <link rel="stylesheet" href="{{ asset('backend/assets/plugin/bootstrap-select/bootstrap-select.min.css') }}">
 @endsection
 
 @section('content')
@@ -26,167 +26,138 @@
                     <span>Review &amp; Payments</span>
                 </li>
             </ul>
-            <div class="row">
-                <div class="col-lg-8">
-                    <ul class="checkout-steps">
-                        <li>
-                            <h2 class="step-title">{{ __('Shipping Address') }}</h2>
+            <form action="javascript:void(0)" method="post" id="checkoutForm">
+                @csrf
+                <div class="row">
+                    <div class="col-lg-8">
+                        <ul class="checkout-steps">
+                            <li>
+                                <h2 class="step-title">{{ __('Shipping Address') }}</h2>
+                                <div class="form-group required-field">
+                                    <label for="cName">{{ __('Name') }} <small class="text-danger"></small></label>
+                                    <input type="text" name="name" id="cName" class="form-control" >
+                                </div><!-- End .form-group required-->
 
-                            <form action="#" method="post">
-                                @csrf
-                                    <div class="form-group required-field">
-                                        <label>First Name </label>
-                                        <input type="text" class="form-control" required>
-                                    </div><!-- End .form-group -->
+                                <div class="form-group">
+                                    <label for="companyName">{{ __('Company') }}</label>
+                                    <input type="text" name="company_name" id="companyName" class="form-control">
+                                </div><!-- End .form-group -->
 
-                                    <div class="form-group required-field">
-                                        <label>Last Name </label>
-                                        <input type="text" class="form-control" required>
-                                    </div><!-- End .form-group -->
+                                <div class="form-group required-field">
+                                    <label for="address">{{ __('Street Address') }} <small class="text-danger"></small></label>
+                                    <textarea name="address" id="address" rows="1" class="form-control" ></textarea>
+                                </div><!-- End .form-group required-->
 
-                                    <div class="form-group">
-                                        <label>Company </label>
-                                        <input type="text" class="form-control">
-                                    </div><!-- End .form-group -->
+                                <div class="form-group required-field">
+                                    <label for="policeStation">{{ __('Police Station') }}  <small class="text-danger"></small></label>
+                                    <div class="select-custom">
+                                        <select name="police_station" id="policeStation" class="form-control form-select form-select-lg" data-live-search="true" data-size="5" title="Select your police station.">
+                                            @foreach($policeStations as $policeStation)
+                                                <option data-tokens="{{ $policeStation->name }}" value="{{ $policeStation->id }}">{{ $policeStation->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div><!-- End .form-group required-->
 
-                                    <div class="form-group required-field">
-                                        <label>Street Address </label>
-                                        <input type="text" class="form-control" required>
-                                        <input type="text" class="form-control" required>
-                                    </div><!-- End .form-group -->
+                                <div class="form-group required-field">
+                                    <label for="state">{{ __('State/Province') }} <small class="text-danger"></small></label>
+                                    <div class="select-custom">
+                                        <select name="state" id="state" class="form-control form-select form-select-lg" data-live-search="true" data-size="5" title="Select your state.">
+                                            @foreach($states as $state)
+                                                <option data-tokens="{{ $state->name }}" value="{{ $state->id }}">{{ $state->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div><!-- End .select-custom -->
+                                </div><!-- End .form-group required-->
 
-                                    <div class="form-group required-field">
-                                        <label>City  </label>
-                                        <input type="text" class="form-control" required>
-                                    </div><!-- End .form-group -->
+                                <div class="form-group required-field">
+                                    <label for="postCode">{{ __('Zip/Postal Code') }} <small class="text-danger"></small></label>
+                                    <input type="text" name="post_code" id="postCode" class="form-control" >
+                                </div><!-- End .form-group required-->
 
-                                    <div class="form-group">
-                                        <label>State/Province</label>
-                                        <div class="select-custom">
-                                            <select class="form-control">
-                                                <option value="CA">California</option>
-                                                <option value="TX">Texas</option>
-                                            </select>
-                                        </div><!-- End .select-custom -->
-                                    </div><!-- End .form-group -->
+                                <div class="form-group required-field">
+                                    <label for="country">{{ __('Country') }} <small class="text-danger"></small></label>
+                                    <div class="select-custom">
+                                        <select name="country" id="country" class="form-control form-select form-select-lg" data-live-search="true" data-size="5" title="Select your country.">
+                                            @foreach($countries as $country)
+                                                <option data-tokens="{{ $country->name }}" value="{{ $country->id }}">{{ $country->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div><!-- End .select-custom -->
+                                </div><!-- End .form-group required-->
 
-                                    <div class="form-group required-field">
-                                        <label>Zip/Postal Code </label>
-                                        <input type="text" class="form-control" required>
-                                    </div><!-- End .form-group -->
+                                <div class="form-group required-field">
+                                    <label for="phone">{{ __('Phone Number') }} <small class="text-danger"></small></label>
+                                    <div class="form-control-tooltip">
+                                        <input type="tel" class="form-control" name="phone" id="phone" >
+                                        <span class="input-tooltip" data-toggle="tooltip" title="For delivery questions." data-placement="right"><i class="icon-question-circle"></i></span>
+                                    </div><!-- End .form-control-tooltip -->
+                                </div><!-- End .form-group required-->
+                            </li>
+                        </ul>
+                    </div><!-- End .col-lg-8 -->
 
-                                    <div class="form-group">
-                                        <label>Country</label>
-                                        <div class="select-custom">
-                                            <select class="form-control">
-                                                <option value="USA">United States</option>
-                                                <option value="Turkey">Turkey</option>
-                                                <option value="China">China</option>
-                                                <option value="Germany">Germany</option>
-                                            </select>
-                                        </div><!-- End .select-custom -->
-                                    </div><!-- End .form-group -->
+                    <div class="col-lg-4">
+                        <div class="order-summary">
+                            <h3>{{ __('Summary') }}</h3>
+                            <h4>
+                                <a data-toggle="collapse" href="#order-cart-section" class="collapsed" role="button" aria-expanded="false" aria-controls="order-cart-section">{{ count($carts). __(' products in Cart') }}</a>
+                            </h4>
 
-                                    <div class="form-group required-field">
-                                        <label>Phone Number </label>
-                                        <div class="form-control-tooltip">
-                                            <input type="tel" class="form-control" required>
-                                            <span class="input-tooltip" data-toggle="tooltip" title="For delivery questions." data-placement="right"><i class="icon-question-circle"></i></span>
-                                        </div><!-- End .form-control-tooltip -->
-                                    </div><!-- End .form-group -->
-                            </form>
-                        </li>
-
-                        <li>
-                            <div class="checkout-step-shipping">
-                                <h2 class="step-title">Shipping Methods</h2>
-
-                                <table class="table table-step-shipping">
+                            <div class="collapse" id="order-cart-section">
+                                <table class="table table-mini-cart">
                                     <tbody>
-                                    <tr>
-                                        <td><input type="radio" name="shipping-method" value="flat"></td>
-                                        <td><strong>$20.00</strong></td>
-                                        <td>Fixed</td>
-                                        <td>Flat Rate</td>
-                                    </tr>
+                                    @foreach($carts as $cart)
+                                        <tr>
+                                            <td class="product-col">
+                                                <figure class="product-image-container">
+                                                    <a href="{{ route('single-product',$cart->options['slug']) }}" class="product-image">
+                                                        <img src="{{ $cart->options['image'] }}" alt="product">
+                                                    </a>
+                                                </figure>
+                                                <div>
+                                                    <h2 class="product-title">
+                                                        <a href="{{ route('single-product',$cart->options['slug']) }}">{{ $cart->name }}</a>
+                                                    </h2>
 
+                                                    <span class="product-qty">{{ __('Qty: ').$cart->qty }}</span>
+                                                </div>
+                                            </td>
+                                            <td class="price-col">
+                                                {{ $cart->subtotal() }}
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     <tr>
-                                        <td><input type="radio" name="shipping-method" value="best"></td>
-                                        <td><strong>$15.00</strong></td>
-                                        <td>Table Rate</td>
-                                        <td>Best Way</td>
+                                        <td class="product-col">
+                                            <div>
+                                                <h2 class="product-title">
+                                                    {{ __('Total') }}
+                                                </h2>
+                                            </div>
+                                        </td>
+                                        <td class="price-col">{{ $cartTotal }}</td>
                                     </tr>
                                     </tbody>
                                 </table>
-                            </div><!-- End .checkout-step-shipping -->
-                        </li>
-                    </ul>
-                </div><!-- End .col-lg-8 -->
+                            </div><!-- End #order-cart-section -->
+                        </div><!-- End .order-summary -->
+                    </div><!-- End .col-lg-4 -->
+                </div><!-- End .row -->
 
-                <div class="col-lg-4">
-                    <div class="order-summary">
-                        <h3>Summary</h3>
-
-                        <h4>
-                            <a data-toggle="collapse" href="#order-cart-section" class="collapsed" role="button" aria-expanded="false" aria-controls="order-cart-section">2 products in Cart</a>
-                        </h4>
-
-                        <div class="collapse" id="order-cart-section">
-                            <table class="table table-mini-cart">
-                                <tbody>
-                                <tr>
-                                    <td class="product-col">
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="assets/images/products/product-1.jpg" alt="product">
-                                            </a>
-                                        </figure>
-                                        <div>
-                                            <h2 class="product-title">
-                                                <a href="product.html">Baseball Cap</a>
-                                            </h2>
-
-                                            <span class="product-qty">Qty: 4</span>
-                                        </div>
-                                    </td>
-                                    <td class="price-col">$17.90</td>
-                                </tr>
-
-                                <tr>
-                                    <td class="product-col">
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="assets/images/products/product-2.jpg" alt="product">
-                                            </a>
-                                        </figure>
-                                        <div>
-                                            <h2 class="product-title">
-                                                <a href="product.html">Dress Shoes</a>
-                                            </h2>
-
-                                            <span class="product-qty">Qty: 4</span>
-                                        </div>
-                                    </td>
-                                    <td class="price-col">$7.90</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div><!-- End #order-cart-section -->
-                    </div><!-- End .order-summary -->
-                </div><!-- End .col-lg-4 -->
-            </div><!-- End .row -->
-
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="checkout-steps-action">
-                        <a href="checkout-review.html" class="btn btn-primary float-right">NEXT</a>
-                    </div><!-- End .checkout-steps-action -->
-                </div><!-- End .col-lg-8 -->
-            </div><!-- End .row -->
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="checkout-steps-action">
+                            <button type="submit" class="btn btn-primary float-right saveShippingAddress">{{ __('NEXT') }}</button>
+                        </div><!-- End .checkout-steps-action -->
+                    </div><!-- End .col-lg-8 -->
+                </div><!-- End .row -->
+            </form>
         </div>
     </main><!-- End .main -->
 @endsection
 
 @section('page-script')
-
+    <script src="{{ asset('backend/assets/plugin/bootstrap-select/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('forntend/assets/js/ecommerce-checkout.js') }}"></script>
 @endsection
