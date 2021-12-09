@@ -73,9 +73,10 @@ Route::get('/country', [DistrictController::class, 'getCountry']);
 Route::post('/district', [DistrictController::class, 'getDistrict']);
 Route::post('/police-station', [DistrictController::class, 'getPoliceStation']);
 Route::post('/order-area', [DistrictController::class, 'saveOrderArea']);
+Route::get('/order-area/{country},{state},{police_station}', [DistrictController::class, 'trackOrderArea']);
 Route::get('/district-info', [DistrictController::class, 'getDistrictInfo']);
 
-Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'verified'])->group(function () {
+Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'admin', 'verified'])->group(function () {
 // dashboard rout
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     // profile routs

@@ -71,4 +71,9 @@ class DistrictController extends Controller
             return $this->backWithError($th->getMessage());
         }
     }
+
+    public function trackOrderArea(CountryList $country, DistrictList $state, ThanaList $police_station)
+    {
+       return response()->json(['country'=>$country, 'state'=>$state, 'police_station'=>$police_station]);
+    }
 }

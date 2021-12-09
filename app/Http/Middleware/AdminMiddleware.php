@@ -18,12 +18,15 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next)
     {
 //        return $next($request);
-        if (Auth::check() && Auth::user()->user_type == 1){
-            return $next($request);
-        }else if (Auth::check() && Auth::user()->user_type == 2){
+        if (Auth::check() && !Auth::user()->hasRole('customer')){
             return $next($request);
         }else {
-            abort(403);
+//            abort(403);
+            $notification = [
+                'message' => 'Sorry no route found.',
+                'alert-type' => 'error'
+            ];
+            return back()->with($notification);
         }
     }
 }

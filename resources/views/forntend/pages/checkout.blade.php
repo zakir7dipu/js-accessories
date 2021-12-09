@@ -26,7 +26,7 @@
                     <span>{{ __('Review & Payments') }}</span>
                 </li>
             </ul>
-            <form action="javascript:void(0)" method="post" id="checkoutForm">
+            <form action="javascript:void(0)" class="d-none" method="post" id="checkoutForm">
                 @csrf
                 <div class="row">
                     <div class="col-lg-8">
@@ -98,50 +98,7 @@
                     </div><!-- End .col-lg-8 -->
 
                     <div class="col-lg-4">
-                        <div class="order-summary">
-                            <h3>{{ __('Summary') }}</h3>
-                            <h4>
-                                <a data-toggle="collapse" href="#order-cart-section" class="collapsed" role="button" aria-expanded="false" aria-controls="order-cart-section">{{ count($carts). __(' products in Cart') }}</a>
-                            </h4>
-
-                            <div class="collapse" id="order-cart-section">
-                                <table class="table table-mini-cart">
-                                    <tbody>
-                                    @foreach($carts as $cart)
-                                        <tr>
-                                            <td class="product-col">
-                                                <figure class="product-image-container">
-                                                    <a href="{{ route('single-product',$cart->options['slug']) }}" class="product-image">
-                                                        <img src="{{ $cart->options['image'] }}" alt="product">
-                                                    </a>
-                                                </figure>
-                                                <div>
-                                                    <h2 class="product-title">
-                                                        <a href="{{ route('single-product',$cart->options['slug']) }}">{{ $cart->name }}</a>
-                                                    </h2>
-
-                                                    <span class="product-qty">{{ __('Qty: ').$cart->qty }}</span>
-                                                </div>
-                                            </td>
-                                            <td class="price-col">
-                                                {{ $cart->subtotal() }}
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    <tr>
-                                        <td class="product-col">
-                                            <div>
-                                                <h2 class="product-title">
-                                                    {{ __('Total') }}
-                                                </h2>
-                                            </div>
-                                        </td>
-                                        <td class="price-col">{{ $cartTotal }}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div><!-- End #order-cart-section -->
-                        </div><!-- End .order-summary -->
+                        @include('forntend.pages.checkout.summary')
                     </div><!-- End .col-lg-4 -->
                 </div><!-- End .row -->
 
@@ -153,6 +110,145 @@
                     </div><!-- End .col-lg-8 -->
                 </div><!-- End .row -->
             </form>
+
+            <div class="row" id="reviewCheckout">
+                <div class="col-lg-4">
+                    @include('forntend.pages.checkout.summary')
+                </div><!-- End .col-lg-4 -->
+
+                <div class="col-lg-8 order-lg-first">
+                    <ul class="checkout-steps">
+                        <li>
+                            <h2 class="step-title">{{ __('Shipping Address') }}</h2>
+
+                            <div class="shipping-step-addresses">
+                                <div class="shipping-address-box active">
+{{--                                    <address>--}}
+{{--                                        Desmond Mason <br>--}}
+{{--                                        123 Street Name, City Name <br>--}}
+{{--                                        Los Angeles, California 03100 <br>--}}
+{{--                                        United States <br>--}}
+{{--                                        (123) 456-7890 <br>--}}
+{{--                                    </address>--}}
+                                </div><!-- End .shipping-address-box -->
+
+                            </div><!-- End .shipping-step-addresses -->
+                            <a href="javascript:void (0)" class="btn btn-sm btn-outline-secondary btn-new-address">{{ __('New Address') }}</a>
+                        </li>
+                    </ul>
+                    <div class="checkout-payment">
+                        <h2 class="step-title">{{ __('Payment Method') }}:</h2>
+
+                        <h4>Check / Money order</h4>
+
+                        <div class="form-group-custom-control">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="change-bill-address" value="1">
+                                <label class="custom-control-label" for="change-bill-address">My billing and shipping address are the same</label>
+                            </div><!-- End .custom-checkbox -->
+                        </div><!-- End .form-group -->
+
+                        <div id="checkout-shipping-address">
+                            <address>
+                                Desmond Mason <br>
+                                123 Street Name, City, USA <br>
+                                Los Angeles, California 03100 <br>
+                                United States <br>
+                                (123) 456-7890
+                            </address>
+                        </div><!-- End #checkout-shipping-address -->
+
+                        <div id="new-checkout-address" class="show">
+                            <form action="#">
+                                <div class="form-group required-field">
+                                    <label>First Name </label>
+                                    <input type="text" class="form-control" required>
+                                </div><!-- End .form-group -->
+
+                                <div class="form-group required-field">
+                                    <label>Last Name </label>
+                                    <input type="text" class="form-control" required>
+                                </div><!-- End .form-group -->
+
+                                <div class="form-group">
+                                    <label>Company </label>
+                                    <input type="text" class="form-control">
+                                </div><!-- End .form-group -->
+
+                                <div class="form-group required-field">
+                                    <label>Street Address </label>
+                                    <input type="text" class="form-control" required>
+                                    <input type="text" class="form-control" required>
+                                </div><!-- End .form-group -->
+
+                                <div class="form-group required-field">
+                                    <label>City  </label>
+                                    <input type="text" class="form-control" required>
+                                </div><!-- End .form-group -->
+
+                                <div class="form-group">
+                                    <label>State/Province</label>
+                                    <div class="select-custom">
+                                        <select class="form-control">
+                                            <option value="CA">California</option>
+                                            <option value="TX">Texas</option>
+                                        </select>
+                                    </div><!-- End .select-custom -->
+                                </div><!-- End .form-group -->
+
+                                <div class="form-group required-field">
+                                    <label>Zip/Postal Code </label>
+                                    <input type="text" class="form-control" required>
+                                </div><!-- End .form-group -->
+
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    <div class="select-custom">
+                                        <select class="form-control">
+                                            <option value="USA">United States</option>
+                                            <option value="Turkey">Turkey</option>
+                                            <option value="China">China</option>
+                                            <option value="Germany">Germany</option>
+                                        </select>
+                                    </div><!-- End .select-custom -->
+                                </div><!-- End .form-group -->
+
+                                <div class="form-group required-field">
+                                    <label>Phone Number </label>
+                                    <div class="form-control-tooltip">
+                                        <input type="tel" class="form-control" required>
+                                        <span class="input-tooltip" data-toggle="tooltip" title="For delivery questions." data-placement="right"><i class="icon-question-circle"></i></span>
+                                    </div><!-- End .form-control-tooltip -->
+                                </div><!-- End .form-group -->
+
+                                <div class="form-group-custom-control">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="address-save">
+                                        <label class="custom-control-label" for="address-save">Save in Address book</label>
+                                    </div><!-- End .custom-checkbox -->
+                                </div><!-- End .form-group -->
+                            </form>
+                        </div><!-- End #new-checkout-address -->
+
+                        <div class="clearfix">
+                            <a href="#" class="btn btn-primary float-right">Place Order</a>
+                        </div><!-- End .clearfix -->
+                    </div><!-- End .checkout-payment -->
+
+                    <div class="checkout-discount">
+                        <h4>
+                            <a data-toggle="collapse" href="#checkout-discount-section" class="collapsed" role="button" aria-expanded="false" aria-controls="checkout-discount-section">Apply Discount Code</a>
+                        </h4>
+
+                        <div class="collapse" id="checkout-discount-section">
+                            <form action="#">
+                                <input type="text" class="form-control form-control-sm" placeholder="Enter discount code"  required>
+                                <button class="btn btn-sm btn-outline-secondary" type="submit">Apply Discount</button>
+                            </form>
+                        </div><!-- End .collapse -->
+                    </div><!-- End .checkout-discount -->
+                </div><!-- End .col-lg-8 -->
+            </div><!-- End .row -->
         </div>
     </main><!-- End .main -->
 @endsection

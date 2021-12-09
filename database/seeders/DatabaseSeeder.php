@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
 //        $this->call(AdvertisementSeeder::class);
 //        $this->call(PagesSeeder::class);
 //        $this->call(SocialMediaLinkSeeder::class);
-        $this->call(CountryListSeeder::class);
+//        $this->call(CountryListSeeder::class);
 //        $this->call(DistrictListSeeder::class);
 //        $this->call(AttributeSeeder::class);
 //        $this->call(CurrencySeeder::class);

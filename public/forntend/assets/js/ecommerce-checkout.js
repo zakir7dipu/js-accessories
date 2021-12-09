@@ -1,16 +1,40 @@
 (function ($) {
     "use script";
-    localStorage.removeItem('sipping_address');
+    // localStorage.removeItem('sipping_address');
     $('#policeStation').selectpicker();
     $('#state').selectpicker();
     $('#country').selectpicker();
 
     let myForm = document.getElementById('checkoutForm');
     let progressStatus = document.querySelector('.checkout-progress-bar');
+    let paymentAndReview = document.getElementById('reviewCheckout');
     progressStatus.querySelectorAll('.progressBar')[0].classList.remove('active');
 
     const reviewSippingAddress = () => {
+        myForm.classList.add('d-none');
+        paymentAndReview.classList.remove('d-none');
         progressStatus.querySelectorAll('.progressBar')[0].classList.add('active');
+        let savedAddress = getSippingAddress();
+        $.ajax({
+            type: 'get',
+            url: `/order-area/${savedAddress.country},${savedAddress.state},${savedAddress.police_station}`,
+            success: function (data) {
+                Object.assign(savedAddress, {country: data.country.name, state: data.state.name, police_station:data.police_station.name});
+                let viewShipping = paymentAndReview.querySelector('.shipping-address-box.active');
+                let address = document.createElement('address');
+                address.innerHTML = `${savedAddress.name} <br> ${savedAddress.phone} <br> ${savedAddress.company_name} <br> ${savedAddress.address} <br> ${savedAddress.police_station}, ${savedAddress.state} <br> ${savedAddress.country}`;
+                viewShipping.appendChild(address);
+            }
+        });
+    };
+
+    const shippingAddressForm = () => {
+        myForm.classList.remove('d-none');
+        paymentAndReview.classList.add('d-none');
+    };
+
+    const getSippingAddress = () => {
+        return JSON.parse(localStorage.getItem('sipping_address'));
     };
 
     myForm.addEventListener('submit', (eveny)=>{
@@ -104,10 +128,20 @@
         if (shippingAddress.name != '' && shippingAddress.address != '' && shippingAddress.police_station != '' && shippingAddress.state != '' && shippingAddress.post_code != '' && shippingAddress.country != '' && shippingAddress.phone != ''){
             localStorage.setItem('sipping_address', JSON.stringify(shippingAddress));
             toastr.success(`Step one has been completed`);
+            reviewSippingAddress();
         }else {
             return;
         }
 
     });
 
+    const showPage = () => {
+        if (getSippingAddress()){
+            reviewSippingAddress();
+        }else {
+            shippingAddressForm();
+        }
+    };
+
+    showPage();
 })(jQuery);
