@@ -131,7 +131,6 @@ class AppSettingsController extends Controller
                 $generalSettings->update($cleanValues);
             }
 
-            //asdasd
             $env = base_path('.env');
 
             if (file_exists($env)) {
