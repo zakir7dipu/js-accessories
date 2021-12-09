@@ -92,6 +92,7 @@
                         <li><a href="{{ route('admin.settings.api') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('API Settings') }}</span></a></li>
                         <li><a href="{{ route('admin.settings.social-media-link') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Social Media Link Settings') }}</span></a></li>
                         <li><a href="{{ route('admin.settings.order-index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Order Settings') }}</span></a></li>
+                        <li><a href="javascript:void (0)" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Payment Settings') }}</span></a></li>
                     </ul>
                 </li>
                 <!-- NAV DIVIDER -->
