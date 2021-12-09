@@ -123,15 +123,8 @@
 
                             <div class="shipping-step-addresses">
                                 <div class="shipping-address-box active">
-{{--                                    <address>--}}
-{{--                                        Desmond Mason <br>--}}
-{{--                                        123 Street Name, City Name <br>--}}
-{{--                                        Los Angeles, California 03100 <br>--}}
-{{--                                        United States <br>--}}
-{{--                                        (123) 456-7890 <br>--}}
-{{--                                    </address>--}}
-                                </div><!-- End .shipping-address-box -->
 
+                                </div><!-- End .shipping-address-box -->
                             </div><!-- End .shipping-step-addresses -->
                             <a href="javascript:void (0)" class="btn btn-sm btn-outline-secondary btn-new-address">{{ __('New Address') }}</a>
                         </li>

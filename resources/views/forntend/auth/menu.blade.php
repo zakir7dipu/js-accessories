@@ -4,17 +4,10 @@
 
         <ul class="list">
             <li class="active"><a href="{{ route('client.dashboard') }}">{{ __('Dashboard') }} </a></li>
-            <li><a href="#">Account Information</a></li>
-            <li><a href="#">Address Book</a></li>
-            <li><a href="#">My Orders</a></li>
-            <li><a href="#">Billing Agreements</a></li>
-            <li><a href="#">Recurring Profiles</a></li>
-            <li><a href="#">My Product Reviews</a></li>
-            <li><a href="#">My Tags</a></li>
-            <li><a href="#">My Wishlist</a></li>
-            <li><a href="#">My Applications</a></li>
-            <li><a href="#">Newsletter Subscriptions</a></li>
-            <li><a href="#">My Downloadable Products</a></li>
+            <li><a href="javascript:void(0)">Account Information</a></li>
+            <li><a href="javascript:void(0)">Address Book</a></li>
+            <li><a href="javascript:void(0)">My Orders</a></li>
+            <li><a href="javascript:void(0)">My Downloadable Products</a></li>
             <li>
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                 document.getElementById('logOutForm').submit();">

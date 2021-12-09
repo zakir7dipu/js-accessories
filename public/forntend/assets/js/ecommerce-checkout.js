@@ -8,7 +8,8 @@
     let myForm = document.getElementById('checkoutForm');
     let progressStatus = document.querySelector('.checkout-progress-bar');
     let paymentAndReview = document.getElementById('reviewCheckout');
-    progressStatus.querySelectorAll('.progressBar')[0].classList.remove('active');
+    let newAddress = document.querySelector('.btn-new-address');
+    // progressStatus.querySelectorAll('.progressBar')[0].classList.remove('active');
 
     const reviewSippingAddress = () => {
         myForm.classList.add('d-none');
@@ -142,6 +143,12 @@
             shippingAddressForm();
         }
     };
+
+    newAddress.addEventListener('click', (event)=>{
+        event.preventDefault();
+        localStorage.removeItem('sipping_address');
+        showPage();
+    });
 
     showPage();
 })(jQuery);
