@@ -4,6 +4,7 @@ namespace App\Http\Controllers\GuestView;
 
 use App\Http\Controllers\Controller;
 use App\Models\Advertisement;
+use App\Models\AttributeItem;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
 use App\Models\Category;
@@ -12,6 +13,9 @@ use App\Models\Pages;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class GuestController extends Controller
 {
@@ -440,5 +444,44 @@ class GuestController extends Controller
             return response()->json([]);
         }
 
+    }
+
+    public function searchByAttribute(Request $request)
+    {
+        $this->validate($request, [
+            'quarry_string' => ['required', 'string'],
+            'quarry_element' => ['required']
+        ]);
+        $quarryString = clean($request->quarry_string);
+        $quarryElement = clean($request->quarry_element);
+        $category = Category::find($quarryElement);
+        try {
+            $items = AttributeItem::where('name', 'LIKE', "%$quarryString%")->get();
+            $data = [];
+            foreach ($items as $item){
+                if ($category->id === $item->product->category_id){
+                    $data[] =  $item->product;
+                }
+            }
+            $products = $this->paginate($data, 12);
+            $advertise = Advertisement::all()->random(1)->first();
+            $carts = Cart::instance('shopping_cart')->content();
+            $cartTotal = Cart::instance('shopping_cart')->subtotal();
+            return view('forntend.pages.category-element', compact('category', 'products', 'advertise', 'carts', 'cartTotal'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     * to make pagination for custom array
+     * @var array
+     */
+    public function paginate($items, $perPage, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 }

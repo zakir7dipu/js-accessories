@@ -1,5 +1,6 @@
 (function ($) {
     "use script";
+    // header search
     const headerSearchBox = document.getElementById('productSearchByCategory');
     const headerSearchBoxCategory = headerSearchBox.querySelector('select');
     const productSearchBoxAutoCompleteList = headerSearchBox.querySelector('#productSearchList');
@@ -24,4 +25,15 @@
             productSearchBoxAutoCompleteList.appendChild(option);
         });
     }
+
+    // search by attribute
+    const searchByAttributeBox = document.querySelector('#searchByAttributeBox');
+    const searchByAttributeItems = document.querySelectorAll('.attributeItem');
+    Array.from(searchByAttributeItems).map((item, key) => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            searchByAttributeBox.querySelector('input[name="quarry_string"]').value = item.innerText;
+            searchByAttributeBox.submit();
+        });
+    });
 })(jQuery);

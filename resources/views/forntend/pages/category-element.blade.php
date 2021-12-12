@@ -45,29 +45,27 @@
 
                     <div class="sidebar-overlay"></div>
                     <aside class="toolbox-left sidebar-shop mobile-sidebar">
-                        <div class="toolbox-item toolbox-sort select-custom">
-                            <a class="sort-menu-trigger" href="#">Size</a>
-                            <ul class="sort-list">
-                                <li>Extra Large</li>
-                                <li>Large</li>
-                                <li>Medium</li>
-                                <li>Small</li>
-                            </ul>
-                        </div><!-- End .toolbox-item -->
+                        @if(count($allSizes) > 0)
+                            <div class="toolbox-item toolbox-sort select-custom">
+                                <a class="sort-menu-trigger" href="#">Size</a>
+                                <ul class="sort-list">
+                                    @foreach($allSizes as $size)
+                                        <li class="attributeItem">{{ $size }}</li>
+                                    @endforeach
+                                </ul>
+                            </div><!-- End .toolbox-item -->
+                        @endif
 
-                        <div class="toolbox-item toolbox-sort select-custom">
-                            <a class="sort-menu-trigger" href="#">Color</a>
-                            <ul class="sort-list">
-                                <li>Black</li>
-                                <li>Blue</li>
-                                <li>Brown</li>
-                                <li>Green</li>
-                                <li>Indigo</li>
-                                <li>Light Blue</li>
-                                <li>Red</li>
-                                <li>Yellow</li>
-                            </ul>
-                        </div><!-- End .toolbox-item -->
+                        @if(count($allColors))
+                            <div class="toolbox-item toolbox-sort select-custom">
+                                <a class="sort-menu-trigger" href="#">Color</a>
+                                <ul class="sort-list">
+                                    @foreach($allColors as $color)
+                                        <li class="attributeItem">{{ $color }}</li>
+                                    @endforeach
+                                </ul>
+                            </div><!-- End .toolbox-item -->
+                        @endif
 
                         <div class="toolbox-item toolbox-sort price-sort select-custom">
                             <a class="sort-menu-trigger" href="#">Price</a>
@@ -82,6 +80,11 @@
                                 </div>
                             </form>
                         </div><!-- End .toolbox-item -->
+                            <form action="{{ route('search.attribute') }}" method="get" class="d-none" id="searchByAttributeBox">
+                                <input type="hidden" name="quarry_string">
+                                <input type="hidden" name="quarry_element" value="{{ $category->id }}">
+
+                            </form>
 
                     </aside><!-- End .toolbox-left -->
 
@@ -100,7 +103,7 @@
 
                     <div class="toolbox-item ml-lg-auto">
                         <div class="toolbox-item toolbox-show show-count">
-                            <label>{{ __('Showing ').($products->count() > 12 ? '12':$products->count()).__(' of ').$products->count().__(' results') }}</label>
+                            <label>{{ __('Showing ').(count($products) > 12 ? '12':count($products)).__(' of ').count($products).__(' results') }}</label>
                         </div><!-- End .toolbox-item -->
                     </div>
                 </nav>
@@ -110,7 +113,7 @@
                 <nav class="toolbox toolbox-pagination">
 
                     <div class="toolbox-item toolbox-show">
-                        <label>{{ __('Showing ').($products->count() > 12 ? '12':$products->count()).__(' of ').$products->count().__(' results') }}</label>
+                        <label>{{ __('Showing ').(count($products) > 12 ? '12':count($products)).__(' of ').count($products).__(' results') }}</label>
                     </div><!-- End .toolbox-item -->
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Advertisement;
+use App\Models\Attribute;
 use App\Models\BlogPostCommentSettings;
 use App\Models\Category;
 use App\Models\CetegorySection;
@@ -56,6 +57,20 @@ class Controller extends BaseController
             ->where('status', true)
             ->random(1);
         $commentSetting = BlogPostCommentSettings::first();
+        $size = Attribute::where('name', 'size')->first();
+        $sizeDatas = $size->items;
+        $allSizes = [];
+        foreach ($sizeDatas as $item){
+            $allSizes[] = ucwords($item->name);
+        }
+        $allSizes = array_unique($allSizes);
+        $color = Attribute::where('name', 'color')->first();
+        $colorDatas = $color->items;
+        $allColors = [];
+        foreach ($colorDatas as $item){
+            $allColors[] = ucwords($item->name);
+        }
+        $allColors = array_unique($allColors);
 
         View::share('districts', $districts);
         View::share('generalSettings', $generalSettings);
@@ -81,6 +96,8 @@ class Controller extends BaseController
         View::share('contact', $contact);
         View::share('popupAd', $popupAd);
         View::share('commentSetting', $commentSetting);
+        View::share('allSizes', $allSizes);
+        View::share('allColors', $allColors);
     }
     public function backWithError($message)
     {

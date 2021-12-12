@@ -72,6 +72,7 @@ Route::prefix('/my-cart')->as('cart.')->group(function (){
 Route::prefix('/search')->as('search.')->group(function (){
     Route::get('/', [GuestController::class, 'headerProductSearch'])->name('header');
     Route::get('/category/{category?}', [GuestController::class, 'searchCategory'])->name('category');
+    Route::get('/attribute', [GuestController::class, 'searchByAttribute'])->name('attribute');
 });
 
 //district-info
