@@ -89,11 +89,11 @@
                                                 </span>
                                 </div><!-- End .product-details -->
 
-                                <figure class="product-image-container">
+                                <figure class="product-image-container" data-role="{{ $cart->rowId }}">
                                     <a href="javascript:void(0)" class="product-image">
                                         <img src="{{ asset($cart->options['image']) }}" alt="product">
                                     </a>
-                                    <a href="javascript:void(0)" class="btn-remove cartRemoveBtn" title="Remove Product" data-role="{{ $cart->rowId }}"><i class="icon-retweet"></i></a>
+{{--                                    <a href="javascript:void(0)" class="btn-remove cartRemoveBtn" title="Remove Product"><i class="icon-retweet"></i></a>--}}
                                 </figure>
                             </div><!-- End .product -->
                             @endforeach

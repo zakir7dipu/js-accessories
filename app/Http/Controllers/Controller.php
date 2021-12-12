@@ -139,7 +139,6 @@ class Controller extends BaseController
 
     public function productFeature()
     {
-
         return $array = [
             "Default sorting",
             "Featured sorting",

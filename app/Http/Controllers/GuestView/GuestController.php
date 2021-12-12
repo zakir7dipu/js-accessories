@@ -410,7 +410,8 @@ class GuestController extends Controller
     public function cartDestroy()
     {
         try {
-            dd('ok');
+            Cart::instance('shopping_cart')->destroy();
+            return $this->backWithSuccess('Cart list has been cleared successfully...');
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
