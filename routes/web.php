@@ -68,6 +68,12 @@ Route::prefix('/my-cart')->as('cart.')->group(function (){
     Route::delete('/destroy', [GuestController::class, 'cartDestroy'])->name('destroy');
 });
 
+// product search
+Route::prefix('/search')->as('search.')->group(function (){
+    Route::get('/', [GuestController::class, 'headerProductSearch'])->name('header');
+    Route::get('/category/{category?}', [GuestController::class, 'searchCategory'])->name('category');
+});
+
 //district-info
 Route::get('/country', [DistrictController::class, 'getCountry']);
 Route::post('/district', [DistrictController::class, 'getDistrict']);

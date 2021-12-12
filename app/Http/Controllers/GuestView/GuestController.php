@@ -410,4 +410,35 @@ class GuestController extends Controller
             return $this->backWithError($th->getMessage());
         }
     }
+
+    // search
+    public function headerProductSearch(Request $request)
+    {
+        $this->validate($request, [
+            'quarry_string' => ['required', 'string'],
+            'quarry_element' => ['required']
+        ]);
+        $quarryString = clean($request->quarry_string);
+        $quarryElement = clean($request->quarry_element);
+        $category = Category::find($quarryElement);
+        try {
+            $products = $category->products()->where('name', 'LIKE', "%$quarryString%")->orderBy('name','ASC')->paginate(12);
+            $advertise = Advertisement::all()->random(1)->first();
+            $carts = Cart::instance('shopping_cart')->content();
+            $cartTotal = Cart::instance('shopping_cart')->subtotal();
+            return view('forntend.pages.category-element', compact('category', 'products', 'advertise', 'carts', 'cartTotal'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function searchCategory(Category $category = null)
+    {
+        if ($category){
+            return response()->json($category->products);
+        }else{
+            return response()->json([]);
+        }
+
+    }
 }

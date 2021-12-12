@@ -12,12 +12,13 @@
 
         <div class="header-center">
             <div class="header-search">
-                <a href="#" class="search-toggle" role="button"><i class="icon-magnifier"></i></a>
-                <form action="#" method="get">
+                <a href="javascript:void(0)" class="search-toggle" role="button"><i class="icon-magnifier"></i></a>
+                <form action="{{ route('search.header') }}" method="get" id="productSearchByCategory">
                     <div class="header-search-wrapper">
-                        <input type="search" class="form-control" name="quarry" id="q" placeholder="I'm searching for..." required>
+                        <input type="search" class="form-control" name="quarry_string" id="q" placeholder="I'm searching for..." list="productSearchList" required>
+                        <datalist id="productSearchList"></datalist>
                         <div class="select-custom">
-                            <select id="cat" name="category">
+                            <select id="cat" name="quarry_element" id="productSearchCategory" datasrc="{{ route('search.category') }}">
                                 <option disabled selected value="{{ null }}">{{ __('Select One') }}</option>
                                 @foreach($parentCategories as $key => $parentCategory)
                                     <optgroup label="{{ $parentCategory->name }}">
