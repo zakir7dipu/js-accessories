@@ -13,9 +13,6 @@ use App\Models\Pages;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class GuestController extends Controller
 {
@@ -526,17 +523,5 @@ class GuestController extends Controller
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
-    }
-
-    /**
-     * The attributes that are mass assignable.
-     * to make pagination for custom array
-     * @var array
-     */
-    public function paginate($items, $perPage, $page = null, $options = [])
-    {
-        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        $items = $items instanceof Collection ? $items : Collection::make($items);
-        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 }
