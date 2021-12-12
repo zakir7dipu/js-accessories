@@ -89,10 +89,11 @@ class GuestController extends Controller
         try {
             $category = Category::where('slug', $slug)->first();
             $products = $category->products()->paginate(12);
+            $productFeatures = $this->productFeature();
             $advertise = Advertisement::all()->random(1)->first();
             $carts = Cart::instance('shopping_cart')->content();
             $cartTotal = Cart::instance('shopping_cart')->subtotal();
-            return view('forntend.pages.category-element', compact('category', 'products', 'advertise', 'carts', 'cartTotal'));
+            return view('forntend.pages.category-element', compact('category', 'products', 'productFeatures', 'advertise', 'carts', 'cartTotal'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
@@ -427,10 +428,11 @@ class GuestController extends Controller
         $category = Category::find($quarryElement);
         try {
             $products = $category->products()->where('name', 'LIKE', "%$quarryString%")->orderBy('name','ASC')->paginate(12);
+            $productFeatures = $this->productFeature();
             $advertise = Advertisement::all()->random(1)->first();
             $carts = Cart::instance('shopping_cart')->content();
             $cartTotal = Cart::instance('shopping_cart')->subtotal();
-            return view('forntend.pages.category-element', compact('category', 'products', 'advertise', 'carts', 'cartTotal'));
+            return view('forntend.pages.category-element', compact('category', 'products', 'advertise', 'carts', 'cartTotal', 'productFeatures'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
@@ -464,10 +466,62 @@ class GuestController extends Controller
                 }
             }
             $products = $this->paginate($data, 12);
+            $productFeatures = $this->productFeature();
             $advertise = Advertisement::all()->random(1)->first();
             $carts = Cart::instance('shopping_cart')->content();
             $cartTotal = Cart::instance('shopping_cart')->subtotal();
-            return view('forntend.pages.category-element', compact('category', 'products', 'advertise', 'carts', 'cartTotal'));
+            return view('forntend.pages.category-element', compact('category', 'products', 'advertise', 'carts', 'cartTotal', 'productFeatures'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function searchByPrice(Request $request)
+    {
+        $this->validate($request, [
+            'quarry_element' => ['required'],
+            'min_price' => ['required'],
+            'max_price' => ['required'],
+        ]);
+        $minPrice = clean($request->min_price);
+        $maxPrice = clean($request->max_price);
+        $quarryElement = clean($request->quarry_element);
+        $category = Category::find($quarryElement);
+        try {
+
+            $products = $category->products()->whereBetween('price', [$minPrice,$maxPrice])->orderBy('name','ASC')->paginate(12);
+            $productFeatures = $this->productFeature();
+            $advertise = Advertisement::all()->random(1)->first();
+            $carts = Cart::instance('shopping_cart')->content();
+            $cartTotal = Cart::instance('shopping_cart')->subtotal();
+            return view('forntend.pages.category-element', compact('category', 'products', 'advertise', 'carts', 'cartTotal', 'productFeatures'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function searchByFeature(Request $request)
+    {
+        $this->validate($request, [
+            'quarry_element' => ['required'],
+            'orderby' => ['required']
+        ]);
+        $orderby = clean($request->orderby);
+        $orderby = str_replace(" sorting", '', $request->orderby);
+        $orderby = str_replace(" ", '_', strtolower($orderby));
+        $quarryElement = clean($request->quarry_element);
+        $category = Category::find($quarryElement);
+        try {
+            if ($orderby === "default"){
+                $products = $category->products()->orderBy('name','ASC')->paginate(12);
+            }else{
+                $products = $category->products()->where($orderby, true)->orderBy('name','ASC')->paginate(12);
+            }
+            $productFeatures = $this->productFeature();
+            $advertise = Advertisement::all()->random(1)->first();
+            $carts = Cart::instance('shopping_cart')->content();
+            $cartTotal = Cart::instance('shopping_cart')->subtotal();
+            return view('forntend.pages.category-element', compact('category', 'products', 'advertise', 'carts', 'cartTotal', 'productFeatures'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }

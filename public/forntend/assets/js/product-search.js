@@ -24,7 +24,7 @@
             option.innerText = item.name;
             productSearchBoxAutoCompleteList.appendChild(option);
         });
-    }
+    };
 
     // search by attribute
     const searchByAttributeBox = document.querySelector('#searchByAttributeBox');
@@ -36,4 +36,12 @@
             searchByAttributeBox.submit();
         });
     });
+
+    // search by feature
+    const searchByFeatureBox = document.querySelector('#searchByFeatureBox');
+    const searchByFeatureBoxItem = searchByFeatureBox.querySelector('select');
+    searchByFeatureBoxItem.addEventListener('change', (e) => {
+        e.preventDefault();
+        searchByFeatureBox.submit();
+    })
 })(jQuery);

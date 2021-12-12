@@ -30,23 +30,24 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function __construct(){
+    public function __construct()
+    {
         $generalSettings = GeneralSettings::first();
         $districts = DistrictList::all();
         $sliders = Slider::where('status', true)->get();
         $featureProductSection = FeatureProduct::first();
-        $featureProducts = Product::where('featured', true)->take($featureProductSection?$featureProductSection->number_of_content:6)->get();
+        $featureProducts = Product::where('featured', true)->take($featureProductSection ? $featureProductSection->number_of_content : 6)->get();
         $categorySection = CetegorySection::first();
-        $sectionCategories = Category::where(['parent_id' => null, 'status' => true])->orderBy('id', 'ASC')->take($categorySection?$categorySection->number_of_content:6)->get();
+        $sectionCategories = Category::where(['parent_id' => null, 'status' => true])->orderBy('id', 'ASC')->take($categorySection ? $categorySection->number_of_content : 6)->get();
         $newArrivalSection = NewArrivalProductsSection::first();
-        $newArrivalProducts = Product::where('featured', true)->take($newArrivalSection?$newArrivalSection->number_of_content:6)->get();
+        $newArrivalProducts = Product::where('featured', true)->take($newArrivalSection ? $newArrivalSection->number_of_content : 6)->get();
         $socialMediaLinks = SocialMediaLink::all();
 
         $productFilterGallerySection = ProductFilterGallerySection::first();
-        $bestSellers = Product::where(['bestseller' => true, 'status' => true])->take($productFilterGallerySection?$productFilterGallerySection->number_of_content:6)->get();
-        $populars = Product::where(['popular' => true, 'status' => true])->take($productFilterGallerySection?$productFilterGallerySection->number_of_content:6)->get();
-        $trendings = Product::where(['trending' => true, 'status' => true])->take($productFilterGallerySection?$productFilterGallerySection->number_of_content:6)->get();
-        $discounts = Product::where('status', true)->where('discount', '!=', null)->take($productFilterGallerySection?$productFilterGallerySection->number_of_content:6)->get();
+        $bestSellers = Product::where(['bestseller' => true, 'status' => true])->take($productFilterGallerySection ? $productFilterGallerySection->number_of_content : 6)->get();
+        $populars = Product::where(['popular' => true, 'status' => true])->take($productFilterGallerySection ? $productFilterGallerySection->number_of_content : 6)->get();
+        $trendings = Product::where(['trending' => true, 'status' => true])->take($productFilterGallerySection ? $productFilterGallerySection->number_of_content : 6)->get();
+        $discounts = Product::where('status', true)->where('discount', '!=', null)->take($productFilterGallerySection ? $productFilterGallerySection->number_of_content : 6)->get();
         $infoSection = InfoSection::take(3)->get();
         $suppliers = Supplier::where('status', true)->get();
         $parentCategories = Category::where(['parent_id' => null, 'status' => true])->orderBy('name', 'ASC')->get();
@@ -60,14 +61,14 @@ class Controller extends BaseController
         $size = Attribute::where('name', 'size')->first();
         $sizeDatas = $size->items;
         $allSizes = [];
-        foreach ($sizeDatas as $item){
+        foreach ($sizeDatas as $item) {
             $allSizes[] = ucwords($item->name);
         }
         $allSizes = array_unique($allSizes);
         $color = Attribute::where('name', 'color')->first();
         $colorDatas = $color->items;
         $allColors = [];
-        foreach ($colorDatas as $item){
+        foreach ($colorDatas as $item) {
             $allColors[] = ucwords($item->name);
         }
         $allColors = array_unique($allColors);
@@ -99,6 +100,7 @@ class Controller extends BaseController
         View::share('allSizes', $allSizes);
         View::share('allColors', $allColors);
     }
+
     public function backWithError($message)
     {
         $notification = [
@@ -134,4 +136,18 @@ class Controller extends BaseController
         ];
         return redirect()->route($route)->with($notification);
     }
+
+    public function productFeature()
+    {
+
+        return $array = [
+            "Default sorting",
+            "Featured sorting",
+            "New Arrival sorting",
+            "Popular sorting",
+            "Bestseller sorting",
+            "Trending sorting",
+        ];
+    }
 }
+

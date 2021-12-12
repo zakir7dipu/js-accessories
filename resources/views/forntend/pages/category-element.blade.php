@@ -69,12 +69,13 @@
 
                         <div class="toolbox-item toolbox-sort price-sort select-custom">
                             <a class="sort-menu-trigger" href="#">Price</a>
-                            <form class="filter-price-form">
-                                <div>Price: <span>$55.00</span> — <span>$111.00</span></div>
+                            <form action="{{ route('search.price') }}" method="get" class="filter-price-form">
+                                <div>Price: <span>{{ $products->min('price') }}</span> — <span>{{ $products->max('price') }}</span></div>
                                 <label>Min price</label>
-                                <input class="input-price" name="min_price"/>
+                                <input type="hidden" name="quarry_element" value="{{ $category->id }}">
+                                <input type="number" step="0.01" class="input-price" name="min_price"/>
                                 <label>Max price</label>
-                                <input class="input-price" name="max_price"/>
+                                <input type="number" step="0.01" class="input-price" name="max_price"/>
                                 <div class="filter-price-action mt-0">
                                     <button type="submit" class="btn btn-primary">Filter</button>
                                 </div>
@@ -83,21 +84,20 @@
                             <form action="{{ route('search.attribute') }}" method="get" class="d-none" id="searchByAttributeBox">
                                 <input type="hidden" name="quarry_string">
                                 <input type="hidden" name="quarry_element" value="{{ $category->id }}">
-
                             </form>
 
                     </aside><!-- End .toolbox-left -->
 
                     <div class="toolbox-item toolbox-sort">
                         <div class="select-custom">
+                            <form action="{{ route('search.feature') }}" method="get" id="searchByFeatureBox" class="form-inline mb-0">
+                                <input type="hidden" name="quarry_element" value="{{ $category->id }}">
                             <select name="orderby" class="form-control">
-                                <option value="menu_order" selected="selected">Default sorting</option>
-                                <option value="popularity">Sort by popularity</option>
-                                <option value="rating">Sort by average rating</option>
-                                <option value="date">Sort by newness</option>
-                                <option value="price">Sort by price: low to high</option>
-                                <option value="price-desc">Sort by price: high to low</option>
+                                @foreach($productFeatures as $item)
+                                    <option {{ request()->orderby === $item?'selected':'' }}>{{ $item }}</option>
+                                @endforeach
                             </select>
+                            </form>
                         </div><!-- End .select-custom -->
                     </div><!-- End .toolbox-item -->
 
