@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\GuestView\GuestController;
 use App\Http\Controllers\Api\DistrictController;
+use App\Http\Controllers\PaymentMethodInputController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -120,6 +121,12 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'admin', 'ver
         Route::get('/order-country/{country}', [AppSettingsController::class, 'orderCountryDeactivate'])->name('order-country-delete');
         Route::get('/order-state/{state}', [AppSettingsController::class, 'orderStateDeactivate'])->name('order-state-delete');
         Route::get('/order-police-station/{thana}', [AppSettingsController::class, 'orderThanaDeactivate'])->name('order-police-station-delete');
+        //payment
+        Route::prefix('/payment')->as('payment.')->group(function (){
+            Route::get('/', [AppSettingsController::class, 'paymentIndex'])->name('index');
+            Route::get('/method/{payment}', [PaymentMethodInputController::class, 'getMethodForm'])->name('method');
+            Route::post('/store/{payment}', [PaymentMethodInputController::class, 'storePayment'])->name('store');
+        });
     });
 
     //pages

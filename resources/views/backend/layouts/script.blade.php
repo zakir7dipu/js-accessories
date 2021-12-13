@@ -48,6 +48,11 @@
 <script src="{{ asset('backend/assets/js/functions.js') }}"></script>
 <script src="{{ asset('backend/assets/js/dashboard.js') }}"></script>
 <script src="{{ asset('backend/assets/js/tables-datatable.js') }}"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 
 <!-- END JAVASCRIPT ------------------------------------------------------------------------------>
 <!------------------------------------------------------------------------------------------------>

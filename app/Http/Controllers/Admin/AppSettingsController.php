@@ -13,6 +13,7 @@ use App\Models\InfoSection;
 use App\Models\NewArrivalProductsSection;
 use App\Models\Pages;
 use App\Models\PageSection;
+use App\Models\PaymentMethod;
 use App\Models\ProductFilterGallerySection;
 use App\Models\SocialMediaLink;
 use App\Models\ThanaList;
@@ -719,6 +720,20 @@ class AppSettingsController extends Controller
         try {
             $thana->update(['status' => false]);
             return $this->backWithSuccess('Deactivated successfully.');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+    /*
+    * payment settings
+    */
+    public function paymentIndex()
+    {
+        try {
+            $generalSettings = GeneralSettings::first();
+            $title = ($generalSettings?$generalSettings->site_name:'').' | Payment Settings';
+            $payments = PaymentMethod::all();
+            return view('backend.pages.settings.payment-settings', compact('title', 'generalSettings', 'payments'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
