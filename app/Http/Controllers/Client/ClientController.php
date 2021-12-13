@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\CountryList;
 use App\Models\DistrictList;
+use App\Models\PaymentMethod;
 use App\Models\ThanaList;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
@@ -43,6 +44,7 @@ class ClientController extends Controller
                 'countries' => CountryList::where('status', true)->get(),
                 'states' => DistrictList::where('status', true)->get(),
                 'policeStations' => ThanaList::where('status', true)->get(),
+                'paymentMethods' => PaymentMethod::where('status', true)->get(),
             ]);
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());

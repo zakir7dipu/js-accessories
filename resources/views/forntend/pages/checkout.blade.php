@@ -132,100 +132,14 @@
                     <div class="checkout-payment">
                         <h2 class="step-title">{{ __('Payment Method') }}:</h2>
 
-                        <h4>Check / Money order</h4>
-
-                        <div class="form-group-custom-control">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="change-bill-address" value="1">
-                                <label class="custom-control-label" for="change-bill-address">My billing and shipping address are the same</label>
-                            </div><!-- End .custom-checkbox -->
-                        </div><!-- End .form-group -->
-
-                        <div id="checkout-shipping-address">
-                            <address>
-                                Desmond Mason <br>
-                                123 Street Name, City, USA <br>
-                                Los Angeles, California 03100 <br>
-                                United States <br>
-                                (123) 456-7890
-                            </address>
-                        </div><!-- End #checkout-shipping-address -->
-
-                        <div id="new-checkout-address" class="show">
-                            <form action="#">
-                                <div class="form-group required-field">
-                                    <label>First Name </label>
-                                    <input type="text" class="form-control" required>
-                                </div><!-- End .form-group -->
-
-                                <div class="form-group required-field">
-                                    <label>Last Name </label>
-                                    <input type="text" class="form-control" required>
-                                </div><!-- End .form-group -->
-
-                                <div class="form-group">
-                                    <label>Company </label>
-                                    <input type="text" class="form-control">
-                                </div><!-- End .form-group -->
-
-                                <div class="form-group required-field">
-                                    <label>Street Address </label>
-                                    <input type="text" class="form-control" required>
-                                    <input type="text" class="form-control" required>
-                                </div><!-- End .form-group -->
-
-                                <div class="form-group required-field">
-                                    <label>City  </label>
-                                    <input type="text" class="form-control" required>
-                                </div><!-- End .form-group -->
-
-                                <div class="form-group">
-                                    <label>State/Province</label>
-                                    <div class="select-custom">
-                                        <select class="form-control">
-                                            <option value="CA">California</option>
-                                            <option value="TX">Texas</option>
-                                        </select>
-                                    </div><!-- End .select-custom -->
-                                </div><!-- End .form-group -->
-
-                                <div class="form-group required-field">
-                                    <label>Zip/Postal Code </label>
-                                    <input type="text" class="form-control" required>
-                                </div><!-- End .form-group -->
-
-                                <div class="form-group">
-                                    <label>Country</label>
-                                    <div class="select-custom">
-                                        <select class="form-control">
-                                            <option value="USA">United States</option>
-                                            <option value="Turkey">Turkey</option>
-                                            <option value="China">China</option>
-                                            <option value="Germany">Germany</option>
-                                        </select>
-                                    </div><!-- End .select-custom -->
-                                </div><!-- End .form-group -->
-
-                                <div class="form-group required-field">
-                                    <label>Phone Number </label>
-                                    <div class="form-control-tooltip">
-                                        <input type="tel" class="form-control" required>
-                                        <span class="input-tooltip" data-toggle="tooltip" title="For delivery questions." data-placement="right"><i class="icon-question-circle"></i></span>
-                                    </div><!-- End .form-control-tooltip -->
-                                </div><!-- End .form-group -->
-
-                                <div class="form-group-custom-control">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="address-save">
-                                        <label class="custom-control-label" for="address-save">Save in Address book</label>
-                                    </div><!-- End .custom-checkbox -->
-                                </div><!-- End .form-group -->
-                            </form>
-                        </div><!-- End #new-checkout-address -->
-
-                        <div class="clearfix">
-                            <a href="#" class="btn btn-primary float-right">Place Order</a>
-                        </div><!-- End .clearfix -->
+                        <div class="row p-3">
+                            @foreach($paymentMethods as $payment)
+                                <div class="col-lg-2 col-md-m col-sm-4 text-center p-4" data-toggle="tooltip" data-placement="top" title="{{ ucwords(str_replace('_', ' ', $payment->name)) }}">
+                                    <img src="{{ asset($payment->icon) }}" alt="{{ $payment->name }}" class="img img-fluid img-thumbnail w-100 cursor-pointer rounded border border-1 border-dark paymentBtn">
+                                    <h5>{{ ucwords(str_replace('_', ' ', $payment->name)) }}</h5>
+                                </div>
+                            @endforeach
+                        </div>
                     </div><!-- End .checkout-payment -->
 
                     <div class="checkout-discount">

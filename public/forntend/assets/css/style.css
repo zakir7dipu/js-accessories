@@ -9294,3 +9294,8 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     margin-bottom: 10rem !important; } }
 
 /*# sourceMappingURL=style.css.map */
+.paymentBtn{
+    max-width: 128px !important;
+    max-height: 128px !important;
+    cursor: pointer;
+}

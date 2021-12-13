@@ -3,15 +3,7 @@
 @section('title', config('app.name', 'laravel').' | '.$title)
 
 @section('page-css')
-    <style>
-        .paymentBtn{
-            max-width: 128px !important;
-            max-height: 128px !important;
-        }
-        .paymentBtn.active{
-            border: 10px solid green !important;
-        }
-    </style>
+
 @endsection
 
 @section('content')
@@ -34,7 +26,7 @@
                     <div class="card-body">
                         <div class="row p-2">
                             @foreach($payments as $payment)
-                                <div class="col-lg-2 col-md-m col-sm-4 text-center p-2" data-toggle="tooltip" data-placement="top" title="{{ ucwords(substr_replace('_', '', $payment->name)) }}">
+                                <div class="col-lg-2 col-md-m col-sm-4 text-center p-2" data-toggle="tooltip" data-placement="top" title="{{ ucwords(str_replace('_', ' ', $payment->name)) }}">
                                     <img src="{{ asset($payment->icon) }}" alt="{{ $payment->name }}" class="img img-fluid img-thumbnail w-100 cursor-pointer rounded border border-1 border-light paymentBtn {{ $payment->status?'active':'' }}" data-role="{{ route('admin.settings.payment.method', $payment->id) }}">
                                 </div>
                             @endforeach
