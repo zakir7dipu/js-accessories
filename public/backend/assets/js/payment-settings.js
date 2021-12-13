@@ -5,20 +5,17 @@
         item.addEventListener('click', (e) => {
             e.preventDefault();
             const moduleName = item.getAttribute('alt');
-            if(moduleName === 'cash_on_delivery') cashOnDeliveryModal(item);
-            else if(moduleName === 'money_transfer') moneyTransferModal();
-            else otherModal(item);
+            if(moduleName === 'money_transfer') moneyTransferModal();
+            else getForm(item, `${item.getAttribute('alt').replace('_', '')} Method`);
         });
     });
 
-    const cashOnDeliveryModal = (item) => {
+    const getForm = (item, title) => {
         $.ajax({
             type: 'get',
             url: item.getAttribute('data-role'),
             success:function (data) {
-                console.log(data);
-                let element = data;
-                createNewModel('Cash On Delivery Method', element);
+                createNewModel(title, data);
             }
         });
     };
@@ -38,10 +35,6 @@
                 },
             },
         })
-    };
-
-    const otherModal = (item) => {
-        createNewModel(`${item.getAttribute('alt').replace('_', '')} Method`, '<h1>Now ok!</h1>');
     };
 
     const createNewModel = (title, element) => {
