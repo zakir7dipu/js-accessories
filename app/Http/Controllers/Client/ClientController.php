@@ -50,4 +50,34 @@ class ClientController extends Controller
             return $this->backWithError($th->getMessage());
         }
     }
+
+    public function checkoutMethod(PaymentMethod $payment)
+    {
+        if ($payment->name === 'cash_on_delivery'){
+            return response()->json($this->cashOnDelivery($payment));
+        }
+        else if ($payment->name === "bKash"){
+            return response()->json($this->bKashPayment($payment));
+        }
+        else {
+            return response()->json($this->nagadAndRoketPayment($payment));
+        }
+    }
+
+    public function cashOnDelivery($payment)
+    {
+        return 'accept';
+    }
+
+    public function bKashPayment($payment)
+    {
+        return $output = '<form action="'.route('client.order.store').'" method="post">
+        <input type="hidden" name="_token" value="'.csrf_token().'">
+        <img src="'.($payment->content? asset($payment->content):'').'" alt="" id="modalImageShow" class="img-fluid img-thumbnail w-50" accept="image/png, image/jpeg"/>
+        <p class="mb-1 text-uppercase"><label for="methodStatus">'.__('TRX ID').'</label>: </p>
+        <div class="input-group input-group-lg mb-3 text-center">
+            <input type="text" name="trx_id" id="trxId" class="form-control">
+        </div>
+    </form>';
+    }
 }

@@ -135,7 +135,7 @@
                         <div class="row p-3">
                             @foreach($paymentMethods as $payment)
                                 <div class="col-lg-2 col-md-m col-sm-4 text-center p-4" data-toggle="tooltip" data-placement="top" title="{{ ucwords(str_replace('_', ' ', $payment->name)) }}">
-                                    <img src="{{ asset($payment->icon) }}" alt="{{ $payment->name }}" class="img img-fluid img-thumbnail w-100 cursor-pointer rounded border border-1 border-dark paymentBtn">
+                                    <img src="{{ asset($payment->icon) }}" alt="{{ $payment->name }}" class="img img-fluid img-thumbnail w-100 cursor-pointer rounded border border-1 border-dark paymentBtn" data-role="{{ route('client.checkout.method',$payment->id) }}">
                                     <h5>{{ ucwords(str_replace('_', ' ', $payment->name)) }}</h5>
                                 </div>
                             @endforeach

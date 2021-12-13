@@ -9,7 +9,7 @@
     let progressStatus = document.querySelector('.checkout-progress-bar');
     let paymentAndReview = document.getElementById('reviewCheckout');
     let newAddress = document.querySelector('.btn-new-address');
-    // progressStatus.querySelectorAll('.progressBar')[0].classList.remove('active');
+    let paymentBtns = document.querySelectorAll('.paymentBtn');
 
     const reviewSippingAddress = () => {
         myForm.classList.add('d-none');
@@ -149,6 +149,36 @@
         localStorage.removeItem('sipping_address');
         showPage();
     });
+
+    Array.from(paymentBtns).map((item, key) => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            getMethod(item)
+        })
+    });
+
+    const getMethod = (item) => {
+        let title = `${item.getAttribute('alt').replace('_', ' ')} Method`;
+        $.ajax({
+            type: 'get',
+            url: item.getAttribute('data-role'),
+            success:function (data) {
+                if (data === 'accept'){
+                    orderProcessed();
+                }else {
+                    createModal(title, data)
+                }
+            }
+        })
+    };
+
+    const createModal = (title, element) => {
+        console.log(title)
+    };
+
+    const orderProcessed = () => {
+        let address =  localStorage.getItem('sipping_address');
+    };
 
     showPage();
 })(jQuery);

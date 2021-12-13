@@ -14,6 +14,7 @@ use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\GuestView\GuestController;
 use App\Http\Controllers\Api\DistrictController;
 use App\Http\Controllers\PaymentMethodInputController;
+use App\Http\Controllers\ProductOrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -219,5 +220,13 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'admin', 'ver
 
 Route::prefix('/my-account')->as('client.')->middleware(['auth:sanctum', 'verified', 'role:customer'])->group(function (){
     Route::get('/dashboard', [ClientController::class, 'index'])->name('dashboard');
-    Route::get('/checkout', [ClientController::class, 'checkoutIndex'])->name('checkout.index');
+    // checkout
+    Route::prefix('/checkout')->as('checkout.')->group(function (){
+        Route::get('/', [ClientController::class, 'checkoutIndex'])->name('index');
+        Route::get('/method/{payment}', [ClientController::class, 'checkoutMethod'])->name('method');
+    });
+    Route::prefix('/order')->as('order.')->group(function (){
+        Route::get('/', [ProductOrderController::class, 'store'])->name('store');
+    });
+
 });
