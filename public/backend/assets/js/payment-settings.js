@@ -1,12 +1,21 @@
+function img_pathUrl(input){
+    $('#modalImageShow')[0].src = (window.URL ? URL : webkitURL).createObjectURL(input.files[0]);
+}
+
 (function ($) {
     "use script";
     let paymentBtns = document.querySelectorAll('.paymentBtn');
     Array.from(paymentBtns).map((item, key) => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
+
             const moduleName = item.getAttribute('alt');
-            if(moduleName === 'money_transfer') moneyTransferModal();
-            else getForm(item, `${item.getAttribute('alt').replace('_', '')} Method`);
+            if(moduleName === 'money_transfer') {
+                moneyTransferModal();
+            } else {
+                $('#preloadModal').modal('show');
+                getForm(item, `${item.getAttribute('alt').replace('_', '')} Method`);
+            }
         });
     });
 
@@ -14,7 +23,7 @@
         $.ajax({
             type: 'get',
             url: item.getAttribute('data-role'),
-            success:function (data) {
+            success:function (data){
                 createNewModel(title, data);
             }
         });
@@ -111,10 +120,10 @@
             modalFooterSaveBtn.parentElement.parentElement.querySelector('form').submit();
         });
 
-        $(`#${modal.id}`).modal('show');
-
-        $(`#${modal.id}`).on('hidden.bs.modal', function (e) {
+        $(`#${modal.id}`).modal('show').on('hidden.bs.modal', function (e) {
             $(`#${modal.id}`).remove();
-        })
+        }).on('shown.bs.modal', function () {
+            $('#preloadModal').modal('hide');
+        });
     }
 })(jQuery);

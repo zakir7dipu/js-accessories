@@ -45,7 +45,10 @@
         </div>
     </div>
 
-
+    <div class="modal fade" id="preloadModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        </div>
+    </div>
 
 @endsection
 
