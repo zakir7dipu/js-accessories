@@ -76,16 +76,16 @@ class ClientOrderController extends Controller
                 Cart::instance('shopping_cart')->remove($cartProduct->rowId);
             }
 
-            $pdf = PDF::loadView('invoice.invoice1', compact('clientOrder'), [
-                'title'      => 'Another Title',
-//                'margin_top' => 0
-            ]);
-            return $pdf->stream('invoice.pdf');
+//            $pdf = PDF::loadView('invoice.invoice1', compact('clientOrder'), [
+//                'title'      => 'Another Title',
+////                'margin_top' => 0
+//            ]);
+//            return $pdf->stream('invoice.pdf');
 
             $notification = [
                 'status' => 'success',
                 'message' => 'Order placed successfully. please wait for order confirmation....',
-//                'route' => route('invoice',$clientOrder)
+                'route' => route('invoice',$clientOrder)
             ];
             return response()->json($notification);
         }catch (\Throwable $th){
