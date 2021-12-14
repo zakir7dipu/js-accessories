@@ -36,10 +36,14 @@ class ClientController extends Controller
 
     public function checkoutIndex()
     {
+        $cart = Cart::instance('shopping_cart');
+        if (count($cart->content()) === 0){
+            return $this->backWithError('No item added to cart for checkout...');
+        }
         try {
             return view('forntend.pages.checkout',[
                 'title' => 'Checkout',
-                'carts' => Cart::instance('shopping_cart')->content(),
+                'carts' => $cart->content(),
                 'cartTotal' => Cart::instance('shopping_cart')->subtotal(),
                 'countries' => CountryList::where('status', true)->get(),
                 'states' => DistrictList::where('status', true)->get(),

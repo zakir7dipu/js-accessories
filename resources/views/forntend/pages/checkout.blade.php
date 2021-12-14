@@ -130,34 +130,48 @@
                         </li>
                     </ul>
                     <div class="checkout-payment">
-                        <h2 class="step-title">{{ __('Payment Method') }}:</h2>
+                        @if(count($paymentMethods) === 0)
+                            <div class="clearfix">
+                                <a href="javascript:void(0)" class="btn btn-primary float-right orderProcessBtn">{{ __('Place Order') }}</a>
+                            </div><!-- End .clearfix -->
+                        @else
+                            <h2 class="step-title">{{ __('Payment Method') }}:</h2>
 
-                        <div class="row p-3">
-                            @foreach($paymentMethods as $payment)
-                                <div class="col-lg-2 col-md-m col-sm-4 text-center p-4" data-toggle="tooltip" data-placement="top" title="{{ ucwords(str_replace('_', ' ', $payment->name)) }}">
-                                    <img src="{{ asset($payment->icon) }}" alt="{{ $payment->name }}" class="img img-fluid img-thumbnail w-100 cursor-pointer rounded border border-1 border-dark paymentBtn" data-role="{{ route('client.checkout.method',$payment->id) }}">
-                                    <h5>{{ ucwords(str_replace('_', ' ', $payment->name)) }}</h5>
-                                </div>
-                            @endforeach
-                        </div>
+                            <div class="row p-3">
+                                @foreach($paymentMethods as $payment)
+                                    <div class="col-lg-2 col-md-m col-sm-4 text-center p-4" data-toggle="tooltip" data-placement="top" title="{{ ucwords(str_replace('_', ' ', $payment->name)) }}">
+                                        <img src="{{ asset($payment->icon) }}" alt="{{ $payment->name }}" class="img img-fluid img-thumbnail w-100 cursor-pointer rounded border border-1 border-dark paymentBtn" data-role="{{ route('client.checkout.method',$payment->id) }}">
+                                        <h5>{{ ucwords(str_replace('_', ' ', $payment->name)) }}</h5>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
                     </div><!-- End .checkout-payment -->
 
-                    <div class="checkout-discount">
-                        <h4>
-                            <a data-toggle="collapse" href="#checkout-discount-section" class="collapsed" role="button" aria-expanded="false" aria-controls="checkout-discount-section">Apply Discount Code</a>
-                        </h4>
+{{--                    <div class="checkout-discount">--}}
+{{--                        <h4>--}}
+{{--                            <a data-toggle="collapse" href="#checkout-discount-section" class="collapsed" role="button" aria-expanded="false" aria-controls="checkout-discount-section">Apply Discount Code</a>--}}
+{{--                        </h4>--}}
 
-                        <div class="collapse" id="checkout-discount-section">
-                            <form action="#">
-                                <input type="text" class="form-control form-control-sm" placeholder="Enter discount code"  required>
-                                <button class="btn btn-sm btn-outline-secondary" type="submit">Apply Discount</button>
-                            </form>
-                        </div><!-- End .collapse -->
-                    </div><!-- End .checkout-discount -->
+{{--                        <div class="collapse" id="checkout-discount-section">--}}
+{{--                            <form action="#">--}}
+{{--                                <input type="text" class="form-control form-control-sm" placeholder="Enter discount code"  required>--}}
+{{--                                <button class="btn btn-sm btn-outline-secondary" type="submit">Apply Discount</button>--}}
+{{--                            </form>--}}
+{{--                        </div><!-- End .collapse -->--}}
+{{--                    </div><!-- End .checkout-discount -->--}}
                 </div><!-- End .col-lg-8 -->
             </div><!-- End .row -->
         </div>
     </main><!-- End .main -->
+
+    <form action="{{ route('client.order.store') }}" method="post" id="orderProcessForm">
+        @csrf
+        <input type="hidden" name="shipping_address">
+        <input type="hidden" name="payment_method">
+        <input type="hidden" name="payment_trx">
+        <input type="hidden" name="coupon_discount">
+    </form>
 @endsection
 
 @section('page-script')

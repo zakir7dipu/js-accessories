@@ -152,6 +152,33 @@ class Controller extends BaseController
         ];
     }
 
+    public function orderPermission()
+    {
+//        Canceled = 0, Pending = 1, Approved = 2, Process to delivery = 3, Delivered = 4.
+        return $array = [
+            (object)[
+                'name' => 'Canceled',
+                'permission_code' => 0
+            ],
+            (object)[
+                'name' => 'Pending',
+                'permission_code' => 1
+            ],
+            (object)[
+                'name' => 'Approved',
+                'permission_code' => 2
+            ],
+            (object)[
+                'name' => 'Process to delivery',
+                'permission_code' => 3
+            ],
+            (object)[
+                'name' => 'Delivered',
+                'permission_code' => 4
+            ],
+        ];
+    }
+
     /**
      * The attributes that are mass assignable.
      * to make pagination for custom array

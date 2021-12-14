@@ -10,6 +10,7 @@
     let paymentAndReview = document.getElementById('reviewCheckout');
     let newAddress = document.querySelector('.btn-new-address');
     let paymentBtns = document.querySelectorAll('.paymentBtn');
+    const oderProcessBtn = document.querySelector('.orderProcessBtn');
 
     const reviewSippingAddress = () => {
         myForm.classList.add('d-none');
@@ -157,6 +158,7 @@
         })
     });
 
+
     const getMethod = (item) => {
         let title = `${item.getAttribute('alt').replace('_', ' ')} Method`;
         $.ajax({
@@ -164,7 +166,7 @@
             url: item.getAttribute('data-role'),
             success:function (data) {
                 if (data === 'accept'){
-                    orderProcessed();
+                    orderProcessedWithoutPayment();
                 }else {
                     createModal(title, data)
                 }
@@ -176,9 +178,48 @@
         console.log(title)
     };
 
-    const orderProcessed = () => {
-        let address =  localStorage.getItem('sipping_address');
+    function uuidv4() {
+        return ([1e7]+-1e3+-1e11).replace(/[018]/g, c => //1e7]+-1e3+-4e3+-8e3+-1e11
+            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        );
+    }
+
+    const orderProcessedWithoutPayment = () => {
+        let order = {
+            'invoice': uuidv4(),
+            'shipping_address': localStorage.getItem('sipping_address'),
+            'coupon_discount': localStorage.getItem('coupon_discount'),
+        };
+
+        sendOrder(order)
     };
+
+    const sendOrder = (object) => {
+        $.ajax({
+            type: 'post',
+            url: '/my-account/order',
+            data: object,
+            success:function (data) {
+                let url = window.location.origin;
+                if (data.status != 'error'){
+                    localStorage.removeItem('coupon_discount');
+                    url = data.route
+                }
+                toastr[data.status](data.message);
+
+                setTimeout(() => {
+                    window.location.href = url
+                }, 2000)
+            }
+        })
+    };
+
+    if (paymentBtns.length === 0){
+        oderProcessBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            orderProcessedWithoutPayment();
+        })
+    }
 
     showPage();
 })(jQuery);

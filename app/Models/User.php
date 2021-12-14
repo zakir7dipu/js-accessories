@@ -72,4 +72,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Address::class,'user_id', 'id');
     }
+
+    public function orders()
+    {
+        return $this->hasMany(ClientOrder::class, 'user_id', 'id');
+    }
 }

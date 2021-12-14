@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Client\ClientController;
+use App\Http\Controllers\Client\ClientOrderController;
 use App\Http\Controllers\GuestView\GuestController;
 use App\Http\Controllers\Api\DistrictController;
 use App\Http\Controllers\PaymentMethodInputController;
@@ -37,6 +38,8 @@ Route::get('/setup', function (){
 });
 
 Route::get('/', [GuestController::class, 'index'])->name('home');
+Route::get('/invoice/{order}', [ClientOrderController::class, 'invoice'])->name('invoice');
+
 // product quick view
 Route::get('/product-quick-view/{product}', [GuestController::class, 'productQuickView'])->name('product-quick-view');
 // product single view
@@ -226,7 +229,7 @@ Route::prefix('/my-account')->as('client.')->middleware(['auth:sanctum', 'verifi
         Route::get('/method/{payment}', [ClientController::class, 'checkoutMethod'])->name('method');
     });
     Route::prefix('/order')->as('order.')->group(function (){
-        Route::get('/', [ProductOrderController::class, 'store'])->name('store');
+        Route::post('/', [ClientOrderController::class, 'store'])->name('store');
     });
 
 });
