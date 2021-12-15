@@ -49,7 +49,9 @@
                         <span class="link-text">{{ __('dashboard') }}</span>
                     </a>
                 </li>
+
                 <!-- NAV ITEM E-COMMERCE -->
+                @can('ecommerce')
                 <li class="nav-item has-dropdown {{ request()->is('admin/e-commerce*') ?'active':'' }}">
                     <a href="javascript:void(0);" class="nav-link">
                         <i class="material-icons">store</i>
@@ -62,23 +64,29 @@
                         <li><a href="javascript:void(0)" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Orders') }}</span></a></li>
                     </ul>
                 </li>
+                @endcan
                 <!-- NAV ITEM CUSTOMERS-->
+                @can('customers')
                 <li class="nav-item {{ request()->is('admin/customer*') ?'active':'' }}">
                     <a href="{{ route('admin.customer.index') }}" class="nav-link">
                         <i class="material-icons">sentiment_satisfied_alt</i>
                         <span class="link-text">{{ __('Customers') }}</span>
                     </a>
                 </li>
+                @endcan
                 <!-- NAV ITEM SUPPLIERS-->
+                @can('suppliers')
                 <li class="nav-item {{ request()->is('admin/supplier*') ?'active':'' }}">
                     <a href="{{ route('admin.supplier.index') }}" class="nav-link">
                         <i class="material-icons">view_compact</i>
                         <span class="link-text">{{ __('Suppliers') }}</span>
                     </a>
                 </li>
+                @endcan
                 <!-- NAV DIVIDER -->
                 <li class="nav-divider"></li>
                 <!-- NAV SETTINGS -->
+                @can('settings')
                 <li class="nav-item has-dropdown {{ request()->is('admin/settings*') ?'active':'' }}">
                     <a href="javascript:void(0);" class="nav-link">
                         <i class="material-icons">settings</i>
@@ -93,11 +101,14 @@
                         <li><a href="{{ route('admin.settings.social-media-link') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Social Media Link Settings') }}</span></a></li>
                         <li><a href="{{ route('admin.settings.order-index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Order Settings') }}</span></a></li>
                         <li><a href="{{ route('admin.settings.payment.index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Payment Settings') }}</span></a></li>
+                        <li><a href="{{ route('admin.settings.user.index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('User') }}</span></a></li>
                     </ul>
                 </li>
+                @endcan
                 <!-- NAV DIVIDER -->
                 <li class="nav-divider"></li>
                 <!-- NAV ITEM widget-->
+                @can('widget')
                 <li class="nav-item has-dropdown {{ request()->is('admin/widget.*') ?'active':'' }}">
                     <a href="javascript:void(0);" class="nav-link">
                         <i class="fas fa-toolbox"></i>
@@ -113,7 +124,9 @@
                         <li><a href="{{ route('admin.widget.info-section.index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Info Section') }}</span></a></li>
                     </ul>
                 </li>
+                @endcan
                 <!-- NAV ITEM advertisement-->
+                @can('advertisement')
                 <li class="nav-item has-dropdown {{ request()->is('admin/advertisement.*') ?'active':'' }}">
                     <a href="javascript:void(0);" class="nav-link">
                         <i class="fab fa-adversal"></i>
@@ -124,7 +137,9 @@
                         <li><a href="{{ route('admin.advertisement.index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Advertising layouts') }}</span></a></li>
                     </ul>
                 </li>
+                @endcan
                 <!-- NAV ITEM pages-->
+                @can('pages')
                 <li class="nav-item has-dropdown {{ request()->is('admin/advertisement.*') ?'active':'' }}">
                     <a href="javascript:void(0);" class="nav-link">
                         <i class="fas fa-file-alt"></i>
@@ -137,7 +152,9 @@
                         @endforeach
                     </ul>
                 </li>
+                @endcan
                 <!-- NAV ITEM BLOG -->
+                @can('blog')
                 <li class="nav-item has-dropdown {{ request()->is('admin/blog*') ?'active':'' }}">
                     <a href="javascript:void(0)" class="nav-link">
                         <i class="fas fa-blog"></i>
@@ -150,7 +167,7 @@
                         <li><a href="{{ route('admin.blog.comment-settings') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Comment Settings') }}</span></a></li>
                     </ul>
                 </li>
-
+                @endcan
                 <!-- NAV ITEM -->
 {{--                <li class="nav-item"><a href="card.html" class="nav-link"><i class="material-icons">style</i><span class="link-text">card</span></a></li>--}}
             </ul>

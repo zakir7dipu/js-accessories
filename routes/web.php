@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AppSettingsController;
 use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CustomUserController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SupplierController;
@@ -102,7 +103,7 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'admin', 'ver
     });
 
     //settings
-    Route::prefix('/settings')->as('settings.')->group(function (){
+    Route::prefix('/settings')->as('settings.')->middleware('permission:settings')->group(function (){
         //general
         Route::get('/', [AppSettingsController::class, 'index'])->name('index');
         Route::post('/', [AppSettingsController::class, 'storeGeneralSettings']);
@@ -131,25 +132,28 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'admin', 'ver
             Route::get('/method/{payment}', [PaymentMethodInputController::class, 'getMethodForm'])->name('method');
             Route::post('/store/{payment}', [PaymentMethodInputController::class, 'storePayment'])->name('store');
         });
+
+        //user
+        Route::resource('/user', CustomUserController::class);
     });
 
     //pages
-    Route::prefix('/page')->as('page.')->group(function (){
+    Route::prefix('/page')->as('page.')->middleware('permission:pages')->group(function (){
         Route::get('/view/{page}', [AppSettingsController::class, 'pageIndex'])->name('index');
         Route::post('/view/{page}', [AppSettingsController::class, 'pageStore']);
     });
 
     //suppliers
-    Route::resource('supplier',SupplierController::class);
+    Route::resource('supplier',SupplierController::class)->middleware('permission:suppliers');
 
     //customers
-    Route::prefix('/customer')->as('customer.')->group(function (){
+    Route::prefix('/customer')->as('customer.')->middleware('permission:customers')->group(function (){
         Route::get('/', [AdminController::class, 'customersIndex'])->name('index');
         Route::get('/view/{customer}', [AdminController::class, 'customersView'])->name('view');
     });
 
     // widget
-    Route::prefix('widget')->as('widget.')->group(function (){
+    Route::prefix('widget')->as('widget.')->middleware('permission:widget')->group(function (){
         //slider
         Route::resource('/slider', SliderController::class);
 
@@ -186,14 +190,11 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'admin', 'ver
     });
 
     // advertisement
-    Route::prefix('advertisement')->as('advertisement.')->group(function (){
-
-    });
-    Route::resource('advertisement', AdvertisementController::class);
+    Route::resource('advertisement', AdvertisementController::class)->middleware('permission:advertisement');
 
 
     //blogs
-    Route::prefix('/blog')->as('blog.')->group(function (){
+    Route::prefix('/blog')->as('blog.')->middleware('permission:blog')->group(function (){
         //category
         Route::resource('/category', BlogCategoryController::class);
         //post
@@ -204,7 +205,7 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'admin', 'ver
     });
 
     //e-commerce
-    Route::prefix('/e-commerce')->as('e-commerce.')->group(function (){
+    Route::prefix('/e-commerce')->as('e-commerce.')->middleware('permission:ecommerce')->group(function (){
         //category
         Route::resource('/category', CategoryController::class);
         Route::get('/category-sub-category/{category}', [CategoryController::class, 'subCategory'])->name('category-sub-category');
@@ -218,7 +219,6 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'admin', 'ver
         // feature activation
         Route::post('/feature-activation/{product}', [ProductController::class, 'featureActivation']);
     });
-
 });
 
 Route::prefix('/my-account')->as('client.')->middleware(['auth:sanctum', 'verified', 'role:customer'])->group(function (){

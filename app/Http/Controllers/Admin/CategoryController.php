@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\GeneralSettings;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -288,6 +289,9 @@ class CategoryController extends Controller
                             unlink(public_path($sChild->icon));
                         }
                     }
+                    foreach ($sChild->products as $product){
+                        $this->destroyProduct($product);
+                    }
                     $sChild->delete();
                 }
 
@@ -295,6 +299,9 @@ class CategoryController extends Controller
                     if (file_exists(public_path($child->icon))){
                         unlink(public_path($child->icon));
                     }
+                }
+                foreach ($child->products as $product){
+                    $this->destroyProduct($product);
                 }
                 $child->delete();
             }
@@ -304,9 +311,31 @@ class CategoryController extends Controller
                     unlink(public_path($category->icon));
                 }
             }
+            foreach ($category->products as $product){
+                $this->destroyProduct($product);
+            }
             $category->delete();
 
             return $this->backWithSuccess('Category has been deleted successfully');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function destroyProduct($product)
+    {
+        try {
+            $product->suppliers()->sync([]);
+            $product->attributes()->sync([]);
+            $product->attributeItems->each->delete();
+            foreach ($product->productImages as $image){
+                if (file_exists(public_path($image->image))){
+                    unlink(public_path($image->image));
+                }
+                $image->delete();
+            }
+            $product->delete();
+            return $this->backWithSuccess($product->name.' has been deleted successfully');
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }

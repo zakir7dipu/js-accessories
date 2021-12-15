@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2021 at 12:16 PM
+-- Generation Time: Dec 15, 2021 at 11:05 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.26
 
@@ -280,9 +280,7 @@ INSERT INTO `categories` (`id`, `parent_id`, `name`, `icon`, `slug`, `status`, `
 (22, 5, 'Tops', '/upload/categories/1634793447n7sxyaDAC.png', 'tops_1634793447', 1, '2021-10-20 23:17:27', '2021-10-20 23:17:27'),
 (23, 5, 'Bags', '/upload/categories/1634793462qvyh6wDAC.png', 'bags_1634793462', 1, '2021-10-20 23:17:42', '2021-10-20 23:17:42'),
 (24, 5, 'Shoes', '/upload/categories/1634793480hetkwlDAC.png', 'shoes_1634793480', 1, '2021-10-20 23:18:00', '2021-10-20 23:18:00'),
-(25, 12, 'Wine Glass', NULL, 'wine_glass_1635343431', 1, '2021-10-27 08:03:51', '2021-10-27 08:03:51'),
-(26, NULL, 'Fabrics', NULL, 'fabrics_1639399287', 1, '2021-12-13 06:41:27', '2021-12-13 06:41:27'),
-(27, 26, 'Net', NULL, 'net_1639399347', 1, '2021-12-13 06:42:27', '2021-12-13 06:42:27');
+(25, 12, 'Wine Glass', NULL, 'wine_glass_1635343431', 1, '2021-10-27 08:03:51', '2021-10-27 08:03:51');
 
 -- --------------------------------------------------------
 
@@ -973,6 +971,7 @@ CREATE TABLE `model_has_roles` (
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\Models\\User', 1),
+(2, 'App\\Models\\User', 4),
 (3, 'App\\Models\\User', 2);
 
 -- --------------------------------------------------------
@@ -1165,6 +1164,20 @@ CREATE TABLE `permissions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, 'settings', 'web', '2021-12-15 03:56:36', '2021-12-15 03:56:36'),
+(2, 'pages', 'web', '2021-12-15 03:56:36', '2021-12-15 03:56:36'),
+(3, 'suppliers', 'web', '2021-12-15 03:56:37', '2021-12-15 03:56:37'),
+(4, 'customers', 'web', '2021-12-15 03:56:37', '2021-12-15 03:56:37'),
+(5, 'widget', 'web', '2021-12-15 03:56:37', '2021-12-15 03:56:37'),
+(6, 'advertisement', 'web', '2021-12-15 03:56:37', '2021-12-15 03:56:37'),
+(7, 'blog', 'web', '2021-12-15 03:56:37', '2021-12-15 03:56:37'),
+(8, 'ecommerce', 'web', '2021-12-15 03:56:37', '2021-12-15 03:56:37');
 
 -- --------------------------------------------------------
 
@@ -2747,6 +2760,25 @@ CREATE TABLE `role_has_permissions` (
   `role_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `role_has_permissions`
+--
+
+INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
+(1, 1),
+(2, 1),
+(3, 1),
+(3, 2),
+(4, 1),
+(4, 2),
+(5, 1),
+(6, 1),
+(6, 2),
+(7, 1),
+(7, 2),
+(8, 1),
+(8, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -2767,7 +2799,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('Gw1ErEPSB3rfWmnHt08ukI7MCLdGnVRyt8IhTNa8', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMkNYNWZxWWpjU01CazJPQWh1NVZsVlpCdmF3MkZyR3JRWGpxc0ttcyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fX0=', 1639480576);
+('0FGTz4RQgTnqLjJXdi7EqurL41RRqOgDLL9PxonK', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQnAxeFZwSmFGcnlxUlpjOG54d2dLSDFpT1g0SmtDYm1uTllPRnNQcCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9yZWdpc3RlciI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1639559150),
+('MT0UcK7KCTLwj3s2KxBJsOPZVRRMw3XMRbQq9ZZk', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUkVPSGVsZmVyblNOTjlSQWRmY1hYRGo4angzcDBnNjk1bTdjWjBlQyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fX0=', 1639562720);
 
 -- --------------------------------------------------------
 
@@ -3452,7 +3485,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `user_type`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `remember_token`, `current_team_id`, `profile_photo_path`, `otp`, `provider_id`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Zakir Hossain', 'zakir7dipu@gmail.com', NULL, '$2y$10$aJbWYgZGlz533z4HbbriF.hzd5SFEbqxBJTHZok/UFS.D3Iuytv8G', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-10-20 22:28:53', '2021-10-20 22:28:53'),
-(2, 3, 'Faidul', 'faidul@mail.com', NULL, '$2y$10$ISj2.CQkFOAon7gLht2w4.maxxhJUAxQlJMgjJwgRRXvStdkWjUla', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-12-08 22:41:20', '2021-12-08 22:41:20');
+(2, 3, 'Faidul', 'faidul@mail.com', NULL, '$2y$10$ISj2.CQkFOAon7gLht2w4.maxxhJUAxQlJMgjJwgRRXvStdkWjUla', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-12-08 22:41:20', '2021-12-08 22:41:20'),
+(4, 2, 'Nokib Mahamud', 'nokib@mail.com', NULL, '$2y$10$STtmyOxYQMbRWtiZpmPyIe6BsevOzSwrn13jqcVklLI/ufPht8P7C', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-12-15 03:42:41', '2021-12-15 03:42:41');
 
 --
 -- Indexes for dumped tables
@@ -3942,7 +3976,7 @@ ALTER TABLE `payment_methods`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -4032,7 +4066,7 @@ ALTER TABLE `thana_lists`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
