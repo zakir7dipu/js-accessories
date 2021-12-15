@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\GeneralSettings;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class CustomUserController extends Controller
@@ -111,8 +112,17 @@ class CustomUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        try {
+            DB::transaction(function () use ($user) {
+                $user->deleteProfilePhoto();
+                $user->tokens->each->delete();
+                $user->delete();
+            });
+            return $this->backWithSuccess('Admin has been deleted successfully...');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
     }
 }

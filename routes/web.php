@@ -134,7 +134,7 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'admin', 'ver
         });
 
         //user
-        Route::resource('/user', CustomUserController::class);
+        Route::resource('/user', CustomUserController::class)->only(['index', 'store', 'destroy']);
     });
 
     //pages

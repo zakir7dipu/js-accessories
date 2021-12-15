@@ -61,12 +61,9 @@
                                         <td>{{ $admin->email }}</td>
                                         <td>
                                             <div class="d-flex">
-                                                <a href="javascript:void(0)">
-                                                    <button type="button" class="btn btn-sm btn btn-success m-1 blogCategoryEditBtn" data-id="{{ $admin->id }}">{{ __('Edit') }}</button>
-                                                </a>
-                                                <a href="javascript:void(0)" title="{{__('Delete')}}" class="sliderDestroyBtn">
+                                                <a href="javascript:void (0)" title="{{__('Delete')}}" class="userDestroyBtn">
                                                     <button type="button" class="btn btn-sm btn btn-danger m-1">{{__('Delete')}}</button>
-                                                    <form action="javascript:void(0)" method="post" class="deleteForm">
+                                                    <form action="{{ route('admin.settings.user.destroy', $admin->id) }}" method="post" class="deleteForm">
                                                         @csrf
                                                         @method('delete')
                                                         <input type="hidden" name="_method" value="delete">
