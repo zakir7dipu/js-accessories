@@ -8,10 +8,13 @@
 
 	<link rel='stylesheet' type='text/css' href='{{ asset('invoices/css/style.css') }}' />
 	<link rel='stylesheet' type='text/css' href='{{ asset('invoices/css/print.css') }}' media="print" />
+{{--    <script src="{{ asset('forntend/assets/js/jquery.min.js') }}"></script>--}}
+{{--    <script src="{{ asset('invoices/js/html2pdf.bundle.js') }}"></script>--}}
+    <script src="{{ asset('invoices/js/invoice.js') }}"></script>
 </head>
 
 <body>
-	<div id="page-wrap" style="padding: 20px 10px">
+	<div id="page-wrap">
 
 		<h6 id="header">{{ __('INVOICE') }}</h6>
 
@@ -36,7 +39,7 @@
             <table id="meta">
                 <tr>
                     <td class="meta-head">Invoice #</td>
-                    <td>{{ $order->invoice }}</td>
+                    <td id="thisInvoice">{{ $order->invoice }}</td>
                 </tr>
                 <tr>
 
@@ -91,10 +94,9 @@
 		</div>
 
 	</div>
-    <button onclick="downloadInvoice();">{{ __('Download') }}</button>
-    <script src="{{ asset('forntend/assets/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('invoices/js/html2pdf.bundle.js') }}"></script>
-    <script src="{{ asset('invoices/js/invoice.js') }}"></script>
+    <div class="downloadArea no-print" style="text-align: center;">
+        <button onclick="downloadInvoice();">{{ __('Download') }}</button>
+    </div>
 </body>
 
 </html>

@@ -3,17 +3,20 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderNotification;
 use App\Models\AttributeItem;
 use App\Models\ClientOrder;
+use App\Models\Company;
 use App\Models\CountryList;
 use App\Models\DistrictList;
 use App\Models\OrderedProduct;
 use App\Models\Product;
 use App\Models\ThanaList;
+use Barryvdh\DomPDF\PDF;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PDF;
+use Illuminate\Support\Facades\Mail;
 
 class ClientOrderController extends Controller
 {
@@ -28,7 +31,9 @@ class ClientOrderController extends Controller
 
         $cart = Cart::instance('shopping_cart');
         $invoice = $request->invoice;
+        $invoice = '10000'.(ClientOrder::count()+1);
         $user = Auth::user();
+        $contact = Company::first();
         // shipping address
         $shippingAddress = (array)json_decode($request->shipping_address, true);
         $shippingAddress['country'] = CountryList::find($shippingAddress['country'])->name;
@@ -76,11 +81,17 @@ class ClientOrderController extends Controller
                 Cart::instance('shopping_cart')->remove($cartProduct->rowId);
             }
 
-//            $pdf = PDF::loadView('invoice.invoice1', compact('clientOrder'), [
-//                'title'      => 'Another Title',
-////                'margin_top' => 0
-//            ]);
-//            return $pdf->stream('invoice.pdf');
+            $order = $clientOrder;
+            Mail::mailer('smtp')
+                ->to($user->email)
+                ->cc($contact->email)
+                ->send(new OrderNotification($order));
+
+//            $pdf = app('dompdf.wrapper');
+//            $pdf->loadView('invoice.invoice1', compact('order'));
+//            $pdf->save(storage_path().'_filename.pdf');
+//            // Finally, you can download the file using download function
+//            $pdf->download('customers.pdf');
 
             $notification = [
                 'status' => 'success',
@@ -99,7 +110,6 @@ class ClientOrderController extends Controller
 
     public function invoice(ClientOrder $order)
     {
-//        dd($order);
         return view('invoice.invoice1', compact('order'));
     }
 }

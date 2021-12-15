@@ -208,8 +208,9 @@
                 toastr[data.status](data.message);
 
                 setTimeout(() => {
-                    window.location.href = url
-                }, 2000)
+                    window.open(url);
+                    window.location.href = window.location.origin+'/my-account/dashboard'
+                }, 1500)
             }
         })
     };
