@@ -75,6 +75,7 @@ class Controller extends BaseController
             $allColors[] = ucwords($item->name);
         }
         $allColors = array_unique($allColors);
+        $orderPermissions = $this->orderPermission();
 
         View::share('districts', $districts);
         View::share('generalSettings', $generalSettings);
@@ -102,6 +103,7 @@ class Controller extends BaseController
         View::share('commentSetting', $commentSetting);
         View::share('allSizes', $allSizes);
         View::share('allColors', $allColors);
+        View::share('orderPermissions', $orderPermissions);
     }
 
     public function backWithError($message)

@@ -6,7 +6,7 @@
             <li class="active"><a href="{{ route('client.dashboard') }}">{{ __('Dashboard') }} </a></li>
             <li><a href="javascript:void(0)">Account Information</a></li>
             <li><a href="javascript:void(0)">Address Book</a></li>
-            <li><a href="javascript:void(0)">My Orders</a></li>
+            <li><a href="{{ route('client.order.index') }}">My Orders</a></li>
             <li><a href="javascript:void(0)">My Downloadable Products</a></li>
             <li>
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

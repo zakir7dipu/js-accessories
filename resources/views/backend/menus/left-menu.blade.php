@@ -61,7 +61,7 @@
                     <ul class="dropdown-list">
                         <li><a href="{{ route('admin.e-commerce.category.index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">Product {{ __('Categories') }}</span></a></li>
                         <li><a href="{{ route('admin.e-commerce.product.index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('product') }}</span></a></li>
-                        <li><a href="javascript:void(0)" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Orders') }}</span></a></li>
+                        <li><a href="{{ route('admin.e-commerce.order.index') }}" class="nav-link"> <i class="material-icons">chevron_right</i> <span class="link-text">{{ __('Orders') }}</span></a></li>
                     </ul>
                 </li>
                 @endcan

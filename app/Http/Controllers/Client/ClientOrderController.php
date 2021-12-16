@@ -9,10 +9,10 @@ use App\Models\ClientOrder;
 use App\Models\Company;
 use App\Models\CountryList;
 use App\Models\DistrictList;
+use App\Models\GeneralSettings;
 use App\Models\OrderedProduct;
 use App\Models\Product;
 use App\Models\ThanaList;
-use Barryvdh\DomPDF\PDF;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +23,50 @@ class ClientOrderController extends Controller
     public function __construct()
     {
         Parent::__construct();
+    }
+
+    public function index()
+    {
+        $user = Auth::user();
+        if ($user->hasRole('supper_admin') || $user->hasRole('admin')){
+            return $this->adminIndex();
+        }else{
+            dd('no');
+        }
+        dd($user->hasRole('supper_admin'));
+    }
+
+    protected function adminIndex()
+    {
+        try {
+            $generalSettings = GeneralSettings::first();
+            $title = ($generalSettings?$generalSettings->site_name:'').' | '.'Client Orders';
+            $orders = ClientOrder::orderBy('id', 'DESC')->get();
+            return view('backend.pages.e-commerce.orders.index', compact('title', 'generalSettings', 'orders'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function orderSingle(ClientOrder $order)
+    {
+        $user = Auth::user();
+        if ($user->hasRole('supper_admin') || $user->hasRole('admin')){
+            return $this->adminSingleOrder($order);
+        }else{
+            dd('no');
+        }
+    }
+
+    protected function adminSingleOrder($order)
+    {
+        try {
+            $generalSettings = GeneralSettings::first();
+            $title = ($generalSettings?$generalSettings->site_name:'').' | '.'Client Order: #'.$order->invoice;
+            return view('backend.pages.e-commerce.orders.single', compact('title', 'generalSettings', 'order'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
     }
 
     public function store(Request $request)
@@ -87,12 +131,6 @@ class ClientOrderController extends Controller
                 ->cc($contact->email)
                 ->send(new OrderNotification($order));
 
-//            $pdf = app('dompdf.wrapper');
-//            $pdf->loadView('invoice.invoice1', compact('order'));
-//            $pdf->save(storage_path().'_filename.pdf');
-//            // Finally, you can download the file using download function
-//            $pdf->download('customers.pdf');
-
             $notification = [
                 'status' => 'success',
                 'message' => 'Order placed successfully. please wait for order confirmation....',
@@ -111,5 +149,21 @@ class ClientOrderController extends Controller
     public function invoice(ClientOrder $order)
     {
         return view('invoice.invoice1', compact('order'));
+    }
+
+    public function statusUpdate(Request $request, ClientOrder $order)
+    {
+        try {
+            $status = '';
+            foreach ($this->orderPermission() as $item){
+                if ($item->permission_code == $request->order_status){
+                    $status = $item->name;
+                }
+            }
+            $order->update(['order_status'=>$request->order_status, 'accepted_by' => Auth::user()->id]);
+            return $this->backWithSuccess('#'.$order->invoice.' has been '.$status);
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
     }
 }

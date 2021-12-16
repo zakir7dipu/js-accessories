@@ -218,6 +218,13 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'admin', 'ver
         Route::delete('/product/image/{image}', [ProductController::class, 'deleteImage']);
         // feature activation
         Route::post('/feature-activation/{product}', [ProductController::class, 'featureActivation']);
+        // orders
+        Route::prefix('/order')->as('order.')->group(function (){
+            Route::get('/', [ClientOrderController::class, 'index'])->name('index');
+            Route::get('/single/{order}', [ClientOrderController::class, 'orderSingle'])->name('single');
+            Route::post('/single/{order}', [ClientOrderController::class, 'statusUpdate'])->name('approval');
+        });
+
     });
 });
 
@@ -228,7 +235,9 @@ Route::prefix('/my-account')->as('client.')->middleware(['auth:sanctum', 'verifi
         Route::get('/', [ClientController::class, 'checkoutIndex'])->name('index');
         Route::get('/method/{payment}', [ClientController::class, 'checkoutMethod'])->name('method');
     });
+    // order
     Route::prefix('/order')->as('order.')->group(function (){
+        Route::get('/', [ClientOrderController::class, 'index'])->name('index');
         Route::post('/', [ClientOrderController::class, 'store'])->name('store');
     });
 
