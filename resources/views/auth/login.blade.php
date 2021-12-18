@@ -38,10 +38,17 @@
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
+                    <a class="text-sm" href="{{ route('register') }}">
+                        <x-jet-button type="button" @click.native="someFunction" class="mr-4 bg-opacity-25 hover:bg-white hover:text-white">
+                            {{ __('Register') }}
+                        </x-jet-button>
+                    </a>
 
-                <x-jet-button class="ml-4">
-                    {{ __('Log in') }}
-                </x-jet-button>
+
+                    <x-jet-button class="ml-4">
+                        {{ __('Log in') }}
+                    </x-jet-button>
+
             </div>
         </form>
     </x-jet-authentication-card>
