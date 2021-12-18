@@ -4,6 +4,11 @@
 
 @section('page-css')
     <link rel="stylesheet" href="{{ asset('backend/assets/plugin/bootstrap-select/bootstrap-select.min.css') }}">
+    <style>
+        .modal-body {
+            background-color: rgba(0,0,0,0.5) !important;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -147,31 +152,24 @@
                             </div>
                         @endif
                     </div><!-- End .checkout-payment -->
-
-{{--                    <div class="checkout-discount">--}}
-{{--                        <h4>--}}
-{{--                            <a data-toggle="collapse" href="#checkout-discount-section" class="collapsed" role="button" aria-expanded="false" aria-controls="checkout-discount-section">Apply Discount Code</a>--}}
-{{--                        </h4>--}}
-
-{{--                        <div class="collapse" id="checkout-discount-section">--}}
-{{--                            <form action="#">--}}
-{{--                                <input type="text" class="form-control form-control-sm" placeholder="Enter discount code"  required>--}}
-{{--                                <button class="btn btn-sm btn-outline-secondary" type="submit">Apply Discount</button>--}}
-{{--                            </form>--}}
-{{--                        </div><!-- End .collapse -->--}}
-{{--                    </div><!-- End .checkout-discount -->--}}
                 </div><!-- End .col-lg-8 -->
             </div><!-- End .row -->
         </div>
     </main><!-- End .main -->
 
-    <form action="{{ route('client.order.store') }}" method="post" id="orderProcessForm">
-        @csrf
-        <input type="hidden" name="shipping_address">
-        <input type="hidden" name="payment_method">
-        <input type="hidden" name="payment_trx">
-        <input type="hidden" name="coupon_discount">
-    </form>
+    <!-- load view -->
+    <div class="modal fade bd-example-modal-lg" id="orderProcessLoadView" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body" style="justify-content: center; align-content: center;">
+                    <div class="col-12">
+                        <img src="{{ asset('upload/settings/ajax-loader.gif') }}" alt="" class="mx-auto img-fluid img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('page-script')

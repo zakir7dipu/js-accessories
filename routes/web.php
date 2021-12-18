@@ -91,6 +91,9 @@ Route::post('/order-area', [DistrictController::class, 'saveOrderArea']);
 Route::get('/order-area/{country},{state},{police_station}', [DistrictController::class, 'trackOrderArea']);
 Route::get('/district-info', [DistrictController::class, 'getDistrictInfo']);
 
+//subscription
+Route::post('/subscription', [GuestController::class, 'subscription'])->name('subscription');
+
 Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'admin', 'verified'])->group(function () {
 // dashboard rout
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');

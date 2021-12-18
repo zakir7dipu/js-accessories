@@ -31,7 +31,7 @@ class ClientOrderController extends Controller
         if ($user->hasRole('supper_admin') || $user->hasRole('admin')){
             return $this->adminIndex();
         }else{
-            dd('no');
+            return $this->clientIndex($user);
         }
         dd($user->hasRole('supper_admin'));
     }
@@ -48,13 +48,26 @@ class ClientOrderController extends Controller
         }
     }
 
+    protected function clientIndex($user)
+    {
+        try {
+            $title = 'My Orders';
+            $carts = Cart::instance('shopping_cart')->content();
+            $cartTotal = Cart::instance('shopping_cart')->subtotal();
+            $orders = $user->orders()->orderBy('id', 'DESC')->get();
+            return view('forntend.auth.orders.index', compact('title', 'carts', 'cartTotal', 'orders'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
     public function orderSingle(ClientOrder $order)
     {
         $user = Auth::user();
         if ($user->hasRole('supper_admin') || $user->hasRole('admin')){
             return $this->adminSingleOrder($order);
         }else{
-            dd('no');
+            return $this->backWithSuccess('No Page found.');
         }
     }
 
@@ -75,7 +88,7 @@ class ClientOrderController extends Controller
 
         $cart = Cart::instance('shopping_cart');
         $invoice = $request->invoice;
-        $invoice = '10000'.(ClientOrder::count()+1);
+        $invoice = 10000+(ClientOrder::count()+1);
         $user = Auth::user();
         $contact = Company::first();
         // shipping address

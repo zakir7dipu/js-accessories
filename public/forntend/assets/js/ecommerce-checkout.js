@@ -23,6 +23,7 @@
             success: function (data) {
                 Object.assign(savedAddress, {country: data.country.name, state: data.state.name, police_station:data.police_station.name});
                 let viewShipping = paymentAndReview.querySelector('.shipping-address-box.active');
+                viewShipping.innerHTML = '';
                 let address = document.createElement('address');
                 address.innerHTML = `${savedAddress.name} <br> ${savedAddress.phone} <br> ${savedAddress.company_name} <br> ${savedAddress.address} <br> ${savedAddress.police_station}, ${savedAddress.state} <br> ${savedAddress.country}`;
                 viewShipping.appendChild(address);
@@ -195,6 +196,7 @@
     };
 
     const sendOrder = (object) => {
+        $('#orderProcessLoadView').modal('show');
         $.ajax({
             type: 'post',
             url: '/my-account/order',

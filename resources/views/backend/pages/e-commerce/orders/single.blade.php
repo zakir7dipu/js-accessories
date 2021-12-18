@@ -68,7 +68,7 @@
                                 <h4 class="text-center">
                                     <u>{{ __('Ordered Items') }}</u>
                                     <br>
-                                    <a href="{{ route('invoice',$order) }}" target="_blank">
+                                    <a href="{{ route('invoice',$order->id) }}" target="_blank">
                                         <button type="button" class="btn btn-info rounded my-3"><i class="fas fa-file-invoice fa-2x"></i></button>
                                     </a></h4>
                                 <table class="table table-hover">

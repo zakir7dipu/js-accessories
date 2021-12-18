@@ -11,6 +11,8 @@
 <script type="module" src="{{ asset('forntend/assets/js/ecommerce-cart.js') }}"></script>
 <!-- product search js -->
 <script type="module" src="{{ asset('forntend/assets/js/product-search.js') }}"></script>
+<!-- Subscription -->
+<script type="module" src="{{ asset('forntend/assets/js/subscription.js') }}"></script>
 
 <!-- Main JS File -->
 <script src="{{ asset('forntend/assets/js/main_init.min.js') }}"></script>

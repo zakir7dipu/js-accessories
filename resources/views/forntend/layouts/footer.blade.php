@@ -11,7 +11,7 @@
                     </p>
                 </div>
                 <div class="col-lg-5">
-                    <form action="#">
+                    <form action="javascript:void (0)" id="subscriptionForm" data-role="{{ route('subscription') }}">
                         <div class="footer-submit-wrapper">
                             <input type="email" class="form-control" placeholder="Enter your Email address" required>
                             <button type="submit" class="btn">{{ __('Subscribe') }}</button>

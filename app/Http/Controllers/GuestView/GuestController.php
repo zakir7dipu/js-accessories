@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\ContactMessage;
 use App\Models\Pages;
 use App\Models\Product;
+use App\Models\Subscribtion;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
@@ -523,5 +524,47 @@ class GuestController extends Controller
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
+    }
+
+    public function subscription(Request $request)
+    {
+        if (!$request->email){
+            $notification = [
+                'status' => 'warning',
+                'message' => 'You did not provide any email'
+            ];
+            return response()->json($notification);
+        } else if (strlen(trim($request->email)) === 0){
+            $notification = [
+                'status' => 'warning',
+                'message' => 'You did not provide any email'
+            ];
+            return response()->json($notification);
+        } else if (Subscribtion::where('email', strtolower($request->email))->count() > 0){
+            $notification = [
+                'status' => 'warning',
+                'message' => 'You are already subscribed by this email.'
+            ];
+            return response()->json($notification);
+        }
+
+        try {
+            Subscribtion::create([
+                "email" => $request->email
+            ]);
+
+            $notification = [
+                'status' => 'success',
+                'message' => 'Successfully subscribed...'
+            ];
+            return response()->json($notification);
+        }catch (\Throwable $th){
+            $notification = [
+                'status' => 'warning',
+                'message' => $th->getMessage()
+            ];
+            return response()->json($notification);
+        }
+        return response()->json($request->all());
     }
 }
