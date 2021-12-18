@@ -230,6 +230,13 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'admin', 'ver
 
 Route::prefix('/my-account')->as('client.')->middleware(['auth:sanctum', 'verified', 'role:customer'])->group(function (){
     Route::get('/dashboard', [ClientController::class, 'index'])->name('dashboard');
+    // profile routs
+    Route::prefix('/profile')->group(function (){
+        Route::get('/', [ClientController::class, 'profile'])->name('profile');
+        Route::post('/', [ClientController::class, 'profileUpdate']);
+        Route::post('/info', [ClientController::class, 'profileInfoUpdate'])->name('profile-info');
+        Route::post('/password-update', [UpdateUserPassword::class, 'updateAdminPassword'])->name('password-update');
+    });
     // checkout
     Route::prefix('/checkout')->as('checkout.')->group(function (){
         Route::get('/', [ClientController::class, 'checkoutIndex'])->name('index');
