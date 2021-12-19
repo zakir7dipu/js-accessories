@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
     <!------------------------------------------------------------------------------------------------>
     <!-- FAVICON  -->
+    <link rel="icon" type="image/x-icon" href="{{ $generalSettings->favicon? asset($generalSettings->favicon):asset('forntend/assets/images/icons/favicon.ico') }}">
     <!-- BOOTSTRAP - V 4.0.0 -->
     <link rel="stylesheet" href="{{ asset('backend/assets/dist/css/bootstrap.min.css') }}" />
     <!-- MATERIAL ICONS -->

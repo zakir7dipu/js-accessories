@@ -12,7 +12,9 @@
 {{--    <script src="{{ asset('invoices/js/html2pdf.bundle.js') }}"></script>--}}
     <script src="{{ asset('invoices/js/invoice.js') }}"></script>
 </head>
-
+<?php
+$currencySymbol = '৳';
+?>
 <body>
 	<div id="page-wrap">
 
@@ -67,6 +69,9 @@
 
             @foreach($order->product as $key => $product)
                 @if($product->product)
+                    <?php if ($product->product){
+                        $currencySymbol = $product->product->currency->symbol;
+                    } ?>
                     <tr class="item-row">
                         <th>{{ $key+1 }}.</th>
                         <td class="description">{!! $product->product->name .'</br>'.$product->specification !!}</td>

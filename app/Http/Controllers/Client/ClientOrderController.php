@@ -160,17 +160,10 @@ class ClientOrderController extends Controller
     public function invoice(ClientOrder $order)
     {
         try {
-            $currencySymbol = '৳';
-            foreach ($order->product as $product){
-                if ($product->product){
-                    $currencySymbol = $product->product->currency->symbol;
-                }
-            }
-            return view('invoice.invoice1', compact('order', 'currencySymbol'));
+            return view('invoice.invoice1', compact('order'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
-
     }
 
     public function statusUpdate(Request $request, ClientOrder $order)

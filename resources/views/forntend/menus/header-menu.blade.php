@@ -1,5 +1,5 @@
 <header class="header">
-    @include('forntend.menus.headers.header-top')
+{{--    @include('forntend.menus.headers.header-top')--}}
 
     @include('forntend.menus.headers.header-middle')
 

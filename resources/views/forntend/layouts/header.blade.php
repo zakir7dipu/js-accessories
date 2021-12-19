@@ -6,12 +6,12 @@
     <title>@yield('title')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <meta name="keywords" content="HTML5 Template" />
-    <meta name="description" content="Porto - Bootstrap eCommerce Template">
-    <meta name="author" content="SW-THEMES">
+    <meta name="keywords" content="{{ $generalSettings->meta_keyword?$generalSettings->meta_keyword:'' }}" />
+    <meta name="description" content="{{ $generalSettings->meta_description?$generalSettings->meta_description:'' }}">
+    <meta name="author" content="{{ __('zakir7dipu') }}">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('forntend/assets/images/icons/favicon.ico') }}">
+    <link rel="icon" type="image/x-icon" href="{{ $generalSettings->favicon? asset($generalSettings->favicon):asset('forntend/assets/images/icons/favicon.ico') }}">
 
 
     <script type="text/javascript">
