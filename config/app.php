@@ -17,6 +17,8 @@ return [
 
     'logo' => env('APP_LOGO'),
 
+    'theme_color' => env('APP_COLOR', 'orange'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
