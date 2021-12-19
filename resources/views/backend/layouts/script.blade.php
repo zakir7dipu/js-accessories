@@ -21,11 +21,11 @@
 <!-- JQUERY-NOTIFY -->
 <script src="{{ asset('backend/assets/plugin/notify/js/notify.js') }}"></script>
 <!-- JVECTORMAP -->
-<script src="{{ asset('backend/assets/plugin/jVectormap/jquery-jvectormap-2.0.3.min.js') }}"></script>
-<script src="{{ asset('backend/assets/plugin/jVectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
-<script src="{{ asset('backend/assets/plugin/jVectormap/jquery-jvectormap-us-aea.js') }}"></script>
-<script src="{{ asset('backend/assets/plugin/jVectormap/jquery-jvectormap-ca-lcc.js') }}"></script>
-<script src="{{ asset('backend/assets/plugin/jVectormap/jquery-jvectormap-fr-regions-mill.js') }}"></script>
+{{--<script src="{{ asset('backend/assets/plugin/jVectormap/jquery-jvectormap-2.0.3.min.js') }}"></script>--}}
+{{--<script src="{{ asset('backend/assets/plugin/jVectormap/jquery-jvectormap-world-mill-en.js') }}"></script>--}}
+{{--<script src="{{ asset('backend/assets/plugin/jVectormap/jquery-jvectormap-us-aea.js') }}"></script>--}}
+{{--<script src="{{ asset('backend/assets/plugin/jVectormap/jquery-jvectormap-ca-lcc.js') }}"></script>--}}
+{{--<script src="{{ asset('backend/assets/plugin/jVectormap/jquery-jvectormap-fr-regions-mill.js') }}"></script>--}}
 <!-- BOOTSTRAP SLIDER -->
 <script src="{{ asset('backend/assets/plugin/bootstrap-slider/bootstrap-slider.min.js') }}"></script>
 <!-- TINY COLOR PICKER -->

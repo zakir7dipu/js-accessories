@@ -6,8 +6,10 @@
                     <a href="{{ route('register') }}" class="widget-newsletter-title">{{ __('Sign Up to Newsletter') }}</a>
                 </div>
                 <div class="col-lg-4">
-                    <p class="widget-newsletter-content">{{ __('Get all the latest information on Events, Sales and Offers.') }}<br>
-                        <span class="widget-newsletter-content">{{ __('Receive $10 coupon for first shopping.') }}</span>
+                    <p class="widget-newsletter-content">
+                        <span class="widget-newsletter-content">{{ __('Get all the latest information on Events, Sales and Offers.') }}</span>
+                        <br>
+{{--                        <span class="widget-newsletter-content">{{ __('Receive $10 coupon for first shopping.') }}</span>--}}
                     </p>
                 </div>
                 <div class="col-lg-5">

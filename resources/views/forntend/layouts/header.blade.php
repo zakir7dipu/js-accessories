@@ -29,7 +29,8 @@
     <link rel="stylesheet" href="{{asset('notification_assets/css/toastr.min.css')}}" />
     <!-- Plugins CSS File -->
     <link rel="stylesheet" href="{{ asset('forntend/assets/css/bootstrap.min.css') }}">
-
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="{{ asset('backend/assets/css/all.min.css') }}">
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{ asset('forntend/assets/css/style.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('forntend/assets/vendor/fontawesome-free/css/all.min.css') }}">

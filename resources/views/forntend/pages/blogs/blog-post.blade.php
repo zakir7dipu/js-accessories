@@ -29,7 +29,7 @@
                 <div class="col-lg-9">
                     <article class="entry single">
                         <div class="entry-media">
-                            <img src="{{ $post->thumbnail?asset($post->thumbnail):'' }}" alt="Post">
+                            <img src="{{ $post->thumbnail?asset($post->thumbnail):'' }}" alt="Post" class="pinterest-img">
                         </div><!-- End .entry-media -->
 
                         <div class="entry-body">
@@ -38,7 +38,7 @@
                                 <span class="month">{{ date('m', strtotime($post->created_at)) }}</span>
                             </div><!-- End .entry-date -->
 
-                            <h2 class="entry-title">
+                            <h2 class="entry-title post-title">
                                {{ $post->title }}
                             </h2>
 
@@ -63,24 +63,26 @@
                             <div class="entry-share">
                                 <h3>
                                     <i class="icon-forward"></i>
-                                    Share this post
+                                    {{ __('Share this post') }}
                                 </h3>
 
                                 <div class="social-icons">
-                                    <a href="#" class="social-icon social-facebook" target="_blank" title="Facebook">
+                                    <a href="javascript:void(0)" id="facebook" class="social-icon social-facebook" target="_blank" title="Facebook">
                                         <i class="icon-facebook"></i>
                                     </a>
-                                    <a href="#" class="social-icon social-twitter" target="_blank" title="Twitter">
+                                    <a href="javascript:void(0)" id="twitter" class="social-icon social-twitter" target="_blank" title="Twitter">
                                         <i class="icon-twitter"></i>
                                     </a>
-                                    <a href="#" class="social-icon social-linkedin" target="_blank" title="Linkedin">
-                                        <i class="icon-linkedin"></i>
+                                    <a href="javascript:void(0)" id="linkedin" class="social-icon social-linkedin" target="_blank" title="Linkedin">
+                                        <i class="fab fa-linkedin"></i>
                                     </a>
-                                    <a href="#" class="social-icon social-gplus" target="_blank" title="Google +">
-                                        <i class="icon-gplus"></i>
+                                    <a href="javascript:void(0)" id="pinterest" class="social-icon social-pinterest" target="_blank" title="Pinterest">
+{{--                                        <i class="icon-mail-alt"></i>--}}
+                                        <i class="fab fa-pinterest-p"></i>
                                     </a>
-                                    <a href="#" class="social-icon social-mail" target="_blank" title="Email">
-                                        <i class="icon-mail-alt"></i>
+                                    <a href="javascript:void(0)" id="whatsapp" class="social-icon social-whatsapp" target="_blank" title="Whatsapp">
+{{--                                        <i class="icon-mail-alt"></i>--}}
+                                        <i class="fab fa-whatsapp"></i>
                                     </a>
                                 </div><!-- End .social-icons -->
                             </div><!-- End .entry-share -->
@@ -157,5 +159,5 @@
 @endsection
 
 @section('page-script')
-
+    <script src="{{ asset('social-share/social-share.js') }}"></script>
 @endsection
