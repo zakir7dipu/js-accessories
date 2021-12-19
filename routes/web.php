@@ -38,9 +38,10 @@ Route::get('/setup', function (){
     return redirect()->route('home');
 });
 
+//home
 Route::get('/', [GuestController::class, 'index'])->name('home');
+//invoice
 Route::get('/invoice/{order}', [ClientOrderController::class, 'invoice'])->name('invoice');
-
 // product quick view
 Route::get('/product-quick-view/{product}', [GuestController::class, 'productQuickView'])->name('product-quick-view');
 // product single view

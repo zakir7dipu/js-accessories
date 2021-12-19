@@ -48,7 +48,7 @@
                 </tr>
                 <tr>
                     <td class="meta-head">Amount</td>
-                    <td><div class="due">{{ $order->price }}</div></td>
+                    <td><div class="due">{{ $currencySymbol.' '.$order->price }}</div></td>
                 </tr>
 
             </table>
@@ -66,24 +66,33 @@
 		  </tr>
 
             @foreach($order->product as $key => $product)
-                <tr class="item-row">
-                    <td>{{ $key+1 }}.</td>
-                    <td class="description">{!! $product->product->name .'</br>'.$product->specification !!}</td>
-                    <td>{{ $product->product->currency->symbol.' '.(str_replace(',','',$product->price_qty) / $product->qty) }}</td>
-                    <td>{{ $product->qty }}</td>
-                    <td>{{ $product->product->currency->symbol.' '.$product->price_qty }}</td>
-                </tr>
+                @if($product->product)
+                    <tr class="item-row">
+                        <th>{{ $key+1 }}.</th>
+                        <td class="description">{!! $product->product->name .'</br>'.$product->specification !!}</td>
+                        <td class="text-right">{{ $currencySymbol.' '.(str_replace(',','',$product->price_qty) / $product->qty) }}</td>
+                        <td class="text-center">{{ $product->qty }}</td>
+                        <td class="text-right">{{ $currencySymbol.' '.$product->price_qty }}</td>
+                    </tr>
+                @else
+                    <tr>
+                        <th>{{ $key+1 }}</th>
+                        <td>
+                            {{ __('Product was deleted by admin...') }}
+                        </td>
+                    </tr>
+                @endif
             @endforeach
 
 		  <tr>
 		      <td colspan="2" class="blank"> </td>
-		      <td colspan="2" class="total-line">Subtotal</td>
-		      <td class="total-value"><div>{{ $order->price }}</div></td>
+		      <td colspan="2" class="total-line">{{ __('Subtotal') }}</td>
+		      <td class="total-value text-right"><div>{{ $currencySymbol.' '.$order->price }}</div></td>
 		  </tr>
 		  <tr>
 		      <td colspan="2" class="blank"> </td>
-		      <td colspan="2" class="total-line">Total</td>
-		      <td class="total-value"><div>{{ $order->price }}</div></td>
+		      <td colspan="2" class="total-line">{{ __('Total') }}</td>
+		      <td class="total-value text-right"><div>{{ $currencySymbol.' '.$order->price }}</div></td>
 		  </tr>
 
 		</table>

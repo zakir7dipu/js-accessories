@@ -85,14 +85,22 @@
                                         $defaultCurrency = '';
                                     @endphp
                                     @foreach($order->product as $key => $product)
-                                        <tr>
-                                            <th>{{ $key+1 }}</th>
-                                            <td>{!! $product->product->name.(strlen(trim($product->specification)) > 0?'</br> -> '.$product->specification:'') !!}</td>
-                                            <td>{{ $product->qty.' '.$product->product->unit_name }}
-                                            <td>{{ $product->product->currency->symbol.' '.$product->price_qty }}</td>
-                                        </tr>
-                                        {{ $defaultCurrency = $product->product->currency->symbol }}
-                                        @endforeach
+                                        @if($product->product)
+                                            <tr>
+                                                <th>{{ $key+1 }}</th>
+                                                <td>{!! $product->product->name.(strlen(trim($product->specification)) > 0?'</br> -> '.$product->specification:'') !!}</td>
+                                                <td>{{ $product->qty.' '.$product->product->unit_name }}
+                                                <td>{{ $product->product->currency->symbol.' '.$product->price_qty }}</td>
+                                            </tr>
+                                            {{ $defaultCurrency = $product->product->currency->symbol }}
+                                        @else
+                                            <td>
+                                                {{ __('Product was deleted by admin...') }}
+                                            </td>
+                                        @endif
+
+
+                                    @endforeach
                                     <tr class="h6">
                                         <td colspan="3" class="text-right">{{ __('Sub-Total') }}</td>
                                         <td>{{ $defaultCurrency.' '.$order->price }}</td>

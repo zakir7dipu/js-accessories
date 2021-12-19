@@ -84,8 +84,6 @@ class ClientOrderController extends Controller
 
     public function store(Request $request)
     {
-//        'user_id', 'invoice', 'price', 'discount', 'weight', 'shipping', 'shipping_status', 'order_status', 'accepted_by'
-
         $cart = Cart::instance('shopping_cart');
         $invoice = $request->invoice;
         $invoice = 10000+(ClientOrder::count()+1);
@@ -161,7 +159,18 @@ class ClientOrderController extends Controller
 
     public function invoice(ClientOrder $order)
     {
-        return view('invoice.invoice1', compact('order'));
+        try {
+            $currencySymbol = '৳';
+            foreach ($order->product as $product){
+                if ($product->product){
+                    $currencySymbol = $product->product->currency->symbol;
+                }
+            }
+            return view('invoice.invoice1', compact('order', 'currencySymbol'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+
     }
 
     public function statusUpdate(Request $request, ClientOrder $order)
