@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2021 at 11:05 AM
+-- Generation Time: Dec 19, 2021 at 11:14 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.26
 
@@ -261,13 +261,9 @@ INSERT INTO `categories` (`id`, `parent_id`, `name`, `icon`, `slug`, `status`, `
 (3, 1, 'Pants', '/upload/categories/1634792902yw6odqDAC.png', 'pants_1634792902', 1, '2021-10-20 23:08:22', '2021-10-20 23:08:22'),
 (4, 1, 'Shoes', '/upload/categories/1634792924k2m8pgDAC.png', 'shoes_1634792924', 1, '2021-10-20 23:08:44', '2021-10-20 23:08:44'),
 (5, NULL, 'Women\'s Fashion', '/upload/categories/1634792943vbaeh0DAC.png', 'women\'s_fashion_1634792943', 1, '2021-10-20 23:09:03', '2021-10-20 23:09:03'),
-(6, NULL, 'Crockeries', '/upload/categories/1634792961xvmdfqDAC.png', 'crockeries_1634792961', 1, '2021-10-20 23:09:21', '2021-11-28 07:54:42'),
 (7, NULL, 'Mobiles', '/upload/categories/1634792981y4i7pjDAC.png', 'mobiles_1634792981', 1, '2021-10-20 23:09:41', '2021-10-20 23:09:41'),
 (8, NULL, 'Electronics', '/upload/categories/16347929970irjq6DAC.png', 'electronics_1634792997', 1, '2021-10-20 23:09:57', '2021-10-20 23:09:57'),
 (9, NULL, 'Food &amp; Beverage', '/upload/categories/1634793016vhai60DAC.png', 'food_&amp;_beverage_1634793016', 1, '2021-10-20 23:10:16', '2021-10-20 23:10:16'),
-(10, 6, 'Ceramics Item', '/upload/categories/1634793092wc24gkDAC.png', 'ceramics_item_1634793092', 1, '2021-10-20 23:11:32', '2021-10-20 23:11:32'),
-(11, 6, 'Melamine Item', '/upload/categories/1634793143k4jvi0DAC.png', 'melamine_item_1634793171', 1, '2021-10-20 23:12:23', '2021-10-20 23:12:51'),
-(12, 6, 'Drinking Glass', '/upload/categories/1634793156o52lskDAC.png', 'drinking_glass_1634793186', 1, '2021-10-20 23:12:36', '2021-10-20 23:13:06'),
 (13, 8, 'Home Electronics', '/upload/categories/16347932442emwloDAC.png', 'home_electronics_1634793244', 1, '2021-10-20 23:14:04', '2021-10-20 23:14:04'),
 (14, 8, 'Kitchen Electronics', '/upload/categories/1634793264ea36zlDAC.png', 'kitchen_electronics_1634793264', 1, '2021-10-20 23:14:24', '2021-10-20 23:14:24'),
 (15, 8, 'Commercial Electronics', '/upload/categories/1634793282ydlvswDAC.png', 'commercial_electronics_1634793282', 1, '2021-10-20 23:14:42', '2021-10-20 23:14:42'),
@@ -279,8 +275,7 @@ INSERT INTO `categories` (`id`, `parent_id`, `name`, `icon`, `slug`, `status`, `
 (21, 7, 'Others', '/upload/categories/1634793431osv7xwDAC.png', 'others_1634793431', 1, '2021-10-20 23:17:11', '2021-10-20 23:17:11'),
 (22, 5, 'Tops', '/upload/categories/1634793447n7sxyaDAC.png', 'tops_1634793447', 1, '2021-10-20 23:17:27', '2021-10-20 23:17:27'),
 (23, 5, 'Bags', '/upload/categories/1634793462qvyh6wDAC.png', 'bags_1634793462', 1, '2021-10-20 23:17:42', '2021-10-20 23:17:42'),
-(24, 5, 'Shoes', '/upload/categories/1634793480hetkwlDAC.png', 'shoes_1634793480', 1, '2021-10-20 23:18:00', '2021-10-20 23:18:00'),
-(25, 12, 'Wine Glass', NULL, 'wine_glass_1635343431', 1, '2021-10-27 08:03:51', '2021-10-27 08:03:51');
+(24, 5, 'Shoes', '/upload/categories/1634793480hetkwlDAC.png', 'shoes_1634793480', 1, '2021-10-20 23:18:00', '2021-10-20 23:18:00');
 
 -- --------------------------------------------------------
 
@@ -331,10 +326,36 @@ CREATE TABLE `client_orders` (
 --
 
 INSERT INTO `client_orders` (`id`, `user_id`, `invoice`, `price`, `discount`, `weight`, `shipping`, `shipping_status`, `payment`, `payment_trx`, `order_status`, `accepted_by`, `created_at`, `updated_at`) VALUES
-(1, 2, 'a0a3bf7b-8302-4ee1db1a7623', '4,640.00', '0', '1482', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-14 03:59:52', '2021-12-14 03:59:52'),
-(2, 2, '58c8fed6-9aa9-fa8130609a38', '2,320.00', '0', '534643', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-14 05:06:56', '2021-12-14 05:06:56'),
-(3, 2, '39dee519-327e-19d66a42d1bf', '2,000.00', '0', '534534', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-14 05:10:36', '2021-12-14 05:10:36'),
-(4, 2, 'b785bbfb-7843-4be5056f63dd', '800.00', '0', '1232', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-14 05:12:36', '2021-12-14 05:12:36');
+(1, 2, 'a0a3bf7b-8302-4ee1db1a7623', '4,640.00', '0', '1482', '0', 1, 'Cash on delivery', NULL, 0, 5, '2021-12-14 03:59:52', '2021-12-16 02:23:17'),
+(2, 2, '58c8fed6-9aa9-fa8130609a38', '2,320.00', '0', '534643', '0', 1, 'Cash on delivery', NULL, 3, 1, '2021-12-14 05:06:56', '2021-12-16 02:19:23'),
+(3, 2, '39dee519-327e-19d66a42d1bf', '2,000.00', '0', '534534', '0', 1, 'Cash on delivery', NULL, 2, 5, '2021-12-14 05:10:36', '2021-12-16 02:23:38'),
+(4, 2, 'b785bbfb-7843-4be5056f63dd', '800.00', '0', '1232', '0', 1, 'Cash on delivery', NULL, 4, 5, '2021-12-14 05:12:36', '2021-12-16 02:23:49'),
+(5, 2, '100005', '800.00', '0', '1232', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-16 02:22:00', '2021-12-16 02:22:00'),
+(6, 2, '100006', '1,620.00', '0', '120', '0', 1, 'Cash on delivery', NULL, 0, 1, '2021-12-17 09:28:21', '2021-12-17 09:31:36'),
+(7, 2, '10007', '1,620.00', '0', '120', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-18 01:39:36', '2021-12-18 01:39:36'),
+(8, 2, '10008', '800.00', '0', '1232', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-18 01:41:18', '2021-12-18 01:41:18'),
+(9, 2, '10009', '2,000.00', '0', '534534', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-18 01:45:00', '2021-12-18 01:45:00'),
+(10, 2, '10010', '800.00', '0', '23523', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-18 01:48:00', '2021-12-18 01:48:00'),
+(11, 2, '10011', '1,600.00', '0', '423423', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-18 01:50:27', '2021-12-18 01:50:27'),
+(12, 2, '10012', '800.00', '0', '23523', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-18 01:52:30', '2021-12-18 01:52:30'),
+(13, 2, '10013', '1,600.00', '0', '423423', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-18 01:53:43', '2021-12-18 01:53:43'),
+(14, 2, '10014', '700.00', '0', '534523', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-18 01:54:56', '2021-12-18 01:54:56'),
+(15, 2, '10015', '600.00', '0', '10', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-18 01:56:12', '2021-12-18 01:56:12'),
+(16, 2, '10016', '2,000.00', '0', '534534', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-18 01:57:26', '2021-12-18 01:57:26'),
+(17, 2, '10017', '800.00', '0', '1232', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-18 01:58:25', '2021-12-18 01:58:25'),
+(18, 2, '10018', '700.00', '0', '534523', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-18 02:02:20', '2021-12-18 02:02:20'),
+(19, 2, '10019', '800.00', '0', '23523', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-18 02:03:15', '2021-12-18 02:03:15'),
+(20, 2, '10020', '800.00', '0', '23523', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-19 00:23:38', '2021-12-19 00:23:38'),
+(21, 2, '10021', '800.00', '0', '23523', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-19 00:26:44', '2021-12-19 00:26:44'),
+(22, 2, '10022', '800.00', '0', '23523', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-19 00:27:34', '2021-12-19 00:27:34'),
+(23, 2, '10023', '800.00', '0', '1232', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-19 00:28:50', '2021-12-19 00:28:50'),
+(24, 2, '10024', '600.00', '0', '10', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-19 00:31:05', '2021-12-19 00:31:05'),
+(25, 2, '10025', '800.00', '0', '1232', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-19 00:36:23', '2021-12-19 00:36:23'),
+(26, 2, '10026', '2,000.00', '0', '534534', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-19 00:39:55', '2021-12-19 00:39:55'),
+(27, 2, '10027', '600.00', '0', '10', '0', 1, 'bKash', 'bKash', 1, NULL, '2021-12-19 03:13:32', '2021-12-19 03:13:32'),
+(28, 2, '10028', '1,620.00', '0', '120', '0', 1, 'bKash', 'asdfghjklqwertyuio12345678', 1, NULL, '2021-12-19 03:19:37', '2021-12-19 03:19:37'),
+(29, 2, '10029', '800.00', '0', '23523', '0', 1, 'Cash on delivery', NULL, 1, NULL, '2021-12-19 03:30:32', '2021-12-19 03:30:32'),
+(30, 2, '10030', '2,220.00', '0', '130', '0', 1, 'bKash', 'aqwsderfghjkasdxfcgvhbnjklwsdfghj', 1, NULL, '2021-12-19 04:14:12', '2021-12-19 04:14:12');
 
 -- --------------------------------------------------------
 
@@ -401,7 +422,8 @@ CREATE TABLE `contact_messages` (
 --
 
 INSERT INTO `contact_messages` (`id`, `contact-name`, `contact-email`, `contact-phone`, `contact-message`, `created_at`, `updated_at`) VALUES
-(1, 'zakir Hossain', 'zakir7dipu@gmail.com', '01764470022', 'This is a testing mail', '2021-11-18 21:55:13', '2021-11-18 21:55:13');
+(1, 'zakir Hossain', 'zakir7dipu@gmail.com', '01764470022', 'This is a testing mail', '2021-11-18 21:55:13', '2021-11-18 21:55:13'),
+(2, 'zakir Hossain', 'zakir7dipu@gmail.com', '01764470022', 'test', '2021-12-15 23:22:57', '2021-12-15 23:22:57');
 
 -- --------------------------------------------------------
 
@@ -939,7 +961,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (53, '2021_12_14_033620_create_client_orders_table', 16),
 (54, '2021_12_14_033829_create_ordered_products_table', 16),
 (55, '2021_12_14_034953_create_accepted_by_admins_table', 16),
-(56, '2021_12_14_035955_create_order_shipping_addresses_table', 16);
+(56, '2021_12_14_035955_create_order_shipping_addresses_table', 16),
+(57, '2021_12_18_080831_create_subscribtions_table', 17);
 
 -- --------------------------------------------------------
 
@@ -971,7 +994,7 @@ CREATE TABLE `model_has_roles` (
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\Models\\User', 1),
-(2, 'App\\Models\\User', 4),
+(2, 'App\\Models\\User', 5),
 (3, 'App\\Models\\User', 2);
 
 -- --------------------------------------------------------
@@ -1025,7 +1048,34 @@ INSERT INTO `ordered_products` (`id`, `product_id`, `order_id`, `specification`,
 (4, 2, 2, 'Size: Small Color: Green', 1, '1,620.00', '180', '2021-12-14 05:06:56', '2021-12-14 05:06:56'),
 (5, 5, 2, ' ', 1, '700.00', '0', '2021-12-14 05:06:56', '2021-12-14 05:06:56'),
 (6, 7, 3, ' ', 1, '2,000.00', '0', '2021-12-14 05:10:36', '2021-12-14 05:10:36'),
-(7, 4, 4, ' ', 1, '800.00', '0', '2021-12-14 05:12:37', '2021-12-14 05:12:37');
+(7, 4, 4, ' ', 1, '800.00', '0', '2021-12-14 05:12:37', '2021-12-14 05:12:37'),
+(8, 4, 5, ' ', 1, '800.00', '0', '2021-12-16 02:22:01', '2021-12-16 02:22:01'),
+(9, 2, 6, 'Size: Small Color: Green', 1, '1,620.00', '180', '2021-12-17 09:28:21', '2021-12-17 09:28:21'),
+(10, 2, 7, 'Size: Small Color: Green', 1, '1,620.00', '180', '2021-12-18 01:39:37', '2021-12-18 01:39:37'),
+(11, 4, 8, ' ', 1, '800.00', '0', '2021-12-18 01:41:18', '2021-12-18 01:41:18'),
+(12, 7, 9, ' ', 1, '2,000.00', '0', '2021-12-18 01:45:00', '2021-12-18 01:45:00'),
+(13, 9, 10, ' ', 1, '800.00', '0', '2021-12-18 01:48:00', '2021-12-18 01:48:00'),
+(14, 8, 11, ' ', 1, '1,600.00', '0', '2021-12-18 01:50:27', '2021-12-18 01:50:27'),
+(15, 9, 12, ' ', 1, '800.00', '0', '2021-12-18 01:52:30', '2021-12-18 01:52:30'),
+(16, 8, 13, ' ', 1, '1,600.00', '0', '2021-12-18 01:53:43', '2021-12-18 01:53:43'),
+(17, 5, 14, ' ', 1, '700.00', '0', '2021-12-18 01:54:56', '2021-12-18 01:54:56'),
+(18, 3, 15, ' ', 1, '600.00', '0', '2021-12-18 01:56:12', '2021-12-18 01:56:12'),
+(19, 7, 16, ' ', 1, '2,000.00', '0', '2021-12-18 01:57:26', '2021-12-18 01:57:26'),
+(20, 4, 17, ' ', 1, '800.00', '0', '2021-12-18 01:58:26', '2021-12-18 01:58:26'),
+(21, 5, 18, ' ', 1, '700.00', '0', '2021-12-18 02:02:21', '2021-12-18 02:02:21'),
+(22, 9, 19, ' ', 1, '800.00', '0', '2021-12-18 02:03:15', '2021-12-18 02:03:15'),
+(23, 9, 20, ' ', 1, '800.00', '0', '2021-12-19 00:23:38', '2021-12-19 00:23:38'),
+(24, 9, 21, ' ', 1, '800.00', '0', '2021-12-19 00:26:45', '2021-12-19 00:26:45'),
+(25, 9, 22, ' ', 1, '800.00', '0', '2021-12-19 00:27:35', '2021-12-19 00:27:35'),
+(26, 4, 23, ' ', 1, '800.00', '0', '2021-12-19 00:28:50', '2021-12-19 00:28:50'),
+(27, 3, 24, ' ', 1, '600.00', '0', '2021-12-19 00:31:06', '2021-12-19 00:31:06'),
+(28, 4, 25, ' ', 1, '800.00', '0', '2021-12-19 00:36:23', '2021-12-19 00:36:23'),
+(29, 7, 26, ' ', 1, '2,000.00', '0', '2021-12-19 00:39:56', '2021-12-19 00:39:56'),
+(30, 3, 27, ' ', 1, '600.00', '0', '2021-12-19 03:13:32', '2021-12-19 03:13:32'),
+(31, 2, 28, 'Size: Small Color: Green', 1, '1,620.00', '180', '2021-12-19 03:19:37', '2021-12-19 03:19:37'),
+(32, 9, 29, ' ', 1, '800.00', '0', '2021-12-19 03:30:32', '2021-12-19 03:30:32'),
+(33, 2, 30, 'Size: Small Color: Green', 1, '1,620.00', '180', '2021-12-19 04:14:13', '2021-12-19 04:14:13'),
+(34, 3, 30, ' ', 1, '600.00', '0', '2021-12-19 04:14:13', '2021-12-19 04:14:13');
 
 -- --------------------------------------------------------
 
@@ -1056,7 +1106,33 @@ INSERT INTO `order_shipping_addresses` (`id`, `order_id`, `name`, `company`, `st
 (1, 1, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-14 03:59:53', '2021-12-14 03:59:53'),
 (2, 2, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-14 05:06:56', '2021-12-14 05:06:56'),
 (3, 3, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-14 05:10:36', '2021-12-14 05:10:36'),
-(4, 4, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-14 05:12:37', '2021-12-14 05:12:37');
+(4, 4, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-14 05:12:37', '2021-12-14 05:12:37'),
+(5, 5, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-16 02:22:01', '2021-12-16 02:22:01'),
+(6, 6, 'Z', NULL, '58/6, Dogormura', 'Bamna', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-17 09:28:21', '2021-12-17 09:28:21'),
+(7, 7, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-18 01:39:37', '2021-12-18 01:39:37'),
+(8, 8, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-18 01:41:18', '2021-12-18 01:41:18'),
+(9, 9, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-18 01:45:00', '2021-12-18 01:45:00'),
+(10, 10, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-18 01:48:00', '2021-12-18 01:48:00'),
+(11, 11, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-18 01:50:27', '2021-12-18 01:50:27'),
+(12, 12, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-18 01:52:30', '2021-12-18 01:52:30'),
+(13, 13, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-18 01:53:43', '2021-12-18 01:53:43'),
+(14, 14, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-18 01:54:56', '2021-12-18 01:54:56'),
+(15, 15, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-18 01:56:12', '2021-12-18 01:56:12'),
+(16, 16, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-18 01:57:26', '2021-12-18 01:57:26'),
+(17, 17, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-18 01:58:26', '2021-12-18 01:58:26'),
+(18, 18, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-18 02:02:21', '2021-12-18 02:02:21'),
+(19, 19, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-18 02:03:15', '2021-12-18 02:03:15'),
+(20, 20, 'zakir Hossain', NULL, '58/6, Dogormura', 'Amtali', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-19 00:23:38', '2021-12-19 00:23:38'),
+(21, 21, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-19 00:26:44', '2021-12-19 00:26:44'),
+(22, 22, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-19 00:27:35', '2021-12-19 00:27:35'),
+(23, 23, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-19 00:28:50', '2021-12-19 00:28:50'),
+(24, 24, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-19 00:31:06', '2021-12-19 00:31:06'),
+(25, 25, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-19 00:36:23', '2021-12-19 00:36:23'),
+(26, 26, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-19 00:39:56', '2021-12-19 00:39:56'),
+(27, 27, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-19 03:13:32', '2021-12-19 03:13:32'),
+(28, 28, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-19 03:19:37', '2021-12-19 03:19:37'),
+(29, 29, 'zakir Hossain', NULL, '58/6, Dogormura', 'Savar', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-19 03:30:32', '2021-12-19 03:30:32'),
+(30, 30, 'zakir Hossain', NULL, '58/6, Dogormura', 'Amtali', 'Dhaka', '1340', 'Bangladesh', '01764470022', '2021-12-19 04:14:12', '2021-12-19 04:14:12');
 
 -- --------------------------------------------------------
 
@@ -1145,9 +1221,9 @@ CREATE TABLE `payment_methods` (
 --
 
 INSERT INTO `payment_methods` (`id`, `icon`, `name`, `number`, `content`, `status`, `created_at`, `updated_at`) VALUES
-(1, '/upload/payment-icons/cash-on-delivery.png', 'cash_on_delivery', NULL, NULL, 0, '2021-12-12 22:15:39', '2021-12-13 06:49:25'),
-(2, '/upload/payment-icons/bKash.jpg', 'bKash', NULL, '/upload/payment-qrcode/1639387419_bKash.jfif', 0, '2021-12-12 22:15:39', '2021-12-13 06:49:34'),
-(3, '/upload/payment-icons/nagad.jpg', 'nagad', '01764470022', NULL, 0, '2021-12-12 22:15:39', '2021-12-13 06:49:43'),
+(1, '/upload/payment-icons/cash-on-delivery.png', 'cash_on_delivery', NULL, NULL, 1, '2021-12-12 22:15:39', '2021-12-19 03:27:36'),
+(2, '/upload/payment-icons/bKash.jpg', 'bKash', NULL, '/upload/payment-qrcode/1639387419_bKash.jfif', 1, '2021-12-12 22:15:39', '2021-12-19 00:49:26'),
+(3, '/upload/payment-icons/nagad.jpg', 'nagad', '01764470022', NULL, 1, '2021-12-12 22:15:39', '2021-12-19 00:55:29'),
 (4, '/upload/payment-icons/rocate.jpg', 'rocate', '017644700222', NULL, 0, '2021-12-12 22:15:39', '2021-12-13 06:49:52'),
 (5, '/upload/payment-icons/money-transfer.png', 'money_transfer', NULL, NULL, 0, '2021-12-12 22:15:39', '2021-12-12 22:15:39');
 
@@ -2624,7 +2700,6 @@ INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `currency_id
 INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `currency_id`, `price`, `short_description`, `discount`, `slug`, `sku`, `unit_name`, `gross_weight`, `tags`, `status`, `featured`, `new_arrival`, `popular`, `bestseller`, `trending`, `created_at`, `updated_at`) VALUES
 (3, 3, 'Gins pant', '<p>Pant</p>', 1, 600, '<p><br></p>', NULL, '1636469138', '5366', 'Pic', '10', '', 1, 1, 1, 1, 1, 1, '2021-11-09 14:45:38', '2021-11-20 03:08:47'),
 (4, 23, 'Bag pac', '<p>Ladis Bag</p>', 1, 800, '<p><br></p>', NULL, '1636890634', '4343', 'Ladis Bag', '1232', '', 1, 1, 1, 0, 1, 1, '2021-11-14 11:50:34', '2021-12-12 02:59:56'),
-(5, 10, 'Oil', '<p>Oil</p>', 1, 700, '<p><br></p>', NULL, '1636890698', '52334', 'oil', '534523', '', 1, 1, 1, 1, 1, 1, '2021-11-14 11:51:38', '2021-11-20 03:09:31'),
 (6, 20, 'Iphone', '<p>Iphone<br></p>', 1, 80000, '<p><br></p>', NULL, '1636890832', '523523', 'Iphone', '432423', '', 1, 0, 1, 1, 0, 0, '2021-11-14 11:53:52', '2021-11-20 03:11:28'),
 (7, 15, 'spicker', '<p>spicker<br></p>', 1, 2000, '<p><br></p>', NULL, '1636890953', '523532', 'spicker', '534534', '', 1, 1, 1, 1, 1, 1, '2021-11-14 11:55:53', '2021-11-20 03:09:41'),
 (8, 13, 'head phone', '<p>head phone<br></p>', 1, 1600, '<p><br></p>', NULL, '1636891018', '42423', 'head phone', '423423', '', 1, 1, 1, 1, 0, 1, '2021-11-14 11:56:58', '2021-11-20 03:09:51'),
@@ -2681,7 +2756,6 @@ INSERT INTO `product_images` (`id`, `product_id`, `name`, `image`, `created_at`,
 (11, 2, '7.jpg', '/upload/products/16353456966ywlhgDAC.jpg', '2021-10-27 08:41:36', '2021-10-27 08:41:36'),
 (12, 3, 'images (1).jpeg', '/upload/products/1636469259mnpt7cDAC.jpeg', '2021-11-09 14:47:39', '2021-11-09 14:47:39'),
 (13, 4, 'F_Purse1_drop.jpg', '/upload/products/1636890634q652nvDAC.jpg', '2021-11-14 11:50:34', '2021-11-14 11:50:34'),
-(14, 5, 'images.jpg', '/upload/products/1636890698jgcf0rDAC.jpg', '2021-11-14 11:51:38', '2021-11-14 11:51:38'),
 (15, 6, 'iPhone+13+HP+Preview.png', '/upload/products/1636890832jdriysDAC.png', '2021-11-14 11:53:53', '2021-11-14 11:53:53'),
 (16, 7, 'ecommerce-product-photography-amazon-Tri-Product-Photo-06849.jpg', '/upload/products/1636890953gwv7btDAC.jpg', '2021-11-14 11:55:53', '2021-11-14 11:55:53'),
 (17, 8, 'photo-1505740420928-5e560c06d30e.jpg', '/upload/products/1636891018lmfycaDAC.jpg', '2021-11-14 11:56:58', '2021-11-14 11:56:58'),
@@ -2799,8 +2873,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('0FGTz4RQgTnqLjJXdi7EqurL41RRqOgDLL9PxonK', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQnAxeFZwSmFGcnlxUlpjOG54d2dLSDFpT1g0SmtDYm1uTllPRnNQcCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9yZWdpc3RlciI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1639559150),
-('MT0UcK7KCTLwj3s2KxBJsOPZVRRMw3XMRbQq9ZZk', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUkVPSGVsZmVyblNOTjlSQWRmY1hYRGo4angzcDBnNjk1bTdjWjBlQyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fX0=', 1639562720);
+('RHJfreSm49E8KoSTHD2vQRkmLFPMbUcxQpZvvvxk', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibVNXY2c5Rm52THhyZDlQUlVXenFJckFObWtsS2JhVkFHcVdtdlVPbyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fX0=', 1639908869),
+('TuUOhAtjSWwkd8sGxvBRr1MGkcSNhx7S0HiH0Nlo', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36', 'YTo4OntzOjY6Il90b2tlbiI7czo0MDoiU3drSVJWNWYwUlo3T1lZU0JzS2thZ01KWDFvMVRQSUR6eVA0REVRMiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9pbnZvaWNlLzI5Ijt9czo0OiJjYXJ0IjthOjE6e3M6MTM6InNob3BwaW5nX2NhcnQiO086Mjk6IklsbHVtaW5hdGVcU3VwcG9ydFxDb2xsZWN0aW9uIjoxOntzOjg6IgAqAGl0ZW1zIjthOjA6e319fXM6MzoidXJsIjthOjA6e31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkSVNqMi5DUWtGT0FvbjdnTGh0Mnc0Lm1heHhoSlVBeFFsSk1nakp3Z1JSWHZTdGRrV2pVbGEiO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJElTajIuQ1FrRk9Bb243Z0xodDJ3NC5tYXh4aEpVQXhRbEpNZ2pKd2dSUlh2U3Rka1dqVWxhIjt9', 1639907272);
 
 -- --------------------------------------------------------
 
@@ -2850,18 +2924,39 @@ CREATE TABLE `social_media_links` (
 --
 
 INSERT INTO `social_media_links` (`id`, `name`, `url`, `created_at`, `updated_at`) VALUES
-(1, 'facebook', NULL, '2021-10-20 22:58:16', '2021-10-20 22:58:16'),
-(2, 'twitter', NULL, '2021-10-20 22:58:16', '2021-10-20 22:58:16'),
-(3, 'linkedin', NULL, '2021-10-20 22:58:16', '2021-10-20 22:58:16'),
-(4, 'pinterest', NULL, '2021-10-20 22:58:16', '2021-10-20 22:58:16'),
-(5, 'youtube', NULL, '2021-10-20 22:58:16', '2021-10-20 22:58:16'),
-(6, 'instagram', NULL, '2021-10-20 22:58:16', '2021-10-20 22:58:16'),
-(7, 'tumblr', NULL, '2021-10-20 22:58:16', '2021-10-20 22:58:16'),
-(8, 'snapchat', NULL, '2021-10-20 22:58:16', '2021-10-20 22:58:16'),
-(9, 'whatsapp', NULL, '2021-10-20 22:58:16', '2021-10-20 22:58:16'),
-(10, 'quora', NULL, '2021-10-20 22:58:16', '2021-10-20 22:58:16'),
-(11, 'delicious', NULL, '2021-10-20 22:58:16', '2021-10-20 22:58:16'),
-(12, 'digg', NULL, '2021-10-20 22:58:16', '2021-10-20 22:58:16');
+(1, 'facebook', 'https://www.facebook.com', '2021-10-20 22:58:16', '2021-12-18 21:58:04'),
+(2, 'twitter', 'https://twitter.com/', '2021-10-20 22:58:16', '2021-12-18 21:58:04'),
+(3, 'linkedin', 'https://www.linkedin.com', '2021-10-20 22:58:16', '2021-12-18 21:58:04'),
+(4, 'pinterest', 'https://www.pinterest.com', '2021-10-20 22:58:16', '2021-12-18 21:58:04'),
+(5, 'youtube', NULL, '2021-10-20 22:58:16', '2021-12-18 21:58:04'),
+(6, 'instagram', NULL, '2021-10-20 22:58:16', '2021-12-18 21:58:04'),
+(7, 'tumblr', NULL, '2021-10-20 22:58:16', '2021-12-18 21:58:04'),
+(8, 'snapchat', NULL, '2021-10-20 22:58:16', '2021-12-18 21:58:04'),
+(9, 'whatsapp', NULL, '2021-10-20 22:58:16', '2021-12-18 21:58:04'),
+(10, 'quora', NULL, '2021-10-20 22:58:16', '2021-12-18 21:58:04'),
+(11, 'delicious', NULL, '2021-10-20 22:58:16', '2021-12-18 21:58:04'),
+(12, 'digg', NULL, '2021-10-20 22:58:16', '2021-12-18 21:58:04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscribtions`
+--
+
+CREATE TABLE `subscribtions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `subscribtions`
+--
+
+INSERT INTO `subscribtions` (`id`, `email`, `created_at`, `updated_at`) VALUES
+(1, 'asd@asd.asd', '2021-12-18 02:42:04', '2021-12-18 02:42:04'),
+(2, 'asdf@asd.asd', '2021-12-18 02:53:41', '2021-12-18 02:53:41');
 
 -- --------------------------------------------------------
 
@@ -3486,7 +3581,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `user_type`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `remember_token`, `current_team_id`, `profile_photo_path`, `otp`, `provider_id`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Zakir Hossain', 'zakir7dipu@gmail.com', NULL, '$2y$10$aJbWYgZGlz533z4HbbriF.hzd5SFEbqxBJTHZok/UFS.D3Iuytv8G', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-10-20 22:28:53', '2021-10-20 22:28:53'),
 (2, 3, 'Faidul', 'faidul@mail.com', NULL, '$2y$10$ISj2.CQkFOAon7gLht2w4.maxxhJUAxQlJMgjJwgRRXvStdkWjUla', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-12-08 22:41:20', '2021-12-08 22:41:20'),
-(4, 2, 'Nokib Mahamud', 'nokib@mail.com', NULL, '$2y$10$STtmyOxYQMbRWtiZpmPyIe6BsevOzSwrn13jqcVklLI/ufPht8P7C', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-12-15 03:42:41', '2021-12-15 03:42:41');
+(5, 2, 'Nokib Mahamud', 'nokib@mail.com', NULL, '$2y$10$NlT/dOcMzBN6aXHrP4MBlOcGVVlI8nbqHYnGjH7jMDHGZWtzhtYHG', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-12-15 23:36:36', '2021-12-15 23:36:36');
 
 --
 -- Indexes for dumped tables
@@ -3761,6 +3856,13 @@ ALTER TABLE `social_media_links`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `subscribtions`
+--
+ALTER TABLE `subscribtions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `subscribtions_email_unique` (`email`);
+
+--
 -- Indexes for table `suppliers`
 --
 ALTER TABLE `suppliers`
@@ -3868,7 +3970,7 @@ ALTER TABLE `cetegory_sections`
 -- AUTO_INCREMENT for table `client_orders`
 --
 ALTER TABLE `client_orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `companies`
@@ -3886,7 +3988,7 @@ ALTER TABLE `company_infos`
 -- AUTO_INCREMENT for table `contact_messages`
 --
 ALTER TABLE `contact_messages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `country_lists`
@@ -3934,7 +4036,7 @@ ALTER TABLE `info_sections`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `new_arrival_products_sections`
@@ -3946,13 +4048,13 @@ ALTER TABLE `new_arrival_products_sections`
 -- AUTO_INCREMENT for table `ordered_products`
 --
 ALTER TABLE `ordered_products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `order_shipping_addresses`
 --
 ALTER TABLE `order_shipping_addresses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -4033,6 +4135,12 @@ ALTER TABLE `social_media_links`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `subscribtions`
+--
+ALTER TABLE `subscribtions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `suppliers`
 --
 ALTER TABLE `suppliers`
@@ -4066,7 +4174,7 @@ ALTER TABLE `thana_lists`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
