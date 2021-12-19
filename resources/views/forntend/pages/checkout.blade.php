@@ -5,7 +5,7 @@
 @section('page-css')
     <link rel="stylesheet" href="{{ asset('backend/assets/plugin/bootstrap-select/bootstrap-select.min.css') }}">
     <style>
-        .modal-body {
+        #orderProcessLoadView .modal-body {
             background-color: rgba(0,0,0,0.5) !important;
         }
     </style>

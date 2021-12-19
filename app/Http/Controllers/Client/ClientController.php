@@ -184,9 +184,23 @@ class ClientController extends Controller
 
     public function bKashPayment($payment)
     {
-        return $output = '<form action="'.route('client.order.store').'" method="post">
-        <input type="hidden" name="_token" value="'.csrf_token().'">
-        <img src="'.($payment->content? asset($payment->content):'').'" alt="" id="modalImageShow" class="img-fluid img-thumbnail w-50" accept="image/png, image/jpeg"/>
+        return $output = '<form action="javascript:void(0)" method="post">
+        <input type="hidden" name="method" value="'.$payment->name.'">
+        <h4><code>'.__('Please use this QR Code or bellow number of the image for your payment. After completing your mobile banking please provide your payment TRX bellow TRX input field for verify your payment. Then press on submit button to complete your order process.').'</code></h4>
+        <img src="'.($payment->content? asset($payment->content):'').'" alt="" id="modalImageShow" class="img-fluid img-thumbnail w-50 mx-auto" accept="image/png, image/jpeg"/>
+        <p class="mb-1 text-uppercase"><label for="methodStatus">'.__('TRX ID').'</label>: </p>
+        <div class="input-group input-group-lg mb-3 text-center">
+            <input type="text" name="trx_id" id="trxId" class="form-control">
+        </div>
+    </form>';
+    }
+
+    public function nagadAndRoketPayment($payment)
+    {
+        return $output = '<form action="javascript:void(0)" method="post">
+        <input type="hidden" name="method" value="'.$payment->name.'">
+        <h4><code>'.__('Please use this number for your payment. After completing your mobile banking please provide your payment TRX bellow TRX input field for verify your payment. Then press on submit button to complete your order process.').'</code></h4>
+        <p class="font-weight-bold">'.$payment->number.'</p>
         <p class="mb-1 text-uppercase"><label for="methodStatus">'.__('TRX ID').'</label>: </p>
         <div class="input-group input-group-lg mb-3 text-center">
             <input type="text" name="trx_id" id="trxId" class="form-control">
