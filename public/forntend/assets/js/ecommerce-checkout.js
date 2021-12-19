@@ -245,7 +245,8 @@
 
         modalFooterSaveBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            modalFooterSaveBtn.parentElement.parentElement.querySelector('form').submit();
+            // modalFooterSaveBtn.parentElement.parentElement.querySelector('form').submit();
+            orderProcessedWithPayment(title, modal.id)
         });
 
         $(`#${modal.id}`).modal('show').on('hidden.bs.modal', function (e) {
@@ -253,6 +254,7 @@
         }).on('shown.bs.modal', function () {
             $('#preloadModal').modal('hide');
         });
+
     };
 
     function uuidv4() {
@@ -269,6 +271,55 @@
         };
 
         sendOrder(order)
+    };
+
+    const orderProcessedWithPayment = (title, modal) => {
+        const modalForm = document.getElementById(title.replaceAll(' ', ''));
+        const inputFields = modalForm.querySelectorAll('input');
+        const paymentInfo = [];
+        Array.from(inputFields).map((item, key) => {
+            if (checkInputValidate(item)){
+                paymentInfo.push({
+                    name: item.getAttribute('name'),
+                    value: item.value
+                });
+            }
+            if (paymentInfo.length === inputFields.length){
+                makeOrderForAdvancePayment(paymentInfo, modal)
+            }
+        });
+
+    };
+
+    const makeOrderForAdvancePayment = (paymentInfo, modal) =>{
+        let order = {
+            'invoice': uuidv4(),
+            'shipping_address': localStorage.getItem('sipping_address'),
+            'coupon_discount': localStorage.getItem('coupon_discount'),
+            'payment': null,
+            'payment_trx': null,
+        };
+        Array.from(paymentInfo).map((item, key) => {
+            if (item.name === 'method'){
+                order.payment = item.value
+            }else if(item.name === 'trx_id'){
+                order.payment_trx = item.value
+            }
+        });
+        $(`#${modal}`).modal('hide');
+        sendOrder(order);
+    };
+
+    const checkInputValidate = (item) => {
+        if (item.value){
+            return true
+        } else {
+            toastr.error(`${item.getAttribute('name').replaceAll('_',' ').toUpperCase()} field is required`);
+            item.classList.add('border');
+            item.classList.add('border-danger');
+            item.focus();
+            return false;
+        }
     };
 
     const sendOrder = (object) => {

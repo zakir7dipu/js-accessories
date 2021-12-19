@@ -184,7 +184,7 @@ class ClientController extends Controller
 
     public function bKashPayment($payment)
     {
-        return $output = '<form action="javascript:void(0)" method="post">
+        return $output = '<form action="javascript:void(0)" method="post" id="'.trim($payment->name).'Method'.'">
         <input type="hidden" name="method" value="'.$payment->name.'">
         <h4><code>'.__('Please use this QR Code or bellow number of the image for your payment. After completing your mobile banking please provide your payment TRX bellow TRX input field for verify your payment. Then press on submit button to complete your order process.').'</code></h4>
         <img src="'.($payment->content? asset($payment->content):'').'" alt="" id="modalImageShow" class="img-fluid img-thumbnail w-50 mx-auto" accept="image/png, image/jpeg"/>
@@ -197,7 +197,7 @@ class ClientController extends Controller
 
     public function nagadAndRoketPayment($payment)
     {
-        return $output = '<form action="javascript:void(0)" method="post">
+        return $output = '<form action="javascript:void(0)" method="post" id="'.trim($payment->name).'Method'.'">
         <input type="hidden" name="method" value="'.$payment->name.'">
         <h4><code>'.__('Please use this number for your payment. After completing your mobile banking please provide your payment TRX bellow TRX input field for verify your payment. Then press on submit button to complete your order process.').'</code></h4>
         <p class="font-weight-bold">'.$payment->number.'</p>

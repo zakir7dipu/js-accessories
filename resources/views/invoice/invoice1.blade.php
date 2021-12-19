@@ -5,8 +5,11 @@
 	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 
 	<title>{{ config('app.name') }}</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ $generalSettings->favicon? asset($generalSettings->favicon):asset('forntend/assets/images/icons/favicon.ico') }}">
 
-	<link rel='stylesheet' type='text/css' href='{{ asset('invoices/css/style.css') }}' />
+
+    <link rel='stylesheet' type='text/css' href='{{ asset('invoices/css/style.css') }}' />
 	<link rel='stylesheet' type='text/css' href='{{ asset('invoices/css/print.css') }}' media="print" />
 {{--    <script src="{{ asset('forntend/assets/js/jquery.min.js') }}"></script>--}}
 {{--    <script src="{{ asset('invoices/js/html2pdf.bundle.js') }}"></script>--}}

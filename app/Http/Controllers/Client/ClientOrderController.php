@@ -112,6 +112,10 @@ class ClientOrderController extends Controller
             $clientOrder->price = $cart->subtotal();
             $clientOrder->discount = $couponDiscount ? $couponDiscount : 0;
             $clientOrder->weight = $weight;
+            if ($request->has('payment')){
+                $clientOrder->payment = $request->payment;
+            }
+            $clientOrder->payment_trx = $request->has('payment_trx')?$request->payment_trx:null;
             $clientOrder->save();
             $clientOrder->address()->create($shippingAddress);
 
