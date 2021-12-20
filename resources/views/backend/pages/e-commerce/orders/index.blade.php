@@ -36,7 +36,8 @@
                                 <thead>
                                 <tr>
                                     <th width="5%">{{__('SL No.')}}</th>
-                                    <th width="20%">{{__('Name')}}</th>
+                                    <th width="10%">{{__('Invoice No.')}}</th>
+                                    <th width="10%">{{__('Name')}}</th>
                                     <th wirth="20%">{{__('Shipping Address')}}</th>
                                     <th wirth="45%">{{__('Products')}}</th>
                                     <th wirth="10%" class="text-center">{{__('Option')}}</th>
@@ -46,6 +47,7 @@
                                 @foreach($orders as $key => $order)
                                     <tr>
                                         <th>{{ $key+1 }}</th>
+                                        <td>{{ $order->invoice }}</td>
                                         <td>{!! $order->address->name.'</br>'.$order->address->phone !!}</td>
                                         <td>{!! ($order->address->company?$order->address->company.', ':'').($order->address->street_address?$order->address->street_address.', ':'').($order->address->police_station?$order->address->police_station.', ':'').($order->address->state?$order->address->state.', ':'').($order->address->country?$order->address->country.'-':'').($order->address->postal_code?$order->address->postal_code.' ':'') !!}</td>
                                         <td>
