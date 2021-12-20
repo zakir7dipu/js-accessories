@@ -323,7 +323,8 @@
     };
 
     const sendOrder = (object) => {
-        $('#orderProcessLoadView').modal('show');
+        // $('#orderProcessLoadView').modal('show');
+        orderProcessLoadView();
         $.ajax({
             type: 'post',
             url: '/my-account/order',
@@ -342,6 +343,14 @@
                 }, 1500)
             }
         })
+    };
+
+    const orderProcessLoadView = () =>{
+        const body = document.querySelector('body');
+        body.setAttribute('style', 'position: relative;');
+        body.classList.add('stop-scrolling');
+        const loadingContent = document.querySelector('.loadOverlay');
+        loadingContent.classList.add('activeLoadOverlay');
     };
 
     if (paymentBtns.length === 0){

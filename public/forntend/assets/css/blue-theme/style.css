@@ -8314,7 +8314,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
         counter-increment: i; }
     .checkout-progress-bar li.active:before,
     .checkout-progress-bar li.active > span:before {
-      background-color: #ff5501; }
+      background-color: #3505F7; }
     .checkout-progress-bar li.active > span {
       color: #000; }
     .checkout-progress-bar li.active > span:after {
@@ -8381,7 +8381,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   vertical-align: top;
   word-wrap: break-word; }
   .shipping-address-box.active {
-    border-color: #ff5501; }
+    border-color: #3505F7; }
     .shipping-address-box.active:after {
       content: '\e84e';
       font-family: 'porto';
@@ -8394,7 +8394,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
       line-height: 2.1rem;
       padding-top: .2rem;
       text-align: center;
-      background-color: #ff5501;
+      background-color: #3505F7;
       color: #ffffff; }
     .shipping-address-box.active .address-box-action {
       visibility: hidden; }
