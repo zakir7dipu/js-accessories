@@ -187,14 +187,14 @@
 {{--            <div class="modal-content">--}}
 {{--                <div class="modal-body" style="justify-content: center; align-content: center;">--}}
 {{--                    <div class="col-12">--}}
-{{--                        <img src="{{ asset('upload/settings/ajax-loader.gif') }}" alt="" class="mx-auto img-fluid img-fluid">--}}
+{{--                        <img src="{{ asset('upload/settings/orange-silver-loader.gif') }}" alt="" class="mx-auto img-fluid img-fluid">--}}
 {{--                    </div>--}}
 {{--                </div>--}}
 {{--            </div>--}}
 {{--        </div>--}}
 {{--    </div>--}}
     <div class="loadOverlay">
-        <img src="{{ asset('upload/settings/ajax-loader.gif') }}" alt="">
+        <img src="{{ asset('upload/settings/'.$themeColors[config('app.theme_color','1')].'-loader.gif') }}" alt="">
     </div>
 
 @endsection
