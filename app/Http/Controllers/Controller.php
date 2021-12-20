@@ -76,6 +76,7 @@ class Controller extends BaseController
         }
         $allColors = array_unique($allColors);
         $orderPermissions = $this->orderPermission();
+        $themeColors = $this->themeColors();
 
         View::share('districts', $districts);
         View::share('generalSettings', $generalSettings);
@@ -104,6 +105,7 @@ class Controller extends BaseController
         View::share('allSizes', $allSizes);
         View::share('allColors', $allColors);
         View::share('orderPermissions', $orderPermissions);
+        View::share('themeColors', $themeColors);
     }
 
     public function backWithError($message)
@@ -156,7 +158,6 @@ class Controller extends BaseController
 
     public function orderPermission()
     {
-//        Canceled = 0, Pending = 1, Approved = 2, Process to delivery = 3, Delivered = 4.
         return $array = [
             (object)[
                 'name' => 'Canceled',
@@ -191,6 +192,15 @@ class Controller extends BaseController
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
         $items = $items instanceof Collection ? $items : Collection::make($items);
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+    }
+
+    public function themeColors()
+    {
+        return $colors = [
+            'blue',
+            'orange',
+            'silver',
+        ];
     }
 }
 

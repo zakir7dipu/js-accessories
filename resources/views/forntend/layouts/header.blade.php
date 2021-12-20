@@ -32,7 +32,7 @@
     <!-- Fontawesome -->
     <link rel="stylesheet" href="{{ asset('backend/assets/css/all.min.css') }}">
     <!-- Main CSS File -->
-    <link rel="stylesheet" href="{{ asset('forntend/assets/css/'.config('app.theme_color','orange').'-theme/style.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('forntend/assets/css/'.$themeColors[config('app.theme_color','1')].'-theme/style.min.css') }}">
 {{--    <link rel="stylesheet" type="text/css" href="{{ asset('forntend/assets/vendor/fontawesome-free/css/all.min.css') }}">--}}
     @yield('page-css')
 </head>

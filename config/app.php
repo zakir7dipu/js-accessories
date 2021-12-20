@@ -17,7 +17,7 @@ return [
 
     'logo' => env('APP_LOGO'),
 
-    'theme_color' => env('APP_COLOR', 'orange'),
+    'theme_color' => env('APP_COLOR', '1'),
 
     /*
     |--------------------------------------------------------------------------
