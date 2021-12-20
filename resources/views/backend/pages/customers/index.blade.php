@@ -29,7 +29,7 @@
                             <h6 class="card-title lh-35">{{ __($title) }}</h6>
                         </div>
                         <div class="col-md-6 col-sm-12 text-right">
-                                <a href="{{ route('admin.supplier.create') }}" class="btn btn-danger btn-sm rounded"><i class="material-icons">add</i></a>
+{{--                                <a href="{{ route('admin.supplier.create') }}" class="btn btn-danger btn-sm rounded"><i class="material-icons">add</i></a>--}}
                         </div>
                     </div>
                 </div>

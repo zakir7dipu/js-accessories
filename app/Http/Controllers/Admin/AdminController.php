@@ -161,7 +161,7 @@ class AdminController extends Controller
         try {
             $generalSettings = GeneralSettings::first();
             $title = ($generalSettings?$generalSettings->site_name:'').' | '. $customer->name;
-            dd($customer);
+
             return view('backend.pages.customers.view', compact('title', 'generalSettings', 'customer'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());

@@ -135,10 +135,12 @@ class AppSettingsController extends Controller
             $env = base_path('.env');
 
 
-            if (file_exists($env)) {
-                file_put_contents($env, str_replace(
-                    'APP_LOGO=' . env("APP_LOGO"), 'APP_LOGO=' . $cleanValues['logo'], file_get_contents($env)
-                ));
+            if ($request->hasFile('logo')) {
+                if (file_exists($env)) {
+                    file_put_contents($env, str_replace(
+                        'APP_LOGO=' . env("APP_LOGO"), 'APP_LOGO=' . $cleanValues['logo'], file_get_contents($env)
+                    ));
+                }
             }
 
             return $this->backWithSuccess('General settings saved successfully');

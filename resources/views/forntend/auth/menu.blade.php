@@ -3,10 +3,10 @@
         <h3 class="widget-title">{{ Auth::user()->name }}</h3>
 
         <ul class="list">
-            <li class="active"><a href="{{ route('client.dashboard') }}">{{ __('Dashboard') }} </a></li>
-            <li><a href="{{ route('client.profile') }}">{{ __('Account Settings') }}</a></li>
+            <li class="{{ request()->is('my-account/dashboard')?'active':'' }}"><a href="{{ route('client.dashboard') }}">{{ __('Dashboard') }} </a></li>
+            <li class="{{ request()->is('my-account/profile')?'active':'' }}"><a href="{{ route('client.profile') }}">{{ __('Account Settings') }}</a></li>
 {{--            <li><a href="javascript:void(0)">Address Book</a></li>--}}
-            <li><a href="{{ route('client.order.index') }}">My Orders</a></li>
+            <li class="{{ request()->is('my-account/order')?'active':'' }}"><a href="{{ route('client.order.index') }}">My Orders</a></li>
 {{--            <li><a href="javascript:void(0)">My Downloadable Products</a></li>--}}
             <li>
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

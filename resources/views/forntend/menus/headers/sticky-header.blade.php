@@ -2,8 +2,8 @@
     <div class="container">
         <nav class="main-nav">
             <ul class="menu sf-arrows">
-                <li class="active"><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
-                <li class="megamenu-container">
+                <li class="{{ request()->path() === '/'?'active':'' }}"><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
+                <li class="megamenu-container {{ request()->is('category*')?'active':'' }}">
                     <a href="javascript:void(0)" class="sf-with-ul">{{ __('Shop') }}</a>
                     <div class="megamenu">
                         <div class="row">
@@ -27,9 +27,9 @@
                     </div><!-- End .megamenu -->
                 </li>
 
-                <li><a href="{{ route('blog.index') }}"><span>{{ __('Bloges & News') }}</span></a></li>
-                <li><a href="{{ route('view-page',$pages->where('name','about')->first()->id) }}"><span>{{ __('About Us') }}</span></a></li>
-                <li><a href="{{ route('view-page',$pages->where('name','contact')->first()->id) }}"><span>{{ __('Contact Us') }}</span></a></li>
+                <li class="{{ request()->is('blog*')?'active':'' }}"><a href="{{ route('blog.index') }}"><span>{{ __('Bloges & News') }}</span></a></li>
+                <li class="{{ request()->is('about-us*')?'active':'' }}"><a href="{{ route('view-page',$pages->where('name','about')->first()->id) }}"><span>{{ __('About Us') }}</span></a></li>
+                <li class="{{ request()->is('contact-us*')?'active':'' }}"><a href="{{ route('view-page',$pages->where('name','contact')->first()->id) }}"><span>{{ __('Contact Us') }}</span></a></li>
                 @auth
                     @if(Auth::user()->hasRole('customer'))
                     <li class="float-right special-effect"><a href="{{ route('client.dashboard') }}">{{ __('Dashboard') }}</a></li>

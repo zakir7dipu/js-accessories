@@ -55,6 +55,10 @@ Route::prefix('blog')->as('blog.')->group(function (){
 });
 //page view
 Route::get('/page/{page}', [GuestController::class, 'pageView'])->name('view-page');
+//about page
+Route::get('/about-us', [GuestController::class, 'aboutPage'])->name('view-aboutPage-page');
+//contact page
+Route::get('/contact-us', [GuestController::class, 'contactPage'])->name('view-contact-page');
 // sote contact message
 Route::post('/contact-store', [GuestController::class, 'storeContactMessage'])->name('contact-store');
 //get product

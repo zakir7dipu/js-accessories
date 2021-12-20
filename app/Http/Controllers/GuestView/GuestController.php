@@ -141,9 +141,9 @@ class GuestController extends Controller
     public function pageView(Pages $page)
     {
         if ($page->name == 'about'){
-           return  $this->aboutPage($page);
+           return  redirect()->route('view-aboutPage-page');
         }elseif ($page->name == 'contact'){
-            return $this->contactPage($page);
+           return  redirect()->route('view-contact-page');
         }
         try {
             $advertise = Advertisement::all()->random(1)->first();
@@ -156,8 +156,9 @@ class GuestController extends Controller
     }
 
     // about page
-    public function aboutPage($page)
+    public function aboutPage()
     {
+        $page = Pages::where('name', 'about')->first();
         try {
             $advertise = Advertisement::all()->random(1)->first();
             $overview = $page->sections()->where(['name'=>'overview', 'status'=>true])->first();
@@ -173,8 +174,9 @@ class GuestController extends Controller
     }
 
     // contact page
-    public function contactPage($page)
+    public function contactPage()
     {
+        $page = Pages::where('name', 'contact')->first();
         try {
             $map = $page->sections()->where(['name'=>'map', 'status'=>true])->first()?$page->sections()->where('name','map')->first():null;
             $carts = Cart::instance('shopping_cart')->content();
