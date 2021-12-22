@@ -88,6 +88,12 @@ Route::prefix('/search')->as('search.')->group(function (){
     Route::get('/feature', [GuestController::class, 'searchByFeature'])->name('feature');
 });
 
+// shurjaPay
+Route::prefix('/shurjaPay')->group(function (){
+    Route::get('/success',[GuestController::class, 'successPayment']);
+    Route::get('/cancel',[GuestController::class, 'cancelPayment']);
+});
+
 //district-info
 Route::get('/country', [DistrictController::class, 'getCountry']);
 Route::post('/district', [DistrictController::class, 'getDistrict']);

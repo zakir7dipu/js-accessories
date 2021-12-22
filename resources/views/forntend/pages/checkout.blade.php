@@ -182,17 +182,6 @@
     </main><!-- End .main -->
 
     <!-- load view -->
-{{--    <div class="modal fade bd-example-modal-lg" id="orderProcessLoadView" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">--}}
-{{--        <div class="modal-dialog modal-lg modal-dialog-centered">--}}
-{{--            <div class="modal-content">--}}
-{{--                <div class="modal-body" style="justify-content: center; align-content: center;">--}}
-{{--                    <div class="col-12">--}}
-{{--                        <img src="{{ asset('upload/settings/orange-silver-loader.gif') }}" alt="" class="mx-auto img-fluid img-fluid">--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
     <div class="loadOverlay">
         <img src="{{ asset('upload/settings/'.$themeColors[config('app.theme_color','1')].'-loader.gif') }}" alt="">
     </div>
@@ -201,5 +190,6 @@
 
 @section('page-script')
     <script src="{{ asset('backend/assets/plugin/bootstrap-select/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('js/shurjoPay.js') }}"></script>
     <script src="{{ asset('forntend/assets/js/ecommerce-checkout.js') }}"></script>
 @endsection

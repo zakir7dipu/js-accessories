@@ -169,6 +169,9 @@ class ClientController extends Controller
         if ($payment->name === 'cash_on_delivery'){
             return response()->json($this->cashOnDelivery($payment));
         }
+        else if ($payment->name === "money_transfer"){
+            return response()->json($this->moneyTransfer($payment));
+        }
         else if ($payment->name === "bKash"){
             return response()->json($this->bKashPayment($payment));
         }
@@ -180,6 +183,13 @@ class ClientController extends Controller
     public function cashOnDelivery($payment)
     {
         return 'accept';
+    }
+
+    public function moneyTransfer($payment)
+    {
+        $payment->username = env('SHURJO_PAY_USERNAME');
+        $payment->password = env('SHURJO_PAY_PASSWORD');
+        return $payment;
     }
 
     public function bKashPayment($payment)

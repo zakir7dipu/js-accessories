@@ -569,4 +569,19 @@ class GuestController extends Controller
         }
         return response()->json($request->all());
     }
+
+    // shurjaPay
+    public function successPayment()
+    {
+        return response()->json([
+            'status' => true
+        ]);
+    }
+
+    public function cancelPayment()
+    {
+        return response()->json([
+            'status' => false
+        ]);
+    }
 }

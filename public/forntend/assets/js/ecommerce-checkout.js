@@ -11,6 +11,10 @@
     let newAddress = document.querySelector('.btn-new-address');
     let paymentBtns = document.querySelectorAll('.paymentBtn');
     const oderProcessBtn = document.querySelector('.orderProcessBtn');
+    const shurjaPay = new ShurjoPay();
+    let country = null;
+    let state = null;
+    let police_station = null;
 
     const reviewSippingAddress = () => {
         myForm.classList.add('d-none');
@@ -21,6 +25,9 @@
             type: 'get',
             url: `/order-area/${savedAddress.country},${savedAddress.state},${savedAddress.police_station}`,
             success: function (data) {
+                country = data.country.name;
+                state =  data.state.name;
+                police_station = data.police_station.name;
                 Object.assign(savedAddress, {country: data.country.name, state: data.state.name, police_station:data.police_station.name});
                 let viewShipping = paymentAndReview.querySelector('.shipping-address-box.active');
                 viewShipping.innerHTML = '';
@@ -166,10 +173,19 @@
             type: 'get',
             url: item.getAttribute('data-role'),
             success:function (data) {
-                if (data === 'accept'){
-                    orderProcessedWithoutPayment();
+                if (typeof data === 'object'){
+                    shurjaPay.getAccess(data.username,data.password)
+                        .then(response => response.json())
+                        .then(result => shurjaPayCreatePayment(result))
+                        .catch(error => console.log('error', error));
+                    return;
                 }else {
-                    createModal(title, data)
+                    return;
+                    if (data === 'accept'){
+                        orderProcessedWithoutPayment();
+                    }else {
+                        createModal(title, data)
+                    }
                 }
             }
         })
@@ -308,6 +324,29 @@
         });
         $(`#${modal}`).modal('hide');
         sendOrder(order);
+    };
+
+    const shurjaPayCreatePayment = (result) => {
+        // token, store_id, prefix, amount, order_id, discsount_amount, disc_percent, customer_name, customer_phone, customer_email, customer_address, customer_city, customer_state, customer_postcode, customer_country
+        let sippingAddress = JSON.parse(localStorage.getItem('sipping_address'));
+        // console.log(sippingAddress)
+        shurjaPay.createPayment(
+            result.token,
+            result.store_id,
+            'eshop',
+            result.amount,
+            uuidv4(),
+            result.discsount_amount?result.discsount_amount:0,
+            result.disc_percent?result.disc_percent:0,
+            sippingAddress.name,
+            sippingAddress.phone,
+            sippingAddress.email?sippingAddress.email:'',
+            sippingAddress.address,
+            police_station,
+            state,
+            sippingAddress.post_code,
+            country,
+        )
     };
 
     const checkInputValidate = (item) => {

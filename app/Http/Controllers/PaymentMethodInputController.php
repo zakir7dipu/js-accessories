@@ -17,6 +17,9 @@ class PaymentMethodInputController extends Controller
         if ($payment->name === 'cash_on_delivery'){
             return response()->json($this->cashOnDelivery($payment));
         }
+        else if ($payment->name === "money_transfer"){
+            return response()->json($this->moneyTransfer($payment));
+        }
         else if ($payment->name === "bKash"){
             return response()->json($this->bKashPayment($payment));
         }
@@ -35,6 +38,29 @@ class PaymentMethodInputController extends Controller
                 <input type="checkbox" name="status" '.($payment->status?'checked':'').' class="methodActivationBtn">
                 <span class="slider round"></span>
             </label>
+        </div>
+    </form>';
+    }
+
+    public function moneyTransfer($payment)
+    {
+        return $output = '<form action="'.route('admin.settings.payment.store',$payment->id).'" method="post">
+        <input type="hidden" name="_token" value="'.csrf_token().'">
+        <p class="mb-1 text-uppercase"><label for="methodStatus">'.__('Activation').'</label>: </p>
+        <div class="input-group input-group-lg mb-3 text-center">
+            <label class="switch">
+                <input type="checkbox" name="status" '.($payment->status?'checked':'').' class="methodActivationBtn">
+                <span class="slider round"></span>
+            </label>
+        </div>
+
+        <p class="mb-1 text-uppercase"><label for="username">'.__('Username').'</label>: </p>
+        <div class="input-group input-group-lg mb-3 text-center">
+            <input type="text" name="username" class="form-control" id="username" value="'.env('SHURJO_PAY_USERNAME').'">
+        </div>
+        <p class="mb-1 text-uppercase"><label for="password">'.__('Password').'</label>: </p>
+        <div class="input-group input-group-lg mb-3 text-center">
+            <input type="text" name="password" class="form-control" id="password" value="'.env('SHURJO_PAY_PASSWORD').'">
         </div>
     </form>';
     }
@@ -88,6 +114,7 @@ class PaymentMethodInputController extends Controller
         try {
             $input = $request->all();
             unset($input['_token']);
+
             if ($request->hasFile('content')){
                 if ($payment->content){
                     $path = $payment->content;
@@ -108,6 +135,20 @@ class PaymentMethodInputController extends Controller
                 $input['status'] = true;
             }else{
                 $input['status'] = false;
+            }
+
+            if ($request->has('username') && $request->has('password')){
+                $env = base_path('.env');
+                if (file_exists($env)) {
+                    file_put_contents($env, str_replace(
+                        'SHURJO_PAY_USERNAME=' . env("SHURJO_PAY_USERNAME"), 'SHURJO_PAY_USERNAME=' . $input['username'], file_get_contents($env)
+                    ));
+                    file_put_contents($env, str_replace(
+                        'SHURJO_PAY_PASSWORD=' . env("SHURJO_PAY_PASSWORD"), 'SHURJO_PAY_PASSWORD=' . $input['password'], file_get_contents($env)
+                    ));
+                }
+                unset($input['username']);
+                unset($input['password']);
             }
 
             $payment->update($input);
