@@ -2,6 +2,7 @@ class ShurjoPay {
     constructor() {
         this.url = 'https://sandbox.shurjopayment.com/api/'
         this.ip = null;
+        this.token = null;
         this.getClientIp();
     }
 
@@ -52,8 +53,9 @@ class ShurjoPay {
     };
 
     createPayment = (token, store_id, prefix, amount, order_id, discsount_amount, disc_percent, customer_name, customer_phone, customer_email, customer_address, customer_city, customer_state, customer_postcode, customer_country) => { //secret-pay
-        // var myHeaders = new Headers();
-        // myHeaders.append("Content-Type", "application/json");
+        this.token = token;
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
             "token": token,
@@ -76,8 +78,7 @@ class ShurjoPay {
             "customer_postcode": customer_postcode,
             "customer_country": customer_country
         });
-        console.log(raw);
-        return;
+
         var requestOptions = {
             method: 'POST',
             headers: myHeaders,
@@ -86,8 +87,37 @@ class ShurjoPay {
         };
 
         fetch(`${this.url}secret-pay`, requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                this.verification(result);
+            })
+            .catch(error => console.log('error', error));
+    };
+
+    verification = result => {
+        // console.log(result);
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "token": this.token,
+            "order_id": result.sp_order_id
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch(`${this.url}verification`, requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
+    }
+
+    paymentStatus = () => {//payment-status
+
     }
 }

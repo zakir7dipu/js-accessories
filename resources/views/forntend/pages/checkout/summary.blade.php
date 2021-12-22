@@ -36,7 +36,7 @@
                         </h2>
                     </div>
                 </td>
-                <td class="price-col">{{ $cartTotal }}</td>
+                <td class="price-col" id="totalPrice">{{ $cartTotal }}</td>
             </tr>
             </tbody>
         </table>

@@ -329,13 +329,13 @@
     const shurjaPayCreatePayment = (result) => {
         // token, store_id, prefix, amount, order_id, discsount_amount, disc_percent, customer_name, customer_phone, customer_email, customer_address, customer_city, customer_state, customer_postcode, customer_country
         let sippingAddress = JSON.parse(localStorage.getItem('sipping_address'));
-        // console.log(sippingAddress)
+        let orderId = uuidv4();
         shurjaPay.createPayment(
             result.token,
             result.store_id,
             'eshop',
-            result.amount,
-            uuidv4(),
+            document.getElementById('totalPrice').innerText.replaceAll(',',''),
+            orderId,
             result.discsount_amount?result.discsount_amount:0,
             result.disc_percent?result.disc_percent:0,
             sippingAddress.name,
