@@ -45,7 +45,7 @@
                                         <p for="orderStatus">{{ __('Order Status') }}</p>
                                         <select name="order_status" id="orderStatus" title="Please select one" class="form-control">
                                             @foreach($orderPermissions as $permissions)
-                                                <option {{ $order->order_status === $permissions->permission_code? 'selected':'' }} {{ $order->order_status >$permissions->permission_code? ($permissions->permission_code != 0?'disabled':''):''  }} {{ $order->order_status === 0?'disabled':'' }}  value="{{ $permissions->permission_code }}">{{ $permissions->name }}</option>
+                                                <option {{ $order->order_status === $permissions->permission_code? 'selected':'' }} {{ $order->order_status >$permissions->permission_code? ($permissions->permission_code != 0?'disabled':($order->order_status === 4?'disabled':'')):''  }} {{ $order->order_status === 0?'disabled':'' }}  value="{{ $permissions->permission_code }}">{{ $permissions->name }}</option>
                                             @endforeach
                                         </select>
                                     </form>
