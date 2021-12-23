@@ -151,12 +151,22 @@ class AdvertisementController extends Controller
     public function destroy(Advertisement $advertisement)
     {
         try {
+            $advertisement->delete();
+            return $this->backWithSuccess($advertisement->title.' has been deleted successfully...');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function forceDestroy(Advertisement $advertisement)
+    {
+        try {
             if ($advertisement->image){
                 if (file_exists(public_path($advertisement->image))){
                     unlink(public_path($advertisement->image));
                 }
             }
-            $advertisement->delete();
+            $advertisement->forceDelete();
             return $this->backWithSuccess($advertisement->title.' has been deleted successfully...');
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());

@@ -224,14 +224,27 @@ class BlogCategoryController extends Controller
     {
         try {
             foreach ($category->posts as $post){
+                $post->delete();
+            }
+            $category->delete();
+            return $this->backWithSuccess('Blog category has been deleted successfully');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function forceDestroy(BlogCategory $category)
+    {
+        try {
+            foreach ($category->posts as $post){
                 if ($post->thumbnail){
                     if (file_exists(public_path($post->thumbnail))){
                         unlink(public_path($post->thumbnail));
                     }
                 }
-                $post->delete();
+                $post->forceDelete();
             }
-            $category->delete();
+            $category->forceDelete();
             return $this->backWithSuccess('Blog category has been deleted successfully');
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());

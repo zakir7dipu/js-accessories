@@ -20,6 +20,7 @@ class CreateAttributeItemsTable extends Migration
             $table->string('name');
             $table->longText('image')->nullable();
             $table->string('details')->nullable()->comment('as like #000000 or S,M,XL or 32, 34, 36 or 3\' by 5\' etc');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

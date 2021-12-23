@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     public $fillable = ['category_id', 'name', 'description', 'currency_id', 'price', 'short_description', 'status', 'featured', 'new_arrival', 'popular', 'bestseller', 'trending', 'discount', 'slug', 'sku', 'unit_name', 'gross_weight', 'tags'];
 

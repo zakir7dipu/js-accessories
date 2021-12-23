@@ -20,6 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->longText('icon')->nullable();
             $table->string('slug',255);
             $table->boolean('status')->default(true)->comment('1 = activated and 0 = deactivated');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

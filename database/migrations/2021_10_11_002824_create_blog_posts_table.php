@@ -23,6 +23,7 @@ class CreateBlogPostsTable extends Migration
             $table->longText('tags')->nullable();
             $table->string('slug');
             $table->boolean('status')->default(true)->comment('0 = unpublish, 1 = publish');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

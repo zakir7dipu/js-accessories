@@ -237,12 +237,22 @@ class BlogPostController extends Controller
     public function destroy(BlogPost $post)
     {
         try {
+            $post->delete();
+            return $this->backWithSuccess('Blog post has been deleted successfully');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function forceDestroy(BlogPost $post)
+    {
+        try {
             if ($post->thumbnail){
                 if (file_exists(public_path($post->thumbnail))){
                     unlink(public_path($post->thumbnail));
                 }
             }
-            $post->delete();
+            $post->forceDelete();
             return $this->backWithSuccess('Blog post has been deleted successfully');
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());

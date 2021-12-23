@@ -21,6 +21,7 @@ class CreateSuppliersTable extends Migration
             $table->longText('logo')->nullable();
             $table->longText('url');
             $table->boolean('status')->default(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

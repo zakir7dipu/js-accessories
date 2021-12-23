@@ -284,6 +284,23 @@ class CategoryController extends Controller
         try {
             foreach ($category->childCategory as $child){
                 foreach ($child->childCategory as $sChild){
+                    $sChild->delete();
+                }
+                $child->delete();
+            }
+            $category->delete();
+
+            return $this->backWithSuccess('Category has been deleted successfully');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function forceDestroy(Category $category)
+    {
+        try {
+            foreach ($category->childCategory as $child){
+                foreach ($child->childCategory as $sChild){
                     if ($sChild->icon){
                         if (file_exists(public_path($sChild->icon))){
                             unlink(public_path($sChild->icon));
@@ -292,7 +309,7 @@ class CategoryController extends Controller
                     foreach ($sChild->products as $product){
                         $this->destroyProduct($product);
                     }
-                    $sChild->delete();
+                    $sChild->forceDelete();
                 }
 
                 if ($child->icon){
@@ -303,7 +320,7 @@ class CategoryController extends Controller
                 foreach ($child->products as $product){
                     $this->destroyProduct($product);
                 }
-                $child->delete();
+                $child->forceDelete();
             }
 
             if ($category->icon){
@@ -314,7 +331,7 @@ class CategoryController extends Controller
             foreach ($category->products as $product){
                 $this->destroyProduct($product);
             }
-            $category->delete();
+            $category->forceDelete();
 
             return $this->backWithSuccess('Category has been deleted successfully');
         }catch (\Throwable $th){
@@ -327,14 +344,14 @@ class CategoryController extends Controller
         try {
             $product->suppliers()->sync([]);
             $product->attributes()->sync([]);
-            $product->attributeItems->each->delete();
+            $product->attributeItems->each->forceDelete();
             foreach ($product->productImages as $image){
                 if (file_exists(public_path($image->image))){
                     unlink(public_path($image->image));
                 }
-                $image->delete();
+                $image->forceDelete();
             }
-            $product->delete();
+            $product->forceDelete();
             return $this->backWithSuccess($product->name.' has been deleted successfully');
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());

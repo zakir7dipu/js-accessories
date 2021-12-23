@@ -420,16 +420,30 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         try {
+            $product->attributeItems->each->delete();
+            foreach ($product->productImages as $image){
+                $image->delete();
+            }
+            $product->delete();
+            return $this->backWithSuccess($product->name.' has been deleted successfully');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function forceDestroy(Product $product)
+    {
+        try {
             $product->suppliers()->sync([]);
             $product->attributes()->sync([]);
-            $product->attributeItems->each->delete();
+            $product->attributeItems->each->forceDelete();
             foreach ($product->productImages as $image){
                 if (file_exists(public_path($image->image))){
                     unlink(public_path($image->image));
                 }
-                $image->delete();
+                $image->forceDelete();
             }
-            $product->delete();
+            $product->forceDelete();
             return $this->backWithSuccess($product->name.' has been deleted successfully');
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
@@ -441,7 +455,7 @@ class ProductController extends Controller
         try {
             $attribute = $item->attribute;
             $product = $item->product;
-            $item->delete();
+            $item->forceDelete();
             $attributeItems = [];
             foreach ($product->attributeItems as $attributeItem){
                 if ($attributeItem->attribute_id === $attribute->id){
@@ -464,7 +478,7 @@ class ProductController extends Controller
             if (file_exists(public_path($image->image))){
                 unlink(public_path($image->image));
             }
-            $image->delete();
+            $image->forceDelete();
             return response()->json('success');
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());

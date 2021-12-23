@@ -201,13 +201,23 @@ class SupplierController extends Controller
     public function destroy(Supplier $supplier)
     {
         try {
+            $supplier->delete();
+            return $this->backWithSuccess('Supplier Deleted successfully.');
+        }catch (\Exception $th){
+            return redirect()->back()->with('error', $th->getMessage());
+        }
+    }
+
+    public function forceDestroy(Supplier $supplier)
+    {
+        try {
             //delete image
             if ($supplier->logo){
                 if (file_exists(public_path($supplier->logo))){
                     unlink(public_path($supplier->logo));
                 }
             }
-            $supplier->delete();
+            $supplier->forceDelete();
             return $this->backWithSuccess('Supplier Deleted successfully.');
         }catch (\Exception $th){
             return redirect()->back()->with('error', $th->getMessage());

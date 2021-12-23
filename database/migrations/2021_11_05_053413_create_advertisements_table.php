@@ -23,6 +23,7 @@ class CreateAdvertisementsTable extends Migration
             $table->string('btn_url')->nullable();
             $table->longText('image')->nullable();
             $table->boolean('status')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

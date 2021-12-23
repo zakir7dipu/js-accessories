@@ -17,6 +17,7 @@ class CreateBlogCategoriesTable extends Migration
             $table->id();
             $table->string('name');
             $table->boolean('status')->default(true)->comment('1 = activate, 0 = deactivate');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

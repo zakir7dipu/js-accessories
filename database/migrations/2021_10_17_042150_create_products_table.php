@@ -33,6 +33,7 @@ class CreateProductsTable extends Migration
             $table->boolean('popular')->default(true)->comment('0 = deactivated, 1 = activated');
             $table->boolean('bestseller')->default(true)->comment('0 = deactivated, 1 = activated');
             $table->boolean('trending')->default(true)->comment('0 = deactivated, 1 = activated');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
