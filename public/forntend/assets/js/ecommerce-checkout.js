@@ -180,7 +180,7 @@
                         .catch(error => console.log('error', error));
                     return;
                 }else {
-                    return;
+                    // return;
                     if (data === 'accept'){
                         orderProcessedWithoutPayment();
                     }else {
