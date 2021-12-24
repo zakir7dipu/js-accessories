@@ -31,7 +31,7 @@
 
             <div class="row mt-5">
                 <div class="col-md-8">
-                    <h2 class="light-title">{{ __('Write') }} <strong>{{ __('Us') }}</strong></h2>
+                    <h2 class="light-title">{{ __('To Request A Product') }} <strong>{{ __('Write Us') }}</strong></h2>
 
                     <form action="{{ route('contact-store') }}" method="post">
                         @csrf
@@ -75,7 +75,7 @@
                         <div>
                             <i class="icon-phone"></i>
                             <h4 class="ml-5 pl-5 mb-0">{{ __('Phone') }}</h4>
-                            <p><a href="tel:">{{ $contact->phone }}</a></p>
+                            <p><a href="{{ 'tel:'.$contact->phone }}">{{ $contact->phone }}</a></p>
                         </div>
                         <div>
                             <i class="icon-mail-alt"></i>

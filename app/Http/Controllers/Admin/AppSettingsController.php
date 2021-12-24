@@ -135,10 +135,10 @@ class AppSettingsController extends Controller
             $env = base_path('.env');
 
 
-            if ($request->hasFile('logo')) {
+            if ($request->hasFile('site_tag_image')) {
                 if (file_exists($env)) {
                     file_put_contents($env, str_replace(
-                        'APP_LOGO=' . env("APP_LOGO"), 'APP_LOGO=' . $cleanValues['logo'], file_get_contents($env)
+                        'APP_LOGO=' . env("APP_LOGO"), 'APP_LOGO=' . $cleanValues['site_tag_image'], file_get_contents($env)
                     ));
                 }
             }

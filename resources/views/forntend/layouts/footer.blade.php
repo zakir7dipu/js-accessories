@@ -28,7 +28,7 @@
         <div class="footer-middle   ">
             <div class="row">
                 <div class="col-lg-6 col-md-6">
-                    <a href="javascript:void(0)">
+                    <a href="{{ route('home') }}">
                         {!! $generalSettings?'<img src="'.asset($generalSettings->logo).'" alt="Porto Logo" class="mt-2">':'<img src="'.asset('forntend/assets/images/logo.png').'" data-src="'.asset('forntend/assets/images/logo-black.png').'" alt="Porto Logo" class="mt-2">' !!}
                     </a>
                     <div class="row">
@@ -88,10 +88,10 @@
                                 <h4 class="widget-title">{{ __('Customer Care') }}</h4>
                                 <ul class="links">
                                     <li><a href="{{ route('client.dashboard') }}">{{ __('My Account') }}</a></li>
-                                    <li><a href="javascript:void(0)">{{ __('Wishlist') }}</a></li>
-                                    <li><a href="javascript:void(0)">{{ __('Shopping Cart') }}</a></li>
-                                    <li><a href="javascript:void(0)">{{ __('Saved Item') }}</a></li>
-                                    <li><a href="javascript:void(0)">{{ __('Request Item') }}</a></li>
+                                    <li><a href="{{ route('my-wishes') }}">{{ __('Wishlist') }}</a></li>
+                                    <li><a href="{{ route('cart.items') }}">{{ __('Shopping Cart') }}</a></li>
+                                    <!--<li><a href="javascript:void(0)">{{ __('Saved Item') }}</a></li>-->
+                                    <li><a href="{{ route('view-contact-page') }}">{{ __('Request Item') }}</a></li>
                                 </ul>
                             </div><!-- End .widget -->
                         </div>
