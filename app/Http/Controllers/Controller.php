@@ -144,13 +144,13 @@ class Controller extends BaseController
         return redirect()->route($route)->with($notification);
     }
 
-    public function redirectBackWithSuccess($message, $route)
+    public function redirectBackWithSuccess($message, $route, $data=null)
     {
         $notification = [
             'message' => $message,
             'alert-type' => 'success'
         ];
-        return redirect()->route($route)->with($notification);
+        return redirect()->route($route,['order'=>$data])->with($notification);
     }
 
     public function redirectBackWithError($message, $route)

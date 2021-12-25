@@ -107,14 +107,14 @@ class ShurjoPay {
        window.location.href = result.checkout_url;
     };
 
-    verification = result => {
+    verification = (orderID, token) => {
         // console.log(result);
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-            "token": this.token,
-            "order_id": result.sp_order_id
+            "token": token,
+            "order_id": orderID
         });
 
         var requestOptions = {
@@ -125,8 +125,16 @@ class ShurjoPay {
         };
 
         fetch(`${this.url}verification`, requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
+            .then(response => response.json())
+            .then(result => {
+                if (result.sp_massage === 'Success'){
+                    toastr.success('Payment is verified...')
+                }else if(result.message === 'Already verified..!'){
+                    toastr.success('Already verified..!')
+                }else {
+                    toastr.error(result.message)
+                }
+            })
             .catch(error => console.log('error', error));
     };
 

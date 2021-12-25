@@ -190,6 +190,5 @@
 
 @section('page-script')
     <script src="{{ asset('backend/assets/plugin/bootstrap-select/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('js/shurjoPay.js') }}"></script>
     <script src="{{ asset('forntend/assets/js/ecommerce-checkout.js') }}"></script>
 @endsection

@@ -5,6 +5,8 @@
 <script src="{{ asset('forntend/assets/js/jquery.countdown/jquery.countdown.min.js') }}"></script>
 <!-- toastr alert -->
 <script src="{{asset('notification_assets/js/toastr.min.js')}}"></script>
+<!-- shurjoPay -->
+<script src="{{ asset('js/shurjoPay.js') }}"></script>
 <!-- Wishlist js -->
 <script type="module" src="{{ asset('forntend/assets/js/ecommerce-wishlist.js') }}"></script>
 <!-- Cart js -->
