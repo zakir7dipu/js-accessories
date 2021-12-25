@@ -24,6 +24,7 @@ class CreateClientOrdersTable extends Migration
             $table->boolean('shipping_status')->default(1)->comment('Client payed = 1, Company payed = 0.');
             $table->string('payment')->default('Xash on delivery');
             $table->string('payment_trx')->nullable()->comment('Payment transaction number');
+            $table->boolean('payment_status')->default(false)->comment('due = 0, payed = 1');
             $table->integer('order_status')->default(1)->comment('Canceled = 0, Pending = 1, Approved = 2, Process to delivery = 3, Delivered = 4.');
             $table->integer('accepted_by')->nullable()->comment('Who process this order.');
             $table->softDeletes();

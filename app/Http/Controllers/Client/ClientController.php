@@ -189,6 +189,7 @@ class ClientController extends Controller
     {
         $payment->username = env('SHURJO_PAY_USERNAME');
         $payment->password = env('SHURJO_PAY_PASSWORD');
+        $payment->perfix = env('SHURJO_PAY_ORDER_PERFIX');
         return $payment;
     }
 

@@ -11,7 +11,7 @@ class ClientOrder extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['user_id', 'invoice', 'price', 'discount', 'weight', 'shipping', 'shipping_status', 'payment', 'payment_trx', 'order_status', 'accepted_by'];
+    protected $fillable = ['user_id', 'invoice', 'price', 'discount', 'weight', 'shipping', 'shipping_status', 'payment', 'payment_trx', 'payment_status', 'order_status', 'accepted_by'];
 
     public function user()
     {

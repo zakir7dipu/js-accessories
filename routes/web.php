@@ -242,7 +242,7 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'admin', 'ver
     });
 });
 
-Route::prefix('/my-account')->as('client.')->middleware(['auth:sanctum', 'verified', 'role:customer'])->group(function (){
+Route::prefix('/my-account')->as('client.')->middleware(['auth:sanctum', 'verified', 'customer'])->group(function (){
     Route::get('/dashboard', [ClientController::class, 'index'])->name('dashboard');
     // profile routs
     Route::prefix('/profile')->group(function (){
@@ -260,6 +260,7 @@ Route::prefix('/my-account')->as('client.')->middleware(['auth:sanctum', 'verifi
     Route::prefix('/order')->as('order.')->group(function (){
         Route::get('/', [ClientOrderController::class, 'index'])->name('index');
         Route::post('/', [ClientOrderController::class, 'store'])->name('store');
+        Route::post('/shurja_pay', [ClientOrderController::class, 'shurjaPayOrderStore'])->name('shurjaPay.store');
     });
 
 });

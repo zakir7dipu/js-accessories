@@ -1,6 +1,7 @@
 class ShurjoPay {
     constructor() {
-        this.url = 'https://sandbox.shurjopayment.com/api/'
+        this.url = 'https://engine.shurjopayment.com/api/';
+        this.sandbox_url = 'https://sandbox.shurjopayment.com/api/';
         this.ip = null;
         this.token = null;
         this.getClientIp();
@@ -12,7 +13,7 @@ class ShurjoPay {
         return this.username
     }
 
-    getAccess = (username, password)  => {// get_token
+    getAccess = (username, password, prifex)  => {// get_token
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
@@ -28,7 +29,12 @@ class ShurjoPay {
             redirect: 'follow'
         };
 
-        return fetch(`${this.url}get_token`, requestOptions);
+        if (prifex){
+            return fetch(`${this.url}get_token`, requestOptions);
+        }else {
+            return fetch(`${this.sandbox_url}get_token`, requestOptions);
+        }
+
     };
 
     getClientIp = () =>{
@@ -89,9 +95,13 @@ class ShurjoPay {
         fetch(`${this.url}secret-pay`, requestOptions)
             .then(response => response.json())
             .then(result => {
-                this.verification(result);
+                this.paymentWindow(result);
             })
             .catch(error => console.log('error', error));
+    };
+
+    paymentWindow = result => {
+        window.open(result.checkout_url, '_blank', 'location=yes,height=570,width=520,left=200,top=100,scrollbars=yes,status=yes');
     };
 
     verification = result => {
@@ -115,7 +125,7 @@ class ShurjoPay {
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
-    }
+    };
 
     paymentStatus = () => {//payment-status
 

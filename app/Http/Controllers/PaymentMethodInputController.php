@@ -62,6 +62,10 @@ class PaymentMethodInputController extends Controller
         <div class="input-group input-group-lg mb-3 text-center">
             <input type="text" name="password" class="form-control" id="password" value="'.env('SHURJO_PAY_PASSWORD').'">
         </div>
+        <p class="mb-1 text-uppercase"><label for="orderPerfix">'.__('Order Perfix').'</label>: </p>
+        <div class="input-group input-group-lg mb-3 text-center">
+            <input type="text" name="order_perfix" class="form-control" id="orderPerfix" value="'.env('SHURJO_PAY_ORDER_PERFIX').'">
+        </div>
     </form>';
     }
 
@@ -146,9 +150,17 @@ class PaymentMethodInputController extends Controller
                     file_put_contents($env, str_replace(
                         'SHURJO_PAY_PASSWORD=' . env("SHURJO_PAY_PASSWORD"), 'SHURJO_PAY_PASSWORD=' . $input['password'], file_get_contents($env)
                     ));
+                    if ($request->order_perfix) {
+                        file_put_contents($env, str_replace(
+                            'SHURJO_PAY_ORDER_PERFIX=' . env("SHURJO_PAY_ORDER_PERFIX"), 'SHURJO_PAY_ORDER_PERFIX=' . $input['order_perfix'], file_get_contents($env)
+                        ));
+                    }
                 }
                 unset($input['username']);
                 unset($input['password']);
+                if ($request->has('order_perfix')){
+                    unset($input['order_perfix']);
+                }
             }
 
             $payment->update($input);

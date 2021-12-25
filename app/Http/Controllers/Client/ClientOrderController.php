@@ -114,6 +114,7 @@ class ClientOrderController extends Controller
             $clientOrder->weight = $weight;
             if ($request->has('payment')){
                 $clientOrder->payment = $request->payment;
+                $clientOrder->payment_status = true;
             }
             $clientOrder->payment_trx = $request->has('payment_trx')?$request->payment_trx:null;
             $clientOrder->save();
@@ -183,6 +184,77 @@ class ClientOrderController extends Controller
             return $this->backWithSuccess('#'.$order->invoice.' has been '.$status);
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function shurjaPayOrderStore(Request $request)
+    {
+        $cart = Cart::instance('shopping_cart');
+        $invoice = $request->invoice;
+        $invoice = 10000+(ClientOrder::count()+1);
+        $user = Auth::user();
+        $contact = Company::first();
+        // shipping address
+        $shippingAddress = (array)json_decode($request->shipping_address, true);
+        $shippingAddress['country'] = CountryList::find($shippingAddress['country'])->name;
+        $shippingAddress['police_station'] = ThanaList::find($shippingAddress['police_station'])->name;
+        $shippingAddress['state'] = DistrictList::find($shippingAddress['state'])->name;
+        $shippingAddress['street_address'] = $shippingAddress['address'];
+        $shippingAddress['postal_code'] = $shippingAddress['post_code'];
+        // shipping address
+        $couponDiscount = $request->coupon_discount;
+        $cartProducts = $cart->content();
+        $weight = 0;
+        foreach ($cartProducts as $cartProduct){
+            $product = Product::find($cartProduct->id);
+            $weight = $weight + ($product->gross_weight * $cartProduct->qty);
+        }
+
+        try {
+            $clientOrder = new ClientOrder();
+            $clientOrder->user_id = $user->id;
+            $clientOrder->invoice = $invoice;
+            $clientOrder->price = $cart->subtotal();
+            $clientOrder->discount = $couponDiscount ? $couponDiscount : 0;
+            $clientOrder->weight = $weight;
+            if ($request->has('payment')){
+                $clientOrder->payment = $request->payment;
+            }
+            $clientOrder->payment_trx = $request->has('payment_trx')?$request->payment_trx:null;
+            $clientOrder->save();
+            $clientOrder->address()->create($shippingAddress);
+
+            foreach ($cartProducts as $cartProduct) {
+                $size = null;
+                $color = null;
+                if ($cartProduct->options['size']) {
+                    $size = AttributeItem::find($cartProduct->options['size'])->name;
+                }
+                if ($cartProduct->options['color']) {
+                    $color = AttributeItem::find($cartProduct->options['color'])->name;
+                }
+                $orderedProduct = new OrderedProduct();
+                $orderedProduct->order_id = $clientOrder->id;
+                $orderedProduct->product_id = $cartProduct->id;
+                $orderedProduct->specification = ($size ? "Size: " . $size : '') . ' ' . ($color ? "Color: " . $color : '');
+                $orderedProduct->qty = $cartProduct->qty;
+                $orderedProduct->price_qty = $cartProduct->subtotal();
+                $orderedProduct->discount = ($cartProduct->options['discount'] * $cartProduct->qty);
+                $orderedProduct->save();
+
+                Cart::instance('shopping_cart')->remove($cartProduct->rowId);
+            }
+
+            $data = $clientOrder;
+            $data->address = $clientOrder->address;
+            $data->user = $clientOrder->user;
+            return response()->json($data);
+        }catch (\Throwable $th){
+            $notification = [
+                'status' => 'error',
+                'message' => $th->getMessage()
+            ];
+            return response()->json($notification);
         }
     }
 }

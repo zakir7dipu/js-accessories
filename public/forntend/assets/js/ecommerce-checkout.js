@@ -174,9 +174,9 @@
             url: item.getAttribute('data-role'),
             success:function (data) {
                 if (typeof data === 'object'){
-                    shurjaPay.getAccess(data.username,data.password)
+                    shurjaPay.getAccess(data.username,data.password, data.perfix)
                         .then(response => response.json())
-                        .then(result => shurjaPayCreatePayment(result))
+                        .then(result => makeOrderForShurjaPay(result))
                         .catch(error => console.log('error', error));
                     return;
                 }else {
@@ -326,26 +326,48 @@
         sendOrder(order);
     };
 
-    const shurjaPayCreatePayment = (result) => {
+    const makeOrderForShurjaPay = (result) => {
+        orderProcessLoadView();
+        let order = {
+            'invoice': uuidv4(),
+            'shipping_address': localStorage.getItem('sipping_address'),
+            'coupon_discount': localStorage.getItem('coupon_discount'),
+            'payment': 'shurjaPay',
+            'payment_trx': null,
+        };
+        $.ajax({
+            type: 'post',
+            url: `${window.location.origin}/my-account/order/shurja_pay`,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data:order,
+            success:function (data) {
+                shurjaPayCreatePayment(result, data);
+            }
+        });
+    };
+
+    const shurjaPayCreatePayment = (result, order) => {
         // token, store_id, prefix, amount, order_id, discsount_amount, disc_percent, customer_name, customer_phone, customer_email, customer_address, customer_city, customer_state, customer_postcode, customer_country
-        let sippingAddress = JSON.parse(localStorage.getItem('sipping_address'));
+        let sippingAddress = order.address;
         let orderId = uuidv4();
         shurjaPay.createPayment(
             result.token,
             result.store_id,
-            'eshop',
-            document.getElementById('totalPrice').innerText.replaceAll(',',''),
-            orderId,
-            result.discsount_amount?result.discsount_amount:0,
+            result.perfix?result.perfix:'ESHOP',
+            order.price,
+            order.invoice,
+            order.discount,
             result.disc_percent?result.disc_percent:0,
-            sippingAddress.name,
+            sippingAddress.user.name,
             sippingAddress.phone,
-            sippingAddress.email?sippingAddress.email:'',
-            sippingAddress.address,
-            police_station,
-            state,
-            sippingAddress.post_code,
-            country,
+            sippingAddress.user.email,
+            sippingAddress.street_address,
+            sippingAddress.police_station,
+            sippingAddress.state,
+            sippingAddress.postal_code,
+            sippingAddress.country,
         )
     };
 
