@@ -20,5 +20,8 @@
 
     let params = new URLSearchParams(location.search);
     const shurjoPay = new ShurjoPay();
-    shurjoPay.verification(params.get('order'),sessionStorage.getItem('spay_token'));
+    if (params.get('order')){
+        shurjoPay.verification(params.get('order'),sessionStorage.getItem('spay_token'));
+    }
+
 })(jQuery);
