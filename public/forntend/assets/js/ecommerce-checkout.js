@@ -174,6 +174,7 @@
             url: item.getAttribute('data-role'),
             success:function (data) {
                 if (typeof data === 'object'){
+                    orderProcessLoadView();
                     shurjaPay.getAccess(data.username,data.password, data.perfix)
                         .then(response => response.json())
                         .then(result => makeOrderForShurjaPay(result))
@@ -327,7 +328,6 @@
     };
 
     const makeOrderForShurjaPay = (result) => {
-        orderProcessLoadView();
         let order = {
             'invoice': uuidv4(),
             'shipping_address': localStorage.getItem('sipping_address'),
@@ -351,7 +351,7 @@
     const shurjaPayCreatePayment = (result, order) => {
         // token, store_id, prefix, amount, order_id, discsount_amount, disc_percent, customer_name, customer_phone, customer_email, customer_address, customer_city, customer_state, customer_postcode, customer_country
         let sippingAddress = order.address;
-        let orderId = uuidv4();
+        let user = order.user;
         shurjaPay.createPayment(
             result.token,
             result.store_id,
@@ -360,9 +360,9 @@
             order.invoice,
             order.discount,
             result.disc_percent?result.disc_percent:0,
-            sippingAddress.user.name,
+            user.name,
             sippingAddress.phone,
-            sippingAddress.user.email,
+            user.email,
             sippingAddress.street_address,
             sippingAddress.police_station,
             sippingAddress.state,
@@ -407,9 +407,9 @@
     };
 
     const orderProcessLoadView = () =>{
-        const body = document.querySelector('body');
-        body.setAttribute('style', 'position: relative;');
-        body.classList.add('stop-scrolling');
+        // const body = document.querySelector('body');
+        // body.setAttribute('style', 'position: relative;');
+        // body.classList.add('stop-scrolling');
         const loadingContent = document.querySelector('.loadOverlay');
         loadingContent.classList.add('activeLoadOverlay');
     };

@@ -144,6 +144,24 @@ class Controller extends BaseController
         return redirect()->route($route)->with($notification);
     }
 
+    public function redirectBackWithSuccess($message, $route)
+    {
+        $notification = [
+            'message' => $message,
+            'alert-type' => 'success'
+        ];
+        return redirect()->route($route)->with($notification);
+    }
+
+    public function redirectBackWithError($message, $route)
+    {
+        $notification = [
+            'message' => $message,
+            'alert-type' => 'error'
+        ];
+        return redirect()->route($route)->with($notification);
+    }
+
     public function productFeature()
     {
         return $array = [

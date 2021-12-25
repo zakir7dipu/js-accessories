@@ -14,6 +14,8 @@ use App\Models\Product;
 use App\Models\Subscribtion;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class GuestController extends Controller
 {
@@ -571,17 +573,27 @@ class GuestController extends Controller
     }
 
     // shurjaPay
-    public function successPayment()
+    public function successPayment(Request $request)
     {
-        return response()->json([
-            'status' => true
-        ]);
+//        $response = Http::post('https://engine.shurjopayment.com/api/verification', [
+//            'order_id' => $request->order_id,
+//        ]);
+        $user = Auth::user();
+        $order = $user->orders()->orderBy('id','DESC')->first();
+        try {
+            $order->update(['payment_trx'=>$request->order_id, 'payment_status'=>true]);
+            return $this->redirectBackWithSuccess('Payment has been received successfully.','home');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
     }
 
     public function cancelPayment()
     {
-        return response()->json([
-            'status' => false
-        ]);
+        try {
+            return $this->redirectBackWithError('Payment has been received successfully.',route('home'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
     }
 }
