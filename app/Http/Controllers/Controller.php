@@ -150,7 +150,7 @@ class Controller extends BaseController
             'message' => $message,
             'alert-type' => 'success'
         ];
-        return redirect()->route($route,['order'=>$data])->with($notification);
+        return redirect()->route($route)->with($notification);
     }
 
     public function redirectBackWithError($message, $route)

@@ -582,7 +582,7 @@ class GuestController extends Controller
         $order = $user->orders()->orderBy('id','DESC')->first();
         try {
             $order->update(['payment_trx'=>$request->order_id, 'payment_status'=>true]);
-            return $this->redirectBackWithSuccess('Payment has been received successfully.','home', $request->order_id);
+            return $this->redirectBackWithSuccess('Payment has been received successfully.','home');
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }

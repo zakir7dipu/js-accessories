@@ -103,11 +103,14 @@ class ShurjoPay {
     };
 
     paymentWindow = result => {
-       // window.open(result.checkout_url, '_blank', 'location=yes,height=570,width=520,left=200,top=100,scrollbars=yes,status=yes');
-       window.location.href = result.checkout_url;
+        window.sessionStorage.removeItem('sp_order_id');
+        window.sessionStorage.setItem("sp_order_id", result.sp_order_id);
+        window.location.href = result.checkout_url;
     };
 
-    verification = (orderID, token) => {
+    verification = () => {
+        const token = sessionStorage.getItem('spay_token');
+        const orderID = sessionStorage.getItem('sp_order_id');
         // console.log(result);
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -124,18 +127,22 @@ class ShurjoPay {
             redirect: 'follow'
         };
 
-        fetch(`${this.url}verification`, requestOptions)
-            .then(response => response.json())
-            .then(result => {
-                if (result.sp_massage === 'Success'){
-                    toastr.success('Payment is verified...')
-                }else if(result.message === 'Already verified..!'){
-                    toastr.success('Already verified..!')
-                }else {
-                    toastr.error(result.message)
-                }
-            })
-            .catch(error => console.log('error', error));
+        if (token && orderID){
+            fetch(`${this.url}verification`, requestOptions)
+                .then(response => response.json())
+                .then(result => {
+                    if (result.sp_code === '1000'){
+                        toastr.success(result.sp_massage);
+                    }else if(result.message === 'Already verified..!'){
+                        toastr.success(result.message);
+                    }else {
+                        toastr.error(result.message)
+                    }
+                    sessionStorage.removeItem('spay_token');
+                    sessionStorage.removeItem('sp_order_id');
+                })
+                .catch(error => console.log('error', error));
+        }
     };
 
     paymentStatus = () => {//payment-status

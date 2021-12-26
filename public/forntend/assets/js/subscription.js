@@ -16,12 +16,13 @@
                 subscription.reset()
             }
         })
-    })
-
-    let params = new URLSearchParams(location.search);
+    });
     const shurjoPay = new ShurjoPay();
-    if (params.get('order')){
-        shurjoPay.verification(params.get('order'),sessionStorage.getItem('spay_token'));
-    }
+    shurjoPay.verification();
+    // let params = new URLSearchParams(location.search);
+    //
+    // if (params.get('order')){
+    //     shurjoPay.verification(params.get('order'),sessionStorage.getItem('spay_token'));
+    // }
 
 })(jQuery);
