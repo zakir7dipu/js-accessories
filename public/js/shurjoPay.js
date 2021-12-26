@@ -131,13 +131,13 @@ class ShurjoPay {
             fetch(`${this.url}verification`, requestOptions)
                 .then(response => response.json())
                 .then(result => {
-                    if (result.sp_code === '1000'){
-                        toastr.success(result.sp_massage);
-                    }else if(result.message === 'Already verified..!'){
-                        toastr.success(result.message);
-                    }else {
-                        toastr.error(result.message)
-                    }
+                    // if (result.sp_massage){
+                    //     toastr.success(result.sp_massage);
+                    // }else if(result.message){
+                    //     toastr.success(result.message);
+                    // }else {
+                    //     toastr.error(result.message)
+                    // }
                     sessionStorage.removeItem('spay_token');
                     sessionStorage.removeItem('sp_order_id');
                 })
