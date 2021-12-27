@@ -47,6 +47,5 @@
 @endsection
 
 @section('page-script')
-    @include('backend.pages.profile.internal-assets.js.profile-page-scripts')
-    <script src="{{ asset('backend/assets/js/form-summerNote.js') }}"></script>
+    <script src="{{ asset('forntend/assets/js/client-profile-page.js') }}"></script>
 @endsection

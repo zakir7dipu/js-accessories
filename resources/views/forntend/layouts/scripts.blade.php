@@ -15,6 +15,8 @@
 <script type="module" src="{{ asset('forntend/assets/js/product-search.js') }}"></script>
 <!-- Subscription -->
 <script type="module" src="{{ asset('forntend/assets/js/subscription.js') }}"></script>
+<!-- IMAGE UPLOADER -->
+<script src="{{asset('backend/assets/js/image-uploader.min.js')}}"></script>
 
 <!-- Main JS File -->
 <script src="{{ asset('forntend/assets/js/main_init.min.js') }}"></script>

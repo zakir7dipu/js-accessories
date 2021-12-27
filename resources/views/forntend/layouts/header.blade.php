@@ -25,6 +25,8 @@
             s.parentNode.insertBefore(wf, s);
         })(document);
     </script>
+    <!-- IMAGE UPLOADER -->
+    <link rel="stylesheet" href="{{asset('backend/assets/css/image-uploader.min.css')}}" />
     <!-- toastr alert -->
     <link rel="stylesheet" href="{{asset('notification_assets/css/toastr.min.css')}}" />
     <!-- Plugins CSS File -->
@@ -33,6 +35,5 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/css/all.min.css') }}">
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{ asset('forntend/assets/css/'.$themeColors[config('app.theme_color','1')].'-theme/style.min.css') }}">
-{{--    <link rel="stylesheet" type="text/css" href="{{ asset('forntend/assets/vendor/fontawesome-free/css/all.min.css') }}">--}}
     @yield('page-css')
 </head>
