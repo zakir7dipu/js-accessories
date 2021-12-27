@@ -28,6 +28,7 @@
                             <th>{{ __('Sl No.') }}</th>
                             <th>{{ __('Invoice No') }}</th>
                             <th>{{ __('Products') }}</th>
+                            <th>{{ __('Payment') }}</th>
                             <th>{{ __('Receipt') }}</th>
                         </tr>
                         </thead>
@@ -52,6 +53,9 @@
                                         @endforeach
                                     </table>
                                 </th>
+                                <td class="text-center">
+                                    {!! $order->payment_status?'<p class="badge badge-success">Payed</p>':($order->payment != 'Cash on delivery'?'<p class="badge badge-danger">Not paid yet</p>':'<p class="badge badge-warning">Cash on delivery</p>') !!}
+                                </td>
                                 <td>
                                     @if($order->order_status === 0)
                                         <p class="badge badge-danger">{{ __('Canceled') }}</p>

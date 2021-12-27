@@ -173,14 +173,18 @@ class ClientOrderController extends Controller
 
     public function statusUpdate(Request $request, ClientOrder $order)
     {
-        try {
-            $status = '';
-            foreach ($this->orderPermission() as $item){
-                if ($item->permission_code == $request->order_status){
-                    $status = $item->name;
-                }
+        $status = null;
+        foreach ($this->orderPermission() as $item){
+            if ($item->permission_code == $request->order_status){
+                $status = $item;
             }
-            $order->update(['order_status'=>$request->order_status, 'accepted_by' => Auth::user()->id]);
+        }
+        try {
+            if ($status->permission_code === 4){
+                $order->update(['payment_status'=>true, 'order_status'=>$status->permission_code, 'accepted_by' => Auth::user()->id]);
+            }else{
+                $order->update(['order_status'=>$status->permission_code, 'accepted_by' => Auth::user()->id]);
+            }
             return $this->backWithSuccess('#'.$order->invoice.' has been '.$status);
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());

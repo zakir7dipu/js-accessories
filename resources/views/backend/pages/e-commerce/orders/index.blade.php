@@ -39,7 +39,8 @@
                                     <th width="10%">{{__('Invoice No.')}}</th>
                                     <th width="10%">{{__('Name')}}</th>
                                     <th wirth="20%">{{__('Shipping Address')}}</th>
-                                    <th wirth="45%">{{__('Products')}}</th>
+                                    <th wirth="35%">{{__('Products')}}</th>
+                                    <th wirth="10%">{{ __('Payment') }}</th>
                                     <th wirth="10%" class="text-center">{{__('Option')}}</th>
                                 </tr>
                                 </thead>
@@ -65,6 +66,9 @@
 
                                                 @endforeach
                                             </table>
+                                        </td>
+                                        <td class="text-center">
+                                            {!! $order->payment_status?'<p class="badge badge-success">Payed</p>':($order->payment != 'Cash on delivery'?'<p class="badge badge-danger">Not paid yet</p>':'<p class="badge badge-warning">Cash on delivery</p>') !!}
                                         </td>
                                         <td>
                                             @if($order->order_status === 0)

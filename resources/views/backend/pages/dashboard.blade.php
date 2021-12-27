@@ -25,7 +25,6 @@
             <div class="row">
                 <div class="col-xl-3 col-sm-6">
                     <div class="card card-dark bg-danger">
-
                         <div class="card-body d-flex">
                             <i class="display-2 fas fa-users"></i>
                             <div class="ml-auto align-self-center text-right">
@@ -38,9 +37,8 @@
 
                 <div class="col-xl-3 col-sm-6">
                     <div class="card card-dark bg-dark">
-
                         <div class="card-body d-flex">
-                            <i class="display-2 fas fa-user-tie"></i>
+                            <i class="display-2 fas fa-user-shield"></i>
                             <div class="ml-auto align-self-center text-right">
                                 <span class="card-title mb-1">{{ __('Admins') }}</span>
                                 <h3 class="card-title font-montserrat mb-0">{{__($allAdmin)}}</h3>
@@ -52,9 +50,8 @@
 
                 <div class="col-xl-3 col-sm-6">
                     <div class="card card-dark bg-info">
-
                         <div class="card-body d-flex">
-                            <i class="display-2 fas fa-user-graduate"></i>
+                            <i class="display-2 fas fa-user-tie"></i>
                             <div class="ml-auto align-self-center text-right">
                                 <span class="card-title mb-1">{{ __('Customers') }}</span>
                                 <h3 class="card-title font-montserrat mb-0">{{__($allCustomer)}}</h3>
@@ -66,9 +63,8 @@
 
                 <div class="col-xl-3 col-sm-6">
                     <div class="card card-dark bg-primary">
-
                         <div class="card-body d-flex">
-                            <i class="display-2 fas fa-user-plus"></i>
+                            <i class="display-2 fas fa-wallet"></i>
                             <div class="ml-auto align-self-center text-right">
                                 <span class="card-title mb-1">{{ __('Total sales') }}</span>
                                 <h3 class="card-title font-montserrat mb-0">2000 K</h3>

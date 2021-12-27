@@ -61,7 +61,7 @@
 ($order->address->company?'</br> -> Company: '.$order->address->company:'').
 ($order->address->street_address?'</br> -> Street Address: '.$order->address->street_address:'').($order->address->police_station?'</br> -> Police Station: '.$order->address->police_station:'').($order->address->state?'</br> -> State: '.$order->address->state:'').($order->address->country?'</br> -> Country: '.$order->address->country.'-':'').($order->address->postal_code?$order->address->postal_code.' ':'') !!}
                                     </p>
-                                    <p>{!! '-> Payment Method: '.$order->payment.($order->payment_trx?'</br> -> TRX: '.$order->payment_trx:'') !!}</p>
+                                    <p><b>{!! '-> Payment Method: '.$order->payment.($order->payment_trx?'</br> -> TRX: '.$order->payment_trx:'').'</br> -> Payment status: '.($order->payment_status?'Payed':($order->payment != 'Cash on delivery'?'Not paid yet.':'Cash on delivery')) !!}</b></p>
                                 </div>
                             </div>
                             <div class="col-12 mt-3">
@@ -134,15 +134,5 @@
 
 @section('page-script')
     <script src="{{asset('backend/assets/js/tables-datatable.js')}}"></script>
-    <script>
-        (function ($) {
-            "use script";
-            // productOrderApprovalForm
-            const form = document.getElementById('productOrderApprovalForm');
-            const select = form.querySelector('select');
-            select.addEventListener('change', () => {
-                form.submit();
-            })
-        })(jQuery)
-    </script>
+    <script src="{{ asset('backend/assets/js/order-status.js') }}"></script>
 @endsection
