@@ -11,9 +11,9 @@
 {{--                <span class="sidebar-brand-text">quantummagazine</span>--}}
             </a>
             <!-- SIDEBAR CLOSE -->
-            <a href="javascript:void(0);" class="sidebar-close d-md-none"  data-toggle="class" data-target="#wrapper" toggle-class="toggled">
-                <i class="material-icons icon-sm">close</i>
-            </a>
+{{--            <a href="javascript:void(0);" class="sidebar-close d-md-none"  data-toggle="class" data-target="#wrapper" toggle-class="toggled">--}}
+{{--                <i class="material-icons icon-sm">close</i>--}}
+{{--            </a>--}}
         </div>
         <!-- SIDEBAR CONTAINER -->
         <div class="sidebar-container style-scroll-dark">

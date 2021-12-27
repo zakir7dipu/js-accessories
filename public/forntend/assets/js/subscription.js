@@ -1,5 +1,6 @@
 (function ($) {
     "use script";
+    $('[data-toggle="tooltip"]').tooltip();
     const subscription = document.getElementById('subscriptionForm');
     subscription.addEventListener('submit', (e) => {
         e.preventDefault();

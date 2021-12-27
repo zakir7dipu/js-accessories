@@ -8,6 +8,12 @@
         // - quantummagazine CALENDAR ------------------------------------------------------------------------------
         //---------------------------------------------------------------------------------------------
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         var today = new Date(),
             month = today.getMonth() + 1,
             year = today.getFullYear(),
@@ -20,7 +26,7 @@
 
         $("#calendar_dark").quantummagazineCalendar({notes: notes,theme: "light",backgroundColor : "#444"});
 
-
+        $('[data-toggle="tooltip"]').tooltip()
     });
 })(jQuery);
 

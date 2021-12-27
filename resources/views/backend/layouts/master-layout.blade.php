@@ -23,13 +23,6 @@
     <!------------------------------------------------------------------------------------------------>
 
     @include('backend.layouts.script')
-    <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-    </script>
     @yield('page-script')
     @include('backend.layouts.toster-script')
 </body>
