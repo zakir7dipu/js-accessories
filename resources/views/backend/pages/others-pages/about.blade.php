@@ -250,5 +250,5 @@
 
 @section('page-script')
     <script src="{{ asset('backend/assets/js/form-summerNote.js') }}"></script>
-    @include('backend.pages.others-pages.internal-assets.page-js')
+    <script src="{{ asset('backend/assets/js/widgets/page-settings.js') }}"></script>
 @endsection

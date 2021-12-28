@@ -3,25 +3,7 @@
 @section('title', $title)
 
 @section('page-css')
-    <style>
-        .empty-ad{
-            background-size: cover;
-            background-position: center;
-            height: 300px;
-            opacity: 0.9;
-            cursor: pointer;
-            transition: 0.5s;
-        }
-        .empty-ad:hover{
-            transition: 0.5s;
-            opacity: 1;
-        }
-        .empty-ad .card-body{
-            justify-content: center;
-            align-items: center;
-            display: flex;
-        }
-    </style>
+
 @endsection
 
 @section('content')
@@ -103,7 +85,7 @@
                                                             <div class="input-group p-3">
                                                                 <div class="form-group w-100">
                                                                     <div class="px-2">
-                                                                        <div class="{{ 'advertise_img'.$key }}" id="{{ 'advertise_img'.$key }}">
+                                                                        <div class="advertise_img" id="{{ 'advertiseImg'.$key }}">
                                                                             <div class="{{ 'input-images'.$key }}"></div>
                                                                         </div>
                                                                     </div>
@@ -198,5 +180,5 @@
 @endsection
 
 @section('page-script')
-    @include('backend.pages.advertisement-layouts.internal-assets.advertisement-layouts-js')
+    <script src="{{ asset('backend/assets/js/advertisement-layouts/advertisement-layouts-settings.js') }}"></script>
 @endsection

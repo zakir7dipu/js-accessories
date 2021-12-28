@@ -138,5 +138,5 @@
 @endsection
 
 @section('page-script')
-    @include('backend.pages.widgets.sliders.internal-assets.slider-js')
+    <script src="{{ asset('backend/assets/js/widgets/slider-settings.js') }}"></script>
 @endsection

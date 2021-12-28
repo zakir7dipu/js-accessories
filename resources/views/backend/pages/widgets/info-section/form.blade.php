@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-
     <div id="wrapper-content">
         <div class="row">
             <div class="col">
@@ -69,7 +68,7 @@
                                                     <div class="input-group p-3">
                                                         <div class="form-group w-100">
                                                             <div class="px-2">
-                                                                <div class="{{ 'column_img'.$key }}" id="{{ 'column_img'.$key }}">
+                                                                <div class="column_img" id="{{ 'columnImg'.$key }}">
                                                                     <div class="{{ 'input-images'.$key }}"></div>
                                                                 </div>
                                                             </div>
@@ -126,5 +125,5 @@
 @endsection
 
 @section('page-script')
-    @include('backend.pages.widgets.info-section.internal-assets.info-section-js')
+    <script src="{{ asset('backend/assets/js/widgets/info-section-settings.js') }}"></script>
 @endsection

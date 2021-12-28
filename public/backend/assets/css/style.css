@@ -7959,6 +7959,24 @@ img{
 .paymentBtn.active{
     border: 10px solid green !important;
 }
+/*Advertisement layouts*/
+.empty-ad{
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    opacity: 0.9;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.empty-ad:hover{
+    transition: 0.5s;
+    opacity: 1;
+}
+.empty-ad .card-body{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
 /*===================================================================================================
 - ---------------------------------------------------------------------------------------------------
 ===================================================================================================*/
