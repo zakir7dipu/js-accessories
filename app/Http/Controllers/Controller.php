@@ -8,6 +8,7 @@ use App\Models\BlogPostCommentSettings;
 use App\Models\Category;
 use App\Models\CetegorySection;
 use App\Models\Company;
+use App\Models\ContactMessage;
 use App\Models\DistrictList;
 use App\Models\FeatureProduct;
 use App\Models\GeneralSettings;
@@ -77,6 +78,7 @@ class Controller extends BaseController
         $allColors = array_unique($allColors);
         $orderPermissions = $this->orderPermission();
         $themeColors = $this->themeColors();
+        $unreadContactMessages = ContactMessage::where('status', false)->get();
 
         View::share('districts', $districts);
         View::share('generalSettings', $generalSettings);
@@ -106,6 +108,7 @@ class Controller extends BaseController
         View::share('allColors', $allColors);
         View::share('orderPermissions', $orderPermissions);
         View::share('themeColors', $themeColors);
+        View::share('unreadContactMessages', $unreadContactMessages);
     }
 
     public function backWithError($message)

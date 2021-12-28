@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ContactMessage;
 use App\Models\GeneralSettings;
 use App\Models\Profile;
 use App\Models\User;
@@ -166,5 +167,31 @@ class AdminController extends Controller
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
+    }
+
+    /*
+     * contact message
+     */
+    public function contactMessageIndex()
+    {
+        try {
+            $generalSettings = GeneralSettings::first();
+            $title = ($generalSettings?$generalSettings->site_name:'').' | '.'Contact Message';
+            $contactMessages = ContactMessage::where('status', false)->get();
+            return view('backend.pages.contact-message.index', compact('title', 'generalSettings', 'contactMessages'));
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
+    }
+
+    public function contactMessageGet(ContactMessage $message)
+    {
+        $message->url = route('admin.contact-message.send');
+        return response()->json($message);
+    }
+
+    public function contactMessageSend(Request $request)
+    {
+        dd($request->all());
     }
 }

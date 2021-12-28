@@ -34,8 +34,7 @@
                     <!-- SIDEBAR ACTIONS -->
                     <div class="sidebar-actions">
                         <a href="{{ route('admin.profile') }}" class="keep"><i class="material-icons">person_outline</i></a>
-                        <a href="javascript:void(0)" ><i class="material-icons" class="m-icon">mail_outline</i></a>
-                        <a href="javascript:void(0)"><i class="material-icons">notifications_none</i></a>
+                        <a href="{{ route('admin.contact-message.index') }}" ><i class="material-icons" class="m-icon">mail_outline</i></a>
                         <a href="{{ route('admin.settings.index') }}"><i class="material-icons" class="m-icon">settings</i></a>
                     </div>
                 </div>

@@ -240,6 +240,14 @@ Route::prefix('/admin')->as('admin.')->middleware(['auth:sanctum', 'admin', 'ver
         });
 
     });
+
+    //contact message
+    Route::prefix('/contact-message')->as('contact-message.')->group(function (){
+        Route::get('/', [AdminController::class, 'contactMessageIndex'])->name('index');
+        Route::get('/{message}', [AdminController::class, 'contactMessageGet'])->name('get-message');
+        Route::post('/', [AdminController::class, 'contactMessageSend'])->name('send');
+    });
+
 });
 
 Route::prefix('/my-account')->as('client.')->middleware(['auth:sanctum', 'verified', 'customer'])->group(function (){
