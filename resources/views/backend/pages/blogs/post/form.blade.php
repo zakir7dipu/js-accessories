@@ -135,7 +135,7 @@
 @endsection
 
 @section('page-script')
-    @include('backend.pages.blogs.internal-assets.js.blog-post-js')
+    <script src="{{ asset('backend/assets/js/blog/post.js') }}"></script>
     <script src="{{asset('backend/assets/plugin/tag-input/tagsinput.js')}}"></script>
     <script src="{{ asset('backend/assets/js/form-summerNote.js') }}"></script>
 @endsection

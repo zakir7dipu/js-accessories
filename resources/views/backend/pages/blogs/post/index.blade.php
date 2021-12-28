@@ -88,5 +88,5 @@
 
 @section('page-script')
     <script src="{{asset('backend/assets/js/tables-datatable.js')}}"></script>
-    @include('backend.pages.blogs.internal-assets.js.blog-post-js')
+    <script src="{{ asset('backend/assets/js/blog/post.js') }}"></script>
 @endsection

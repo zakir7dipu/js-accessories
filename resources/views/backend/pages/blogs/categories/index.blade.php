@@ -97,5 +97,5 @@
 @endsection
 
 @section('page-script')
-    @include('backend.pages.blogs.internal-assets.js.blog-category-js')
+    <script src="{{ asset('backend/assets/js/blog/category-settings.js') }}"></script>
 @endsection
