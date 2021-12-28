@@ -139,5 +139,5 @@
 @endsection
 
 @section('page-script')
-    @include('backend.pages.settings.internal-assets.js.logo-page-scripts')
+    <script src="{{ asset('backend/assets/js/logo-page-scripts.js') }}"></script>
 @endsection

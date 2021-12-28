@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-
 <div id="wrapper-content">
     <div class="row">
         <div class="col">
@@ -101,6 +100,5 @@
 @endsection
 
 @section('page-script')
-    @include('backend.pages.suppliers.internal-assets.js.delete-warning')
-    @include('backend.pages.suppliers.internal-assets.js.suppliers-page-scripts')
+    <script src="{{ asset('backend/assets/js/suppliers-page.js') }}"></script>
 @endsection

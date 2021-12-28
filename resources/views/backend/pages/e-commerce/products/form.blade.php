@@ -58,7 +58,7 @@
                                     <div class="col-12" id="showProCategory">
                                         <p class="mb-1"><label for="proCategory" class="card-title font-weight-bold">{!! __('Pro-Category').' <small>('.__('Optional').')</small> &nbsp; <code>'.__('If you want to add product under any pro-category please select this option').'</code>' !!}</label> </p>
                                         <div class="input-group input-group-lg mb-3">
-                                            <select name="pro_category" id="proCategory" class="form-control" {{ $categories->count() == 0?'readonly':'' }}>
+                                            <select name="pro_category" id="proCategory" class="form-control" {{ $categories->count() == 0?'readonly':'' }} data-role="{{ $selectedItem?($selectedItem->pro_category?$selectedItem->pro_category->id:null):null }}">
                                                 <option value="{{ null }}">{{ __('Select One') }}</option>
                                             </select>
                                             <br>
@@ -328,5 +328,5 @@
 @section('page-script')
     <script src="{{ asset('backend/assets/js/form-summerNote.js') }}"></script>
     <script src="{{ asset('backend/assets/js/product-attributes.js') }}"></script>
-    @include('backend.pages.e-commerce.products.internal-assets.product-js')
+    <script src="{{asset('backend/assets/js/ecommerce/product.js')}}"></script>
 @endsection

@@ -47,6 +47,6 @@
 @endsection
 
 @section('page-script')
-    @include('backend.pages.profile.internal-assets.js.profile-page-scripts')
+    <script src="{{ asset('backend/assets/js/profile-page.js') }}"></script>
     <script src="{{ asset('backend/assets/js/form-summerNote.js') }}"></script>
 @endsection

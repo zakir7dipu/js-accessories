@@ -1,26 +1,14 @@
-<script !src="">
-    @if(Session::has('message'))
-        var type = "{{ Session::get('alert-type', 'info') }}";
-        switch (type) {
-            case 'info':
-                toastr.info("{{ Session::get('message') }}");
-                break;
+@if(Session::has('message'))
+    <div class="d-none" id="sessionHasMessage">
+        <input type="hidden" class="sessionMessageType" name="type" value="{{ Session::get('alert-type', 'info') }}">
+        <input type="hidden" class="sessionMessage" name="message" value="{{ Session::get('message') }}">
+    </div>
 
-            case 'warning':
-                toastr.warning("{{ Session::get('message') }}");
-                break;
-
-            case 'success':
-                toastr.success("{{ Session::get('message') }}");
-                break;
-
-            case 'error':
-                toastr.error("{{ Session::get('message') }}");
-                break;
-        }
-        @elseif(count($errors) > 0)
-        @foreach($errors->all() as $error)
-        toastr.error("{{ $error }}");
+@elseif(count($errors) > 0)
+    <div class="d-none" id="sessionHasError">
+        @foreach($errors->all() as $key => $error)
+            <input type="hidden" class="sessionMessage" name="{{"message".$key}}" value="{{ $error }}">
         @endforeach
-    @endif
-</script>
+    </div>
+@endif
+<script src="{{ asset('notification_assets/js/toastr-implementation.js') }}"></script>

@@ -53,7 +53,11 @@
                                     <div class="col-12 pl-5" id="showSubcategory">
                                         <p class="mb-1"><label for="subCategory" class="card-title font-weight-bold">{!! __('Sub-Category').' <small>('.__('Optional').')</small> &nbsp; <code>'.__('If you want to add Pro-category please select this option').'</code>' !!}</label> </p>
                                         <div class="input-group input-group-lg mb-3">
-                                            <select name="sub_category" id="subCategory" class="form-control" {{ $categories->count() == 0?'readonly':'' }}>
+                                            <select name="sub_category" id="subCategory" class="form-control" {{ $categories->count() == 0?'readonly':'' }} data-role="{{ $selectedItem?
+                    ($selectedItem->sub_category
+                        ?$selectedItem->sub_category->id
+                        :null)
+                    :null }}">
                                                 <option value="{{ null }}">{{ __('Select One') }}</option>
                                             </select>
                                             <br>
@@ -120,5 +124,5 @@
 @endsection
 
 @section('page-script')
-    @include('backend.pages.e-commerce.categories.internal-assets.category-js')
+    <script src="{{asset('backend/assets/js/ecommerce/category.js')}}"></script>
 @endsection

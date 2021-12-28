@@ -125,5 +125,5 @@
 @endsection
 
 @section('page-script')
-    @include('backend.pages.suppliers.internal-assets.js.suppliers-page-scripts')
+    <script src="{{ asset('backend/assets/js/suppliers-page.js') }}"></script>
 @endsection

@@ -104,7 +104,7 @@
                                             </label>
                                         </td>
                                         <td class="text-center">
-                                            <a href="javascript:void(0)" class="btn btn-success  btn-circle m-1" >
+                                            <a href="{{ route('single-product',$data->slug) }}" class="btn btn-success  btn-circle m-1" target="_blank">
                                                 <i class="material-icons">remove_red_eye</i>
                                             </a>
                                             <a href="{{ route('admin.e-commerce.product.edit',$data->id) }}" class="btn btn-info  btn-circle m-1" >
@@ -132,5 +132,5 @@
 
 @section('page-script')
     <script src="{{asset('backend/assets/js/tables-datatable.js')}}"></script>
-    @include('backend.pages.e-commerce.products.internal-assets.product-js')
+    <script src="{{asset('backend/assets/js/ecommerce/product.js')}}"></script>
 @endsection

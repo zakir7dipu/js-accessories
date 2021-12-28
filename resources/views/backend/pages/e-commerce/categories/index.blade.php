@@ -95,5 +95,5 @@
 
 @section('page-script')
     <script src="{{asset('backend/assets/js/tables-datatable.js')}}"></script>
-    @include('backend.pages.e-commerce.categories.internal-assets.category-js')
+    <script src="{{asset('backend/assets/js/ecommerce/category.js')}}"></script>
 @endsection
