@@ -203,9 +203,10 @@ class AdminController extends Controller
         try {
             $reply = new ReplyContactMessage();
             $reply->contact_msg_id = $message->id;
-            $reply->message = $request->message_text;
+            $reply->message = clean($request->message_text);
             $reply->by_user = Auth::user()->id;
             $reply->save();
+//            $message->notify(new ReplyContactMessage($message));
             return $this->backWithSuccess('Replied successfully.');
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());

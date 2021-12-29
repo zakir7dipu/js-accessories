@@ -53,7 +53,7 @@
                                 @foreach ($contactMessages as $key => $message)
                                     <tr>
                                         <td>{{ $key+1 }}</td>
-                                        <td>{{$message->created_at->format('M d, Y')}}</td>
+                                        <td>{{$message->created_at->format('M d, Y h:i a')}}</td>
                                         <td>{{$message->contact_name}}</td>
                                         <td>{{$message->contact_email}}</td>
                                         <td>{{$message->contact_phone}}</td>
