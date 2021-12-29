@@ -40,10 +40,11 @@
                                 <thead>
                                 <tr>
                                     <th width="5%">{{__('SL')}}</th>
+                                    <th width="10%">{{__('Date')}}</th>
                                     <th width="10%">{{__('Name')}}</th>
                                     <th width="10%">{{__('Email')}}</th>
                                     <th width="10%">{{__('Phone')}}</th>
-                                    <th width="60%">{{__('Message')}}</th>
+                                    <th width="50%">{{__('Message')}}</th>
                                     <th width="5%">{{__('Options')}}</th>
                                 </tr>
                                 </thead>
@@ -52,6 +53,7 @@
                                 @foreach ($contactMessages as $key => $message)
                                     <tr>
                                         <td>{{ $key+1 }}</td>
+                                        <td>{{$message->created_at->format('M d, Y')}}</td>
                                         <td>{{$message->contact_name}}</td>
                                         <td>{{$message->contact_email}}</td>
                                         <td>{{$message->contact_phone}}</td>
