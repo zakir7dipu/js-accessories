@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ContactMessage;
 use App\Models\GeneralSettings;
 use App\Models\Profile;
+use App\Models\ReplyContactMessage;
 use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\Request;
@@ -179,7 +180,7 @@ class AdminController extends Controller
             $generalSettings = GeneralSettings::first();
             $title = ($generalSettings?$generalSettings->site_name:'').' | '.'Contact Message';
             $this->readAllUnreadMessage();
-            $contactMessages = ContactMessage::all();
+            $contactMessages = ContactMessage::orderBy('id','DESC')->get();
             return view('backend.pages.contact-message.index', compact('title', 'generalSettings', 'contactMessages'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
@@ -188,12 +189,26 @@ class AdminController extends Controller
 
     public function contactMessageGet(ContactMessage $message)
     {
-        $message->url = route('admin.contact-message.send');
+        $message->update(['status' => true]);
+        $message->url = route('admin.contact-message.send',$message->id);
+        $message->reply_message = $message->replyMessage;
         return response()->json($message);
     }
 
-    public function contactMessageSend(Request $request)
+    public function contactMessageSend(Request $request, ContactMessage $message)
     {
-        dd($request->all());
+        $this->validate($request, [
+            'message_text' => ['required', 'string']
+        ]);
+        try {
+            $reply = new ReplyContactMessage();
+            $reply->contact_msg_id = $message->id;
+            $reply->message = $request->message_text;
+            $reply->by_user = Auth::user()->id;
+            $reply->save();
+            return $this->backWithSuccess('Replied successfully.');
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
     }
 }

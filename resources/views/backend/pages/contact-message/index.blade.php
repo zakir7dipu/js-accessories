@@ -58,7 +58,12 @@
                                         <td>{{$message->contact_message}}</td>
                                         <td>
                                             <div class="d-flex">
-                                                <button type="button" class="btn btn-sm btn btn-success m-1 contactMessageReplyBtn rounded" data-id="{{ $message->id }}">{{ __('Reply') }}</button>
+                                                @if(!$message->replyMessage)
+                                                    <button type="button" class="btn btn-sm btn btn-success m-1 contactMessageReplyBtn rounded" data-id="{{ $message->id }}">{{ __('Reply') }}</button>
+                                                @else
+                                                    <button type="button" class="btn btn-sm btn btn-info m-1 contactMessageReplyBtn rounded" data-id="{{ $message->id }}">{{ __('View') }}</button>
+                                                @endif
+
                                             </div>
                                         </td>
                                     </tr>

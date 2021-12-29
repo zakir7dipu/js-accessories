@@ -77,4 +77,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(ClientOrder::class, 'user_id', 'id');
     }
+
+    public function mailReply()
+    {
+        return $this->hasMany(ReplyContactMessage::class, 'by_user','id');
+    }
 }

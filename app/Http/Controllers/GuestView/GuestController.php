@@ -197,10 +197,10 @@ class GuestController extends Controller
         ]);
         try {
             ContactMessage::create([
-                'contact-name'=>$request['contact-name'],
-                'contact-email'=>$request['contact-email'],
-                'contact-phone'=>$request['contact-phone'],
-                'contact-message'=>$request['contact-message']
+                'contact_name'=>$request['contact-name'],
+                'contact_email'=>$request['contact-email'],
+                'contact_phone'=>$request['contact-phone'],
+                'contact_message'=>$request['contact-message']
             ]);
             return $this->backWithSuccess('Message has been save successfully.');
         }catch (\Throwable $th){
@@ -575,9 +575,6 @@ class GuestController extends Controller
     // shurjaPay
     public function successPayment(Request $request)
     {
-//        $response = Http::post('https://engine.shurjopayment.com/api/verification', [
-//            'order_id' => $request->order_id,
-//        ]);
         $user = Auth::user();
         $order = $user->orders()->orderBy('id','DESC')->first();
         try {
