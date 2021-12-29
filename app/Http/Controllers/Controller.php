@@ -7,6 +7,7 @@ use App\Models\Attribute;
 use App\Models\BlogPostCommentSettings;
 use App\Models\Category;
 use App\Models\CetegorySection;
+use App\Models\ClientOrder;
 use App\Models\Company;
 use App\Models\ContactMessage;
 use App\Models\DistrictList;
@@ -79,6 +80,7 @@ class Controller extends BaseController
         $orderPermissions = $this->orderPermission();
         $themeColors = $this->themeColors();
         $unreadContactMessages = ContactMessage::where('status', false)->get();
+
 
         View::share('districts', $districts);
         View::share('generalSettings', $generalSettings);
@@ -201,6 +203,19 @@ class Controller extends BaseController
                 'permission_code' => 4
             ],
         ];
+    }
+
+    public function readAllUnreadMessage()
+    {
+        $unreadContactMessages = ContactMessage::where('status', false)->get();
+        if (count($unreadContactMessages) > 0){
+            $unreadContactMessages->each->update(['status' => true]);
+        }
+    }
+
+    public function totalSales()
+    {
+        return ClientOrder::where('payment_status', true)->sum('price');
     }
 
     /**

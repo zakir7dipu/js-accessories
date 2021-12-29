@@ -67,7 +67,7 @@
                             <i class="display-2 fas fa-wallet"></i>
                             <div class="ml-auto align-self-center text-right">
                                 <span class="card-title mb-1">{{ __('Total sales') }}</span>
-                                <h3 class="card-title font-montserrat mb-0">2000 K</h3>
+                                <h3 class="card-title font-montserrat mb-0">{{ number_format($totalSales,2,'.',',') }}</h3>
                             </div>
                         </div>
                     </div>

@@ -84,9 +84,10 @@ class ClientOrderController extends Controller
 
     public function store(Request $request)
     {
+        $lastOrder = ClientOrder::orderBy('id','desc')->first();
         $cart = Cart::instance('shopping_cart');
         $invoice = $request->invoice;
-        $invoice = 10000+(ClientOrder::count()+1);
+        $invoice = 10000+($lastOrder?($lastOrder->id + 1):1);
         $user = Auth::user();
         $contact = Company::first();
         // shipping address
@@ -97,7 +98,7 @@ class ClientOrderController extends Controller
         $shippingAddress['street_address'] = $shippingAddress['address'];
         $shippingAddress['postal_code'] = $shippingAddress['post_code'];
         // shipping address
-        $couponDiscount = $request->coupon_discount;
+        $couponDiscount = str_replace(',','',$request->coupon_discount);
         $cartProducts = $cart->content();
         $weight = 0;
         foreach ($cartProducts as $cartProduct){
@@ -109,7 +110,7 @@ class ClientOrderController extends Controller
             $clientOrder = new ClientOrder();
             $clientOrder->user_id = $user->id;
             $clientOrder->invoice = $invoice;
-            $clientOrder->price = $cart->subtotal();
+            $clientOrder->price = str_replace(',','',$cart->subtotal());
             $clientOrder->discount = $couponDiscount ? $couponDiscount : 0;
             $clientOrder->weight = $weight;
             if ($request->has('payment')){
@@ -134,18 +135,19 @@ class ClientOrderController extends Controller
                 $orderedProduct->product_id = $cartProduct->id;
                 $orderedProduct->specification = ($size ? "Size: " . $size : '') . ' ' . ($color ? "Color: " . $color : '');
                 $orderedProduct->qty = $cartProduct->qty;
-                $orderedProduct->price_qty = $cartProduct->subtotal();
+                $orderedProduct->price_qty = str_replace(',','',$cartProduct->subtotal());
                 $orderedProduct->discount = ($cartProduct->options['discount'] * $cartProduct->qty);
                 $orderedProduct->save();
 
                 Cart::instance('shopping_cart')->remove($cartProduct->rowId);
             }
 
-            $order = $clientOrder;
-            Mail::mailer('smtp')
-                ->to($user->email)
-                ->cc($contact->email)
-                ->send(new OrderNotification($order));
+//            if (env(MAIL_USERNAME) !=null && env(MAIL_PASSWORD) !=null){
+//                $order = $clientOrder;
+//                Mail::to($user->email)
+//                    ->cc($contact->email)
+//                    ->send(new OrderNotification($order));
+//            }
 
             $notification = [
                 'status' => 'success',
@@ -185,7 +187,7 @@ class ClientOrderController extends Controller
             }else{
                 $order->update(['order_status'=>$status->permission_code, 'accepted_by' => Auth::user()->id]);
             }
-            return $this->backWithSuccess('#'.$order->invoice.' has been '.$status);
+            return $this->backWithSuccess('#'.$order->invoice.' has been '.$status->name);
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
         }
@@ -193,9 +195,10 @@ class ClientOrderController extends Controller
 
     public function shurjaPayOrderStore(Request $request)
     {
+        $lastOrder = ClientOrder::orderBy('id','desc')->first();
         $cart = Cart::instance('shopping_cart');
         $invoice = $request->invoice;
-        $invoice = 10000+(ClientOrder::count()+1);
+        $invoice = 10000+($lastOrder?($lastOrder->id + 1):1);
         $user = Auth::user();
         $contact = Company::first();
         // shipping address
@@ -206,7 +209,7 @@ class ClientOrderController extends Controller
         $shippingAddress['street_address'] = $shippingAddress['address'];
         $shippingAddress['postal_code'] = $shippingAddress['post_code'];
         // shipping address
-        $couponDiscount = $request->coupon_discount;
+        $couponDiscount = str_replace(',','',$request->coupon_discount);
         $cartProducts = $cart->content();
         $weight = 0;
         foreach ($cartProducts as $cartProduct){
@@ -218,7 +221,7 @@ class ClientOrderController extends Controller
             $clientOrder = new ClientOrder();
             $clientOrder->user_id = $user->id;
             $clientOrder->invoice = $invoice;
-            $clientOrder->price = $cart->subtotal();
+            $clientOrder->price = str_replace(',','',$cart->subtotal());
             $clientOrder->discount = $couponDiscount ? $couponDiscount : 0;
             $clientOrder->weight = $weight;
             if ($request->has('payment')){
@@ -242,7 +245,7 @@ class ClientOrderController extends Controller
                 $orderedProduct->product_id = $cartProduct->id;
                 $orderedProduct->specification = ($size ? "Size: " . $size : '') . ' ' . ($color ? "Color: " . $color : '');
                 $orderedProduct->qty = $cartProduct->qty;
-                $orderedProduct->price_qty = $cartProduct->subtotal();
+                $orderedProduct->price_qty = str_replace(',','',$cartProduct->subtotal());
                 $orderedProduct->discount = ($cartProduct->options['discount'] * $cartProduct->qty);
                 $orderedProduct->save();
 

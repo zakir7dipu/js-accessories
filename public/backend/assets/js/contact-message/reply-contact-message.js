@@ -13,7 +13,6 @@
             url: `/admin/contact-message/${message}`,
             success:function (data) {
                 messageWindow(data);
-                // $('#replyMailModal').modal('show');
             }
         })
     };
@@ -28,5 +27,5 @@
         submitBtn.addEventListener('click', () => {
             form.submit();
         })
-    }
+    };
 })(jQuery);

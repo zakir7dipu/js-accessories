@@ -31,6 +31,7 @@ class AdminController extends Controller
                 'allUsers' => User::where('user_type', '!=', 1)->count(),
                 'allAdmin' => User::where('user_type', 2)->count(),
                 'allCustomer' => User::where('user_type', 3)->count(),
+                'totalSales' => $this->totalSales()
             ]);
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
@@ -177,7 +178,8 @@ class AdminController extends Controller
         try {
             $generalSettings = GeneralSettings::first();
             $title = ($generalSettings?$generalSettings->site_name:'').' | '.'Contact Message';
-            $contactMessages = ContactMessage::where('status', false)->get();
+            $this->readAllUnreadMessage();
+            $contactMessages = ContactMessage::all();
             return view('backend.pages.contact-message.index', compact('title', 'generalSettings', 'contactMessages'));
         }catch (\Throwable $th){
             return $this->backWithError($th->getMessage());
