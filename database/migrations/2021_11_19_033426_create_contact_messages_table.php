@@ -16,7 +16,7 @@ class CreateContactMessagesTable extends Migration
         Schema::create('contact_messages', function (Blueprint $table) {
             $table->id();
             $table->string('contact_name');
-            $table->string('contact_email')->nullable();
+            $table->string('email')->nullable();
             $table->string('contact_phone')->nullable();
             $table->longText('contact_message');
             $table->boolean('status')->default(false);

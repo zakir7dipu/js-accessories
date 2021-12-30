@@ -198,7 +198,7 @@ class GuestController extends Controller
         try {
             ContactMessage::create([
                 'contact_name'=>$request['contact-name'],
-                'contact_email'=>$request['contact-email'],
+                'email'=>$request['contact-email'],
                 'contact_phone'=>$request['contact-phone'],
                 'contact_message'=>$request['contact-message']
             ]);

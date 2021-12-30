@@ -197,19 +197,20 @@ class AdminController extends Controller
 
     public function contactMessageSend(Request $request, ContactMessage $message)
     {
+//        $message =first
         $this->validate($request, [
             'message_text' => ['required', 'string']
         ]);
-        try {
+//        try {
             $reply = new ReplyContactMessage();
             $reply->contact_msg_id = $message->id;
             $reply->message = clean($request->message_text);
             $reply->by_user = Auth::user()->id;
             $reply->save();
-//            $message->notify(new ReplyContactMessage($message));
+            $reply->notify(new ReplyContactMessage((array)$message));
             return $this->backWithSuccess('Replied successfully.');
-        }catch (\Throwable $th){
-            return $this->backWithError($th->getMessage());
-        }
+//        }catch (\Throwable $th){
+//            return $this->backWithError($th->getMessage());
+//        }
     }
 }

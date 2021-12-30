@@ -11,7 +11,7 @@ class ContactMessage extends Model
     use HasFactory;
     use Notifiable;
 
-    protected $fillable = ['contact_name', 'contact_email', 'contact_phone', 'contact_message', 'status'];
+    protected $fillable = ['contact_name', 'email', 'contact_phone', 'contact_message', 'status'];
 
     public function replyMessage()
     {

@@ -11,7 +11,7 @@ use Illuminate\Notifications\Notification;
 class ReplyContactMessage extends Notification
 {
     use Queueable;
-    private $message;
+    public $reply;
 
     /**
      * Create a new notification instance.
@@ -20,7 +20,7 @@ class ReplyContactMessage extends Notification
      */
     public function __construct(ContactMessage $message)
     {
-        $this->message = $message;
+        $this->message = (object)$message;
     }
 
     /**
