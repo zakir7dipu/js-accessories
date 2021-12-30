@@ -35,5 +35,9 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/css/all.min.css') }}">
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{ asset('forntend/assets/css/'.$themeColors[config('app.theme_color','1')].'-theme/style.min.css') }}">
+    <!-- Whatsapp Chat Bot -->
+    @if($whatsAppChatBot)
+        <link rel="stylesheet" href="{{ asset('social-share/whatsapp/floating-wpp.min.css') }}">
+    @endif
     @yield('page-css')
 </head>

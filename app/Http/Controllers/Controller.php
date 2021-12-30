@@ -80,7 +80,7 @@ class Controller extends BaseController
         $orderPermissions = $this->orderPermission();
         $themeColors = $this->themeColors();
         $unreadContactMessages = ContactMessage::where('status', false)->get();
-
+        $whatsAppChatBot = strlen(env('WHATSAPP_NUMBER')) > 0?env('WHATSAPP_NUMBER'):null;
 
         View::share('districts', $districts);
         View::share('generalSettings', $generalSettings);
@@ -111,6 +111,7 @@ class Controller extends BaseController
         View::share('orderPermissions', $orderPermissions);
         View::share('themeColors', $themeColors);
         View::share('unreadContactMessages', $unreadContactMessages);
+        View::share('whatsAppChatBot', $whatsAppChatBot);
     }
 
     public function backWithError($message)
