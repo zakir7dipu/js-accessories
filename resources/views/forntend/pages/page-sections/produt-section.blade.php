@@ -18,7 +18,7 @@
                     <a href="javascript:void(0)" data-role="{{ $product->id }}" class="btn-icon-wish myWish"><i class="icon-heart"></i></a>
                 </div>
                 <h2 class="product-title">
-                    <a href="javascript:void(0)">{{ substr($product->name, 0, 27) }}</a>
+                    <a href="javascript:void(0)">{{ substr($product->name, 0, 16) }}</a>
                 </h2>
                 <div class="price-box">
                     {!! $product->discount?'<span class="old-price">'.$product->currency->symbol.$product->price.'</span><span class="product-price">'.$product->currency->symbol.($product->price - (($product->price * $product->discount) / 100)).'</span>':'<span class="product-price">'.$product->currency->symbol.$product->price.'</span>' !!}

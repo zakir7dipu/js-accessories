@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <a href="{{ route('home') }}">
-                        {!! $generalSettings?'<img src="'.asset($generalSettings->logo).'" alt="Porto Logo" class="mt-2">':'<img src="'.asset('forntend/assets/images/logo.png').'" data-src="'.asset('forntend/assets/images/logo-black.png').'" alt="Porto Logo" class="mt-2">' !!}
+                        {!! $generalSettings?'<img src="'.asset($generalSettings->site_tag_image).'" alt="Porto Logo" class="mt-2">':'<img src="'.asset('forntend/assets/images/logo.png').'" data-src="'.asset('forntend/assets/images/logo-black.png').'" alt="Porto Logo" class="mt-2">' !!}
                     </a>
                     <div class="row">
                         <div class="col-sm-6 col-xl-4">

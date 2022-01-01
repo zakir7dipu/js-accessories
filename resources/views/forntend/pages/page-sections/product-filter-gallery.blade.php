@@ -46,7 +46,7 @@
                                                     <a href="javascript:void(0)" data-role="{{ $itemData->id }}" class="btn-icon-wish myWish"><i class="icon-heart"></i></a>
                                                 </div>
                                                 <h2 class="product-title">
-                                                    <a href="javascript:void(0)">{{ substr($itemData->name, 0, 27) }}</a>
+                                                    <a href="javascript:void(0)">{{ substr($itemData->name, 0, 16) }}</a>
                                                 </h2>
                                                 <div class="price-box">
                                                     {!! $itemData->discount?'<span class="old-price">'.$itemData->currency->symbol.$itemData->price.'</span><span class="product-price">'.$itemData->currency->symbol.($itemData->price - (($itemData->price * $itemData->discount) / 100)).'</span>':'<span class="product-price">'.$itemData->currency->symbol.$itemData->price.'</span>' !!}
@@ -80,7 +80,7 @@
                                                     <a href="javascript:void(0)" data-role="{{ $itemData->id }}" class="btn-icon-wish myWish"><i class="icon-heart"></i></a>
                                                 </div>
                                                 <h2 class="product-title">
-                                                    <a href="javascript:void(0)">{{ substr($itemData->name, 0, 27) }}</a>
+                                                    <a href="javascript:void(0)">{{ substr($itemData->name, 0, 16) }}</a>
                                                 </h2>
                                                 <div class="price-box">
                                                     {!! $itemData->discount?'<span class="old-price">'.$itemData->currency->symbol.$itemData->price.'</span><span class="product-price">'.$itemData->currency->symbol.($itemData->price - (($itemData->price * $itemData->discount) / 100)).'</span>':'<span class="product-price">'.$itemData->currency->symbol.$itemData->price.'</span>' !!}
@@ -114,7 +114,7 @@
                                                     <a href="javascript:void(0)" data-role="{{ $itemData->id }}" class="btn-icon-wish myWish"><i class="icon-heart"></i></a>
                                                 </div>
                                                 <h2 class="product-title">
-                                                    <a href="javascript:void(0)">{{ substr($itemData->name, 0, 27) }}</a>
+                                                    <a href="javascript:void(0)">{{ substr($itemData->name, 0, 16) }}</a>
                                                 </h2>
                                                 <div class="price-box">
                                                     {!! $itemData->discount?'<span class="old-price">'.$itemData->currency->symbol.$itemData->price.'</span><span class="product-price">'.$itemData->currency->symbol.($itemData->price - (($itemData->price * $itemData->discount) / 100)).'</span>':'<span class="product-price">'.$itemData->currency->symbol.$itemData->price.'</span>' !!}
@@ -148,7 +148,7 @@
                                                     <a href="javascript:void(0)" data-role="{{ $itemData->id }}" class="btn-icon-wish myWish"><i class="icon-heart"></i></a>
                                                 </div>
                                                 <h2 class="product-title">
-                                                    <a href="javascript:void(0)">{{ substr($itemData->name, 0, 27) }}</a>
+                                                    <a href="javascript:void(0)">{{ substr($itemData->name, 0, 16) }}</a>
                                                 </h2>
                                                 <div class="price-box">
                                                     {!! $itemData->discount?'<span class="old-price">'.$itemData->currency->symbol.$itemData->price.'</span><span class="product-price">'.$itemData->currency->symbol.($itemData->price - (($itemData->price * $itemData->discount) / 100)).'</span>':'<span class="product-price">'.$itemData->currency->symbol.$itemData->price.'</span>' !!}

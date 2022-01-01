@@ -5,8 +5,7 @@
                 <i class="icon-menu"></i>
             </button>
             <a href="{{ route('home') }}" class="logo">
-                {!! $generalSettings?'<img src="'.asset($generalSettings->site_tag_image).'" data-src="'.asset($generalSettings->logo).'" alt="Porto Logo">':'<img src="'.asset('forntend/assets/images/logo.png').'" data-src="'.asset('forntend/assets/images/logo-black.png').'" alt="Porto Logo">' !!}
-{{--                <img src="{{ asset('forntend/assets/images/logo.png') }}" data-src="{{ asset('forntend/assets/images/logo-black.png') }}" alt="Porto Logo">--}}
+                {!! $generalSettings?'<img src="'.asset($generalSettings->logo).'" data-src="'.asset($generalSettings->site_tag_image).'" alt="Porto Logo">':'<img src="'.asset('forntend/assets/images/logo.png').'" data-src="'.asset('forntend/assets/images/logo-black.png').'" alt="Porto Logo">' !!}
             </a>
         </div><!-- End .header-left -->
 
