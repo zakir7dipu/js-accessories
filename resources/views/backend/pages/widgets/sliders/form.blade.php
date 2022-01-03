@@ -102,7 +102,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <p class="mb-1"><label for="sliderImg">{{__('Slider Image')}}:</label> <sup><i class="text-danger fas fa-star-of-life small"></i></sup></p>
+                                    <p class="mb-1"><label for="sliderImg">{{__('Slider Image')}}:</label> <sup><i class="text-danger fas fa-star-of-life small"></i></sup>&nbsp; <code>{{ __('Expected Image size will be 1583px x 540px') }}</code></p></p>
                                     <div class="input-group p-3">
                                         <div class="form-group w-100">
                                             <div class="px-2">
