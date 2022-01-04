@@ -2,25 +2,24 @@
 
 namespace App\Notifications;
 
-use App\Models\ContactMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ReplyContactMessage extends Notification
+class ReplyContactMessageNotification extends Notification
 {
     use Queueable;
-    public $reply;
+    public $details;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(ContactMessage $message)
+    public function __construct($details)
     {
-        $this->message = (object)$message;
+        $this->details = $details;
     }
 
     /**
@@ -43,12 +42,11 @@ class ReplyContactMessage extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('Dear Sir,')
-                    ->line('With due respect I am replying your below text,')
-                    ->line($this->message->contact_message)
-                    ->line($this->message->replyMessage->message)
-                    ->action('To Shop Our Trusted Product', url('/'))
-                    ->line('Thank you for using our application!');
+            ->greeting($this->details['greeting'])
+            ->line($this->details['body_head'])
+            ->line($this->details['body_mid'])
+            ->action($this->details['actionText'], $this->details['actionUrl'])
+            ->line($this->details['footer']);
     }
 
     /**

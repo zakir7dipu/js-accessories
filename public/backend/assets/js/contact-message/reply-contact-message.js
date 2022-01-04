@@ -22,7 +22,7 @@
         // return;
         let form = document.getElementById('replyMailModal').querySelector('form');
         let submitBtn = document.getElementById('replyMailModal').querySelector('.submitBtn');
-        form.querySelector('input[name="to_email"]').value = data.contact_email;
+        form.querySelector('input[name="to_email"]').value = data.email;
         form.querySelector('textarea[name="message"]').innerHTML = data.contact_message;
         if (!data.reply_message){
             form.action = data.url;

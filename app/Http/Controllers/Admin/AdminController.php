@@ -8,11 +8,13 @@ use App\Models\GeneralSettings;
 use App\Models\Profile;
 use App\Models\ReplyContactMessage;
 use App\Models\User;
+use App\Notifications\ReplyContactMessageNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Notification;
 
 class AdminController extends Controller
 {
@@ -197,20 +199,30 @@ class AdminController extends Controller
 
     public function contactMessageSend(Request $request, ContactMessage $message)
     {
-//        $message =first
         $this->validate($request, [
             'message_text' => ['required', 'string']
         ]);
-//        try {
+        try {
             $reply = new ReplyContactMessage();
             $reply->contact_msg_id = $message->id;
             $reply->message = clean($request->message_text);
             $reply->by_user = Auth::user()->id;
             $reply->save();
-            $reply->notify(new ReplyContactMessage((array)$message));
+
+            $details = [
+                'greeting' => 'Dear ' . $message->contact_name,
+                'body_head' => 'In response to your inquiry "' . $message->contact_message . '"',
+                'body_mid' => $request->message_text,
+                'actionText' => 'For Shopping Safely & Comfortably',
+                'actionUrl' => route('home'),
+                'footer' => 'Thank ypu for shopping from ' . env('APP_URL'),
+            ];
+
+            Notification::send($message, new ReplyContactMessageNotification($details));
+
             return $this->backWithSuccess('Replied successfully.');
-//        }catch (\Throwable $th){
-//            return $this->backWithError($th->getMessage());
-//        }
+        }catch (\Throwable $th){
+            return $this->backWithError($th->getMessage());
+        }
     }
 }
