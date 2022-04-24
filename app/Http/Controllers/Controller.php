@@ -14,6 +14,7 @@ use App\Models\DistrictList;
 use App\Models\FeatureProduct;
 use App\Models\GeneralSettings;
 use App\Models\InfoSection;
+use App\Models\LicencePeriod;
 use App\Models\NewArrivalProductsSection;
 use App\Models\Pages;
 use App\Models\Product;
@@ -81,6 +82,10 @@ class Controller extends BaseController
         $themeColors = $this->themeColors();
         $unreadContactMessages = ContactMessage::where('status', false)->get();
         $whatsAppChatBot = strlen(env('WHATSAPP_NUMBER')) > 0?env('WHATSAPP_NUMBER'):null;
+        $licence = LicencePeriod::first();
+        if (strtotime($licence->exp_date) < time()){
+            return abort(403, 'Unauthorized action.');
+        }
 
         View::share('districts', $districts);
         View::share('generalSettings', $generalSettings);
@@ -237,6 +242,7 @@ class Controller extends BaseController
             'blue',
             'orange',
             'silver',
+            'royal-blue',
         ];
     }
 }

@@ -45,7 +45,7 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->namespace($this->namespace)
-                ->domain('ebazaar.com.bd')
+//                ->domain('127.0.0.1:8000')
                 ->group(base_path('routes/web.php'));
         });
     }

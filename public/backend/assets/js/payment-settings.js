@@ -11,8 +11,8 @@ function img_pathUrl(input){
 
             const moduleName = item.getAttribute('alt');
             if(moduleName === 'money_transfer') {
-                // moneyTransferModal();
-                // return;
+                moneyTransferModal();
+                return;
                 // if activate shurjaPay
                 $('#preloadModal').modal('show');
                 getForm(item, `${item.getAttribute('alt').replace('_', '')} Method`);
