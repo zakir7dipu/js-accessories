@@ -243,6 +243,7 @@ class Controller extends BaseController
             'orange',
             'silver',
             'royal-blue',
+            'parrot-green',
         ];
     }
 }
